@@ -76,4 +76,4 @@ Favoriten: Speichern bestimmter Tiere in einer persönlichen Merkliste.
         - Brian
             - Datenbank
                 - Lebewesen, user, Ort, Models
-            - normal oder sequelize?
+            - sequelize
