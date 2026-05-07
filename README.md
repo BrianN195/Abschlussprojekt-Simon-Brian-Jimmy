@@ -59,6 +59,14 @@ Favoriten: Speichern bestimmter Tiere in einer persönlichen Merkliste.
 - css
 
 ### Wer macht was bis wann?
-- Jimmy
-- Simon
-- Brian
+- Woche 1 bis 11. Mai grobes backend und frontend
+    - haupt componenten erstellen
+    - server.ts erstellen
+    - router erstellen
+        - für jede unterseite
+    - Models für datenbank
+    - db.ts
+        - Jimmy
+        - Simon
+        - Brian
+            - Datenbank
