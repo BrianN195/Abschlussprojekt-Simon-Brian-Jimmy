@@ -25,12 +25,12 @@ Favoriten: Speichern bestimmter Tiere in einer persönlichen Merkliste.
 - Teilen-Funktion: Direktes Teilen von Entdeckungen und Tier-Steckbriefen über soziale Medien oder Messenger.
 - Beispielbild: Dunkel: https://chatgpt.com/s/m_69fc4add4c2c8191acda4885c8c595bd Hell: https://chatgpt.com/s/m_69fc4d3fb3cc8191a083aa669101405e
 ### Aufbau:
+- Rechte System user/gast user sieht alles, gast nur beiträge ohne comments und bewertung
 - Alles auf Englisch schreiben!
 - Website
     - Header für Login/Logout bzw. Registrierung
-    - Homepage 
+    - Homepage -> Katalog
     - Unterseiten
-        
         - Profil
             - Seit wann dabei
             - Name
@@ -70,6 +70,10 @@ Favoriten: Speichern bestimmter Tiere in einer persönlichen Merkliste.
     - Models für datenbank
     - db.ts
         - Jimmy
+            - haupt componenten erstellen
         - Simon
+            - Backend
         - Brian
             - Datenbank
+                - Lebewesen, user, Ort, Models
+            - normal oder sequelize?
