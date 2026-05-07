@@ -27,7 +27,10 @@ Favoriten: Speichern bestimmter Tiere in einer persönlichen Merkliste.
 ### Aufbau:
 - Alles auf Englisch schreiben!
 - Website
+    - Header für Login/Logout bzw. Registrierung
+    - Homepage 
     - Unterseiten
+        
         - Profil
             - Seit wann dabei
             - Name
