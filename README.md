@@ -70,6 +70,8 @@ Favoriten: Speichern bestimmter Tiere in einer persönlichen Merkliste.
     - Models für datenbank
     - db.ts
         - Jimmy
+            - Componenten
         - Simon
+            - Backend
         - Brian
             - Datenbank
