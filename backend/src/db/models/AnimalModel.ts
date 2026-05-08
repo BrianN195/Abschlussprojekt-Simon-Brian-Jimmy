@@ -37,10 +37,6 @@ AnimalModel.init(
       allowNull: true,
     },
 
-    // locationId: {
-    //   type: DataTypes.INTEGER,
-    //   allowNull: false,
-    // },
   },
   {
     sequelize,

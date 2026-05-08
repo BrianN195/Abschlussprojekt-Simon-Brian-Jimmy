@@ -18,7 +18,7 @@ LocationModel.init(
 
     region: {
       type: DataTypes.STRING,
-      allowNull: true,
+      allowNull: false,
       // z.B. "North Ari Atoll"
     },
 
