@@ -75,3 +75,7 @@ Favoriten: Speichern bestimmter Tiere in einer persönlichen Merkliste.
             - Backend
         - Brian
             - Datenbank
+
+### Was steht bisher?
+- Datenbank
+    - Datenbank Modelle UserModel, LocationModel, AnimalModel, AnimalLocationModel.
