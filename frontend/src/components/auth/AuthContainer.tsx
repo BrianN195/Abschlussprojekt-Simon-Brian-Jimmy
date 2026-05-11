@@ -6,8 +6,11 @@ function AuthContainer() {
     return ( 
         <div className="auth-container">
             <GuestButton />
-            <LoginLogoutButton />
+
             <RegisterButton />
+            
+            <LoginLogoutButton />
+            
         </div>
     );
 }

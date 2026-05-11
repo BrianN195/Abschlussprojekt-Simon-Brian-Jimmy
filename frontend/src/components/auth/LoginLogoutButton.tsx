@@ -1,5 +1,10 @@
 function LoginLogoutButton() {
-    return <button className="login-logout-button">Login/Logout</button>
+    return (
+    
+    <button className="login-logout-button">
+        Login
+    </button>
+    );
 }
 
 export default LoginLogoutButton;
