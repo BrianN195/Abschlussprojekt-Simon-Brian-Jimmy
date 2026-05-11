@@ -1,34 +1,21 @@
-<<<<<<< HEAD
-import './App.css'
-
-function App() {
-
-
-  return (
-    <>
-      
-    </>
-  )
-=======
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-
-import LandingPage from "./pages/LandingPage";
-import MainPage from "./pages/MainPage";
-import RegisterPage from "./pages/RegisterPage";
+import AuthContainer from "./components/auth/AuthContainer";
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<LandingPage />} />
+    <main className="landing-page">
+      <section className="landing-content">
+        <p className="landing-greeting">Welcome to</p>
 
-        <Route path="/main" element={<MainPage />} />
+        <h1 className="country">Maldives</h1>
 
-        <Route path="/register" element={<RegisterPage />} />
-      </Routes>
-    </BrowserRouter>
+        <span className="landing-fauna">Marine Fauna</span>
+
+        <p className="landing-subtitle">discover, enjoy and protect</p>
+
+        <AuthContainer />
+      </section>
+    </main>
   );
->>>>>>> 1d4ede4be009f4cf5b14cb103971908d3ab2f6c5
 }
 
 export default App;

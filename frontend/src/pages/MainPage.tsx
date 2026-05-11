@@ -11,9 +11,9 @@ function MainPage() {
                 Maldives Marine Life
             </h1>
 
-            <CatalogSection />
-
             <WeatherSection />
+            
+            <CatalogSection />
 
             <VisitorSection />
 
