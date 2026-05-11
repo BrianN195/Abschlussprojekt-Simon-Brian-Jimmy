@@ -31,7 +31,7 @@ Favoriten: Speichern bestimmter Tiere in einer persönlichen Merkliste.
     - Homepage 
     - Unterseiten
         
-        - Profil
+        - Benutzer Profil
             - Seit wann dabei
             - Name
             - Wie oft da
@@ -75,3 +75,23 @@ Favoriten: Speichern bestimmter Tiere in einer persönlichen Merkliste.
             - Backend
         - Brian
             - Datenbank
+
+### Was steht bisher?
+- Datenbank
+    - Datenbank Modelle UserModel, LocationModel, AnimalModel, AnimalLocationModel.
+    - Wenn man bestimmte Locations oder Tiere passend suchen will:
+    ```ts
+    const animals = await AnimalModel.findAll({
+  include: {
+    model: LocationModel,
+    where: { id: locationId }   //hier dann die id der gesuchen location (also number) welches gebiet welche id bekommt steht noch lange nicht fest
+  }
+    });
+    const location = await LocationModel.findAll({
+  include: {
+    model: AnimalModel,
+    where: { id: animalId }     // das selbe in grün
+  }
+    });
+
+
