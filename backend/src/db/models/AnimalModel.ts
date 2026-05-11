@@ -1,7 +1,15 @@
 import { DataTypes, Model } from "sequelize";
 import { sequelize } from "../config/database";
 
-class AnimalModel extends Model {}
+class AnimalModel extends Model {
+  declare id: number;
+  declare name: string
+  declare scientificName: string
+  declare description: string
+  declare category: string
+  declare dangerLevel: number
+  declare imageUrl: string
+}
 
 AnimalModel.init(
   {

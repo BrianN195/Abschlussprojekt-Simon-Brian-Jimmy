@@ -1,52 +1,45 @@
 import { Router, Request, Response } from 'express';
+import LocationModel from '../db/models/LocationModel';
+import AnimalModel from '../db/models/AnimalModel';
 
 const router = Router();
 
-// Placeholder: später mit echter DB
-const resorts = [
-  {
-    id: 1,
-    name: 'Paradise Island Resort',
-    atoll: 'North Malé Atoll',
-    lat: 4.1755,
-    lng: 73.5282,
-    description: 'Luxury resort with pristine beaches',
-    imageUrl: 'https://via.placeholder.com/400x300?text=Paradise+Island',
-  },
-  {
-    id: 2,
-    name: 'Ocean Blue Maldives',
-    atoll: 'South Malé Atoll',
-    lat: 3.9921,
-    lng: 73.3336,
-    description: 'Budget-friendly diving destination',
-    imageUrl: 'https://via.placeholder.com/400x300?text=Ocean+Blue',
-  },
-];
+
 
 // GET /api/v1/resorts
-router.get('/', (req: Request, res: Response) => {
+router.get('/', async (req: Request, res: Response) => {
   try {
-    res.json(resorts);
+    const locations = await LocationModel.findAll()
+    res.json(locations)
   } catch (error) {
     res.status(500).json({ error: 'Failed to fetch resorts' });
   }
 });
 
 // GET /api/v1/resorts/:id
-router.get('/:id', (req: Request, res: Response) => {
+router.get('/:id', async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-    const resort = resorts.find((r) => r.id === parseInt(id as string));
+    const location = await LocationModel.findByPk(Number(id))
 
-    if (!resort) {
+    if (!location) {
       return res.status(404).json({ error: 'Resort not found' });
     }
 
-    res.json(resort);
+    res.json(location);
   } catch (error) {
     res.status(500).json({ error: 'Failed to fetch resort' });
   }
 });
+router.get('/:id/animals', async (req: Request, res: Response) => {
+    const {id} = req.params
+    const location = await LocationModel.findByPk(Number(id),{
+      include: AnimalModel
+    });
 
+    if(!location) {
+      return res.status(404).json({ error: 'Location not found' });
+    }
+    res.json(location)
+})
 export default router;

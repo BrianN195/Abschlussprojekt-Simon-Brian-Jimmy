@@ -1,11 +1,9 @@
 import { Router, Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
+import UserModel from '../db/models/UserModel';
 
 const router = Router();
-
-// Placeholder: später mit echter DB
-const users: any[] = [];
 
 const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key';
 
@@ -19,7 +17,9 @@ router.post('/register', async (req: Request, res: Response) => {
     }
 
     // Check if user exists (später: DB-Abfrage)
-    const userExists = users.find((u) => u.email === email);
+    const userExists = await UserModel.findOne({
+      where: {email}
+    });
     if (userExists) {
       return res.status(409).json({ error: 'User already exists' });
     }
@@ -27,20 +27,18 @@ router.post('/register', async (req: Request, res: Response) => {
     // Hash password
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    const newUser = {
-      id: Math.random().toString(),
+    const newUser = await UserModel.create({
       email,
       password: hashedPassword,
-      displayName,
+      username: displayName,
       createdAt: new Date(),
-    };
+    });
 
-    users.push(newUser);
+
 
     res.status(201).json({
-      id: newUser.id,
       email: newUser.email,
-      displayName: newUser.displayName,
+      displayName: newUser.username,
     });
   } catch (error) {
     res.status(500).json({ error: 'Registration failed' });
@@ -56,12 +54,14 @@ router.post('/login', async (req: Request, res: Response) => {
       return res.status(400).json({ error: 'Missing email or password' });
     }
 
-    const user = users.find((u) => u.email === email);
+    const user = await UserModel.findOne({
+      where: {email}
+    });
     if (!user) {
       return res.status(401).json({ error: 'Invalid credentials' });
     }
 
-    const passwordMatch = await bcrypt.compare(password, user.password);
+    const passwordMatch = await bcrypt.compare(password, user.passwordHash);
     if (!passwordMatch) {
       return res.status(401).json({ error: 'Invalid credentials' });
     }
@@ -77,7 +77,7 @@ router.post('/login', async (req: Request, res: Response) => {
       user: {
         id: user.id,
         email: user.email,
-        displayName: user.displayName,
+        displayName: user.username,
       },
     });
   } catch (error) {
@@ -86,7 +86,7 @@ router.post('/login', async (req: Request, res: Response) => {
 });
 
 // GET /api/v1/auth/me (Protected)
-router.get('/me', (req: Request, res: Response) => {
+router.get('/me', async (req: Request, res: Response) => {
   try {
     const token = req.headers.authorization?.split(' ')[1];
     if (!token) {
@@ -94,7 +94,7 @@ router.get('/me', (req: Request, res: Response) => {
     }
 
     const decoded = jwt.verify(token, JWT_SECRET) as any;
-    const user = users.find((u) => u.id === decoded.id);
+    const user = await UserModel.findByPk(decoded.id)
 
     if (!user) {
       return res.status(404).json({ error: 'User not found' });
@@ -103,8 +103,7 @@ router.get('/me', (req: Request, res: Response) => {
     res.json({
       id: user.id,
       email: user.email,
-      displayName: user.displayName,
-      createdAt: user.createdAt,
+      displayName: user.username
     });
   } catch (error) {
     res.status(401).json({ error: 'Invalid token' });
