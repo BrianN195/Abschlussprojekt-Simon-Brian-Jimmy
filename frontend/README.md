@@ -2,6 +2,24 @@
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
+## Local API setup
+
+In development, the Vite dev server proxies API requests to the backend:
+
+- Frontend: `http://localhost:5173`
+- Backend: `http://localhost:5000`
+- API requests: use relative paths like `/api/v1/auth`, `/api/v1/species`, or `/api/v1/resorts`
+
+That means your frontend code should call the API like this:
+
+```ts
+fetch('/api/v1/auth/login')
+```
+
+or with `credentials: 'include'` if you use cookies/session-based auth.
+
+If you change the backend port, update the proxy target in [vite.config.ts](vite.config.ts).
+
 Currently, two official plugins are available:
 
 - [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
