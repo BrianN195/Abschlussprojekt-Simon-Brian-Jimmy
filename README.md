@@ -31,7 +31,8 @@ Favoriten: Speichern bestimmter Tiere in einer persönlichen Merkliste.
     - Header für Login/Logout bzw. Registrierung
     - Homepage -> Katalog
     - Unterseiten
-        - Profil
+        
+        - Benutzer Profil
             - Seit wann dabei
             - Name
             - Wie oft da
