@@ -24,6 +24,7 @@ AnimalModel.init(
       type: DataTypes.STRING,
       allowNull: true,
       // z.B.: "Fisch", "Hai", "Koralle", "Schildkröte"
+      //vllt noch ein Mdel für kategorien?
     },
 
     dangerLevel: {
@@ -47,3 +48,9 @@ AnimalModel.init(
 );
 
 export default AnimalModel;
+
+// was noch dazu kommt
+// größe, gewicht
+// wie gefährlich bzw wie gefährdet
+// wo es lebt
+//
