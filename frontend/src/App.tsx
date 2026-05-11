@@ -1,20 +1,20 @@
-import AuthContainer from "./components/auth/AuthContainer";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+
+import LandingPage from "./pages/LandingPage";
+import MainPage from "./pages/MainPage";
+import LoginPage from "./pages/LoginPage";
+import RegisterPage from "./pages/RegisterPage";
 
 function App() {
   return (
-    <main className="landing-page">
-      <section className="landing-content">
-        <p className="landing-greeting">Welcome to</p>
-
-        <h1 className="country">Maldives</h1>
-
-        <span className="landing-fauna">Marine Fauna</span>
-
-        <p className="landing-subtitle">discover, enjoy and protect</p>
-
-        <AuthContainer />
-      </section>
-    </main>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/main" element={<MainPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
