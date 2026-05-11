@@ -1,0 +1,73 @@
+In Express (Backend) wurde bisher gecoded:
+
+Tierkatalog:
+
+AnimalModel.init(
+  {
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+
+    scientificName: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+
+    description: {
+      type: DataTypes.TEXT,
+      allowNull: true,
+    },
+
+    category: {
+      type: DataTypes.STRING,
+      allowNull: true,
+      // z.B.: "Fisch", "Hai", "Koralle", "Schildkröte"
+    },
+
+    dangerLevel: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      // z.B. 1–5 Skala
+    },
+
+    imageUrl: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+
+  },
+
+
+
+Für das Profil:
+
+UserModel.init(
+  {
+    username: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true
+    },
+
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+    },
+
+    passwordHash: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    
+    profileImage: {
+        type: DataTypes.STRING,
+        allowNull: true
+    },
+
+    bio : {
+        type: DataTypes.TEXT,
+        allowNull: true
+    }
+
