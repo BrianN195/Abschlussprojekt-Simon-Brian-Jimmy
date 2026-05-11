@@ -31,7 +31,7 @@ Favoriten: Speichern bestimmter Tiere in einer persönlichen Merkliste.
     - Homepage 
     - Unterseiten
         
-        - Profil
+        - Benutzer Profil
             - Seit wann dabei
             - Name
             - Wie oft da
