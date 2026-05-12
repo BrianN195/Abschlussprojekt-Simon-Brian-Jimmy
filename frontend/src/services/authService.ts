@@ -58,6 +58,7 @@ export const authService = {
 
   // Login
   login: async (email: string, password: string) => {
+    
     const response = await fetch(`${API_URL}/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -67,6 +68,7 @@ export const authService = {
     const data = await parseJsonSafe(response);
 
     if (!response.ok) {
+      console.log("response nicht ok")
       throw new Error(data.error || data.message || "Login failed");
     }
 

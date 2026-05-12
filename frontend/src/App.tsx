@@ -6,6 +6,7 @@ import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 
 import "./App.css";
+import Animal from "./components/animals/Animal";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/main" element={<MainPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/animals/:id" element={<Animal />} />
       </Routes>
     </BrowserRouter>
   );

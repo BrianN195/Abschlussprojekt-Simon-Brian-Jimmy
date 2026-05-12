@@ -45,6 +45,6 @@ router.get('/:id/locations', async (req: Request, res: Response) => {
     if(!animal) {
       return res.status(404).json({ error: 'Animal not found' });
     }
-    res.json(location)
+    res.json(animal)
 })
 export default router;

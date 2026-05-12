@@ -47,6 +47,7 @@ router.post('/register', async (req: Request, res: Response) => {
 
 // POST /api/v1/auth/login
 router.post('/login', async (req: Request, res: Response) => {
+  console.log("Im login backend")
   try {
     const { email, password } = req.body;
 

@@ -1,0 +1,57 @@
+import type { Animal } from "../types/Animal";
+const API_URL =
+  import.meta.env.VITE_API_URL?.replace(/\/$/, "") ||
+  "http://localhost:5000/api/v1/species";
+
+type ApiError = {
+  error?: string;
+  message?: string;
+};
+
+async function parseJsonSafe<T>(response: Response): Promise<T> {
+  try {
+    return (await response.json()) as T;
+  } catch {
+    return {} as T;
+  }
+}
+export const speciesService = {
+  // Alle Tiere holen
+  getAll: async (): Promise<Animal[]> => {
+    const res = await fetch(`${API_URL}`);
+
+    const data = await parseJsonSafe<Animal[] | ApiError>(res);
+
+    if (!res.ok) {
+      throw new Error((data as ApiError).error || "Failed to fetch animals");
+    }
+
+    return data as Animal[];
+  },
+
+  // Einzelnes Tier
+  getById: async (id: number): Promise<Animal> => {
+    const res = await fetch(`${API_URL}/${id}`);
+
+    const data = await parseJsonSafe<Animal | ApiError>(res);
+
+    if (!res.ok) {
+      throw new Error((data as ApiError).error || "Animal not found");
+    }
+
+    return data as Animal;
+  },
+
+  // Locations (falls dein Backend das sauber fixed hat)
+  getLocations: async (id: number) => {
+    const res = await fetch(`${API_URL}/${id}/locations`);
+
+    const data = await parseJsonSafe<any | ApiError>(res);
+
+    if (!res.ok) {
+      throw new Error((data as ApiError).error || "Failed to fetch locations");
+    }
+
+    return data;
+  },
+};
