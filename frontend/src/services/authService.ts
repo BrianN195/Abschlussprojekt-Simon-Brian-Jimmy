@@ -7,7 +7,7 @@ const API_URL =
 type AuthUser = {
   id: string | number;
   email: string;
-  displayName?: string;
+  username?: string;
   [key: string]: unknown;
 };
 
@@ -38,11 +38,11 @@ function persistAuth(data: AuthResponse) {
 
 export const authService = {
   // Register
-  register: async (email: string, password: string, displayName: string) => {
+  register: async (email: string, password: string, username: string) => {
     const response = await fetch(`${API_URL}/register`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password, displayName }),
+      body: JSON.stringify({ email, password, username }),
     });
 
     const data = await parseJsonSafe(response);

@@ -5,14 +5,14 @@ import { authService } from "../services/authService";
 function RegisterPage() {
   const navigate = useNavigate();
 
-  const [displayName, setDisplayName] = useState("");
+  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
-   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setErrorMessage("");
 
@@ -24,7 +24,7 @@ function RegisterPage() {
     setLoading(true);
 
     try {
-      await authService.register(email, password, displayName);
+      await authService.register(email, password, username);
       // Falls Register bereits Token liefert, ist man ggf. schon eingeloggt.
       // Für sauberen Flow trotzdem auf Login weiterleiten:
       navigate("/login");
@@ -42,12 +42,12 @@ function RegisterPage() {
       <h1 className="register-title">Register</h1>
 
       <form className="register-form" onSubmit={handleSubmit}>
-        <label htmlFor="register-display-name">Display name</label>
+        <label htmlFor="register-username">Username</label>
         <input
-          id="register-display-name"
+          id="register-username"
           type="text"
-          value={displayName}
-          onChange={(event) => setDisplayName(event.target.value)}
+          value={username}
+          onChange={(event) => setUsername(event.target.value)}
           required
         />
 
