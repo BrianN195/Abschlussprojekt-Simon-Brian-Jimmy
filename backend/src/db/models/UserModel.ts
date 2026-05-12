@@ -1,8 +1,18 @@
 import { DataTypes, Model } from "sequelize";
 import { sequelize } from "../config/database";
 
-class UserModel extends Model {}
-
+class UserModel extends Model {
+  declare id: number;
+  declare username: string;
+  declare email: string;
+  declare passwordHash: string;
+  declare profileImage: string | null;
+  declare bio: string | null;
+}
+// hier in die {} das damit ts weiß was wie exestiert
+//
+//
+// hier das initialieren des Models für die Datenbank
 UserModel.init(
   {
     username: {

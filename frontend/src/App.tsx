@@ -2,8 +2,8 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import LandingPage from "./pages/LandingPage";
 import MainPage from "./pages/MainPage";
-import RegisterPage from "./pages/RegisterPage";
 import LoginPage from "./pages/LoginPage";
+import RegisterPage from "./pages/RegisterPage";
 
 import "./App.css";
 

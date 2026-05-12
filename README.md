@@ -83,5 +83,6 @@ Favoriten: Speichern bestimmter Tiere in einer persönlichen Merkliste.
         - weiter frontend
     - Simon 
         - backend mit frontend verbinden (loginbutton/registerButton mit backend)
+        
     - Brian
         - backend mit datenbank verbinden
