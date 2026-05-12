@@ -1,6 +1,7 @@
 import { useState, type FormEvent } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { authService } from "../services/authService";
+import "../styles/register.css";
 
 function RegisterPage() {
   const navigate = useNavigate();
@@ -39,7 +40,7 @@ function RegisterPage() {
 
   return (
     <main className="register-page">
-      <h1 className="register-title">Register</h1>
+      <h1 className="register-title">Registration</h1>
 
       <form className="register-form" onSubmit={handleSubmit}>
         <label htmlFor="register-username">Username</label>
