@@ -1,7 +1,15 @@
 import { DataTypes, Model } from "sequelize";
 import { sequelize } from "../config/database";
 
-class LocationModel extends Model {}
+class LocationModel extends Model {
+  declare id: number
+  declare name: string
+  declare description: string
+  declare region: string
+  declare latitude: number
+  declare longtitude: number
+  declare depth: number
+}
 
 LocationModel.init(
   {

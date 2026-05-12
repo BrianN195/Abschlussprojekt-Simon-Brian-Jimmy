@@ -78,3 +78,11 @@ Favoriten: Speichern bestimmter Tiere in einer persönlichen Merkliste.
             - Datenbank
                 - Lebewesen, user, Ort, Models
             - sequelize
+- Woche 2 bis 18. Mai
+    - Jimmy
+        - weiter frontend
+    - Simon 
+        - backend mit frontend verbinden (loginbutton/registerButton mit backend)
+        
+    - Brian
+        - backend mit datenbank verbinden
