@@ -9,6 +9,9 @@ function RegisterPage() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [gender, setGender] = useState("");
+  const [birthDate, setBirthDate] = useState(""); // Format: YYYY-MM-DD
 
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
@@ -22,10 +25,15 @@ function RegisterPage() {
       return;
     }
 
+    if (password !== confirmPassword) {
+      setErrorMessage("Passwords do not match.");
+      return;
+    }
+
     setLoading(true);
 
     try {
-      await authService.register(email, password, username);
+      await authService.register(email, password, username, gender, birthDate);
       // Falls Register bereits Token liefert, ist man ggf. schon eingeloggt.
       // Für sauberen Flow trotzdem auf Login weiterleiten:
       navigate("/login");
@@ -49,6 +57,7 @@ function RegisterPage() {
           type="text"
           value={username}
           onChange={(event) => setUsername(event.target.value)}
+          placeholder="Required field"
           required
         />
 
@@ -58,6 +67,7 @@ function RegisterPage() {
           type="email"
           value={email}
           onChange={(event) => setEmail(event.target.value)}
+          placeholder="Required field"
           required
         />
 
@@ -67,8 +77,39 @@ function RegisterPage() {
           type="password"
           value={password}
           onChange={(event) => setPassword(event.target.value)}
+          placeholder="Required field"
           required
           minLength={6}
+        />
+        <label htmlFor="register-confirm-password">Confirm Password</label>
+        <input id="register-confirm-password"
+          type="password"
+          value={confirmPassword}
+          onChange={(event) => setConfirmPassword(event.target.value)}
+          placeholder="Required field"
+          minLength={6}
+          required
+        />
+
+        <label htmlFor="register-gender">Gender</label>
+        <select
+          id="register-gender"
+          value={gender}
+          onChange={(event) => setGender(event.target.value)}
+        >
+          <option value="">Optional</option>
+          <option value="female">Woman</option>
+          <option value="male">Man</option>
+          <option value="other">Others</option>
+        </select>
+
+        <label htmlFor="register-birthDate">Birth Date</label>
+        <input
+          id="register-birthDate"
+          type="date"
+          value={birthDate}
+          onChange={(event) => setBirthDate(event.target.value)}
+          placeholder="Optional"
         />
 
         <button type="submit" disabled={loading}>
