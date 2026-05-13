@@ -1,15 +1,20 @@
 .landing-page {
   min-height: 100vh;
-  display: grid;
-  place-items: center;
-  padding: 2rem;
+  width: 100%;
 
-  background:
-    linear-gradient(rgba(2, 12, 24, 0.25), rgba(2, 12, 24, 0.7)),
-    url("/images/landing-ocean.jpg");
-
+  background-image: url("./images/desktop/landing-ocean-desktop.png");
   background-size: cover;
   background-position: center;
+  background-repeat: no-repeat;
+  background-color: #061826;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  padding: 2rem;
+  position: relative;
 }
 
 .landing-content {
@@ -62,19 +67,154 @@
 }
 
 .auth-button {
-  border: none;
+  min-width: 145px;
+  padding: 0.9rem 1.35rem;
+
+  border: 1px solid rgba(255, 255, 255, 0.35);
   border-radius: 999px;
-  padding: 0.85rem 1.35rem;
 
   cursor: pointer;
+
   font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.03em;
 
-  color: #031827;
-  background: linear-gradient(135deg, #67e8f9, #a7f3d0);
+  color: #ffffff;
+  background: rgba(6, 24, 38, 0.55);
 
-  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(10px);
+
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
 .auth-button:hover {
-  transform: translateY(-2px);
+  transform: translateY(-3px);
+
+  background: rgba(0, 194, 255, 0.28);
+
+  border-color: rgba(126, 231, 255, 0.8);
+
+  box-shadow: 0 16px 38px rgba(0, 194, 255, 0.25);
 }
+
+.auth-button:active {
+  transform: translateY(-1px);
+}
+
+.auth-button:focus-visible {
+  outline: 3px solid rgba(126, 231, 255, 0.75);
+  outline-offset: 4px;
+}
+
+/* Tablet hochkant + kleinere Laptops */
+@media (max-width: 1024px) {
+  .landing-page {
+    background-image: url("./images/tablet/landing-ocean-tablet.png");
+    padding: 1.5rem;
+  }
+
+  .landing-content {
+    max-width: 480px;
+    padding: 2.5rem 1.8rem;
+    border-radius: 28px;
+  }
+}
+
+/* Tablet quer */
+@media (min-width: 768px) and (max-width: 1366px) and (orientation: landscape) {
+  .landing-page {
+    background-image: url("./images/tablet/landing-ocean-tablet.png");
+  }
+
+  .landing-content {
+    max-width: 560px;
+    padding: 2.4rem 2rem;
+  }
+
+  .auth-container {
+    flex-direction: row;
+  }
+}
+
+/* Handy hochkant */
+@media (max-width: 600px) {
+  .landing-page {
+    background-image: url("./images/handy/landing-ocean-mobile.png");
+    padding: 1rem;
+  }
+
+  .landing-content {
+    width: 100%;
+    max-width: 100%;
+    padding: 2rem 1rem;
+    border-radius: 22px;
+  }
+
+  .landing-greeting {
+    font-size: 0.8rem;
+    letter-spacing: 0.18em;
+  }
+
+  .landing-subtitle {
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .auth-container {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .auth-button {
+    width: 100%;
+    padding: 0.9rem 1rem;
+  }
+}
+
+/* Handy quer */
+@media (max-height: 500px) and (orientation: landscape) {
+  .landing-page {
+    background-image: url("./images/handy/landing-ocean-mobile.png");
+    padding: 0.75rem;
+  }
+
+  .landing-content {
+    max-width: 720px;
+    padding: 1.2rem 1.5rem;
+    border-radius: 20px;
+  }
+
+  .landing-greeting {
+    font-size: 0.75rem;
+  }
+
+  .country {
+    font-size: clamp(2.4rem, 8vw, 4rem);
+  }
+
+  .landing-fauna {
+    font-size: clamp(1.1rem, 3vw, 1.8rem);
+  }
+
+  .landing-subtitle {
+    margin: 0.7rem 0 1rem;
+    font-size: 0.9rem;
+  }
+
+  .auth-container {
+    flex-direction: row;
+    gap: 0.6rem;
+  }
+
+  .auth-button {
+    width: auto;
+    padding: 0.7rem 1rem;
+  }
+}
+

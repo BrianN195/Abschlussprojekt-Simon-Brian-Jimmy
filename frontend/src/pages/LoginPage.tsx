@@ -1,6 +1,7 @@
 import { useState, type FormEvent, } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { authService } from "../services/authService";
+import "../styles/login.css";
 
 function LoginPage() {
   const navigate = useNavigate();
