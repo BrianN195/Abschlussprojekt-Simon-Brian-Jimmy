@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import authRoutes from './routes/auth.routes';
 import speciesRoutes from './routes/species.routes';
 import resortsRoutes from './routes/resorts.routes';
+import { sequelize } from './db/config/database';
 
 dotenv.config();
 
@@ -56,8 +57,17 @@ app.use((req: Request, res: Response) => {
   res.status(404).json({ error: 'Route not found' });
 });
 
-app.listen(PORT, () => {
+sequelize.sync({ alter: true })
+  .then(() => {
+    console.log('Database synced');
+
+    app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
-});
+  });
+  })
+
+  .catch((error) => {
+    console.error('Unable to sync database:', error);
+  });
 
 export default app;

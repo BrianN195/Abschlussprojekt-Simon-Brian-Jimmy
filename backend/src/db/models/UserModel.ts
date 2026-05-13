@@ -8,6 +8,8 @@ class UserModel extends Model {
   declare passwordHash: string;
   declare profileImage: string | null;
   declare bio: string | null;
+  declare gender: string | null;
+  declare birthDate: string | null;
 }
 // hier in die {} das damit ts weiß was wie exestiert
 //
@@ -31,17 +33,28 @@ UserModel.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    
+
     profileImage: {
-        type: DataTypes.STRING,
-        allowNull: true
+      type: DataTypes.STRING,
+      allowNull: true
     },
 
-    bio : {
-        type: DataTypes.TEXT,
-        allowNull: true
-    }
+    bio: {
+      type: DataTypes.TEXT,
+      allowNull: true
+    },
+
+    gender: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+
+    birthDate: {
+      type: DataTypes.DATEONLY,
+      allowNull: true
+    },
   },
+
   {
     sequelize,
     modelName: "User",

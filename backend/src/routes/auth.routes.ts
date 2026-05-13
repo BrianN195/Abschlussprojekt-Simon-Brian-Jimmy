@@ -10,15 +10,15 @@ const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key';
 // POST /api/v1/auth/register
 router.post('/register', async (req: Request, res: Response) => {
   try {
-    const { email, password, displayName } = req.body;
+    const { email, password, username, gender, birthDate } = req.body;
 
-    if (!email || !password || !displayName) {
+    if (!email || !password || !username) {
       return res.status(400).json({ error: 'Missing required fields' });
     }
 
     // Check if user exists (später: DB-Abfrage)
     const userExists = await UserModel.findOne({
-      where: {email}
+      where: { email }
     });
     if (userExists) {
       return res.status(409).json({ error: 'User already exists' });
@@ -29,21 +29,28 @@ router.post('/register', async (req: Request, res: Response) => {
 
     const newUser = await UserModel.create({
       email,
-      password: hashedPassword,
-      username: displayName,
-      createdAt: new Date(),
+      passwordHash: hashedPassword,
+      username,
+      gender: gender || null,
+      birthDate: birthDate || null,
     });
 
 
 
     res.status(201).json({
-      email: newUser.email,
-      displayName: newUser.username,
+      user: {
+        id: newUser.id,
+        email: newUser.email,
+        username: newUser.username,
+        gender: newUser.gender,
+        birthDate: newUser.birthDate
+      },
     });
   } catch (error) {
     res.status(500).json({ error: 'Registration failed' });
   }
 });
+
 
 // POST /api/v1/auth/login
 router.post('/login', async (req: Request, res: Response) => {
@@ -56,7 +63,7 @@ router.post('/login', async (req: Request, res: Response) => {
     }
 
     const user = await UserModel.findOne({
-      where: {email}
+      where: { email }
     });
     if (!user) {
       return res.status(401).json({ error: 'Invalid credentials' });
@@ -78,7 +85,9 @@ router.post('/login', async (req: Request, res: Response) => {
       user: {
         id: user.id,
         email: user.email,
-        displayName: user.username,
+        username: user.username,
+        gender: user.gender,
+        birthDate: user.birthDate
       },
     });
   } catch (error) {
@@ -104,7 +113,9 @@ router.get('/me', async (req: Request, res: Response) => {
     res.json({
       id: user.id,
       email: user.email,
-      displayName: user.username
+      username: user.username,
+      gender: user.gender,
+      birthDate: user.birthDate,
     });
   } catch (error) {
     res.status(401).json({ error: 'Invalid token' });
