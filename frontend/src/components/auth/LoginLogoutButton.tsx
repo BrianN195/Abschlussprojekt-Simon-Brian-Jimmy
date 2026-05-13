@@ -12,14 +12,14 @@ function LoginLogoutButton() {
 
   if (!isLoggedIn) {
     return (
-      <Link to="/login">
-        <button className="login-logout-button">Login</button>
+      <Link className="auth-button" to="/login">
+        Login
       </Link>
     );
   }
 
   return (
-    <button className="login-logout-button" onClick={handleLogout}>
+    <button className="auth-button" type="button" onClick={handleLogout}>
       Logout
     </button>
   );

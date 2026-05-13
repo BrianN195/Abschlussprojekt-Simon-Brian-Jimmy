@@ -1,4 +1,5 @@
 import AuthContainer from "../components/auth/AuthContainer";
+import "../styles/landing.css";
 
 function LandingPage() {
   return (

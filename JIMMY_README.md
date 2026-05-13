@@ -1,7 +1,7 @@
 # Änderungen am [Dienstag, 12.05.2026]
 
 ## Datenbank
- - **Prespl**: Neueste Version runtergeladen und eingerichtet soweit ich konnte. (?? dbAdmin ??)
+ - **Prostgrespl**: Neueste Version runtergeladen und eingerichtet soweit ich konnte. (?? dbAdmin ??)
 
 ## Backend
 - **UserModel**: Gender und Geburtsdatum-Felder hinzugefügt.
