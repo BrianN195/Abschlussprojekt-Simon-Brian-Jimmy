@@ -3,12 +3,19 @@ import { sequelize } from "../config/database";
 
 class AnimalModel extends Model {
   declare id: number;
-  declare name: string
-  declare scientificName: string
-  declare description: string
-  declare category: string
-  declare dangerLevel: number
-  declare imageUrl: string
+  declare name: string;
+  declare scientificName: string;
+  declare description: string;
+  declare category: string;
+  declare dangerLevel: number;
+  declare imageUrl: string;
+  declare size?: string;
+  declare weight?: string;
+  declare habitat?: string; 
+  declare bestViewingTime: string[];
+  declare depthRange?: string; 
+  declare diet?: string; 
+  declare isSchooling?: boolean; // true = schwarmtier, false = nicht schwarmtier 
 }
 
 AnimalModel.init(
@@ -27,18 +34,15 @@ AnimalModel.init(
       type: DataTypes.TEXT,
       allowNull: true,
     },
-    
+
     category: {
       type: DataTypes.STRING,
       allowNull: true,
-      // z.B.: "Fisch", "Hai", "Koralle", "Schildkröte"
-      //vllt noch ein Mdel für kategorien?
     },
 
     dangerLevel: {
       type: DataTypes.INTEGER,
       allowNull: true,
-      // z.B. 1–5 Skala
     },
 
     imageUrl: {
@@ -46,6 +50,46 @@ AnimalModel.init(
       allowNull: true,
     },
 
+    size: {
+      type: DataTypes.STRING,
+      allowNull: true,
+      // z.B. "2m", "30cm - 1.5m"
+    },
+
+    weight: {
+      type: DataTypes.STRING,
+      allowNull: true,
+      // z.B. "200kg"
+    },
+
+    habitat: {
+      type: DataTypes.STRING,
+      allowNull: true,
+      // z.B. "Korallenriff", "Offener Ozean", "Tiefsee"
+    },
+
+    bestViewingTime: {
+      type: DataTypes.ARRAY,
+      allowNull: true
+    },
+
+    depthRange: {
+      type: DataTypes.STRING,
+      allowNull: true,
+      // z.B. "0–1000m"
+    },
+
+    diet: {
+      type: DataTypes.STRING,
+      allowNull: true,
+      // z.B. "Fische, Plankton"
+    },
+
+    isSchooling: {
+      type: DataTypes.BOOLEAN,
+      allowNull: true,
+      // Schwarmtier
+    },
   },
   {
     sequelize,
@@ -61,4 +105,8 @@ export default AnimalModel;
 // größe, gewicht
 // wie gefährlich bzw wie gefährdet
 // wo es lebt
-//
+// nahrung
+// schwarm tier
+// wie gefährdet
+// lebensräume (korallen,riffe)
+// tiefe?
