@@ -1,10 +1,8 @@
-'use strict';
+"use strict";
 
 module.exports = {
   async up(queryInterface, Sequelize) {
-
-    await queryInterface.createTable('user', {
-
+    await queryInterface.createTable("user", {
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
@@ -39,6 +37,17 @@ module.exports = {
         allowNull: true,
       },
 
+      gender: {
+        type: Sequelize.ENUM("male", "female", "others"),
+        allowNull: true,
+        defaultValue: "others",
+      },
+
+      birthDate: {
+        type: Sequelize.DATEONLY,
+        allowNull: true,
+      },
+
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
@@ -49,12 +58,9 @@ module.exports = {
         type: Sequelize.DATE,
       },
     });
-
   },
 
   async down(queryInterface, Sequelize) {
-
-    await queryInterface.dropTable('user');
-
-  }
+    await queryInterface.dropTable("user");
+  },
 };

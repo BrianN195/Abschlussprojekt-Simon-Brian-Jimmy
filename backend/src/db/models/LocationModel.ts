@@ -2,13 +2,15 @@ import { DataTypes, Model } from "sequelize";
 import { sequelize } from "../config/database";
 
 class LocationModel extends Model {
-  declare id: number
-  declare name: string
-  declare description: string
-  declare region: string
-  declare latitude: number
-  declare longtitude: number
-  declare depth: number
+  declare id: number;
+  declare name: string;
+  declare description: string;
+  declare region: string;
+  declare latitude: number;
+  declare longitude: number;
+  declare depth: number;
+  declare type: "reef" | "wreck" | "cave" | "wall" | "sandbank";
+  declare imageUrl: string;
 }
 
 LocationModel.init(
@@ -16,7 +18,6 @@ LocationModel.init(
     name: {
       type: DataTypes.STRING,
       allowNull: false,
-      // z.B. "Maaya Thila"
     },
 
     description: {
@@ -27,7 +28,6 @@ LocationModel.init(
     region: {
       type: DataTypes.STRING,
       allowNull: false,
-      // z.B. "North Ari Atoll"
     },
 
     latitude: {
@@ -43,7 +43,19 @@ LocationModel.init(
     depth: {
       type: DataTypes.FLOAT,
       allowNull: true,
-      // typische Tauchtiefe in Metern
+    },
+
+    // 🆕 Location-Typ
+    type: {
+      type: DataTypes.ENUM("reef", "wreck", "cave", "wall", "sandbank"),
+      allowNull: false,
+      defaultValue: "reef",
+    },
+
+    // 🆕 Bild
+    imageUrl: {
+      type: DataTypes.STRING,
+      allowNull: true,
     },
   },
   {

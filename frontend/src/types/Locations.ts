@@ -4,18 +4,22 @@ export type Location = {
   id: number;
   name: string;
   description: string;
-  region?: string;
-  latitude: number
-  longtitude: number
-  depth: number
+  region: string;
+  latitude: number;
+  longitude: number;
+  depth: number;
+  type: "reef" | "wreck" | "cave" | "wall" | "sandbank";
+  imageUrl: string;
 };
 export type LocationDetail = {
   id: number;
   name: string;
   description: string;
-  region?: string;
-  animals: Animal[]
-  latitude: number
-  longtitude: number
-  depth: number
+  region: string;
+  latitude: number;
+  longitude: number;
+  depth: number;
+  type: "reef" | "wreck" | "cave" | "wall" | "sandbank";
+  imageUrl: string;
+  animals: Animal[];
 };

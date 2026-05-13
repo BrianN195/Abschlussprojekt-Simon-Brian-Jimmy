@@ -8,7 +8,7 @@ class UserModel extends Model {
   declare passwordHash: string;
   declare profileImage: string | null;
   declare bio: string | null;
-  declare gender: string | null;
+  declare gender: "male"|"female"|"others";
   declare birthDate: string | null;
 }
 // hier in die {} das damit ts weiß was wie exestiert
@@ -45,8 +45,9 @@ UserModel.init(
     },
 
     gender: {
-      type: DataTypes.STRING,
+      type: DataTypes.ENUM("male", "female", "others"),
       allowNull: true,
+      defaultValue: "others"
     },
 
     birthDate: {

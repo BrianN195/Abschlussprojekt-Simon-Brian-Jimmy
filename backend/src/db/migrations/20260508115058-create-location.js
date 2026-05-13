@@ -14,12 +14,11 @@ module.exports = {
       name: {
         type: Sequelize.STRING,
         allowNull: false,
-        unique: true,
       },
 
       description: {
         type: Sequelize.TEXT,
-        allowNull: false,
+        allowNull: true,
       },
 
       region: {
@@ -42,6 +41,19 @@ module.exports = {
         allowNull: true,
       },
 
+      // 🆕 Location-Typ
+      type: {
+        type: Sequelize.ENUM("reef", "wreck", "cave", "wall", "sandbank"),
+        allowNull: false,
+        defaultValue: "reef",
+      },
+
+      // 🆕 Bild
+      imageUrl: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
@@ -54,9 +66,7 @@ module.exports = {
     });
   },
 
-   async down(queryInterface, Sequelize) {
-
-    await queryInterface.dropTable('location');
-
-  }
+  async down(queryInterface, Sequelize) {
+    await queryInterface.dropTable("location");
+  },
 };
