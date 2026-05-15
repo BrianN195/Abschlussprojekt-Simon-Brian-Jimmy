@@ -97,3 +97,8 @@ Favoriten: Speichern bestimmter Tiere in einer persönlichen Merkliste.
     ALLGEMEIN: 
     - Übers Wochenende überlegen, welche Rollen (user, admin, ..) könnten wichtig für unsere Webseite sein und wie könnte jede einzelne Rolle definiert sein
     ```
+
+    Um datenbank anzulegen:
+    - ganz wichtig: postgresql muss laufen! (systemctl start postgresql)
+    - erst migrieren: in den backend ordner und dann im terminal: npx sequelize-cli db:migrate
+    - dann seed durchlaufen lassen: npm run seed
