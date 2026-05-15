@@ -5,10 +5,19 @@ class AnimalLocationModel extends Model {}
 
 AnimalLocationModel.init(
   {
+    animalId: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+    },
+
+    locationId: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+    },
+
     rarity: {
       type: DataTypes.STRING,
-      allowNull: true,
-      // z.B. "common", "rare"
+      allowNull: false,
     },
   },
   {

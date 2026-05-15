@@ -69,7 +69,7 @@ AnimalModel.init(
     },
 
     bestViewingTime: {
-      type: DataTypes.ARRAY,
+      type: DataTypes.ARRAY(DataTypes.STRING),
       allowNull: true
     },
 
