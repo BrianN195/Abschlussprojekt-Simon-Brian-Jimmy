@@ -5,6 +5,7 @@ import MainPage from "./pages/MainPage";
 import RegisterPage from "./pages/RegisterPage";
 import LoginPage from "./pages/LoginPage";
 import MainLayout from "./components/layout/MainLayout";
+import Animal from "./components/animals/Animal";
 
 import "./App.css";
 
@@ -23,6 +24,7 @@ function App() {
           <Route path="/profile" element={<div>Profile Page (TODO)</div>} />
           <Route path="/animals" element={<div>Animals Page (TODO)</div>} />
           <Route path="/about" element={<div>About Page (TODO)</div>} />
+          <Route path="/animal/:id" element={<Animal/>}/>
         </Route>
       </Routes>
     </BrowserRouter>

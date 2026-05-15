@@ -42,7 +42,7 @@ export default function Animal() {
       <div className={styles.appearList}>
         <h6 className={styles.title}>appears here</h6>
         <ul>
-          {animal.locations.map((location) => {
+          {animal.locations?.map((location) => {
             return <li key={location.id}>{location.name}</li>;
             // hier noch Navlink dann zu den jewaligen locations
           })}
