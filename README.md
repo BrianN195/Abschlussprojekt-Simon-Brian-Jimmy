@@ -90,7 +90,8 @@ Favoriten: Speichern bestimmter Tiere in einer persönlichen Merkliste.
                 - login/logout
                 - profil
                 - language
-                - about us       
+                - about
+        - About- sowie Profilseite erstellen   
     - Brian
         - backend mit datenbank verbinden
     ```
