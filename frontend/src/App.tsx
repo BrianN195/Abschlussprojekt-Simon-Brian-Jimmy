@@ -7,6 +7,8 @@ import LoginPage from "./pages/LoginPage";
 import MainLayout from "./components/layout/MainLayout";
 
 import "./App.css";
+import Animal from "./components/animals/Animal";
+import Location from "./components/locations/Location";
 
 function App() {
   return (
@@ -23,6 +25,8 @@ function App() {
           <Route path="/profile" element={<div>Profile Page (TODO)</div>} />
           <Route path="/animals" element={<div>Animals Page (TODO)</div>} />
           <Route path="/about" element={<div>About Page (TODO)</div>} />
+          <Route path="/animal/:id" element={<Animal/>}/>
+          <Route path="/location/:id" element={<Location/>}/>
         </Route>
       </Routes>
     </BrowserRouter>

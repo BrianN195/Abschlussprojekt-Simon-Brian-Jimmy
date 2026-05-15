@@ -26,14 +26,6 @@ export default function Animal() {
           <p className={styles.scientificName}>{animal.scientificName}</p>
         </div>
       </div>
-      {/* hier dann noch die stats (AnimalStats.tsx)
-          was man bedenken sollte:
-          je mehr infos ist zwar besser, aber heißt auch 
-          wir müssen mehr infos suchen für die ersten einträge.
-          - KI geht dann zwar schnell ist aber auch fehler anfälliger
-          - Händisch ist besser aber dann braucht mind. 1 wahrscheinlich mind. 1 tag nur dateneintragen
-          - ODER wir finden was was wir nutzen können, best case.
-      */}
       <section className={styles.about}>
         <h6 className={styles.title}>About</h6>
         {/* der inline style ist für ein mehrzeiligen text einfach */}
@@ -42,12 +34,13 @@ export default function Animal() {
       <div className={styles.appearList}>
         <h6 className={styles.title}>appears here</h6>
         <ul>
-          {animal.locations.map((location) => {
+          {animal.locations?.map((location) => {
             return <li key={location.id}>{location.name}</li>;
             // hier noch Navlink dann zu den jewaligen locations
           })}
         </ul>
       </div>
+      
     </main>
   );
 }
