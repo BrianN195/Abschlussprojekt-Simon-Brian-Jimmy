@@ -112,9 +112,23 @@ function RegisterPage() {
           placeholder="Optional"
         />
 
-        <button type="submit" disabled={loading}>
-          {loading ? "Registering..." : "Create account"}
-        </button>
+<div className="register-actions">
+  <button
+    className="register-action-button"
+    type="submit"
+    disabled={loading}
+  >
+    {loading ? "Registering..." : "Create account"}
+  </button>
+
+          <button
+            className="register-action-button"
+            type="button"
+            onClick={() => navigate("/")}
+          >
+            Cancel
+          </button>
+        </div>
       </form>
 
       {errorMessage ? <p className="auth-error">{errorMessage}</p> : null}

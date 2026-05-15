@@ -1,4 +1,4 @@
-import { useState, type FormEvent, } from "react";
+import { useState, type FormEvent } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { authService } from "../services/authService";
 import "../styles/login.css";
@@ -14,15 +14,18 @@ function LoginPage() {
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+
     setErrorMessage("");
     setLoading(true);
 
     try {
       await authService.login(email, password);
+
       navigate("/main");
     } catch (error) {
       const message =
         error instanceof Error ? error.message : "Login failed";
+
       setErrorMessage(message);
     } finally {
       setLoading(false);
@@ -35,21 +38,25 @@ function LoginPage() {
 
       <form className="login-form" onSubmit={handleSubmit}>
         <label htmlFor="login-email">Email</label>
+
         <input
           id="login-email"
           type="email"
           value={email}
           onChange={(event) => setEmail(event.target.value)}
           required
+          placeholder="Enter Email"
         />
 
         <label htmlFor="login-password">Password</label>
+
         <input
           id="login-password"
           type="password"
           value={password}
           onChange={(event) => setPassword(event.target.value)}
           required
+          placeholder="Enter Password"
         />
 
         <button type="submit" disabled={loading}>
@@ -57,7 +64,9 @@ function LoginPage() {
         </button>
       </form>
 
-      {errorMessage ? <p className="auth-error">{errorMessage}</p> : null}
+      {errorMessage ? (
+        <p className="auth-error">{errorMessage}</p>
+      ) : null}
 
       <p>
         No account yet? <Link to="/register">Create one</Link>

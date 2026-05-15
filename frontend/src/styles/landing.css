@@ -23,10 +23,8 @@
   text-align: center;
 
   border-radius: 32px;
-  background: none;
-  backdrop-filter: blur(2.13px);
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
+  background: transparent;
+  backdrop-filter:none;
 }
 
 .landing-greeting {
