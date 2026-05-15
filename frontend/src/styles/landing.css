@@ -62,49 +62,70 @@
 .auth-container {
   display: flex;
   justify-content: center;
+  align-items: center;
   gap: 0.8rem;
   flex-wrap: wrap;
 }
 
 .auth-button {
-  min-width: 145px;
-  padding: 0.9rem 1.35rem;
+  position: relative;
 
-  border: 1px solid rgba(255, 255, 255, 0.35);
-  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: fit-content;
+  min-width: unset;
+
+  padding: 0.45rem 0.8rem;
+
+  border: 1px solid transparent;
+  border-radius: 12px;
+
+  background: transparent;
+  color: #ffffff;
+
+  font-size: 1rem;
+  font-weight: 500;
+  font-family: "Inter", sans-serif;
 
   cursor: pointer;
-
-  font-weight: 700;
-  font-size: 0.95rem;
-  letter-spacing: 0.03em;
-
-  color: #ffffff;
-  background: rgba(6, 24, 38, 0.55);
-
-  backdrop-filter: blur(10px);
-
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+  text-decoration: none;
 
   transition:
+    background 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease,
     transform 0.25s ease,
-    background 0.25s ease,
-    border-color 0.25s ease,
-    box-shadow 0.25s ease;
+    color 0.35s ease;
+
+  backdrop-filter: blur(0px);
+  box-shadow: none;
 }
 
 .auth-button:hover {
-  transform: translateY(-3px);
+  background: rgba(8, 90, 120, 0.22);
 
-  background: rgba(0, 194, 255, 0.28);
+  border-color: rgba(126, 231, 255, 0.55);
 
-  border-color: rgba(126, 231, 255, 0.8);
+  backdrop-filter: blur(10px);
 
-  box-shadow: 0 16px 38px rgba(0, 194, 255, 0.25);
+  box-shadow:
+    0 0 14px rgba(0, 255, 255, 0.3),
+    0 0 28px rgba(0, 180, 255, 0.22),
+    0 0 46px rgba(0, 120, 255, 0.14);
+
+  color: #ffffff;
+
+  transform: translateY(-2px) scale(1.03);
+}
+
+.auth-button::after {
+  display: none;
 }
 
 .auth-button:active {
-  transform: translateY(-1px);
+  transform: scale(0.97);
 }
 
 .auth-button:focus-visible {
@@ -169,11 +190,12 @@
   .auth-container {
     flex-direction: column;
     width: 100%;
+    align-items: center;
   }
 
   .auth-button {
-    width: 100%;
-    padding: 0.9rem 1rem;
+    width: fit-content;
+    padding: 0.45rem 0.8rem;
   }
 }
 
@@ -213,8 +235,7 @@
   }
 
   .auth-button {
-    width: auto;
-    padding: 0.7rem 1rem;
+    width: fit-content;
+    padding: 0.4rem 0.75rem;
   }
 }
-
