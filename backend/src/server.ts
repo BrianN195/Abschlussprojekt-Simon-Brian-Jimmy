@@ -1,6 +1,7 @@
 import express, { Express, Request, Response, NextFunction } from 'express';
 import cors, { CorsOptions } from 'cors';
 import dotenv from 'dotenv';
+import path from 'path';
 import authRoutes from './routes/auth.routes';
 import speciesRoutes from './routes/species.routes';
 import resortsRoutes from './routes/resorts.routes';
@@ -33,6 +34,7 @@ const corsOptions: CorsOptions = {
 app.use(cors(corsOptions));
 app.options(/.*/, cors(corsOptions));
 app.use(express.json());
+app.use('/uploads', express.static(path.resolve(process.cwd(), 'public/uploads')));
 
 // Health Check Route
 app.get('/health', (req: Request, res: Response) => {

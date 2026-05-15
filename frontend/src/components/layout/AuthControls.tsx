@@ -18,11 +18,20 @@ function AuthControls({ mobile = false, onAction }: AuthControlsProps) {
   }
 
   if (isLoggedIn) {
+    const initials = (user?.username || user?.email || "").split(/\s+/).filter(Boolean).map(s=>s[0].toUpperCase()).slice(0,2).join("");
+
     return (
       <>
         <span className={mobile ? "nav-mobile-user" : "nav-user"}>
-          Hi, {user?.username || user?.email}
+          {user?.profileImage ? (
+            <img src={user.profileImage} alt="avatar" className="nav-user-avatar" />
+          ) : (
+            <span className="nav-user-avatar-fallback">{initials || "G"}</span>
+          )}
+
+          <span className="nav-user-greet">Hi, {user?.username || user?.email}</span>
         </span>
+
         <Link
           to="/profile"
           className={mobile ? "nav-mobile-link" : "nav-link"}

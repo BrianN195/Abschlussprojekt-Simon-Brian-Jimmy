@@ -4,10 +4,12 @@ const API_URL =
   import.meta.env.VITE_API_URL?.replace(/\/$/, "") ||
   "http://localhost:5000/api/v1/auth";
 
-type AuthUser = {
+export type AuthUser = {
   id: string | number;
   email: string;
   username: string;
+  profileImage?: string | null;
+  bio?: string | null;
   gender?: string | null;
   birthDate?: string | null;
   [key: string]: unknown;
@@ -113,8 +115,57 @@ export const authService = {
 
   isAuthenticated: () => !!localStorage.getItem("authToken"),
 
-  getAuthHeader: () => {
+  getAuthHeader: (): HeadersInit | undefined => {
     const token = localStorage.getItem("authToken");
-    return token ? { Authorization: `Bearer ${token}` } : {};
+    return token ? { Authorization: `Bearer ${token}` } : undefined;
+  },
+  // Fetch profile from backend (/me)
+  fetchProfile: async (): Promise<AuthUser | null> => {
+    const authHeader = authService.getAuthHeader();
+    const headers: Record<string, string> = {
+      "Content-Type": "application/json",
+      ...(authHeader ? (authHeader as Record<string, string>) : {}),
+    };
+
+    const response = await fetch(`${API_URL}/me`, {
+      method: "GET",
+      headers,
+    });
+
+    const data = await parseJsonSafe(response);
+
+    if (!response.ok) {
+      throw new Error(data.error || data.message || "Failed to fetch profile");
+    }
+
+    if (data && (data as any).id) {
+      // persist minimal user
+      localStorage.setItem("user", JSON.stringify(data));
+      return data as AuthUser;
+    }
+
+    return null;
+  },
+  updateProfile: async (payload: FormData): Promise<AuthUser> => {
+    const headers = authService.getAuthHeader();
+
+    const response = await fetch(`${API_URL}/me`, {
+      method: "PUT",
+      headers,
+      body: payload,
+    });
+
+    const data = await parseJsonSafe(response);
+
+    if (!response.ok) {
+      throw new Error(data.error || data.message || "Failed to update profile");
+    }
+
+    if (data && (data as any).id) {
+      localStorage.setItem("user", JSON.stringify(data));
+      return data as AuthUser;
+    }
+
+    throw new Error("Invalid profile response");
   },
 };
