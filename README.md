@@ -80,9 +80,20 @@ Favoriten: Speichern bestimmter Tiere in einer persönlichen Merkliste.
             - sequelize
 - Woche 2 bis 18. Mai
     - Jimmy
-        - weiter frontend
+        - weiter frontend       
     - Simon 
         - backend mit frontend verbinden (loginbutton/registerButton mit backend)
-        
+        - header-layout fürs main-layot erstellen 
+            - Navigation (ohne Suchfunktion)
+                - logo der Webseite
+                - animals
+                - login/logout
+                - profil
+                - language
+                - about us       
     - Brian
         - backend mit datenbank verbinden
+    ```
+    ALLGEMEIN: 
+    - Übers Wochenende überlegen, welche Rollen (user, admin, ..) könnten wichtig für unsere Webseite sein und wie könnte jede einzelne Rolle definiert sein
+    ```
