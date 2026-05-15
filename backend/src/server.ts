@@ -4,7 +4,9 @@ import dotenv from 'dotenv';
 import authRoutes from './routes/auth.routes';
 import speciesRoutes from './routes/species.routes';
 import resortsRoutes from './routes/resorts.routes';
+import searchRoutes from './routes/search.routes'
 import { sequelize } from './db/config/database';
+import "./db/models/index"
 
 dotenv.config();
 
@@ -43,6 +45,7 @@ app.get('/health', (req: Request, res: Response) => {
 app.use('/api/v1/auth', authRoutes);
 app.use('/api/v1/species', speciesRoutes);
 app.use('/api/v1/resorts', resortsRoutes);
+app.use('/api/v1/search', searchRoutes);
 
 // Error Handler Middleware
 app.use((err: any, req: Request, res: Response, next: NextFunction) => {

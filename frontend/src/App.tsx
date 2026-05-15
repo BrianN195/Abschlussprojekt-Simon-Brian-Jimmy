@@ -9,6 +9,8 @@ import Animal from "./components/animals/Animal";
 
 import "./App.css";
 
+import Location from "./components/locations/Location";
+
 function App() {
   return (
     <BrowserRouter>
@@ -25,6 +27,7 @@ function App() {
           <Route path="/animals" element={<div>Animals Page (TODO)</div>} />
           <Route path="/about" element={<div>About Page (TODO)</div>} />
           <Route path="/animal/:id" element={<Animal/>}/>
+          <Route path="/location/:id" element={<Location/>}/>
         </Route>
       </Routes>
     </BrowserRouter>

@@ -17,7 +17,6 @@ class AnimalModel extends Model {
   declare diet?: string; 
   declare isSchooling?: boolean; // true = schwarmtier, false = nicht schwarmtier 
 }
-
 AnimalModel.init(
   {
     name: {
