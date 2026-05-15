@@ -90,10 +90,16 @@ Favoriten: Speichern bestimmter Tiere in einer persönlichen Merkliste.
                 - login/logout
                 - profil
                 - language
-                - about us       
+                - about
+        - About- sowie Profilseite erstellen   
     - Brian
         - backend mit datenbank verbinden
     ```
     ALLGEMEIN: 
     - Übers Wochenende überlegen, welche Rollen (user, admin, ..) könnten wichtig für unsere Webseite sein und wie könnte jede einzelne Rolle definiert sein
     ```
+
+    Um datenbank anzulegen:
+    - ganz wichtig: postgresql muss laufen! (systemctl start postgresql)
+    - erst migrieren: in den backend ordner und dann im terminal: npx sequelize-cli db:migrate
+    - dann seed durchlaufen lassen: npm run seed

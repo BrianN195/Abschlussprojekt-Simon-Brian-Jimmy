@@ -5,9 +5,10 @@ import MainPage from "./pages/MainPage";
 import RegisterPage from "./pages/RegisterPage";
 import LoginPage from "./pages/LoginPage";
 import MainLayout from "./components/layout/MainLayout";
+import Animal from "./components/animals/Animal";
 
 import "./App.css";
-import Animal from "./components/animals/Animal";
+
 import Location from "./components/locations/Location";
 
 function App() {

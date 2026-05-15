@@ -29,6 +29,7 @@
 .login-title {
   text-align: center;
   margin-bottom: 1.5rem;
+
   font-size: clamp(2rem, 5vw, 3rem);
   text-shadow: 0 8px 28px rgba(0, 0, 0, 0.45);
 }
@@ -39,6 +40,7 @@
 
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 1rem;
 
   padding: 2rem;
@@ -56,37 +58,67 @@
 
 .login-form input {
   width: 100%;
+
   padding: 0.9rem 1rem;
 
   border: none;
   border-radius: 10px;
-
   outline: none;
-  font-size: 1rem;
 
+  font-size: 1rem;
   text-align: center;
 }
 
 .login-form button {
-  width: 100%;
-  padding: 1rem;
+  width: fit-content;
 
-  border: none;
-  border-radius: 10px;
+  padding: 0.55rem 1rem;
+
+  border: 1px solid transparent;
+  border-radius: 12px;
+
+  background: transparent;
+  color: #ffffff;
+
+  font-size: 1rem;
+  font-weight: 500;
+  font-family: "Inter", sans-serif;
 
   cursor: pointer;
 
-  font-weight: 600;
-  font-size: 1rem;
+  transition:
+    background 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease,
+    transform 0.25s ease,
+    color 0.35s ease;
 
-  background: #00c2ff;
-  color: white;
-
-  transition: 0.3s;
+  backdrop-filter: blur(0px);
+  box-shadow: none;
 }
 
 .login-form button:hover {
-  background: #0099cc;
+  background: rgba(8, 90, 120, 0.22);
+
+  border-color: rgba(180, 245, 255, 0.75);
+
+  backdrop-filter: blur(10px);
+
+  box-shadow:
+    0 0 14px rgba(120, 255, 255, 0.55),
+    0 0 28px rgba(0, 220, 255, 0.38),
+    0 0 46px rgba(0, 140, 255, 0.22);
+
+  transform: translateY(-2px) scale(1.03);
+}
+
+.login-form button:active {
+  transform: scale(0.97);
+}
+
+.login-form button:focus-visible {
+  outline: 3px solid rgba(126, 231, 255, 0.75);
+  outline-offset: 4px;
 }
 
 .auth-error {
@@ -98,12 +130,17 @@
   color: #7ee7ff;
   font-weight: 600;
   text-decoration: none;
-  transition: 0.3s;
+  transition:
+    color 0.3s ease,
+    text-shadow 0.3s ease;
 }
 
 .login-page a:hover {
   color: #b8f4ff;
-  text-decoration: underline;
+  text-decoration: none;
+  text-shadow:
+    0 0 10px rgba(120, 255, 255, 0.55),
+    0 0 22px rgba(0, 220, 255, 0.35);
 }
 
 .login-page p {
@@ -111,7 +148,6 @@
 
   display: flex;
   gap: 1rem;
-
   align-items: center;
 
   font-size: 1rem;
@@ -161,10 +197,15 @@
     border-radius: 16px;
   }
 
-  .login-form input,
-  .login-form button {
+  .login-form input {
     font-size: 0.95rem;
     padding: 0.8rem;
+  }
+
+  .login-form button {
+    width: fit-content;
+    font-size: 0.95rem;
+    padding: 0.5rem 0.9rem;
   }
 
   .login-page p {
@@ -195,10 +236,15 @@
     border-radius: 16px;
   }
 
-  .login-form input,
-  .login-form button {
+  .login-form input {
     font-size: 0.9rem;
     padding: 0.65rem;
+  }
+
+  .login-form button {
+    width: fit-content;
+    font-size: 0.9rem;
+    padding: 0.45rem 0.85rem;
   }
 
   .login-page p {
