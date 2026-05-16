@@ -24,7 +24,7 @@
 
   border-radius: 32px;
   background: transparent;
-  backdrop-filter:none;
+  backdrop-filter: none;
 }
 
 .landing-greeting {
@@ -39,22 +39,27 @@
   margin: 0.35rem 0 0;
   font-size: clamp(3.4rem, 9vw, 6.4rem);
   line-height: 0.9;
-  color: #ffffff;
-  text-shadow: 0 8px 28px rgba(0, 0, 0, 0.45);
+  color: #f4fbff;
+  text-shadow:
+    0 0 12px rgba(126, 231, 255, 0.35),
+    0 8px 28px rgba(0, 0, 0, 0.55);
 }
 
 .landing-fauna {
   display: block;
   margin-top: 0.7rem;
   font-size: clamp(1.4rem, 4vw, 2.5rem);
-  color: #7dd3fc;
-  text-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+  color: #7ee7ff;
+  text-shadow:
+    0 0 12px rgba(126, 231, 255, 0.45),
+    0 6px 20px rgba(0, 0, 0, 0.45);
 }
 
 .landing-subtitle {
   margin: 1rem 0 2rem;
-  color: #dff7ff;
+  color: #e6f7ff;
   font-weight: 500;
+  text-shadow: 0 4px 16px rgba(0, 0, 0, 0.45);
 }
 
 .auth-container {
@@ -81,7 +86,7 @@
   border-radius: 12px;
 
   background: transparent;
-  color: #ffffff;
+  color: #e6f7ff;
 
   font-size: 1rem;
   font-weight: 500;
@@ -99,23 +104,26 @@
 
   backdrop-filter: blur(0px);
   box-shadow: none;
+
+  /* performance hints to avoid paint/layout jitter on hover */
+  will-change: box-shadow, background, color;
+  transform-origin: center;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-font-smoothing: antialiased;
 }
 
 .auth-button:hover {
   background: rgba(8, 90, 120, 0.22);
-
   border-color: rgba(126, 231, 255, 0.55);
-
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(8px);
 
   box-shadow:
     0 0 14px rgba(0, 255, 255, 0.3),
     0 0 28px rgba(0, 180, 255, 0.22),
     0 0 46px rgba(0, 120, 255, 0.14);
 
-  color: #ffffff;
-
-  transform: translateY(-2px) scale(1.03);
+  color: #f4fbff;
 }
 
 .auth-button::after {
@@ -127,11 +135,11 @@
 }
 
 .auth-button:focus-visible {
-  outline: 3px solid rgba(126, 231, 255, 0.75);
-  outline-offset: 4px;
+  /* avoid outline-induced layout shift; use box-shadow for focus indication */
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(126, 231, 255, 0.25);
 }
 
-/* Tablet hochkant + kleinere Laptops */
 @media (max-width: 1024px) {
   .landing-page {
     background-image: url("./images/tablet/landing-ocean-tablet.png");
@@ -145,7 +153,6 @@
   }
 }
 
-/* Tablet quer */
 @media (min-width: 768px) and (max-width: 1366px) and (orientation: landscape) {
   .landing-page {
     background-image: url("./images/tablet/landing-ocean-tablet.png");
@@ -161,7 +168,6 @@
   }
 }
 
-/* Handy hochkant */
 @media (max-width: 600px) {
   .landing-page {
     background-image: url("./images/handy/landing-ocean-mobile.png");
@@ -197,7 +203,6 @@
   }
 }
 
-/* Handy quer */
 @media (max-height: 500px) and (orientation: landscape) {
   .landing-page {
     background-image: url("./images/handy/landing-ocean-mobile.png");

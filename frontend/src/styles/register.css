@@ -33,13 +33,71 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1rem;
+  gap: 0.2rem;
 
   padding: 2rem;
   border-radius: 20px;
 
   background: transparent;
   backdrop-filter: none;
+}
+
+/* BACK BUTTON */
+.back-button {
+  position: fixed;
+  top: 2rem;
+  left: 2rem;
+  z-index: 999;
+
+  width: fit-content;
+  padding: 0.55rem 1rem;
+
+  border: 1px solid transparent;
+  border-radius: 12px;
+
+  background: transparent;
+  color: #ffffff;
+
+  font-size: 1rem;
+  font-weight: 500;
+  font-family: "Inter", sans-serif;
+
+  cursor: pointer;
+
+  transition:
+    background 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease,
+    transform 0.25s ease,
+    color 0.35s ease;
+
+  backdrop-filter: blur(0px);
+  box-shadow: none;
+}
+
+.back-button:hover,
+.back-button:focus {
+  background: rgba(8, 90, 120, 0.22);
+
+  border-color: rgba(126, 231, 255, 0.55);
+
+  backdrop-filter: blur(10px);
+
+  box-shadow:
+    0 0 14px rgba(0, 255, 255, 0.3),
+    0 0 28px rgba(0, 180, 255, 0.22),
+    0 0 46px rgba(0, 120, 255, 0.14);
+
+  transform: translateY(-2px) scale(1.03);
+}
+
+.back-button:active {
+  transform: scale(0.97);
+}
+
+.back-button:focus-visible {
+  outline: 3px solid rgba(126, 231, 255, 0.75);
+  outline-offset: 4px;
 }
 
 /* LABELS */
@@ -49,6 +107,15 @@
   font-weight: 500;
 
   color: #ffffff;
+}
+
+/* Form field wrapper to keep label+input together */
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+  width: 100%;
+  align-items: center;
 }
 
 /* INPUTS + SELECTS */
@@ -76,11 +143,10 @@
   box-shadow: none;
 
   transition:
-    width 0.3s ease,
-    background 0.35s ease,
-    border-color 0.35s ease,
-    box-shadow 0.35s ease,
-    transform 0.25s ease;
+    background 0.45s ease,
+    border-color 0.45s ease,
+    box-shadow 0.45s ease,
+    color 0.45s ease;
 }
 
 /* PLACEHOLDER + SELECT TEXT */
@@ -102,8 +168,6 @@
 .register-form select:hover,
 .register-form input:focus,
 .register-form select:focus {
-  width: fit-content;
-
   background: rgba(8, 90, 120, 0.22);
 
   border-color: rgba(126, 231, 255, 0.55);
@@ -114,8 +178,24 @@
     0 0 14px rgba(0, 255, 255, 0.3),
     0 0 28px rgba(0, 180, 255, 0.22),
     0 0 46px rgba(0, 120, 255, 0.14);
+}
 
-  transform: translateY(-2px) scale(1.03);
+/* Apply same hover/focus styling when hovering the label or the whole field
+   so moving between label and input doesn't toggle styles (prevents flicker) */
+.form-field:hover input,
+.form-field:hover select,
+.form-field:focus-within input,
+.form-field:focus-within select {
+  background: rgba(8, 90, 120, 0.22);
+
+  border-color: rgba(126, 231, 255, 0.55);
+
+  backdrop-filter: blur(10px);
+
+  box-shadow:
+    0 0 14px rgba(0, 255, 255, 0.3),
+    0 0 28px rgba(0, 180, 255, 0.22),
+    0 0 46px rgba(0, 120, 255, 0.14);
 }
 
 /* DATE */
@@ -222,7 +302,7 @@
   border-radius: 12px;
 
   background: transparent;
-  color: #7ee7ff;
+  color:white;
 
   font-weight: 600;
   text-decoration: none;
@@ -342,4 +422,120 @@
     gap: 0.65rem;
     border-radius: 18px;
   }
+}
+
+/* GENDER INFO TOOLTIP */
+.gender-label-wrapper {
+  position: relative;
+
+  display: inline-flex;
+  align-items: flex-start;
+}
+
+.info-tooltip {
+  position: absolute;
+
+  top: -0.45rem;
+  right: -1.9rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.info-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 18px;
+  height: 18px;
+
+  border-radius: 50%;
+
+  border: 1px solid transparent;
+
+  background: transparent;
+
+  color: #ffffff;
+
+  font-size: 0.72rem;
+  font-weight: 700;
+  font-family: "Inter", sans-serif;
+
+  cursor: pointer;
+
+  backdrop-filter: blur(0px);
+  box-shadow: none;
+
+  transition:
+    background 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease,
+    transform 0.25s ease,
+    color 0.35s ease;
+}
+
+.info-icon:hover {
+  background: rgba(8, 90, 120, 0.22);
+
+  border-color: rgba(126, 231, 255, 0.55);
+
+  backdrop-filter: blur(10px);
+
+  box-shadow:
+    0 0 10px rgba(0, 255, 255, 0.22),
+    0 0 20px rgba(0, 180, 255, 0.16),
+    0 0 34px rgba(0, 120, 255, 0.12);
+
+  transform: scale(1.08);
+}
+
+.tooltip-text {
+  position: absolute;
+
+  top: 2rem;
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  width: max-content;
+  max-width: 280px;
+
+  padding: 0.75rem 0.9rem;
+
+  border-radius: 14px;
+
+  background: rgba(4, 22, 34, 1);
+
+  border: 1px solid rgba(126, 231, 255, 0.35);
+
+  backdrop-filter: none;
+
+  overflow: hidden;
+  
+
+  color: #dffbff;
+
+  font-size: 0.85rem;
+  text-align: center;
+  line-height: 1.4;
+
+  opacity: 0;
+  visibility: hidden;
+
+  z-index: 99999;
+
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
+
+  pointer-events: none;
+}
+
+.info-tooltip:hover .tooltip-text {
+  opacity: 1;
+  visibility: visible;
+
+  transform: translateX(-50%) translateY(6px);
 }
