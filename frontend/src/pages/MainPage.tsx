@@ -12,12 +12,6 @@ function MainPage() {
             </h1>
 
             <WeatherSection />
-            
-            <CatalogSection />
-
-            <VisitorSection />
-
-            <CommentSection />
 
             <ProfileSection />
 
