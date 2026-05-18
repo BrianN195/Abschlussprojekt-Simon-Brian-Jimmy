@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import NavLinks from "./NavLinks";
 import AuthControls from "./AuthControls";
-import "./MainNavigation.css";
+import "../../styles/MainNavigation.css";
 
 function MainNavigation() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
