@@ -87,14 +87,14 @@ router.post('/register', async (req: Request, res: Response) => {
 router.post('/login', async (req: Request, res: Response) => {
   console.log("Im login backend")
   try {
-    const { email, password } = req.body;
+    const { username, password } = req.body;
 
-    if (!email || !password) {
-      return res.status(400).json({ error: 'Missing email or password' });
+    if (!username || !password) {
+      return res.status(400).json({ error: 'Missing username or password' });
     }
 
     const user = await UserModel.findOne({
-      where: { email }
+      where: { username }
     });
     if (!user) {
       return res.status(401).json({ error: 'Invalid credentials' });

@@ -147,7 +147,7 @@ function RegisterPage() {
             <option value="">Optional</option>
             <option value="female">Woman</option>
             <option value="male">Man</option>
-            <option value="other">Others</option>
+            <option value="others">Others</option>
           </select>
         </div>
 
