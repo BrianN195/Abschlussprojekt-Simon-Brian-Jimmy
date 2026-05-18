@@ -15,8 +15,11 @@
 
 .profile-section,
 .profile-edit-section {
-  width: min(100%, 1100px);
+  width: 100%;
+  max-width: 1200px; /* match .nav-container max-width */
   margin: 0 auto;
+  padding: 0 16px; /* align horizontal padding with nav container */
+  box-sizing: border-box;
 }
 
 .profile-summary-card,
@@ -27,6 +30,12 @@
   background: linear-gradient(180deg, rgba(9, 31, 49, 0.82), rgba(5, 22, 36, 0.92));
   box-shadow: 0 24px 80px rgba(0, 0, 0, 0.35);
   backdrop-filter: blur(14px);
+}
+
+.profile-summary-card {
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0 auto;
 }
 
 .profile-summary-header {
@@ -99,12 +108,18 @@
   gap: 1rem;
   margin-top: 1.5rem;
 }
+.profile-form-fields {
+  display: grid;
+  gap: 1rem;
+  max-width: 560px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
 
-.profile-stats > div {
-  padding: 1rem 1.05rem;
-  border-radius: 20px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+/* center the form group inside the right column of the grid */
+.profile-edit-grid > .profile-form-fields {
+  justify-self: center;
 }
 
 .profile-stat-wide {
@@ -129,6 +144,8 @@
 
 .profile-edit-section {
   margin-top: 1.5rem;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .profile-edit-form {
@@ -203,11 +220,14 @@
 .profile-form-fields {
   display: grid;
   gap: 1rem;
+  max-width: 450px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .profile-form-row {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: 1fr 1fr;
   gap: 1rem;
 }
 
@@ -236,6 +256,13 @@
 textarea.form-input {
   min-height: 140px;
   resize: vertical;
+}
+
+/* Ensure date input matches select (gender) width/box-model */
+.profile-form-row input[type="date"],
+.profile-form-row select {
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .profile-save-button {
@@ -278,6 +305,18 @@ textarea.form-input {
     padding: 1rem;
   }
 
+  .profile-section,
+  .profile-edit-section {
+    padding: 0 16px;
+  }
+
+
+@media (min-width: 769px) {
+  .profile-section,
+  .profile-edit-section {
+    padding: 0 20px; /* match .nav-container padding at desktop */
+  }
+}
   .profile-summary-header,
   .profile-edit-grid {
     grid-template-columns: 1fr;
