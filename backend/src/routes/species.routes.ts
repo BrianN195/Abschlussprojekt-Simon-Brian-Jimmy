@@ -11,7 +11,7 @@ router.get("/", async (req: Request, res: Response) => {
   try {
     const search = (req.query.search as string)?.toLowerCase() || "";
 
-    const animals = await AnimalModel.findAll()
+    const animals = await AnimalModel.findAll();
 
     res.json(animals);
   } catch (error: unknown) {
@@ -24,7 +24,7 @@ router.get("/", async (req: Request, res: Response) => {
 router.get("/:id", async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-    const animal = await AnimalModel.findByPk(Number(id))
+    const animal = await AnimalModel.findByPk(Number(id));
 
     if (!animal) {
       return res.status(404).json({ error: "Species not found" });
@@ -36,15 +36,20 @@ router.get("/:id", async (req: Request, res: Response) => {
     res.status(500).json({ error: "Failed to fetch species" });
   }
 });
-router.get('/:id/locations', async (req: Request, res: Response) => {
-    const {id} = req.params
-    const animal = await AnimalModel.findByPk(Number(id),{
-      include: LocationModel
-    });
+router.get("/:id/locations", async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const animal = await AnimalModel.findByPk(Number(id), {
+    include: LocationModel,
+  });
 
-    if(!animal) {
-      return res.status(404).json({ error: 'Animal not found' });
-    }
-    res.json(animal)
-})
+  if (!animal) {
+    return res.status(404).json({ error: "Animal not found" });
+  }
+  const data = animal.toJSON();
+
+  return res.json({
+    ...data,
+    locations: data.Locations, // umbenennen
+  });
+});
 export default router;
