@@ -207,3 +207,12 @@ index e7eca98..f90f135 100644
 
 </details>
 
+Neuer Plan:
+
+- Catalog fällt weg
+
+- Wetter Container ist schon gemacht/ Wir noch nicht richtig angezeigt und design nochmal überfliegen !!prüfen und reparieren!!
+
+- comments geht dirakt nach animals. dort soll/kann kommentiert werden.
+
+- Mein Auftrag: Container favoutites auf der main Page coden und einfügen. Alles Was unter animals per checkbox ausgewählt wird muss dann auf der mainPage unter Favoriten aufgelistet werden. Erscheinen soll das Bild mit unten drunter dem Wissenschaftsbnamen und dem Umgangsnamen. Muss klickbar (link) sein, weil bei klick wieder zu der entsprechen animalpage geleitet wird. Beispielsweise wir wählen unter animals "Clownfish" als favorite aus. Das wird auf der mainPage unter favorite aufgeführt. Bei klick wieder zurück auf die animals direkt nach "Clownfish"

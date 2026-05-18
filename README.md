@@ -23,7 +23,11 @@ Favoriten: Speichern bestimmter Tiere in einer persönlichen Merkliste.
  - Social Features:
 
 - Teilen-Funktion: Direktes Teilen von Entdeckungen und Tier-Steckbriefen über soziale Medien oder Messenger.
-- Beispielbild: Dunkel: https://chatgpt.com/s/m_69fc4add4c2c8191acda4885c8c595bd Hell: https://chatgpt.com/s/m_69fc4d3fb3cc8191a083aa669101405e
+- Beispielbild - Webseite: 
+    - Hell: https://chatgpt.com/s/m_6a0ac766caac81918df23356f4af0c67
+- Beispielbild - App:
+    - Dunkel: https://chatgpt.com/s/m_69fc4add4c2c8191acda4885c8c595bd 
+    - Hell: https://chatgpt.com/s/m_69fc4d3fb3cc8191a083aa669101405e
 ### Aufbau:
 - Rechte System user/gast user sieht alles, gast nur beiträge ohne comments und bewertung
 - Alles auf Englisch schreiben!
