@@ -12,6 +12,8 @@ export default function Animal() {
       .then((res) => res.json())
       .then((data) => setAnimal(data));
   }, [id]);
+  
+  
   if (!animal) return <p>Loading</p>;
   return (
     <main>
@@ -24,6 +26,7 @@ export default function Animal() {
         <div className={styles.nameContainer}>
           <h2 className={styles.title}>{animal.name}</h2>
           <p className={styles.scientificName}>{animal.scientificName}</p>
+        
         </div>
       </div>
       <section className={styles.about}>
