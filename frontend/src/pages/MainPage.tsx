@@ -1,4 +1,3 @@
-import ProfileSection from "../components/main/ProfileSection";
 import FavoritesSection from "../components/main/FavoritesSection";
 import WeatherSection from "../components/main/WeatherSection";
 
@@ -10,8 +9,6 @@ function MainPage() {
             </h1>
 
             <WeatherSection />
-
-            <ProfileSection />
 
             <FavoritesSection />
 
