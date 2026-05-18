@@ -1,0 +1,194 @@
+.hardInfoContainer{
+    width: 15rem;
+    height: 15rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.nameContainer{
+    width: 14rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: left;
+}
+
+.favoriteCheckboxLabel {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+    cursor: pointer;
+}
+
+.favoriteCheckboxLabel input {
+    width: 1rem;
+    height: 1rem;
+}
+
+.scientificName{
+  color: gray;
+  font-style: italic;
+}
+
+.bild {
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.title{
+    font-style: italic;
+}
+
+.about{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.appearList{
+    list-style: none;
+    
+}
+
+/* TABLET */
+@media (max-width: 1024px) {
+  .hardInfoContainer {
+    width: 12rem;
+    height: 12rem;
+  }
+
+  .nameContainer {
+    width: 11rem;
+  }
+
+  .title {
+    font-size: 1.2rem;
+  }
+
+  .about {
+    gap: 8px;
+  }
+}
+
+/* MOBILE / HANDY HOCHKANT */
+@media (max-width: 600px) {
+  main {
+    padding: 1rem;
+  }
+
+  .hardInfoContainer {
+    width: 10rem;
+    height: 10rem;
+  }
+
+  .nameContainer {
+    width: 9rem;
+  }
+
+  .title {
+    font-size: 1rem;
+  }
+
+  .scientificName {
+    font-size: 0.85rem;
+  }
+
+  .favoriteCheckboxLabel {
+    font-size: 0.9rem;
+    gap: 0.4rem;
+    margin-top: 0.4rem;
+  }
+
+  .favoriteCheckboxLabel input {
+    width: 0.9rem;
+    height: 0.9rem;
+  }
+
+  .about {
+    gap: 6px;
+  }
+
+  .about h6 {
+    font-size: 0.95rem;
+  }
+
+  .about p {
+    font-size: 0.85rem;
+  }
+
+  .appearList h6 {
+    font-size: 0.95rem;
+  }
+
+  .appearList ul {
+    padding-left: 1rem;
+  }
+
+  .appearList li {
+    font-size: 0.85rem;
+  }
+}
+
+/* HANDY QUER (Landscape) */
+@media (max-height: 500px) and (orientation: landscape) {
+  .hardInfoContainer {
+    width: 8rem;
+    height: 8rem;
+  }
+
+  .nameContainer {
+    width: 7rem;
+  }
+
+  .title {
+    font-size: 0.9rem;
+  }
+
+  .scientificName {
+    font-size: 0.75rem;
+  }
+
+  .favoriteCheckboxLabel {
+    font-size: 0.8rem;
+    gap: 0.3rem;
+    margin-top: 0.2rem;
+  }
+
+  .favoriteCheckboxLabel input {
+    width: 0.8rem;
+    height: 0.8rem;
+  }
+
+  .about {
+    gap: 4px;
+  }
+
+  .about h6 {
+    font-size: 0.8rem;
+    margin: 0.3rem 0 0 0;
+  }
+
+  .about p {
+    font-size: 0.75rem;
+  }
+
+  .appearList h6 {
+    font-size: 0.8rem;
+    margin: 0.3rem 0 0 0;
+  }
+
+  .appearList ul {
+    padding-left: 0.8rem;
+    margin: 0.2rem 0;
+  }
+
+  .appearList li {
+    font-size: 0.75rem;
+    line-height: 1.2;
+  }
+}

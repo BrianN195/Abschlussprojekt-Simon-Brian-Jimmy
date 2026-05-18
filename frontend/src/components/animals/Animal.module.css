@@ -17,6 +17,19 @@
     justify-content: left;
 }
 
+.favoriteCheckboxLabel {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+    cursor: pointer;
+}
+
+.favoriteCheckboxLabel input {
+    width: 1rem;
+    height: 1rem;
+}
+
 .scientificName{
   color: gray;
   font-style: italic;
