@@ -13,7 +13,7 @@ const animal1 = await AnimalModel.create({
     "Großer Rochen der häufig in den Malediven vorkommt. Bekannt für seine eleganten Bewegungen und seine Präsenz an Reinigungsstationen in den Atollen.",
   category: "ray",
   dangerLevel: 1,
-  imageUrl: "https://www.mantatrust.org/wp-content/uploads/2019/06/manta-ray.jpg",
+  imageUrl: "/images/animals/mantarochen.jpg",
 
   size: "3-5 m",
   weight: "700-1400 kg",
@@ -30,7 +30,7 @@ const animal2 = await AnimalModel.create({
     "Ruhiger bodenlebender Hai mit charakteristischem Fleckenmuster. Häufig in warmen Lagunen und Riffbereichen der Malediven anzutreffen.",
   category: "shark",
   dangerLevel: 2,
-  imageUrl: "https://www.maldives.com/wp-content/uploads/leopard-shark-maldives.jpg",
+  imageUrl: "/images/animals/leopardenhai.jpg",
 
   size: "2-3.5 m",
   weight: "20-30 kg",
@@ -47,7 +47,7 @@ const animal3 = await AnimalModel.create({
     "Schneller Rochen mit markanten weißen Punkten. Oft in offenen Lagunen und Kanälen der südlichen Malediven zu sehen.",
   category: "ray",
   dangerLevel: 1,
-  imageUrl: "https://upload.wikimedia.org/wikipedia/commons/e/e1/Aetobatus_narinari2.jpg",
+  imageUrl: "/images/animals/adlerrochen.jpg",
 
   size: "2-3 m",
   weight: "150-230 kg",
@@ -64,7 +64,7 @@ const animal4 = await AnimalModel.create({
     "Grüne Meeresschildkröte die häufig an Korallenriffen der Malediven vorkommt. Bekannt für ihre ruhige Art und langen Wanderungen.",
   category: "turtle",
   dangerLevel: 1,
-  imageUrl: "https://upload.wikimedia.org/wikipedia/commons/6/6b/Green_turtle_swimming_over_coral_reefs_in_Kona.jpg",
+  imageUrl: "/images/animals/meeresschildkröte.jpg",
 
   size: "0.8-1.5 m",
   weight: "110-190 kg",
@@ -81,7 +81,7 @@ const animal5 = await AnimalModel.create({
     "Kleiner bis mittelgroßer Hai der oft nahe Korallenriffen schwimmt. Häufig in flachen Lagunen der Malediven anzutreffen.",
   category: "shark",
   dangerLevel: 3,
-  imageUrl: "https://upload.wikimedia.org/wikipedia/commons/5/52/Blacktip_reef_shark.jpg",
+  imageUrl: "/images/animals/hai.jpg",
 
   size: "1.2-1.8 m",
   weight: "13-45 kg",
@@ -98,7 +98,7 @@ const animal6 = await AnimalModel.create({
     "Raubfisch mit langem silbernen Körper und scharfen Zähnen. Oft in Gruppen an Riffkanten der Malediven anzutreffen.",
   category: "fish",
   dangerLevel: 3,
-  imageUrl: "https://upload.wikimedia.org/wikipedia/commons/9/9f/Great_Barracuda.jpg",
+  imageUrl: "/images/animals/barrakuda.jpg",
 
   size: "0.6-1.8 m",
   weight: "5-25 kg",
@@ -115,7 +115,7 @@ const animal7 = await AnimalModel.create({
     "Größter Fisch der Welt und einer der bekanntesten Bewohner des South Ari Atolls. Trotz seiner Größe vollkommen ungefährlich für Menschen.",
   category: "shark",
   dangerLevel: 1,
-  imageUrl: "https://upload.wikimedia.org/wikipedia/commons/5/56/Whale_shark_Georgia_aquarium.jpg",
+  imageUrl: "/images/animals/walhai.jpg",
 
   size: "8-18 m",
   weight: "15000-34000 kg",
@@ -132,7 +132,7 @@ const animal8 = await AnimalModel.create({
     "Nachtaktiver Riffhai, der tagsüber oft regungslos in Höhlen oder unter Korallen liegt. Sehr häufig in den Malediven.",
   category: "shark",
   dangerLevel: 2,
-  imageUrl: "https://upload.wikimedia.org/wikipedia/commons/5/5a/Whitetip_reef_shark.jpg",
+  imageUrl: "/images/animals/Weißspitzen-Riffhai.jpg",
 
   size: "1.2-1.6 m",
   weight: "18-20 kg",
@@ -149,7 +149,7 @@ const animal9 = await AnimalModel.create({
     "Aktiver Riffhai, der oft an Riffkanten patrouilliert. Häufig in größeren Gruppen in den äußeren Atollbereichen.",
   category: "shark",
   dangerLevel: 3,
-  imageUrl: "https://upload.wikimedia.org/wikipedia/commons/3/3f/Grey_reef_shark.jpg",
+  imageUrl: "/images/animals/grauerRiffhai.jpg",
 
   size: "1.5-2.5 m",
   weight: "20-35 kg",
@@ -166,7 +166,7 @@ const animal10 = await AnimalModel.create({
     "Kleiner, farbenfroher Riff-Fisch der in Symbiose mit Seeanemonen lebt. Sehr häufig in flachen Korallenriffen der Malediven.",
   category: "fish",
   dangerLevel: 1,
-  imageUrl: "https://upload.wikimedia.org/wikipedia/commons/5/57/Clownfish_anemone.jpg",
+  imageUrl: "/images/animals/clownfish.jpg",
 
   size: "8-11 cm",
   weight: "20-30 g",

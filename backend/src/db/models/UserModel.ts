@@ -8,8 +8,9 @@ class UserModel extends Model {
   declare passwordHash: string;
   declare profileImage: string | null;
   declare bio: string | null;
-  declare gender: "male"|"female"|"others";
+  declare gender: "male" | "female" | "others";
   declare birthDate: string | null;
+  declare role: "user" | "admin" | "moderator";
 }
 // hier in die {} das damit ts weiß was wie exestiert
 //
@@ -20,7 +21,7 @@ UserModel.init(
     username: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true
+      unique: true,
     },
 
     email: {
@@ -36,23 +37,29 @@ UserModel.init(
 
     profileImage: {
       type: DataTypes.STRING,
-      allowNull: true
+      allowNull: true,
     },
 
     bio: {
       type: DataTypes.TEXT,
-      allowNull: true
+      allowNull: true,
     },
 
     gender: {
       type: DataTypes.ENUM("male", "female", "others"),
       allowNull: true,
-      defaultValue: "others"
+      defaultValue: "others",
     },
 
     birthDate: {
       type: DataTypes.DATEONLY,
-      allowNull: true
+      allowNull: true,
+    },
+
+    role: {
+      type: DataTypes.ENUM("user", "admin", "moderator"),
+      allowNull: false,
+      defaultValue: "user",
     },
   },
 
@@ -60,8 +67,8 @@ UserModel.init(
     sequelize,
     modelName: "User",
     tableName: "user",
-    timestamps: true
-  }
+    timestamps: true,
+  },
 );
 
 export default UserModel;

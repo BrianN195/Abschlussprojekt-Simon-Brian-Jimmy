@@ -105,5 +105,6 @@ Favoriten: Speichern bestimmter Tiere in einer persönlichen Merkliste.
 
     Um datenbank anzulegen:
     - ganz wichtig: postgresql muss laufen! (systemctl start postgresql)
+    - wenn resetet werden muss, im backendordner: npx sequelize-cli db:migrate:undo:all
     - erst migrieren: in den backend ordner und dann im terminal: npx sequelize-cli db:migrate
     - dann seed durchlaufen lassen: npm run seed

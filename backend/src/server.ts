@@ -37,6 +37,7 @@ app.use(cors(corsOptions));
 app.options(/.*/, cors(corsOptions));
 app.use(express.json());
 app.use('/uploads', express.static(path.resolve(process.cwd(), 'public/uploads')));
+app.use("/images", express.static("public/images"));
 
 // Health Check Route
 app.get('/health', (req: Request, res: Response) => {
