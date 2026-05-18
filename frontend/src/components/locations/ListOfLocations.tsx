@@ -1,0 +1,42 @@
+import { useEffect, useState } from "react";
+import type { Location } from "../../types/Locations";
+import { locationService } from "../../services/locationService";
+
+export default function locationList() {
+  const [locations, setlocations] = useState<Location[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchlocations() {
+      try {
+        setLoading(true);
+
+        const data = await locationService.getAll();
+        setlocations(data);
+      } catch (err) {
+        console.log(err);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchlocations();
+  }, []);
+
+  if (loading) return <p>Lade Locations...</p>;
+
+  return (
+    <div className="grid gap-3">
+      {locations.length === 0 ? (
+        <p>No Locations saved</p>
+      ) : (
+        locations.map((location) => (
+          <div key={location.id} className="p-3 rounded-xl shadow bg-white">
+            <h3 className="text-lg font-bold">{location.name}</h3>
+            <p className="text-sm text-gray-500">{location.region}</p>
+          </div>
+        ))
+      )}
+    </div>
+  );
+}
