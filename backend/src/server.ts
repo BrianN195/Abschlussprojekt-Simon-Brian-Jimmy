@@ -3,6 +3,7 @@ import cors, { CorsOptions } from 'cors';
 import dotenv from 'dotenv';
 import path from 'path';
 import authRoutes from './routes/auth.routes';
+import favoritesRoutes from './routes/favorites.routes';
 import speciesRoutes from './routes/species.routes';
 import resortsRoutes from './routes/resorts.routes';
 import searchRoutes from './routes/search.routes'
@@ -46,6 +47,7 @@ app.get('/health', (req: Request, res: Response) => {
 
 // Routes
 app.use('/api/v1/auth', authRoutes);
+app.use('/api/v1/favorites', favoritesRoutes);
 app.use('/api/v1/species', speciesRoutes);
 app.use('/api/v1/resorts', resortsRoutes);
 app.use('/api/v1/search', searchRoutes);
