@@ -17,54 +17,62 @@ function AuthControls({ mobile = false, onAction }: AuthControlsProps) {
     navigate("/");
   }
 
-  if (isLoggedIn) {
-    const initials = (user?.username || user?.email || "").split(/\s+/).filter(Boolean).map(s=>s[0].toUpperCase()).slice(0,2).join("");
+  const initials = (user?.username || user?.email || "")
+    .split(/\s+/)
+    .filter(Boolean)
+    .map((s) => s[0].toUpperCase())
+    .slice(0, 2)
+    .join("");
 
-    return (
-      <>
-        <span className={mobile ? "nav-mobile-user" : "nav-user"}>
-          {user?.profileImage ? (
-            <img src={user.profileImage} alt="avatar" className="nav-user-avatar" />
-          ) : (
-            <span className="nav-user-avatar-fallback">{initials || "G"}</span>
-          )}
-
-          <span className="nav-user-greet">Hi, {user?.username || user?.email}</span>
-        </span>
-
-        <Link
-          to="/profile"
-          className={mobile ? "nav-mobile-link" : "nav-link"}
-          onClick={onAction}
-        >
-          Profile
-        </Link>
-        <button
-          className={mobile ? "nav-mobile-logout" : "nav-logout-btn"}
-          onClick={handleLogout}
-        >
-          Logout
-        </button>
-      </>
-    );
-  }
+  const avatarContent = user?.profileImage ? (
+    <img src={user.profileImage} alt="avatar" className="nav-user-avatar" />
+  ) : (
+    <span className="nav-user-avatar-fallback">{initials || "G"}</span>
+  );
 
   return (
     <>
-      <Link
-        to="/login"
-        className={mobile ? "nav-mobile-link" : "nav-link"}
-        onClick={onAction}
-      >
-        Login
-      </Link>
-      <Link
-        to="/register"
-        className={mobile ? "nav-mobile-link nav-register" : "nav-link nav-register"}
-        onClick={onAction}
-      >
-        Register
-      </Link>
+      <span className={mobile ? "nav-mobile-user" : "nav-user"}>
+        {avatarContent}
+        <span className="nav-user-greet">
+          Hi, {isLoggedIn ? user?.username || user?.email : "Guest"}
+        </span>
+      </span>
+
+      {isLoggedIn ? (
+        <>
+          <Link
+            to="/profile"
+            className={mobile ? "nav-mobile-link" : "nav-link"}
+            onClick={onAction}
+          >
+            Profile
+          </Link>
+          <button
+            className={mobile ? "nav-mobile-logout" : "nav-logout-btn"}
+            onClick={handleLogout}
+          >
+            Logout
+          </button>
+        </>
+      ) : (
+        <>
+          <Link
+            to="/login"
+            className={mobile ? "nav-mobile-link" : "nav-link"}
+            onClick={onAction}
+          >
+            Login
+          </Link>
+          <Link
+            to="/register"
+            className={mobile ? "nav-mobile-link nav-register" : "nav-link nav-register"}
+            onClick={onAction}
+          >
+            Register
+          </Link>
+        </>
+      )}
     </>
   );
 }
