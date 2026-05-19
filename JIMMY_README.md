@@ -216,3 +216,13 @@ Neuer Plan:
 - comments geht dirakt nach animals. dort soll/kann kommentiert werden.
 
 - Mein Auftrag: Container favoutites auf der main Page coden und einfügen. Alles Was unter animals per checkbox ausgewählt wird muss dann auf der mainPage unter Favoriten aufgelistet werden. Erscheinen soll das Bild mit unten drunter dem Wissenschaftsbnamen und dem Umgangsnamen. Muss klickbar (link) sein, weil bei klick wieder zu der entsprechen animalpage geleitet wird. Beispielsweise wir wählen unter animals "Clownfish" als favorite aus. Das wird auf der mainPage unter favorite aufgeführt. Bei klick wieder zurück auf die animals direkt nach "Clownfish"
+
+
+diese Code bei Favoriten berücksichtigen, Die sind noch nich gemrged und/oder grcoded
+
+// animals als favorit setzen:
+await user.addFavorite(animal);
+//favorit enfernen:
+await user.removeFavorite(animal);
+//alle favoriten holen:
+const favorites = await user.getFavorites()
