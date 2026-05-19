@@ -39,17 +39,22 @@ export default function Animal() {
     const checked = event.target.checked;
     setIsFavourite(checked);
 
-    if (checked) {
-      await saveFavoriteAnimal({
-        id: animal.id,
-        name: animal.name,
-        scientificName: animal.scientificName,
-        imageUrl: animal.imageUrl,
-      });
-      return;
-    }
+    try {
+      if (checked) {
+        await saveFavoriteAnimal({
+          id: animal.id,
+          name: animal.name,
+          scientificName: animal.scientificName,
+          imageUrl: animal.imageUrl,
+        });
+        return;
+      }
 
-    await removeFavoriteAnimal(animal.id);
+      await removeFavoriteAnimal(animal.id);
+    } catch (error) {
+      console.error("Failed to update favorite state:", error);
+      setIsFavourite(!checked);
+    }
   };
   
   
