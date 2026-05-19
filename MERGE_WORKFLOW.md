@@ -5,18 +5,21 @@ Dieser Plan beschreibt die sicheren und sauberen Schritte, um den Branch `compon
 
 Vom eigenen BRANCH aus:     ----> (in diesem Fall components)
 
-
 git add .
 git commit -m " HIER REIN WAS GEMACHT WORDEN IST. IN KURZFASSUNG"
-git push origin components
-git fetch origin
+git push
+git fetch
+
+- In den main switchen:
 git switch main
-git pull origin main
-git merge origin/components
-git push origin main
+git pull
+git merge components
+git push
+
+- In die components switchen:
 git switch components
-git fetch origin
-git merge origin/main
+git fetch
+git merge main
 
 
 ---
