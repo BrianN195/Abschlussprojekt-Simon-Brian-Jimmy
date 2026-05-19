@@ -1,44 +1,100 @@
 import type { FavoriteAnimal } from "../types/FavoriteAnimal";
+import { authService } from "./authService";
 
-const FAVOURITES_KEY = "favouriteAnimals";
+const API_URL =
+    import.meta.env.VITE_API_URL?.replace(/\/$/, "") ||
+    "http://localhost:5000/api/v1/favorites";
 
-// Get all favorite animals from localStorage
+type ApiError = {
+    error?: string;
+    message?: string;
+};
+
+async function parseJsonSafe<T>(response: Response): Promise<T> {
+    try {
+        return (await response.json()) as T;
+    } catch {
+        return [] as T;
+    }
+}
+
+function buildHeaders(): HeadersInit {
+    const authHeader = authService.getAuthHeader();
+
+    return {
+        "Content-Type": "application/json",
+        ...(authHeader ? (authHeader as Record<string, string>) : {}),
+    };
+}
+
+// Get all favorite animals from the backend database
 export async function getFavoriteAnimals(): Promise<FavoriteAnimal[]> {
     try {
-        const storedFavourites = localStorage.getItem(FAVOURITES_KEY);
-        if (!storedFavourites) {
+        if (!authService.isAuthenticated()) {
             return [];
         }
-        return JSON.parse(storedFavourites) as FavoriteAnimal[];
+
+        const response = await fetch(API_URL, {
+            method: "GET",
+            headers: buildHeaders(),
+        });
+
+        const data = await parseJsonSafe<FavoriteAnimal[] | ApiError>(response);
+
+        if (!response.ok) {
+            throw new Error((data as ApiError).error || "Failed to load favorites");
+        }
+
+        return data as FavoriteAnimal[];
     } catch (error) {
         console.error("Failed to load favourites:", error);
         return [];
     }
 }
 
-// Add a favorite animal to localStorage
+// Add a favorite animal in the backend database
 export async function saveFavoriteAnimal(animal: FavoriteAnimal): Promise<void> {
     try {
-        const favourites = await getFavoriteAnimals();
-        const alreadyExists = favourites.some((favorite) => favorite.id === animal.id);
-
-        if (!alreadyExists) {
-            favourites.push(animal);
-            localStorage.setItem(FAVOURITES_KEY, JSON.stringify(favourites));
-            window.dispatchEvent(new Event("favourites-changed"));
+        if (!authService.isAuthenticated()) {
+            return;
         }
+
+        const response = await fetch(`${API_URL}/${animal.id}`, {
+            method: "POST",
+            headers: buildHeaders(),
+        });
+
+        const data = await parseJsonSafe<FavoriteAnimal[] | ApiError>(response);
+
+        if (!response.ok) {
+            throw new Error((data as ApiError).error || "Failed to save favourite");
+        }
+
+        window.dispatchEvent(new Event("favourites-changed"));
     } catch (error) {
         console.error("Failed to save favourite:", error);
         throw error;
     }
 }
 
-// Remove a favorite animal from localStorage
+// Remove a favorite animal from the backend database
 export async function removeFavoriteAnimal(animalId: number): Promise<void> {
     try {
-        const favourites = await getFavoriteAnimals();
-        const filtered = favourites.filter((favorite) => favorite.id !== animalId);
-        localStorage.setItem(FAVOURITES_KEY, JSON.stringify(filtered));
+        if (!authService.isAuthenticated()) {
+            return;
+        }
+
+        const response = await fetch(`${API_URL}/${animalId}`, {
+            method: "DELETE",
+            headers: buildHeaders(),
+        });
+
+        const data = await parseJsonSafe<FavoriteAnimal[] | ApiError>(response);
+
+        if (!response.ok) {
+            throw new Error((data as ApiError).error || "Failed to remove favourite");
+        }
+
         window.dispatchEvent(new Event("favourites-changed"));
     } catch (error) {
         console.error("Failed to remove favourite:", error);
