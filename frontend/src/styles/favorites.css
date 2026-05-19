@@ -1,0 +1,176 @@
+.favorites-section {
+  width: min(100%, 1100px);
+  margin: 2rem auto;
+  padding: 1.5rem;
+
+  color: #ffffff;
+  font-family: "Inter", sans-serif;
+}
+
+.favorites-section h2 {
+  margin: 0 0 1rem;
+  color: #f4fbff;
+  font-family: "Poppins", sans-serif;
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  text-shadow:
+    0 0 12px rgba(126, 231, 255, 0.35),
+    0 8px 28px rgba(0, 0, 0, 0.45);
+}
+
+.favorites-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1rem;
+}
+
+.favorite-card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+
+  text-decoration: none;
+  color: #ffffff;
+
+  border-radius: 18px;
+  border: 1px solid transparent;
+  background: transparent;
+  backdrop-filter: blur(0px);
+  box-shadow: none;
+
+  transition:
+    background 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease,
+    color 0.35s ease;
+}
+
+.favorite-card:hover,
+.favorite-card:focus {
+  background: rgba(8, 90, 120, 0.22);
+  border-color: rgba(126, 231, 255, 0.55);
+  backdrop-filter: blur(10px);
+  box-shadow:
+    0 0 14px rgba(0, 255, 255, 0.3),
+    0 0 28px rgba(0, 180, 255, 0.22),
+    0 0 46px rgba(0, 120, 255, 0.14);
+}
+
+.favorite-card:focus-visible {
+  outline: 3px solid rgba(126, 231, 255, 0.75);
+  outline-offset: 4px;
+}
+
+.favorite-card-default {
+  max-width: 420px;
+  cursor: default;
+}
+
+.favorite-card-default:hover {
+  background: transparent;
+  border-color: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+}
+
+.favorite-image {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  display: block;
+  border-radius: 18px;
+}
+
+.favorite-info {
+  padding: 0.9rem;
+  text-align: center;
+}
+
+.favorite-scientific-name {
+  margin: 0;
+  font-size: 0.95rem;
+  font-style: italic;
+  color: rgba(202, 240, 248, 0.85);
+}
+
+.favorite-common-name {
+  margin: 0.3rem 0 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+/* TABLET */
+@media (max-width: 1024px) {
+  .favorites-section {
+    width: min(100%, 900px);
+    margin: 1.5rem auto;
+    padding: 1.2rem;
+  }
+
+  .favorites-grid {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  }
+
+  .favorite-image {
+    height: 190px;
+  }
+
+  .favorite-card-default {
+    max-width: 380px;
+  }
+}
+
+/* HANDY HOCHKANT */
+@media (max-width: 600px) {
+  .favorites-section {
+    width: 100%;
+    margin: 1rem auto;
+    padding: 1rem;
+  }
+
+  .favorites-section h2 {
+    text-align: center;
+  }
+
+  .favorites-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .favorite-card-default {
+    max-width: 100%;
+  }
+
+  .favorite-image {
+    height: 210px;
+  }
+
+  .favorite-info {
+    padding: 0.75rem;
+  }
+}
+
+/* HANDY QUER */
+@media (max-height: 500px) and (orientation: landscape) {
+  .favorites-section {
+    margin: 0.75rem auto;
+    padding: 0.75rem;
+  }
+
+  .favorites-section h2 {
+    font-size: 1.4rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .favorites-grid {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 0.75rem;
+  }
+
+  .favorite-image {
+    height: 140px;
+  }
+
+  .favorite-info {
+    padding: 0.6rem;
+  }
+}
