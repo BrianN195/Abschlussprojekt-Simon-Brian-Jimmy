@@ -226,3 +226,16 @@ await user.addFavorite(animal);
 await user.removeFavorite(animal);
 //alle favoriten holen:
 const favorites = await user.getFavorites()
+
+
+
+
+Weil wir was in unserer Datenbank veränert/gemacht haben  muss ich  jetzt erstmal das die alles machen. Arbeitsablaufplan inklusiv Powershell bitte. Ich muss resten.
+
+ Um datenbank anzulegen:
+    - ganz wichtig: postgresql muss laufen! (systemctl start postgresql)
+    - wenn resetet werden muss, im backendordner: npx sequelize-cli db:migrate:undo:all
+    - erst migrieren: in den backend ordner und dann im terminal: npx sequelize-cli db:migrate
+    - dann seed durchlaufen lassen: npm run seed
+
+    Ich habe bereits ein Account auf der Datenbank Prostsql.

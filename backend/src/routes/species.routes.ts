@@ -52,4 +52,38 @@ router.get("/:id/locations", async (req: Request, res: Response) => {
     locations: data.Locations, // umbenennen
   });
 });
+
+router.post("/createAnimal", async (req: Request, res: Response) => {
+  const {
+    name,
+    scientificName,
+    description,
+    category,
+    dangerLevel,
+    size,
+    weight,
+    habitat,
+    bestViewingTime,
+    depthRange,
+    diet,
+    isSchooling
+  } = req.body;
+
+  const newAnimal = await AnimalModel.create({
+    name,
+    scientificName,
+    description,
+    category,
+    dangerLevel,
+    size,
+    weight,
+    habitat,
+    bestViewingTime,
+    depthRange,
+    diet,
+    isSchooling
+  })
+
+  return res.status(201).json(newAnimal);
+});
 export default router;
