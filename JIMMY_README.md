@@ -74,3 +74,4 @@ Weil wir was in unserer Datenbank verändert/gemacht haben  muss ich  jetzt erst
 - [Server-Setup](backend/src/server.ts#L12): Favorites- und Weather-Route sind im Backend eingebunden.
  - [Weather-Widget Component](frontend/src/components/main/WeatherSection.tsx#L1): Frontend-Component lädt das Widget-Script und rendert das Wetterbereich.
  - [Weather Styles](frontend/src/styles/weather.css#L1): CSS für das Weather-Layout und responsive Anpassungen.
+ - [Weather-Types](frontend/src/types/Weather.ts#L1): `WeatherData` wurde ausgelagert; `WeatherSection.tsx` importiert jetzt den Typ.
