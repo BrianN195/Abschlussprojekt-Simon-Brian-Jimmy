@@ -72,3 +72,5 @@ Weil wir was in unserer Datenbank verändert/gemacht haben  muss ich  jetzt erst
 - [Weather-Container](frontend/src/components/main/WeatherSection.tsx#L10): Wetter wird im Frontend als eigener Bereich angezeigt.
 - [Weather-Route](backend/src/routes/weather.routes.ts#L6): Backend liefert die Wetterdaten für den Container.
 - [Server-Setup](backend/src/server.ts#L12): Favorites- und Weather-Route sind im Backend eingebunden.
+ - [Weather-Widget Component](frontend/src/components/main/WeatherSection.tsx#L1): Frontend-Component lädt das Widget-Script und rendert das Wetterbereich.
+ - [Weather Styles](frontend/src/styles/weather.css#L1): CSS für das Weather-Layout und responsive Anpassungen.
