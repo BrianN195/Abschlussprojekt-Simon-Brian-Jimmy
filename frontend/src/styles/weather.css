@@ -1,0 +1,61 @@
+.weather-section {
+  width: min(100%, 1100px);
+  margin: 2rem auto;
+  padding: 1.5rem;
+
+  border-radius: 24px;
+  border: 1px solid rgba(126, 231, 255, 0.32);
+  background: rgba(3, 28, 42, 0.38);
+  backdrop-filter: blur(12px);
+
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.38);
+
+  color: #ffffff;
+  font-family: "Inter", sans-serif;
+}
+
+.weather-section h2 {
+  margin: 0 0 1rem;
+
+  font-family: "Poppins", sans-serif;
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+
+  color: #f4fbff;
+}
+
+.weatherwidget-io {
+  text-decoration: none;
+}
+
+/* TABLET */
+@media (max-width: 1024px) {
+  .weather-section {
+    width: min(100%, 900px);
+    margin: 1.5rem auto;
+    padding: 1.3rem;
+    border-radius: 22px;
+  }
+}
+
+/* MOBILE */
+@media (max-width: 600px) {
+  .weather-section {
+    width: 100%;
+    margin: 1rem auto;
+    padding: 1rem;
+    border-radius: 18px;
+  }
+
+  .weather-section h2 {
+    text-align: center;
+  }
+}
+
+/* MOBILE QUERFORMAT */
+@media (max-height: 500px) and (orientation: landscape) {
+  .weather-section {
+    margin: 0.75rem auto;
+    padding: 0.9rem;
+    border-radius: 16px;
+  }
+}

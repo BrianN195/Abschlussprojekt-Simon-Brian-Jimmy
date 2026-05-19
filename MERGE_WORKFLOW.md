@@ -3,7 +3,7 @@
 ## Übersicht
 Dieser Plan beschreibt die sicheren und sauberen Schritte, um den Branch `components` in den Branch `main` zu mergen.
 
-Vom eigenen BRANCH aus:     ----> (in diesem Fall components)
+- Vom eigenen BRANCH aus:     ----> (in diesem Fall components)
 
 git add .
 git commit -m " HIER REIN WAS GEMACHT WORDEN IST. IN KURZFASSUNG"
@@ -11,6 +11,7 @@ git push
 git fetch
 
 - In den main switchen:
+
 git switch main
 git pull
 git merge components

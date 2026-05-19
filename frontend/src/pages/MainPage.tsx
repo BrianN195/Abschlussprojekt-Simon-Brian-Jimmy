@@ -1,6 +1,6 @@
 import FavoritesSection from "../components/main/FavoritesSection";
 import WeatherSection from "../components/main/WeatherSection";
-
+import "../styles/main.css"
 function MainPage() {
 
     return (
@@ -8,6 +8,7 @@ function MainPage() {
             <h1 className="main-title">Maldives Marine Life</h1>
 
             <WeatherSection />
+            
             <FavoritesSection />
         </main>
     );

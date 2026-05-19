@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import "../../styles/weather.css";
 
 declare global {
   interface Window {
@@ -25,17 +26,21 @@ function WeatherSection() {
     }
   }, []);
 
-  return (
-    <a
+ return (
+  <section className="weather-section">
+    <h2>Weather</h2>
+
+  <a
       className="weatherwidget-io"
       href="https://forecast7.com/en/4d1773d51/male/"
-      data-label_1="MALEDIVEN"
-      data-label_2="WETTER"
+      data-label_1="MALDIVES"
+      data-label_2="WEATHER"
       data-theme="dark"
     >
-      MALEDIVEN WETTER
+      MALDIVES WEATHER
     </a>
-  );
+  </section>
+);
 }
 
 export default WeatherSection;
