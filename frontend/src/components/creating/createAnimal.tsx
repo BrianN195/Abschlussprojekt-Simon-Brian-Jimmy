@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 export default function CreateAnimal() {
-  const [isSchooling, setIsSchooling] = useState<boolean>(false);
+  
   const [form, setForm] = useState({
     name: "",
     scientificName: "",
@@ -36,6 +36,7 @@ export default function CreateAnimal() {
         formData.append(key, value as any);
       }
     });
+
     await fetch("http://localhost:5000/api/v1/species/createAnimal", {
       method: "POST",
       body: formData,
@@ -47,64 +48,76 @@ export default function CreateAnimal() {
         <h2>Create Animal</h2>
         <input
           type="text"
-          name=""
+          name="name"
           id=""
           placeholder="Name"
           onChange={handleChange}
         />
         <input
           type="text"
-          name=""
+          name="scientificName"
           id=""
           placeholder="Scientific Name"
           onChange={handleChange}
         />
         <input
           type="text"
-          name=""
+          name="description"
           id=""
           placeholder="description"
           onChange={handleChange}
         />
         <input
           type="text"
-          name=""
+          name="category"
           id=""
           placeholder="category"
           onChange={handleChange}
         />
         <input
           type="number"
-          name=""
+          name="dangerLevel"
           id=""
           placeholder="danger Level"
           onChange={handleChange}
         />
-        {/* bild einfügen, wie? was zu beachten? */}
         <input
-          type="number"
-          name=""
+          type="file"
+          name="image"
+          accept="image/*"
+          onChange={(e) => {
+            if (e.target.files) {
+              setForm((prev) => ({
+                ...prev,
+                image: e.target.files![0],
+              }));
+            }
+          }}
+        />
+        <input
+          type="text"
+          name="size"
           id=""
           placeholder="size"
           onChange={handleChange}
         />
         <input
-          type="number"
-          name=""
+          type="text"
+          name="weight"
           id=""
           placeholder="weight"
           onChange={handleChange}
         />
         <input
           type="text"
-          name=""
+          name="habitat"
           id=""
           placeholder="habitat"
           onChange={handleChange}
         />
         <input
           type="month"
-          name=""
+          name="bestViewingTime"
           id=""
           placeholder="best viewing month"
           onChange={handleChange}
@@ -114,21 +127,46 @@ export default function CreateAnimal() {
           placeholder="Depth Range"
           onChange={handleChange}
         />
+        <input
+          type="text"
+          name="diet"
+          placeholder="Diet"
+          onChange={handleChange}
+        />
         <div>
           <p>Is Schooling?</p>
-          <input
-            type="radio"
-            checked={isSchooling === true}
-            onChange={() => setIsSchooling(true)}
-          />
 
-          <input
-            type="radio"
-            checked={isSchooling === false}
-            onChange={() => setIsSchooling(false)}
-          />
+          <label>
+            Yes
+            <input
+              type="radio"
+              name="isSchooling"
+              checked={form.isSchooling === true}
+              onChange={() =>
+                setForm((prev) => ({
+                  ...prev,
+                  isSchooling: true,
+                }))
+              }
+            />
+          </label>
+
+          <label>
+            No
+            <input
+              type="radio"
+              name="isSchooling"
+              checked={form.isSchooling === false}
+              onChange={() =>
+                setForm((prev) => ({
+                  ...prev,
+                  isSchooling: false,
+                }))
+              }
+            />
+          </label>
         </div>
-        <button type="submit"></button>
+        <button type="submit">Create Animal</button>
       </form>
     </>
   );

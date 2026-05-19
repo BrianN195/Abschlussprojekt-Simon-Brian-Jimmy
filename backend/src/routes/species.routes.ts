@@ -1,6 +1,7 @@
 import { Router, Request, Response } from "express";
 import AnimalModel from "../db/models/AnimalModel";
 import LocationModel from "../db/models/LocationModel";
+import upload from "../middlewares/uploadMiddleware";
 
 const router = Router();
 
@@ -53,37 +54,39 @@ router.get("/:id/locations", async (req: Request, res: Response) => {
   });
 });
 
-router.post("/createAnimal", async (req: Request, res: Response) => {
-  const {
-    name,
-    scientificName,
-    description,
-    category,
-    dangerLevel,
-    size,
-    weight,
-    habitat,
-    bestViewingTime,
-    depthRange,
-    diet,
-    isSchooling
-  } = req.body;
+router.post(
+  "/createAnimal",
+  upload.single("image"),
+  async (req: Request, res: Response) => {
+    try {
+      const imageUrl = req.file ? `/images/animals/${req.file.filename}` : "";
 
-  const newAnimal = await AnimalModel.create({
-    name,
-    scientificName,
-    description,
-    category,
-    dangerLevel,
-    size,
-    weight,
-    habitat,
-    bestViewingTime,
-    depthRange,
-    diet,
-    isSchooling
-  })
+      const newAnimal = await AnimalModel.create({
+        name: req.body.name,
+        scientificName: req.body.scientificName,
+        description: req.body.description,
+        category: req.body.category,
+        dangerLevel: req.body.dangerLevel,
+        imageUrl,
+        size: req.body.size,
+        weight: req.body.weight,
+        habitat: req.body.habitat,
+        bestViewingTime: req.body.bestViewingTime
+          ? [req.body.bestViewingTime]
+          : [],
+        depthRange: req.body.depthRange,
+        diet: req.body.diet,
+        isSchooling: req.body.isSchooling === "true",
+      });
 
-  return res.status(201).json(newAnimal);
-});
+      return res.status(201).json(newAnimal);
+    } catch (error) {
+      console.error(error);
+
+      return res.status(500).json({
+        message: "Error creating animal",
+      });
+    }
+  },
+);
 export default router;

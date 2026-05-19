@@ -108,3 +108,15 @@ Favoriten: Speichern bestimmter Tiere in einer persönlichen Merkliste.
     - wenn resetet werden muss, im backendordner: npx sequelize-cli db:migrate:undo:all
     - erst migrieren: in den backend ordner und dann im terminal: npx sequelize-cli db:migrate
     - dann seed durchlaufen lassen: npm run seed
+
+    Bzgl. Admin Rolle geben:
+    - backend/src/scripts/makeAdmin.ts email durch deine email mit der du dich registriert hast ersetzen
+    - npm run make-Admin
+    
+    Rollen verwenden:
+    - gibt die middleware im ornder middlewares (roleMiddleware.ts)
+    - die kann für alle rollen genutzt werden
+    - einfach beim nutzen die rolle als parameter übergeben die gebraucht wird. bpsw. ("admin")
+
+    Create Seiten:
+    Sind soweit fertig, sollten nur für Admin nutzbar und sichtbar sein

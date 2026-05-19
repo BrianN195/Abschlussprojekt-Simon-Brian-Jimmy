@@ -374,6 +374,7 @@ await AnimalLocationModel.create({
   locationId: location3.id,
   rarity: "common",
 });
+
 }
 seed()
   .then(() => {
