@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import NavLinks from "./NavLinks";
 import AuthControls from "./AuthControls";
 import "../../styles/MainNavigation.css";
+import SearchBar from "./SearchBar";
 
 function MainNavigation() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -23,6 +24,9 @@ function MainNavigation() {
         </nav>
 
         <div className="nav-right">
+          <div className="nav-search">
+            <SearchBar />
+          </div>
           <div className="nav-auth">
             <AuthControls />
           </div>
@@ -41,6 +45,7 @@ function MainNavigation() {
       {mobileMenuOpen ? (
         <nav className="nav-mobile-menu">
           <NavLinks mobile onLinkClick={closeMobileMenu} />
+          <div className="nav-search-mobile"><SearchBar /></div>
           <AuthControls mobile onAction={closeMobileMenu} />
         </nav>
       ) : null}
