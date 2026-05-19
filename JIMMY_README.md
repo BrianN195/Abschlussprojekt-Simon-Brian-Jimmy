@@ -229,8 +229,8 @@ const favorites = await user.getFavorites()
 
 
 
-
-Weil wir was in unserer Datenbank veränert/gemacht haben  muss ich  jetzt erstmal das die alles machen. Arbeitsablaufplan inklusiv Powershell bitte. Ich muss resten.
+Auftrag reset Datenbank:
+Weil wir was in unserer Datenbank verändert/gemacht haben  muss ich  jetzt erstmal ein resete machen. Arbeitsablaufplan inklusiv Powershell bitte. Ich muss resten.
 
  Um datenbank anzulegen:
     - ganz wichtig: postgresql muss laufen! (systemctl start postgresql)
@@ -238,4 +238,6 @@ Weil wir was in unserer Datenbank veränert/gemacht haben  muss ich  jetzt erstm
     - erst migrieren: in den backend ordner und dann im terminal: npx sequelize-cli db:migrate
     - dann seed durchlaufen lassen: npm run seed
 
-    Ich habe bereits ein Account auf der Datenbank Prostsql.
+    Ich habe bereits ein Account auf der Datenbank Postsql.
+
+	Auftrag erledigt und Datenbank auf neuestem Stand.
