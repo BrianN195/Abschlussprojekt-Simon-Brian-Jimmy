@@ -63,9 +63,12 @@ Weil wir was in unserer Datenbank verändert/gemacht haben  muss ich  jetzt erst
 
 	Auftrag erledigt und Datenbank auf neuestem Stand.
 
-	## Letzte Änderungen (19.052026)
-- [Favorites-Container](frontend/src/components/main/FavoritesSection.tsx#L1): Favoriten werden jetzt aus der Datenbank geladen und als klickbare Karten angezeigt.
-- [Favorites-Service](frontend/src/services/favouritesService.ts#L1): `localStorage` wurde für Favoriten entfernt, die Daten kommen jetzt über die API.
-- [Animal-Favoriten](frontend/src/components/animals/Animal.tsx#L1): Checkboxen speichern und entfernen Favoriten direkt in der Datenbank.
-- [Backend-Favorites-Route](backend/src/routes/favorites.routes.ts#L1): Neue Route für Favoriten holen, hinzufügen und löschen.
-- [Server-Anbindung](backend/src/server.ts#L5): Die Favorites-Route ist im Backend eingebunden.
+
+## Letzte Änderungen (19.052026)
+- [Favorites-Container](frontend/src/components/main/FavoritesSection.tsx#L1): Favoriten kommen aus der Datenbank und sind direkt anklickbar.
+- [Favorites-Service](frontend/src/services/favouritesService.ts#L1): Zugriff läuft jetzt über die API statt über `localStorage`.
+- [Animal-Favoriten](frontend/src/components/animals/Animal.tsx#L1): Favoriten werden beim Setzen und Entfernen direkt gespeichert.
+- [Backend-Favorites-Route](backend/src/routes/favorites.routes.ts#L1): Neue Route zum Holen, Speichern und Löschen der Favoriten.
+- [Weather-Container](frontend/src/components/main/WeatherSection.tsx#L10): Wetter wird im Frontend als eigener Bereich angezeigt.
+- [Weather-Route](backend/src/routes/weather.routes.ts#L6): Backend liefert die Wetterdaten für den Container.
+- [Server-Setup](backend/src/server.ts#L12): Favorites- und Weather-Route sind im Backend eingebunden.

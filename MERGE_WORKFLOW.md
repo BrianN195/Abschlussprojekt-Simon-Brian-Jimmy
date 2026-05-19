@@ -13,7 +13,6 @@ git fetch
 - In den main switchen:
 
 git switch main
-git pull
 git merge components
 git push
 
