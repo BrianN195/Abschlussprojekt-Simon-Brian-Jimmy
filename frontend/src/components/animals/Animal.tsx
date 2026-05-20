@@ -56,8 +56,8 @@ export default function Animal() {
       setIsFavourite(!checked);
     }
   };
-  
-  
+
+
   if (!animal) return <p>Loading</p>;
   return (
     <main>
@@ -78,7 +78,7 @@ export default function Animal() {
             />
             Favorite
           </label>
-        
+
         </div>
       </div>
       <section className="about">
@@ -95,7 +95,7 @@ export default function Animal() {
           })}
         </ul>
       </div>
-      
+
     </main>
   );
 }
