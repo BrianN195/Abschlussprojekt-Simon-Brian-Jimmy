@@ -11,6 +11,7 @@ class UserModel extends Model {
   declare gender: "male" | "female" | "others";
   declare birthDate: string | null;
   declare role: "user" | "admin" | "moderator";
+  declare isVerified: boolean;
 }
 // hier in die {} das damit ts weiß was wie exestiert
 //
@@ -60,6 +61,10 @@ UserModel.init(
       type: DataTypes.ENUM("user", "admin", "moderator"),
       allowNull: false,
       defaultValue: "user",
+    },
+    isVerified: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
     },
   },
 
