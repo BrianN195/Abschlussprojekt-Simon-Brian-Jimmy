@@ -34,7 +34,7 @@ export default function Animal() {
   const handleFavouriteChange = async (
     event: ChangeEvent<HTMLInputElement>
   ) => {
-    if (!animal) return;
+    if (!animal)  return;
 
     const checked = event.target.checked;
     setIsFavourite(checked);
