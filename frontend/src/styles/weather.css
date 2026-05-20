@@ -1,5 +1,6 @@
 .weather-section {
-  width: min(100%, 1100px);
+  width: min(100%, 1200px);
+  box-sizing: border-box;
 
   margin: 0 auto;
 
