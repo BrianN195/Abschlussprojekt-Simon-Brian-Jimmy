@@ -18,7 +18,7 @@ git push
 
 - In die components switchen:
 git switch components
-git fetch**********
+git fetch
 git merge main
 
 

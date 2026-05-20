@@ -84,7 +84,7 @@ Container Weather:
 - In dem Container muss oben rechts in der Ecke eine checkbox sein. Rechts daneben ein Delete-Button.
 Mit der checkbbox in den Container Favorites muss man alle Favoriten die man aus dem Bereich Animal ausgewählt hatte auf einmal markieren/auswählen können, damit wenn man dann auf den Delete-Buttuon klickt alle Favorites auf einmal gelöscht werden.
 
-!!! ABER NUR DIE IN DEM FAVORITES-CONTAINER !!!
+!!! ABER NUR DIE "ANIMALCARDS" IN DEM FAVORITES-CONTAINER LÖSCHEN !!!
 
 - Wenn man sich favoriten ausgesucht hat und diese dann in dem Container "Favotiten" aufgelistet sind, müssen dann die jeweiligen einzelnen Favoriten auch individuell eine checkbox haben.  Mit Hilfe dieser individuellen checkbox kann man einzelne Favoriten auswählen/markieren die dann bei klick auf den Delete-Button aus den Favoriten gelöscht werden können.
 
