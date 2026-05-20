@@ -1,0 +1,35 @@
+.cardContainer{
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+.card{
+    border-style: solid;
+    border-color: aqua;
+    border-radius: 25px;
+    width: 15em;
+    background-color: blue;
+    transition: transform 0.2s ease;
+}
+.card:hover {
+  transform: scale(1.02);
+  cursor: pointer;
+}
+.pic{
+    width: 10em;
+    height: 10em;
+    object-fit: cover;
+    border-color: aquamarine;
+    border-radius: 25px;
+    
+}
+.categoryName{
+    text-transform: capitalize;
+}
+.cardLink {
+  text-decoration: none;
+  color: inherit;
+}

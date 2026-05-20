@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { speciesService } from "../../services/animalService";
 import type { Animal } from "../../types/Animal";
+import { Link } from "react-router-dom";
+import style from "./AnimalList.module.css";
 
 export default function AnimalList() {
   const [animals, setAnimals] = useState<Animal[]>([]);
@@ -26,15 +28,22 @@ export default function AnimalList() {
   if (loading) return <p>Lade Tiere...</p>;
 
   return (
-    <div className="grid gap-3">
+    <div className={style.cardContainer}>
       {animals.length === 0 ? (
         <p>Keine Tiere gespeichert</p>
       ) : (
         animals.map((animal) => (
-          <div key={animal.id} className="p-3 rounded-xl shadow bg-white">
-            <h3 className="text-lg font-bold">{animal.name}</h3>
-            <p className="text-sm text-gray-500">{animal.category}</p>
-          </div>
+          <Link
+            key={animal.id}
+            to={`/animal/${animal.id}`}
+            className={style.cardLink}
+          >
+            <div key={animal.id} className={style.card}>
+              <h3 className="">{animal.name}</h3>
+              <img src={animal.imageUrl} alt="" className={style.pic} />
+              <p className={style.categoryName}>{animal.category}</p>
+            </div>
+          </Link>
         ))
       )}
     </div>
