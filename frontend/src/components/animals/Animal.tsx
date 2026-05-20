@@ -29,6 +29,13 @@ export default function Animal() {
     };
 
     loadFavouriteState();
+
+    // geänderter Code: listen for favourites-changed to sync checkbox state (20.05.2026)
+    window.addEventListener("favourites-changed", loadFavouriteState);
+
+    return () => {
+      window.removeEventListener("favourites-changed", loadFavouriteState);
+    };
   }, [id]);
 
   const handleFavouriteChange = async (
