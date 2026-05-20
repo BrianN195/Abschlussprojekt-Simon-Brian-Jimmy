@@ -1,20 +1,104 @@
 .favorites-section {
-  width: min(100%, 1100px);
+  width: min(100%, 1200px);
+  box-sizing: border-box;
   margin: 2rem auto;
   padding: 1.5rem;
+
+  /* geänderter Code: added frosted panel, select-all header and batch delete (20.05.2026) */
+
+  border-radius: 24px;
+  border: 1px solid rgba(126, 231, 255, 0.32);
+  background: rgba(3, 28, 42, 0.38);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.38);
 
   color: #ffffff;
   font-family: "Inter", sans-serif;
 }
 
+.favorites-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
 .favorites-section h2 {
-  margin: 0 0 1rem;
+  margin: 0;
   color: #f4fbff;
   font-family: "Poppins", sans-serif;
   font-size: clamp(1.6rem, 4vw, 2.4rem);
   text-shadow:
     0 0 12px rgba(126, 231, 255, 0.35),
     0 8px 28px rgba(0, 0, 0, 0.45);
+}
+
+.favorites-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.favorites-select-all {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #f4fbff;
+  font-weight: 600;
+  user-select: none;
+  cursor: pointer;
+}
+
+.favorites-select-all input {
+  width: 1rem;
+  height: 1rem;
+  margin: 0;
+  accent-color: #7ee7ff;
+}
+
+.favorites-delete-button {
+  min-height: 40px;
+  padding: 0.6rem 1rem;
+  border: 1px solid rgba(126, 231, 255, 0.35);
+  border-radius: 999px;
+  background: rgba(255, 107, 107, 0.18);
+  color: #ffffff;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    background 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease,
+    transform 0.25s ease,
+    color 0.35s ease;
+  backdrop-filter: blur(0px);
+  box-shadow: none;
+}
+
+.favorites-delete-button:hover:not(:disabled) {
+  background: rgba(8, 90, 120, 0.22);
+  border-color: rgba(126, 231, 255, 0.55);
+  backdrop-filter: blur(10px);
+  box-shadow:
+    0 0 14px rgba(0, 255, 255, 0.3),
+    0 0 28px rgba(0, 180, 255, 0.22),
+    0 0 46px rgba(0, 120, 255, 0.14);
+  color: #f4fbff;
+  transform: translateY(-2px) scale(1.03);
+}
+
+.favorites-delete-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.favorites-delete-button:focus-visible,
+.favorites-select-all input:focus-visible {
+  outline: 3px solid rgba(126, 231, 255, 0.75);
+  outline-offset: 4px;
 }
 
 .favorites-grid {
@@ -24,6 +108,10 @@
 }
 
 .favorite-card {
+  position: relative;
+}
+
+.favorite-card-link {
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -36,7 +124,6 @@
   background: transparent;
   backdrop-filter: blur(0px);
   box-shadow: none;
-
   transition:
     background 0.35s ease,
     border-color 0.35s ease,
@@ -44,8 +131,8 @@
     color 0.35s ease;
 }
 
-.favorite-card:hover,
-.favorite-card:focus {
+.favorite-card-link:hover,
+.favorite-card-link:focus-visible {
   background: rgba(8, 90, 120, 0.22);
   border-color: rgba(126, 231, 255, 0.55);
   backdrop-filter: blur(10px);
@@ -55,9 +142,32 @@
     0 0 46px rgba(0, 120, 255, 0.14);
 }
 
-.favorite-card:focus-visible {
+.favorite-card-link:focus-visible {
   outline: 3px solid rgba(126, 231, 255, 0.75);
   outline-offset: 4px;
+}
+
+.favorite-card-select {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 999px;
+  background: rgba(3, 28, 42, 0.72);
+  border: 1px solid rgba(126, 231, 255, 0.35);
+  backdrop-filter: blur(10px);
+}
+
+.favorite-card-select input {
+  width: 1rem;
+  height: 1rem;
+  margin: 0;
+  accent-color: #7ee7ff;
 }
 
 .favorite-card-default {
@@ -102,9 +212,13 @@
 /* TABLET */
 @media (max-width: 1024px) {
   .favorites-section {
-    width: min(100%, 900px);
+    width: min(100%, 1200px);
     margin: 1.5rem auto;
     padding: 1.2rem;
+  }
+
+  .favorites-header {
+    align-items: flex-start;
   }
 
   .favorites-grid {
@@ -130,6 +244,15 @@
 
   .favorites-section h2 {
     text-align: center;
+  }
+
+  .favorites-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .favorites-actions {
+    justify-content: center;
   }
 
   .favorites-grid {
@@ -159,6 +282,10 @@
   .favorites-section h2 {
     font-size: 1.4rem;
     margin-bottom: 0.6rem;
+  }
+
+  .favorites-header {
+    align-items: flex-start;
   }
 
   .favorites-grid {

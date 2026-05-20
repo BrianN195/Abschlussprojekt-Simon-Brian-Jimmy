@@ -6,6 +6,7 @@ import jwt from 'jsonwebtoken';
 import sharp from 'sharp';
 import bcrypt from 'bcrypt';
 import UserModel from '../db/models/UserModel';
+import apiLimiter from '../middlewares/apiLimiter';
 
 const router = Router();
 
@@ -24,11 +25,31 @@ const storage = multer.diskStorage({
     cb(null, `${Date.now()}-${safeName}`);
   },
 });
+//sicherheitshalber erstmal nur auskommentiert
+// const upload = multer({
+//   storage,
+//   limits: {
+//     fileSize: 5 * 1024 * 1024,
+//   },
+// });
 
 const upload = multer({
   storage,
   limits: {
     fileSize: 5 * 1024 * 1024,
+  },
+  fileFilter: (_req, file, cb) => {
+    const allowedTypes = [
+      "image/jpeg",
+      "image/png",
+      "image/webp",
+    ];
+
+    if (!allowedTypes.includes(file.mimetype)) {
+      return cb(new Error("Only images allowed"));
+    }
+
+    cb(null, true);
   },
 });
 
@@ -45,7 +66,7 @@ function serializeUser(req: Request, user: UserModel) {
 }
 
 // POST /api/v1/auth/register
-router.post('/register', async (req: Request, res: Response) => {
+router.post('/register', apiLimiter, async (req: Request, res: Response) => {
   try {
     const { email, password, username, gender, birthDate } = req.body;
 
@@ -84,7 +105,7 @@ router.post('/register', async (req: Request, res: Response) => {
 
 
 // POST /api/v1/auth/login
-router.post('/login', async (req: Request, res: Response) => {
+router.post('/login', apiLimiter, async (req: Request, res: Response) => {
   console.log("Im login backend")
   try {
     const { username, password } = req.body;
@@ -144,7 +165,7 @@ router.get('/me', async (req: Request, res: Response) => {
 });
 
 // PUT /api/v1/auth/me (Protected)
-router.put('/me', upload.single('avatar'), async (req: Request, res: Response) => {
+router.put('/me', upload.single('avatar'),apiLimiter,  async (req: Request, res: Response) => {
   try {
     const token = req.headers.authorization?.split(' ')[1];
     if (!token) {

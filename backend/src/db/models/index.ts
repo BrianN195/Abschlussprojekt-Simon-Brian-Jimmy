@@ -22,11 +22,15 @@ LocationModel.belongsToMany(AnimalModel, {
 UserModel.belongsToMany(AnimalModel, {
   through: UserFavoriteAnimalModel,
   as: "favorites",
+  foreignKey: "userId",
+  otherKey: "animalId",
 });
 
 AnimalModel.belongsToMany(UserModel, {
   through: UserFavoriteAnimalModel,
   as: "fans",
+  foreignKey: "animalId",
+  otherKey: "userId",
 });
 
 UserModel.hasMany(AnimalCommentModel, {

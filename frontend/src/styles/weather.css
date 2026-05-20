@@ -1,5 +1,7 @@
 .weather-section {
-  width: min(100%, 1100px);
+  /* geänderter Code: increased max width and added box-sizing (20.05.2026) */
+  width: min(100%, 1200px);
+  box-sizing: border-box;
 
   margin: 0 auto;
 

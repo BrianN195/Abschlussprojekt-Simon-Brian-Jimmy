@@ -82,18 +82,73 @@ Container Weather:
 - Hintergrundbild neu und bearbeiten. Bild soll den gesamten Hintergrund vom Container beanspruchen und wegen mobile und tablet responsiv sein.
 
 - In dem Container muss oben rechts in der Ecke eine checkbox sein. Rechts daneben ein Delete-Button.
-Mit der checkbbox in den Container Favorites muss man alle Favoriten die man aus dem Bereich Animal ausgewählt hatte auf einmal markieren/auswählen können, damit wenn man dann auf den Delete-Buttuon klickt alle Favorites auf einmal gelöscht werden.
+Mit der checkbbox in den Container Favorites muss man alle Favoriten die man aus dem Bereich Animal ausgewählt hatte auf einmal markieren/auswählen können, damit wenn man dann auf den Delete-Buttuon klickt alle Favorites auf einmal gelöscht werden. Wenn aus den Favoriites gelöscht, dann bei den Animals automatisch die Auswahl in den jeweiligen checkboxes entfernen. 
 
-!!! ABER NUR DIE IN DEM FAVORITES-CONTAINER !!!
+!!! ABER NUR DIE "ANIMALCARDS" IN DEM FAVORITES-CONTAINER LÖSCHEN !!!
 
-- Wenn man sich favoriten ausgesucht hat und diese dann in dem Container "Favotiten" aufgelistet sind, müssen dann die jeweiligen einzelnen Favoriten auch individuell eine checkbox haben.  Mit Hilfe dieser individuellen checkbox kann man einzelne Favoriten auswählen/markieren die dann bei klick auf den Delete-Button aus den Favoriten gelöscht werden können.
+- Wenn man sich favoriten ausgesucht hat und diese dann in dem Container "Favotiten" aufgelistet sind, müssen dann die jeweiligen einzelnen Favoriten auch individuell eine checkbox haben.  Mit Hilfe dieser individuellen checkbox kann man einzelne Favoriten auswählen/markieren die dann bei klick auf den Delete-Button aus den Favoriten gelöscht werden können. Nach dem Löschen sollen die entsprechenden Checkboxen bei den Animals automatisch wieder abgewählt werden.
 
 !!! DARAN DENKEN DASS DIE NUR AUS DEM fAVORITES-CONTAINER GELÖSCHT WEREDN UND NICHT AUS DEN ANIMALS !!!
 
-- Im Code nachgucken ob die Checkbox-Markierung verschwinden, die Checkbox die man im Bereich Animals ausgewählt/markiert hat, wenn man die jeweiligen Tiere aus dem Favoriten-Container gelöscht hat. 
+- Im Code nachgucken ob die Checkbox-Markierung verschwinden. Wenn aus den Favorites gelöscht, dann bei den Animals automatisch die Auswahl in den jeweiligen checkboxes entfernen.  
 
 Danach Container Weather:
 - Im Hauptteil ---> muss "today" 
 
 - bei Forecast ---> "Wochentag und Datum"
+
+## Letzte Änderungen (20.05.2026)
+
+Die folgenden Änderungen wurden am 20.05.2026 vorgenommen (nur die betroffenen Teile sind hier aufgeführt). In den Dateien habe ich Kommentar‑Marker gesetzt ("geänderter Code") — die Links führen direkt zu den Stellen.
+
+- **Favorites - Komponente (neuer Header + Auswahl & Batch-Löschen):** [frontend/src/components/main/FavoritesSection.tsx](frontend/src/components/main/FavoritesSection.tsx#L24-L130) — //geänderter Code, //neuer Code
+
+    Vorher (betroffene Teile):
+    ```html
+    <h2>Favorites</h2>
+
+    <!-- pro-favorit (vorher) -->
+    <Link
+        to={`/animal/${animal.id}`}
+        className="favorite-card"
+    >
+        <img src={animal.imageUrl} alt={animal.name} className="favorite-image" />
+        <div className="favorite-info">...</div>
+    </Link>
+    ```
+
+- **Favorites - Styles (Panel + Select-all + Buttons):** [frontend/src/styles/favorites.css](frontend/src/styles/favorites.css#L1-L12) — /* geänderter Code */
+
+    Vorher (betroffene Teile):
+    ```css
+    .favorites-section {
+        width: min(100%, 1100px);
+        margin: 2rem auto;
+        padding: 1.5rem;
+        color: #ffffff;
+        font-family: "Inter", sans-serif;
+    }
+    ```
+
+- **Weather - Styles (Breite / Box-model):** [frontend/src/styles/weather.css](frontend/src/styles/weather.css#L1-L6) — /* geänderter Code */
+
+    Vorher (betroffene Teile):
+    ```css
+    .weather-section {
+        width: min(100%, 1100px);
+        margin: 0 auto;
+        padding: 1.5rem;
+    }
+    ```
+
+- **Animal - Komponente (Sync mit Favorites):** [frontend/src/components/animals/Animal.tsx](frontend/src/components/animals/Animal.tsx#L28-L36) — //geänderter Code
+
+    Vorher (betroffene Teile):
+    ```js
+    // loadFavouriteState();
+    // (vorher wurde hier nicht auf das Event 'favourites-changed' gehört)
+    ```
+
+Hinweis: Ich habe nur die betroffenen Abschnitte als "Vorher"-Schnipsel eingefügt (nicht ganze Dateien). Die Links zeigen auf die aktuellen Stellen mit den Kommentar-Markern (z. B. `// geänderter Code` oder `/* geänderter Code */`). Soll ich die README-Änderung direkt committen? Wenn ja, mache ich einen Commit mit Nachricht "docs: add 20.05.2026 changes summary".
+
 
