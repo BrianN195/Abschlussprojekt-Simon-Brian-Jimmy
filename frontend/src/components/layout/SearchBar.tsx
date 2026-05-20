@@ -41,20 +41,23 @@ export default function SearchBar() {
   }, [search]);
 
   return (
-    <div>
+    <div className="search-bar" role="search">
       <input
+        className="search-input"
         type="text"
         value={search}
         placeholder="Search..."
         onChange={(e) => setSearch(e.target.value)}
+        aria-label="Search"
+        autoComplete="off"
       />
 
       {(results.animals.length > 0 || results.locations.length > 0) && (
-        <div>
+        <div className="search-results" role="listbox">
           {results.animals.length > 0 && (
-            <ul>
+            <ul className="search-group" aria-label="Animal results">
               {results.animals.map((animal) => (
-                <li key={animal.id}>
+                <li key={animal.id} className="search-item" role="option">
                   <Link to={`/animal/${animal.id}`}>{animal.name}</Link>
                 </li>
               ))}
@@ -62,9 +65,9 @@ export default function SearchBar() {
           )}
 
           {results.locations.length > 0 && (
-            <ul>
+            <ul className="search-group" aria-label="Location results">
               {results.locations.map((loc) => (
-                <li key={loc.id}>
+                <li key={loc.id} className="search-item" role="option">
                   <Link to={`/location/${loc.id}`}>{loc.name}</Link>
                 </li>
               ))}
