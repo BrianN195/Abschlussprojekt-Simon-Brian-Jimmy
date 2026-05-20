@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import type { Animal } from "../../types/Animal";
 import type { Location } from "../../types/Locations";
 import { Link } from "react-router-dom";
@@ -14,6 +14,7 @@ export default function SearchBar() {
     animals: [],
     locations: [],
   });
+  const inputRef = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -58,7 +59,16 @@ export default function SearchBar() {
             <ul className="search-group" aria-label="Animal results">
               {results.animals.map((animal) => (
                 <li key={animal.id} className="search-item" role="option">
-                  <Link to={`/animal/${animal.id}`}>{animal.name}</Link>
+                  <Link
+                    to={`/animal/${animal.id}`}
+                    onClick={() => {
+                      setResults({ animals: [], locations: [] });
+                      setSearch("");
+                      inputRef.current?.blur();
+                    }}
+                  >
+                    {animal.name}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -68,7 +78,16 @@ export default function SearchBar() {
             <ul className="search-group" aria-label="Location results">
               {results.locations.map((loc) => (
                 <li key={loc.id} className="search-item" role="option">
-                  <Link to={`/location/${loc.id}`}>{loc.name}</Link>
+                  <Link
+                    to={`/location/${loc.id}`}
+                    onClick={() => {
+                      setResults({ animals: [], locations: [] });
+                      setSearch("");
+                      inputRef.current?.blur();
+                    }}
+                  >
+                    {loc.name}
+                  </Link>
                 </li>
               ))}
             </ul>
