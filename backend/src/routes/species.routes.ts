@@ -2,6 +2,7 @@ import { Router, Request, Response } from "express";
 import AnimalModel from "../db/models/AnimalModel";
 import LocationModel from "../db/models/LocationModel";
 import upload from "../middlewares/uploadMiddleware";
+import { animalSchema } from "../validation/animalSchema";
 
 const router = Router();
 
@@ -58,25 +59,35 @@ router.post(
   "/createAnimal",
   upload.single("image"),
   async (req: Request, res: Response) => {
+    const parsed = animalSchema.safeParse(req.body);
+
+    if (!parsed.success) {
+      return res.status(400).json({
+        message: "Invalid input",
+        errors: parsed.error.flatten(),
+      });
+    }
+
+    const data = parsed.data;
     try {
       const imageUrl = req.file ? `/images/animals/${req.file.filename}` : "";
 
       const newAnimal = await AnimalModel.create({
-        name: req.body.name,
-        scientificName: req.body.scientificName,
-        description: req.body.description,
-        category: req.body.category,
-        dangerLevel: req.body.dangerLevel,
+        name: data.name,
+        scientificName: data.scientificName,
+        description: data.description,
+        category: data.category,
+        dangerLevel: data.dangerLevel,
         imageUrl,
-        size: req.body.size,
-        weight: req.body.weight,
-        habitat: req.body.habitat,
-        bestViewingTime: req.body.bestViewingTime
-          ? [req.body.bestViewingTime]
+        size: data.size,
+        weight: data.weight,
+        habitat: data.habitat,
+        bestViewingTime: data.bestViewingTime
+          ? [data.bestViewingTime]
           : [],
-        depthRange: req.body.depthRange,
-        diet: req.body.diet,
-        isSchooling: req.body.isSchooling === "true",
+        depthRange: data.depthRange,
+        diet: data.diet,
+        isSchooling: data.isSchooling,
       });
 
       return res.status(201).json(newAnimal);

@@ -2,7 +2,7 @@ import { Router, Request, Response } from "express";
 import LocationModel from "../db/models/LocationModel";
 import AnimalModel from "../db/models/AnimalModel";
 import upload from "../middlewares/uploadMiddleware";
-
+import { locationSchema } from "../validation/locationSchema";
 const router = Router();
 
 // GET /api/v1/resorts
@@ -46,20 +46,30 @@ router.post(
   upload.single("image"),
   async (req: Request, res: Response) => {
     try {
+      const parsed = locationSchema.safeParse(req.body);
+
+      if (!parsed.success) {
+        return res.status(400).json({
+          message: "Invalid input",
+          errors: parsed.error.flatten(),
+        });
+      }
+
+      const data = parsed.data;
       const imageUrl = req.file ? `/images/locations/${req.file.filename}` : "";
 
       const newLocation = await LocationModel.create({
-        name: req.body.name,
-        description: req.body.description,
-        region: req.body.region,
+        name: data.name,
+        description: data.description,
+        region: data.region,
 
-        latitude: Number(req.body.latitude),
+        latitude: Number(data.latitude),
 
-        longitude: Number(req.body.longitude),
+        longitude: Number(data.longitude),
 
-        depth: Number(req.body.depth),
+        depth: Number(data.depth),
 
-        type: req.body.type,
+        type: data.type,
 
         imageUrl,
       });
