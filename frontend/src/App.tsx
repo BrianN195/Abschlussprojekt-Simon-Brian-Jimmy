@@ -12,6 +12,7 @@ import "./App.css";
 
 import Location from "./components/locations/Location";
 import AnimalList from "./components/animals/ListOfAnimals";
+import AboutPage from "./pages/AboutPage";
 
 function App() {
   return (
@@ -26,7 +27,7 @@ function App() {
         <Route element={<MainLayout />}>
           <Route path="/main" element={<MainPage />} />
           <Route path="/profile" element={<ProfilePage />} />
-          <Route path="/about" element={<div>About Page (TODO)</div>} />
+          <Route path="/about" element={<AboutPage />} />
           <Route path="/animal/:id" element={<Animal/>}/>
           <Route path="/location/:id" element={<Location/>}/>
           <Route path="/animals" element={<AnimalList/>}/>

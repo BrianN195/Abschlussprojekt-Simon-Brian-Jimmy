@@ -14,7 +14,7 @@ function NavLinks({ onLinkClick, mobile = false }: NavLinksProps) {
         Animals
       </Link>
       <Link to="/about" className={linkClassName} onClick={onLinkClick}>
-        About Us
+        About
       </Link>
     </>
   );
