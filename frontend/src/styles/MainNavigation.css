@@ -150,12 +150,15 @@
   padding: 12px 16px;
   border-top: 1px solid var(--panel-border);
   background: var(--panel);
+  align-items: center;
 }
 .nav-mobile-link {
   color: var(--text);
   text-decoration: none;
   padding: 10px 12px;
   border-radius: 8px;
+  width: 100%;
+  text-align: center;
 }
 .nav-mobile-link:hover {
   background: rgba(255, 255, 255, 0.03);
@@ -166,7 +169,8 @@
   border-radius: 8px;
   background: var(--danger);
   color: #fff;
-  text-align: left;
+  width: 50%;
+  text-align: center;
 }
 
 /* Responsive breakpoints */
@@ -247,7 +251,7 @@
 }
 .nav-search-mobile .search-bar { position: relative; }
 .nav-search-mobile .search-input {
-  width: 70%;
+  width: 60%;
   padding: 10px 12px;
   border-radius: 10px;
   border: 1px solid rgba(255,255,255,0.06);
