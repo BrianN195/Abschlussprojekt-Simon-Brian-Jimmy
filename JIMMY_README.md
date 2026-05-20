@@ -75,3 +75,25 @@ Weil wir was in unserer Datenbank verändert/gemacht haben  muss ich  jetzt erst
  - [Weather-Widget Component](frontend/src/components/main/WeatherSection.tsx#L1): Frontend-Component lädt das Widget-Script und rendert das Wetterbereich.
  - [Weather Styles](frontend/src/styles/weather.css#L1): CSS für das Weather-Layout und responsive Anpassungen.
  - [Weather-Types](frontend/src/types/Weather.ts#L1): `WeatherData` wurde ausgelagert; `WeatherSection.tsx` importiert jetzt den Typ.
+
+Auftrag heute:  (20.05.2026)
+
+Container Weather:
+- Hintergrundbild neu und bearbeiten. Bild soll den gesamten Hintergrund vom Container beanspruchen und wegen mobile und tablet responsiv sein.
+
+- In dem Container muss oben rechts in der Ecke eine checkbox sein. Rechts daneben ein Delete-Button.
+Mit der checkbbox in den Container Favorites muss man alle Favoriten die man aus dem Bereich Animal ausgewählt hatte auf einmal markieren/auswählen können, damit wenn man dann auf den Delete-Buttuon klickt alle Favorites auf einmal gelöscht werden.
+
+!!! ABER NUR DIE IN DEM FAVORITES-CONTAINER !!!
+
+- Wenn man sich favoriten ausgesucht hat und diese dann in dem Container "Favotiten" aufgelistet sind, müssen dann die jeweiligen einzelnen Favoriten auch individuell eine checkbox haben.  Mit Hilfe dieser individuellen checkbox kann man einzelne Favoriten auswählen/markieren die dann bei klick auf den Delete-Button aus den Favoriten gelöscht werden können.
+
+!!! DARAN DENKEN DASS DIE NUR AUS DEM fAVORITES-CONTAINER GELÖSCHT WEREDN UND NICHT AUS DEN ANIMALS !!!
+
+- Im Code nachgucken ob die Checkbox-Markierung verschwinden, die Checkbox die man im Bereich Animals ausgewählt/markiert hat, wenn man die jeweiligen Tiere aus dem Favoriten-Container gelöscht hat. 
+
+Danach Container Weather:
+- Im Hauptteil ---> muss "today" 
+
+- bei Forecast ---> "Wochentag und Datum"
+
