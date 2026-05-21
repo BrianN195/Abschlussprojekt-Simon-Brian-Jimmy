@@ -90,7 +90,9 @@ Mit der checkbbox in den Container Favorites muss man alle Favoriten die man aus
 
 !!! DARAN DENKEN DASS DIE NUR AUS DEM fAVORITES-CONTAINER GELÖSCHT WEREDN UND NICHT AUS DEN ANIMALS !!!
 
-- Im Code nachgucken ob die Checkbox-Markierung verschwinden. Wenn aus den Favorites gelöscht, dann bei den Animals automatisch die Auswahl in den jeweiligen checkboxes entfernen.  
+- Im Code nachgucken ob die Checkbox-Markierung verschwinden. Wenn aus den Favorites gelöscht, dann bei den Animals automatisch die Auswahl in den jeweiligen checkboxes entfernen.
+
+- Im Container Favorittes sollen aufeinmal nur 4 Bilder zu sehen sein. Falls mehr als diese Ausgewählt sind muss ein slider rechts erscheinen. Bei klick dann weiter sliden und und weitere max. 4 Bilder anzeigen. Weil man dann aber zurück sliden kann dann einen slider links erscheinen und etc... 
 
 Danach Container Weather:
 - Im Hauptteil ---> muss "today" 
