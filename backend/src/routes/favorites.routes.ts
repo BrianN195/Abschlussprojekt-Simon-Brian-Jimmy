@@ -7,7 +7,13 @@ const router = Router();
 router.use(authMiddleware);
 
 function serializeFavorites(favorites: any[]) {
-  return favorites.map((animal) => animal.toJSON());
+  const uniqueFavorites = new Map<number, any>();
+
+  for (const animal of favorites) {
+    uniqueFavorites.set(animal.id, animal.toJSON());
+  }
+
+  return Array.from(uniqueFavorites.values());
 }
 
 router.get("/", async (req: AuthRequest, res: Response) => {
@@ -32,7 +38,11 @@ router.post("/:animalId", async (req: AuthRequest, res: Response) => {
       return res.status(404).json({ error: "Animal not found" });
     }
 
-    await user.addFavorite(animal);
+    const alreadyFavorited = await user.hasFavorite(animal);
+
+    if (!alreadyFavorited) {
+      await user.addFavorite(animal);
+    }
 
     const favorites = await user.getFavorites();
     return res.status(200).json(serializeFavorites(favorites));
