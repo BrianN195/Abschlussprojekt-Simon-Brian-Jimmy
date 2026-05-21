@@ -15,8 +15,8 @@ function MainNavigation() {
   return (
     <header className="main-navigation">
       <div className="nav-container">
-        <Link to="/" className="nav-logo">
-          Maldives Marine
+        <Link to="/main" className="nav-logo">
+          <img src="/images/logo/logo_für_malediven_website-app_dark.png" alt="Maldives Marine" />
         </Link>
 
         <nav className="nav-menu">

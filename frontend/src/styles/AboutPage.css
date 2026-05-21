@@ -1,0 +1,107 @@
+.about-page {
+  max-width: 1100px;
+  margin: 28px auto;
+  padding: 24px;
+  color: var(--text);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 18px;
+}
+
+/* Hero */
+.about-hero {
+  padding: 28px;
+  border-radius: 12px;
+  background: linear-gradient(90deg, rgba(90,215,199,0.04), rgba(90,215,199,0.02));
+  border: 1px solid rgba(90,215,199,0.06);
+  box-shadow: 0 8px 24px rgba(2,8,12,0.45);
+}
+.about-hero h1 {
+  margin: 0 0 6px 0;
+  color: var(--accent);
+  font-size: 1.6rem;
+}
+.about-hero p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 1.02rem;
+  line-height: 1.5;
+  max-width: 78ch;
+}
+
+/* Cards / Sections */
+.about-page section {
+  background: linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.01));
+  border: 1px solid rgba(255,255,255,0.03);
+  padding: 16px 18px;
+  border-radius: 10px;
+  margin-bottom: 0;
+  transition: transform 160ms ease, box-shadow 160ms ease;
+}
+.about-page section:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(2,8,12,0.35);
+}
+
+.about-page h2 {
+  margin-top: 0;
+  color: var(--accent);
+  font-size: 1.15rem;
+}
+
+.about-page ul {
+  margin: 8px 0 0 1.1rem;
+}
+.about-page li {
+  margin-bottom: 8px;
+  color: var(--text);
+}
+
+/* Two-column layout for features/target on larger screens */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+/* CTA */
+.about-cta {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 0 0 0;
+}
+.about-cta .about-cta-button {
+  display: inline-block;
+  background: var(--accent);
+  color: rgba(2,8,8,0.95);
+  padding: 10px 18px;
+  border-radius: 10px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: transform 120ms ease, box-shadow 120ms ease;
+  box-shadow: 0 8px 18px rgba(90,215,199,0.09);
+}
+.about-cta .about-cta-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 28px rgba(90,215,199,0.12);
+}
+
+@media (min-width: 880px) {
+  .about-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .about-page {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .about-page {
+    margin: 12px;
+    padding: 12px;
+  }
+  .about-hero h1 {
+    font-size: 1.3rem;
+  }
+}
