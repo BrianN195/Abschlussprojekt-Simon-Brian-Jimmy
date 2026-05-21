@@ -1,5 +1,6 @@
 import { Router, Response } from "express";
 import AnimalModel from "../db/models/AnimalModel";
+import UserFavoriteAnimalModel from "../db/models/UserFavoritAnimalModel";
 import authMiddleware, { AuthRequest } from "../middlewares/authMiddleware";
 
 const router = Router();
@@ -38,11 +39,12 @@ router.post("/:animalId", async (req: AuthRequest, res: Response) => {
       return res.status(404).json({ error: "Animal not found" });
     }
 
-    const alreadyFavorited = await user.hasFavorite(animal);
-
-    if (!alreadyFavorited) {
-      await user.addFavorite(animal);
-    }
+    await UserFavoriteAnimalModel.findOrCreate({
+      where: {
+        userId: user.id,
+        animalId: animal.id,
+      },
+    });
 
     const favorites = await user.getFavorites();
     return res.status(200).json(serializeFavorites(favorites));
@@ -62,7 +64,12 @@ router.delete("/:animalId", async (req: AuthRequest, res: Response) => {
       return res.status(404).json({ error: "Animal not found" });
     }
 
-    await user.removeFavorite(animal);
+    await UserFavoriteAnimalModel.destroy({
+      where: {
+        userId: user.id,
+        animalId: animal.id,
+      },
+    });
 
     const favorites = await user.getFavorites();
     return res.status(200).json(serializeFavorites(favorites));
