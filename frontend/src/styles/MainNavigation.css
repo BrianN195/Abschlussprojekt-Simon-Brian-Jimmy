@@ -173,7 +173,8 @@
   border-radius: 8px;
   background: var(--accent-hover);
   color: #fff;
-  width: 50%;
+  width: 100%;
+  max-width: 280px;
   text-align: center;
 }
 
@@ -255,7 +256,7 @@
 }
 .nav-search-mobile .search-bar { position: relative; }
 .nav-search-mobile .search-input {
-  width: 60%;
+  width: 100%;
   padding: 10px 12px;
   border-radius: 10px;
   border: 1px solid rgba(255,255,255,0.06);

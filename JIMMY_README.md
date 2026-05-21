@@ -153,4 +153,64 @@ Die folgenden Änderungen wurden am 20.05.2026 vorgenommen (nur die betroffenen 
 
 Hinweis: Ich habe nur die betroffenen Abschnitte als "Vorher"-Schnipsel eingefügt (nicht ganze Dateien). Die Links zeigen auf die aktuellen Stellen mit den Kommentar-Markern (z. B. `// geänderter Code` oder `/* geänderter Code */`). Soll ich die README-Änderung direkt committen? Wenn ja, mache ich einen Commit mit Nachricht "docs: add 20.05.2026 changes summary".
 
+## Letzte Änderungen (21.05.2026)
+- [MainNavigation.css](frontend/src/styles/MainNavigation.css#L170) und [MainNavigation.css](frontend/src/styles/MainNavigation.css#L258) - die letzten responsiven Feinanpassungen wurden wiederhergestellt, damit das mobile Menü und die Suche auf kleinen Screens sauber bleiben.
+
+    Vorher (zurückgenommener Stand):
+    ```css
+    .nav-search-mobile .search-input {
+        width: 60%;
+        padding: 10px 12px;
+        border-radius: 10px;
+        border: 1px solid rgba(255,255,255,0.06);
+        background: rgba(255,255,255,0.02);
+        color: var(--text);
+    }
+
+    .nav-mobile-logout {
+        padding: 10px 12px;
+        border: 0;
+        border-radius: 8px;
+        background: var(--accent-hover);
+        color: #fff;
+        width: 50%;
+        text-align: center;
+    }
+    ```
+
+- [profile.css](frontend/src/styles/profile.css#L308) und [profile.css](frontend/src/styles/profile.css#L331) - der Desktop-Abstand für die Profilseite ist wieder aktiv, damit Tablet und Desktop sauber getrennt bleiben.
+
+    Vorher (zurückgenommener Stand):
+    ```css
+    @media (max-width: 900px) {
+        .profile-page {
+            padding: 1rem;
+        }
+
+        .profile-section,
+        .profile-edit-section {
+            padding: 0 16px;
+        }
+
+        .profile-summary-header,
+        .profile-edit-grid {
+            grid-template-columns: 1fr;
+            flex-direction: column;
+        }
+
+        .profile-stats,
+        .profile-form-row {
+            grid-template-columns: 1fr;
+        }
+
+        .profile-save-button {
+            width: auto;
+            min-width: 0;
+            justify-self: center;
+        }
+    }
+    ```
+
+- Hinweis: Die volle Browserbreite kommt weiterhin aus [frontend/src/index.css](frontend/src/index.css#L57) und [frontend/src/index.css](frontend/src/index.css#L64). Dort ist `#root` jetzt auf `width: 100%` statt auf eine feste Breite gesetzt.
+
 
