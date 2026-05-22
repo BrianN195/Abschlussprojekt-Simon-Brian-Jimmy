@@ -20,6 +20,12 @@ UserFavoriteAnimalModel.init(
     modelName: "UserFavoriteAnimal",
     tableName: "user_favorite_animal",
     timestamps: false,
+    indexes: [
+      {
+        unique: true,
+        fields: ["userId", "animalId"],
+      },
+    ],
   }
 );
 

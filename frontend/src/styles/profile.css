@@ -310,13 +310,6 @@ textarea.form-input {
     padding: 0 16px;
   }
 
-
-@media (min-width: 769px) {
-  .profile-section,
-  .profile-edit-section {
-    padding: 0 20px; /* match .nav-container padding at desktop */
-  }
-}
   .profile-summary-header,
   .profile-edit-grid {
     grid-template-columns: 1fr;
@@ -332,6 +325,13 @@ textarea.form-input {
     width: auto;
     min-width: 0;
     justify-self: center;
+  }
+}
+
+@media (min-width: 769px) {
+  .profile-section,
+  .profile-edit-section {
+    padding: 0 20px; /* match .nav-container padding at desktop */
   }
 }
 

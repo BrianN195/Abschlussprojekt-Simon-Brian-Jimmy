@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { FavoriteAnimal } from "../../types/FavoriteAnimal";
 import {
   getFavoriteAnimals,
@@ -10,6 +10,9 @@ import "../../styles/favorites.css";
 function FavoritesSection() {
   const [favorites, setFavorites] = useState<FavoriteAnimal[]>([]);
   const [selectedFavoriteIds, setSelectedFavoriteIds] = useState<number[]>([]);
+  const carouselViewportRef = useRef<HTMLDivElement>(null);
+  const [currentPage, setCurrentPage] = useState(0);
+  const visibleCount = 4;
 
   const loadFavorites = async () => {
     const favs = await getFavoriteAnimals();
@@ -49,6 +52,37 @@ function FavoritesSection() {
     }
   };
 
+  const getPageCount = () => Math.max(1, Math.ceil(favorites.length / visibleCount));
+
+  const updateCurrentPage = () => {
+    const viewport = carouselViewportRef.current;
+
+    if (!viewport) {
+      setCurrentPage(0);
+      return;
+    }
+
+    const nextPage = Math.round(viewport.scrollLeft / viewport.clientWidth);
+    setCurrentPage(Math.min(Math.max(nextPage, 0), getPageCount() - 1));
+  };
+
+  const scrollCarousel = (direction: -1 | 1) => {
+    const viewport = carouselViewportRef.current;
+
+    if (!viewport) {
+      return;
+    }
+
+    const nextPage = Math.min(Math.max(currentPage + direction, 0), getPageCount() - 1);
+
+    viewport.scrollTo({
+      left: nextPage * viewport.clientWidth,
+      behavior: "smooth",
+    });
+
+    setCurrentPage(nextPage);
+  };
+
   useEffect(() => {
     loadFavorites();
 
@@ -63,6 +97,26 @@ function FavoritesSection() {
     setSelectedFavoriteIds((currentSelected) =>
       currentSelected.filter((id) => favorites.some((animal) => animal.id === id))
     );
+  }, [favorites]);
+
+  useEffect(() => {
+    updateCurrentPage();
+
+    const viewport = carouselViewportRef.current;
+
+    const handleScroll = () => updateCurrentPage();
+
+    if (viewport) {
+      viewport.addEventListener("scroll", handleScroll, { passive: true });
+    }
+
+    return () => {
+      if (viewport) viewport.removeEventListener("scroll", handleScroll);
+    };
+  }, [favorites]);
+
+  useEffect(() => {
+    setCurrentPage((current) => Math.min(current, getPageCount() - 1));
   }, [favorites]);
 
   const allSelected = favorites.length > 0 && selectedFavoriteIds.length === favorites.length;
@@ -111,38 +165,63 @@ function FavoritesSection() {
           </div>
         </article>
       ) : (
-        <div className="favorites-grid">
-          {favorites.map((animal) => (
-            // geänderter Code: per-item checkbox added (20.05.2026)
-            <article
-              key={animal.id}
-              className="favorite-card"
+        <div className="favorites-carousel">
+          {favorites.length > visibleCount && currentPage > 0 && (
+            <button
+              type="button"
+              className="favorites-carousel-button favorites-carousel-button-left visible"
+              onClick={() => scrollCarousel(-1)}
+              aria-label="Scroll favorites left"
             >
-              <label className="favorite-card-select">
-                <input
-                  type="checkbox"
-                  checked={selectedFavoriteIds.includes(animal.id)}
-                  onChange={() => toggleFavoriteSelection(animal.id)}
-                  aria-label={`Select ${animal.name}`}
-                />
-              </label>
+              ‹
+            </button>
+          )}
 
-              <Link to={`/animal/${animal.id}`} className="favorite-card-link">
-                <img
-                  src={animal.imageUrl}
-                  alt={animal.name}
-                  className="favorite-image"
-                />
+          <div className="favorites-carousel-viewport" ref={carouselViewportRef}>
+            <div className="favorites-carousel-track">
+              {favorites.map((animal) => (
+                // geänderter Code: per-item checkbox added (20.05.2026)
+                <article
+                  key={animal.id}
+                  className="favorite-card"
+                >
+                  <input
+                    className="favorite-card-checkbox"
+                    type="checkbox"
+                    checked={selectedFavoriteIds.includes(animal.id)}
+                    onChange={() => toggleFavoriteSelection(animal.id)}
+                    aria-label={`Select ${animal.name}`}
+                  />
 
-                <div className="favorite-info">
-                  <p className="favorite-scientific-name">
-                    {animal.scientificName}
-                  </p>
-                  <p className="favorite-common-name">{animal.name}</p>
-                </div>
-              </Link>
-            </article>
-          ))}
+                  <Link to={`/animal/${animal.id}`} className="favorite-card-link">
+                    <img
+                      src={animal.imageUrl}
+                      alt={animal.name}
+                      className="favorite-image"
+                    />
+
+                    <div className="favorite-info">
+                      <p className="favorite-scientific-name">
+                        {animal.scientificName}
+                      </p>
+                      <p className="favorite-common-name">{animal.name}</p>
+                    </div>
+                  </Link>
+                </article>
+              ))}
+            </div>
+          </div>
+
+          {favorites.length > visibleCount && currentPage < getPageCount() - 1 && (
+            <button
+              type="button"
+              className="favorites-carousel-button favorites-carousel-button-right visible"
+              onClick={() => scrollCarousel(1)}
+              aria-label="Scroll favorites right"
+            >
+              ›
+            </button>
+          )}
         </div>
       )}
     </section>
