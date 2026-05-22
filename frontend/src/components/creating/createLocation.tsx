@@ -1,7 +1,7 @@
 import { useState } from "react";
+import styles from "./create.module.css"
 
 export default function CreateLocation() {
-
   const [form, setForm] = useState({
     name: "",
     description: "",
@@ -14,17 +14,14 @@ export default function CreateLocation() {
   });
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
   ) => {
-
     const { name, value } = e.target;
 
     setForm((prev) => ({
       ...prev,
       [name]:
-        name === "latitude" ||
-        name === "longitude" ||
-        name === "depth"
+        name === "latitude" || name === "longitude" || name === "depth"
           ? Number(value)
           : value,
     }));
@@ -41,93 +38,94 @@ export default function CreateLocation() {
       }
     });
 
-    await fetch(
-      "http://localhost:5000/api/v1/species/createLocation",
-      {
-        method: "POST",
-        body: formData,
-      }
-    );
+    await fetch("http://localhost:5000/api/v1/species/createLocation", {
+      method: "POST",
+      body: formData,
+    });
   };
 
   return (
-    <form onSubmit={handleCreate}>
+    <div className={styles.container}>
+      <form className={styles.form} onSubmit={handleCreate}>
+        <h2 className={styles.title}>Create Location</h2>
 
-      <h2>Create Location</h2>
+        <input
+          className={styles.input}
+          type="text"
+          name="name"
+          placeholder="Name"
+          onChange={handleChange}
+        />
 
-      <input
-        type="text"
-        name="name"
-        placeholder="Name"
-        onChange={handleChange}
-      />
+        <input
+          className={styles.input}
+          type="text"
+          name="description"
+          placeholder="Description"
+          onChange={handleChange}
+        />
 
-      <input
-        type="text"
-        name="description"
-        placeholder="Description"
-        onChange={handleChange}
-      />
+        <input
+          className={styles.input}
+          type="text"
+          name="region"
+          placeholder="Region"
+          onChange={handleChange}
+        />
 
-      <input
-        type="text"
-        name="region"
-        placeholder="Region"
-        onChange={handleChange}
-      />
+        <input
+          className={styles.input}
+          type="number"
+          step="0.0001"
+          name="latitude"
+          placeholder="Latitude"
+          onChange={handleChange}
+        />
 
-      <input
-        type="number"
-        step="0.0001"
-        name="latitude"
-        placeholder="Latitude"
-        onChange={handleChange}
-      />
+        <input
+          className={styles.input}
+          type="number"
+          step="0.0001"
+          name="longitude"
+          placeholder="Longitude"
+          onChange={handleChange}
+        />
 
-      <input
-        type="number"
-        step="0.0001"
-        name="longitude"
-        placeholder="Longitude"
-        onChange={handleChange}
-      />
+        <input
+          className={styles.input}
+          type="number"
+          name="depth"
+          placeholder="Depth"
+          onChange={handleChange}
+        />
 
-      <input
-        type="number"
-        name="depth"
-        placeholder="Depth"
-        onChange={handleChange}
-      />
+        <select className={styles.input} name="type" onChange={handleChange}>
+          <option value="reef">Reef</option>
+          <option value="wreck">Wreck</option>
+          <option value="cave">Cave</option>
+          <option value="wall">Wall</option>
+          <option value="sandbank">Sandbank</option>
+        </select>
 
-      <select
-        name="type"
-        onChange={handleChange}
-      >
-        <option value="reef">Reef</option>
-        <option value="wreck">Wreck</option>
-        <option value="cave">Cave</option>
-        <option value="wall">Wall</option>
-        <option value="sandbank">Sandbank</option>
-      </select>
+        <input
+          className={styles.fileInput}
+          type="file"
+          name="image"
+          accept="image/*"
+          onChange={(e) => {
+            if (e.target.files) {
+              setForm((prev) => ({
+                ...prev,
+                image: e.target.files![0],
+              }));
+            }
+          }}
+        />
 
-      <input
-        type="file"
-        name="image"
-        accept="image/*"
-        onChange={(e) => {
-          if (e.target.files) {
-            setForm((prev) => ({
-              ...prev,
-              image: e.target.files![0],
-            }));
-          }
-        }}
-      />
-
-      <button type="submit">
-        Create Location
-      </button>
-
-    </form>
+        <button className={styles.button} type="submit">
+          Create Location
+        </button>
+      </form>
+    </div>
   );
 }

@@ -13,6 +13,8 @@ import "./App.css";
 import Location from "./components/locations/Location";
 import AnimalList from "./components/animals/ListOfAnimals";
 import AboutPage from "./pages/AboutPage";
+import CreateAnimal from "./components/creating/createAnimal";
+import CreateLocation from "./components/creating/createLocation";
 
 function App() {
   return (
@@ -31,6 +33,8 @@ function App() {
           <Route path="/animal/:id" element={<Animal/>}/>
           <Route path="/location/:id" element={<Location/>}/>
           <Route path="/animals" element={<AnimalList/>}/>
+          <Route path="/createAnimal" element={<CreateAnimal/>}/>
+          <Route path="/createLocation" element={<CreateLocation/>}/>
         </Route>
       </Routes>
     </BrowserRouter>
