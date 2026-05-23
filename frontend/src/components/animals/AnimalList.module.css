@@ -1,3 +1,25 @@
+.mainContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-image: url("../../../public/images/handy/login-diver-mobile.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 3em;
+}
+
+@media (min-width: 768px) {
+  .mainContainer {
+    background-image: url("../../../public/images/tablet/login-diver-tablet.png");
+  }
+}
+@media (min-width: 1024px) {
+  .mainContainer {
+    background-image: url("../../../public/images/desktop/login-diver-desktop.png");
+  }
+}
+
 .cardContainer{
     display: flex;
     gap: 10px;

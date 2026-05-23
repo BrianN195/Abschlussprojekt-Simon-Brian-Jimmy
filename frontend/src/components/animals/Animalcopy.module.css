@@ -49,6 +49,7 @@
   padding: 2px;
   margin-bottom: 1em;
   margin-right: auto;
+  margin-left: 3em;
 }
 
 .nameContainer {
@@ -111,9 +112,10 @@
 .bild {
   max-width: 25vw;
   height: auto;
-  object-fit: cover;
+  object-fit: contain;
   border-radius: 25px;
   border: 3px solid aquamarine;
+  display: block;
 }
 .appearList {
   margin-left: auto;
@@ -127,6 +129,7 @@
   border-radius: 25px;
   padding: 2px;
   margin-bottom: 1em;
+  margin-right: 3em;
 }
 .appearList h6{
   font-size: larger;

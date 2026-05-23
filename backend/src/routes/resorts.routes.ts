@@ -41,6 +41,28 @@ router.get("/:id/animals", async (req: Request, res: Response) => {
   }
   res.json(location);
 });
+
+router.get("/:id/animal", async (req: Request, res: Response) => {
+  const { id } = req.params;
+
+  const location = await LocationModel.findByPk(Number(id), {
+    include: AnimalModel,
+  });
+
+  if (!location) {
+    return res.status(404).json({
+      error: "Location not found",
+    });
+  }
+
+  const data = location.toJSON();
+
+  return res.json({
+    ...data,
+    animals: data.Animals,
+  });
+});
+
 router.post(
   "/createLocation",
   upload.single("image"),

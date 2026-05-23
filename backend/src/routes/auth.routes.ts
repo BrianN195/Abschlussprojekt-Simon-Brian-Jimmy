@@ -53,7 +53,7 @@ const upload = multer({
   },
 });
 
-function serializeUser(req: Request, user: UserModel) {
+ function serializeUser(req: Request, user: UserModel) {
   return {
     id: user.id,
     email: user.email,
@@ -62,6 +62,7 @@ function serializeUser(req: Request, user: UserModel) {
     bio: user.bio,
     gender: user.gender,
     birthDate: user.birthDate,
+    role: user.role
   };
 }
 

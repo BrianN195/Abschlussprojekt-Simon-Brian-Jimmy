@@ -23,6 +23,6 @@ export type User = {
   gender?: Gender;
   birthDate?: string;
   registrationDate: string;
-  isAdmin: boolean;
+  role: string
 };
 
