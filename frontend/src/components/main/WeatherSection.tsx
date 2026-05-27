@@ -1,8 +1,10 @@
+import { useTranslation } from 'react-i18next';
 import { useEffect, useState } from "react";
 import type { WeatherData } from '../../types/Weather';
 import "../../styles/weather.css";
 
 function WeatherSection() {
+  const { t } = useTranslation();
   const [weather, setWeather] = useState<WeatherData | null>(null);
 
   useEffect(() => {
@@ -27,34 +29,34 @@ function WeatherSection() {
 
   return (
     <section className="weather-section">
-      <h2>Weather</h2>
+      <h2>{t('weather.title')}</h2>
 
       {!weather ? (
-        <p>Loading weather data...</p>
+        <p>{t('weather.loading')}</p>
       ) : (
         <div className="weather-content">
           <div className="weather-current">
             <h3>{weather.location}</h3>
 
             <p>
-              Temperature: {weather.current.temperature_2m}°C
+              {t('weather.temperature')}: {weather.current.temperature_2m}°C
             </p>
 
             <p>
-              Humidity: {weather.current.relative_humidity_2m}%
+              {t('weather.humidity')}: {weather.current.relative_humidity_2m}%
             </p>
 
             <p>
-              Wind: {weather.current.wind_speed_10m} km/h
+              {t('weather.wind')}: {weather.current.wind_speed_10m} km/h
             </p>
 
             <p>
-              Rain: {weather.current.precipitation} mm
+              {t('weather.rain')}: {weather.current.precipitation} mm
             </p>
           </div>
 
           <div className="weather-forecast">
-            <h3>7-Day Forecast</h3>
+            <h3>{t('weather.forecast')}</h3>
 
             {weather.daily.time.map((day, index) => (
               <div
@@ -64,21 +66,21 @@ function WeatherSection() {
                 <p>{day}</p>
 
                 <p>
-                  Max:
+                  {t('weather.max')}:
                   {" "}
                   {weather.daily.temperature_2m_max[index]}
                   {weather.dailyUnits.temperature_2m_max}
                 </p>
 
                 <p>
-                  Min:
+                  {t('weather.min')}:
                   {" "}
                   {weather.daily.temperature_2m_min[index]}
                   {weather.dailyUnits.temperature_2m_min}
                 </p>
 
                 <p>
-                  Rain:
+                  {t('weather.rain')}:
                   {" "}
                   {weather.daily.precipitation_sum[index]}
                   {weather.dailyUnits.precipitation_sum}

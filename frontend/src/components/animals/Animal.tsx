@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { useEffect, useState, type ChangeEvent } from "react";
 import { useParams } from "react-router-dom";
 import type { AnimalDetail } from "../../types/Animal";
@@ -9,6 +10,7 @@ import {
 import "../../styles/animal.css";
 
 export default function Animal() {
+  const { t } = useTranslation();
   const { id } = useParams();
   const [animal, setAnimal] = useState<AnimalDetail | null>(null);
   const [isFavourite, setIsFavourite] = useState(false);
@@ -65,7 +67,7 @@ export default function Animal() {
   };
 
 
-  if (!animal) return <p>Loading</p>;
+  if (!animal) return <p>{t('animal.loading')}</p>;
   return (
     <main>
       <div className="hardInfoContainer">
@@ -83,18 +85,18 @@ export default function Animal() {
               checked={isFavourite}
               onChange={handleFavouriteChange}
             />
-            Favorite
+            {t('animal.favorite')}
           </label>
 
         </div>
       </div>
       <section className="about">
-        <h6 className="title">About</h6>
+        <h6 className="title">{t('animal.about')}</h6>
         {/* der inline style ist für ein mehrzeiligen text einfach */}
         <p style={{ whiteSpace: "pre-line" }}>{animal.description}</p>
       </section>
       <div className="appearList">
-        <h6 className="title">appears here</h6>
+        <h6 className="title">{t('animal.appearsHere')}</h6>
         <ul>
           {animal.locations?.map((location) => {
             return <li key={location.id}>{location.name}</li>;

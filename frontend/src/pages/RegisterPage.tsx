@@ -1,9 +1,11 @@
+import { useTranslation } from "react-i18next";
 import { useRef, useState, type FormEvent } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { authService } from "../services/authService";
 import "../styles/register.css";
 
 function RegisterPage() {
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   const [username, setUsername] = useState("");
@@ -23,12 +25,12 @@ function RegisterPage() {
     setErrorMessage("");
 
     if (password.length < 6) {
-      setErrorMessage("Password must be at least 6 characters.");
+      setErrorMessage(t('register.passwordTooShort'));
       return;
     }
 
     if (password !== confirmPassword) {
-      setErrorMessage("Passwords do not match.");
+      setErrorMessage(t('register.passwordMismatch'));
       return;
     }
 
@@ -46,7 +48,7 @@ function RegisterPage() {
       navigate("/login");
     } catch (error) {
       const message =
-        error instanceof Error ? error.message : "Registration failed";
+        error instanceof Error ? error.message : t('register.failed');
 
       setErrorMessage(message);
     } finally {
@@ -61,47 +63,47 @@ function RegisterPage() {
         className="back-button"
         onClick={() => navigate("/")}
       >
-        {`<< Back`}
+        {t('common.back')}
       </button>
 
-      <h1 className="register-title">Registration</h1>
+      <h1 className="register-title">{t('register.title')}</h1>
 
       <form className="register-form" onSubmit={handleSubmit}>
         <div className="form-field">
-          <label htmlFor="register-username">Username</label>
+          <label htmlFor="register-username">{t('register.username')}</label>
 
           <input
             id="register-username"
             type="text"
             value={username}
             onChange={(event) => setUsername(event.target.value)}
-            placeholder="Required field"
+            placeholder={t('register.requiredField')}
             required
           />
         </div>
 
         <div className="form-field">
-          <label htmlFor="register-email">Email</label>
+          <label htmlFor="register-email">{t('register.email')}</label>
 
           <input
             id="register-email"
             type="email"
             value={email}
             onChange={(event) => setEmail(event.target.value)}
-            placeholder="Required field"
+            placeholder={t('register.requiredField')}
             required
           />
         </div>
 
         <div className="form-field">
-          <label htmlFor="register-password">Password</label>
+          <label htmlFor="register-password">{t('register.password')}</label>
 
           <input
             id="register-password"
             type="password"
             value={password}
             onChange={(event) => setPassword(event.target.value)}
-            placeholder="Required field"
+            placeholder={t('register.requiredField')}
             required
             minLength={6}
           />
@@ -109,7 +111,7 @@ function RegisterPage() {
 
         <div className="form-field">
           <label htmlFor="register-confirm-password">
-            Confirm Password
+            {t('register.confirmPassword')}
           </label>
 
           <input
@@ -119,7 +121,7 @@ function RegisterPage() {
             onChange={(event) =>
               setConfirmPassword(event.target.value)
             }
-            placeholder="Required field"
+            placeholder={t('register.requiredField')}
             minLength={6}
             required
           />
@@ -127,14 +129,13 @@ function RegisterPage() {
 
         <div className="form-field">
           <div className="gender-label-wrapper">
-            <label htmlFor="register-gender">Gender</label>
+            <label htmlFor="register-gender">{t('register.gender')}</label>
 
             <div className="info-tooltip">
               <span className="info-icon">i</span>
 
               <div className="tooltip-text">
-                Optional information such as gender and birth date can be updated later in your
-                profile settings.
+                {t('register.genderInfo')}
               </div>
             </div>
           </div>
@@ -144,16 +145,16 @@ function RegisterPage() {
             value={gender}
             onChange={(event) => setGender(event.target.value)}
           >
-            <option value="">Optional</option>
-            <option value="female">Woman</option>
-            <option value="male">Man</option>
-            <option value="others">Others</option>
+            <option value="">{t('register.optional')}</option>
+            <option value="female">{t('register.woman')}</option>
+            <option value="male">{t('register.man')}</option>
+            <option value="others">{t('register.others')}</option>
           </select>
         </div>
 
         <div className="form-field">
           <label htmlFor="register-birthDate">
-            Birth Date
+            {t('register.birthDate')}
           </label>
 
           <input
@@ -174,7 +175,7 @@ function RegisterPage() {
               }
             }}
             onChange={(event) => setBirthDate(event.target.value)}
-            placeholder="Optional"
+            placeholder={t('register.optional')}
           />
         </div>
 
@@ -184,7 +185,7 @@ function RegisterPage() {
             type="button"
             onClick={() => navigate("/")}
           >
-            Cancel
+            {t('common.cancel')}
           </button>
 
           <button
@@ -192,7 +193,7 @@ function RegisterPage() {
             type="submit"
             disabled={loading}
           >
-            {loading ? "Registering..." : "Create account"}
+            {loading ? t('register.loading') : t('register.createAccount')}
           </button>
         </div>
       </form>
@@ -202,8 +203,8 @@ function RegisterPage() {
       ) : null}
 
       <p>
-        Already registered?{" "}
-        <Link to="/login">Go to login</Link>
+        {t('register.alreadyRegistered')} {" "}
+        <Link to="/login">{t('register.goToLogin')}</Link>
       </p>
     </main>
   );

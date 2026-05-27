@@ -27,6 +27,12 @@
   backdrop-filter: none;
 }
 
+.landing-language-row {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 0.75rem;
+}
+
 .landing-greeting {
   margin: 0;
   font-size: 0.95rem;
@@ -184,6 +190,10 @@
   .landing-greeting {
     font-size: 0.8rem;
     letter-spacing: 0.18em;
+  }
+
+  .landing-language-row {
+    justify-content: center;
   }
 
   .landing-subtitle {

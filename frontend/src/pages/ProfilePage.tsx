@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { useEffect, useState } from "react";
 import type { ChangeEvent, FormEvent } from "react";
 import ProfileSection from "../components/main/ProfileSection";
@@ -5,6 +6,7 @@ import { authService, type AuthUser } from "../services/authService";
 import "../styles/profile.css";
 
 function ProfilePage() {
+  const { t } = useTranslation();
   const [user, setUser] = useState<AuthUser | null>(null);
   const [formData, setFormData] = useState({
     username: "",
@@ -45,7 +47,7 @@ function ProfilePage() {
         setUser(profile);
         syncForm(profile);
       } catch (err: any) {
-        setError(err.message || "Failed to load profile");
+        setError(err.message || t('profile.failedLoad'));
       } finally {
         setLoading(false);
       }
@@ -99,9 +101,9 @@ function ProfilePage() {
       setUser(updated);
       syncForm(updated);
       setAvatarPreview((updated.profileImage as string) || "");
-      setSuccess("Profil gespeichert.");
+      setSuccess(t('profile.saved'));
     } catch (err: any) {
-      setError(err.message || "Failed to save profile");
+      setError(err.message || t('profile.failedSave'));
     } finally {
       setSaving(false);
     }
@@ -109,8 +111,8 @@ function ProfilePage() {
 
   return (
     <main className="profile-page">
-      <h1 className="main-title">Profile</h1>
-      {loading && <p>Loading profile…</p>}
+      <h1 className="main-title">{t('profile.title')}</h1>
+      {loading && <p>{t('profile.loading')}</p>}
       {error && <p style={{ color: "red" }}>{error}</p>}
       {success && <p style={{ color: "#b8f7d2" }}>{success}</p>}
 
@@ -118,7 +120,7 @@ function ProfilePage() {
 
       {!loading && !error && (
         <section className="profile-edit-section">
-          <h2 className="section-title">Edit Profile</h2>
+          <h2 className="section-title">{t('profile.editTitle')}</h2>
 
           <form onSubmit={handleSubmit} className="profile-edit-form">
             <div className="profile-edit-grid">
@@ -132,9 +134,9 @@ function ProfilePage() {
                 </div>
 
                 <div>
-                  <p className="profile-helper-text">PNG, JPG oder WEBP bis 5 MB.</p>
+                  <p className="profile-helper-text">{t('profile.helperText')}</p>
                   <label htmlFor="avatar" className="file-button">
-                    Avatar auswählen
+                    {t('profile.chooseAvatar')}
                   </label>
                   <input
                     id="avatar"
@@ -149,7 +151,7 @@ function ProfilePage() {
 
               <div className="profile-form-fields">
                 <div>
-                  <label htmlFor="username" className="form-label">Username</label>
+                  <label htmlFor="username" className="form-label">{t('profile.username')}</label>
                   <input
                     id="username"
                     name="username"
@@ -161,7 +163,7 @@ function ProfilePage() {
                 </div>
 
                 <div>
-                  <label htmlFor="bio" className="form-label">Bio</label>
+                  <label htmlFor="bio" className="form-label">{t('profile.bio')}</label>
                   <textarea
                     id="bio"
                     name="bio"
@@ -174,7 +176,7 @@ function ProfilePage() {
 
                 <div className="profile-form-row">
                   <div>
-                    <label htmlFor="gender" className="form-label">Gender</label>
+                    <label htmlFor="gender" className="form-label">{t('profile.gender')}</label>
                     <select
                       id="gender"
                       name="gender"
@@ -182,15 +184,15 @@ function ProfilePage() {
                       onChange={handleChange}
                       className="form-input"
                     >
-                      <option value="">Not set</option>
-                      <option value="male">male</option>
-                      <option value="female">female</option>
-                      <option value="others">others</option>
+                      <option value="">{t('profile.notSet')}</option>
+                      <option value="male">{t('profile.male')}</option>
+                      <option value="female">{t('profile.female')}</option>
+                      <option value="others">{t('profile.others')}</option>
                     </select>
                   </div>
 
                   <div>
-                    <label htmlFor="birthDate" className="form-label">Birth date</label>
+                    <label htmlFor="birthDate" className="form-label">{t('profile.birthDate')}</label>
                     <input
                       id="birthDate"
                       name="birthDate"
@@ -203,7 +205,7 @@ function ProfilePage() {
                 </div>
 
                 <button type="submit" className="app-button profile-save-button" disabled={saving}>
-                  {saving ? "Saving…" : "Save profile"}
+                  {saving ? t('profile.saving') : t('profile.saveProfile')}
                 </button>
               </div>
             </div>

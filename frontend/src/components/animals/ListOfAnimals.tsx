@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { useEffect, useState } from "react";
 import { speciesService } from "../../services/animalService";
 import type { Animal } from "../../types/Animal";
@@ -5,6 +6,7 @@ import { Link } from "react-router-dom";
 import style from "./AnimalList.module.css";
 
 export default function AnimalList() {
+  const { t } = useTranslation();
   const [animals, setAnimals] = useState<Animal[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -25,12 +27,12 @@ export default function AnimalList() {
     fetchAnimals();
   }, []);
 
-  if (loading) return <p>Lade Tiere...</p>;
+  if (loading) return <p>{t('list.loadingAnimals')}</p>;
 
   return (
     <div className={style.cardContainer}>
       {animals.length === 0 ? (
-        <p>Keine Tiere gespeichert</p>
+        <p>{t('list.noAnimals')}</p>
       ) : (
         animals.map((animal) => (
           <Link

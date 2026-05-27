@@ -1,7 +1,9 @@
+import { useTranslation } from 'react-i18next';
 import { Link, useNavigate } from "react-router-dom";
 import { authService } from "../../services/authService";
 
 function LoginLogoutButton() {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const isLoggedIn = authService.isAuthenticated();
 
@@ -13,14 +15,14 @@ function LoginLogoutButton() {
   if (!isLoggedIn) {
     return (
       <Link className="auth-button" to="/login">
-        Login
+        {t('auth.login')}
       </Link>
     );
   }
 
   return (
     <button className="auth-button" type="button" onClick={handleLogout}>
-      Logout
+      {t('auth.logout')}
     </button>
   );
 }

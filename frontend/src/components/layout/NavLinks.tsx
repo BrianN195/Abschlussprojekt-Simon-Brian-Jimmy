@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { Link } from "react-router-dom";
 
 type NavLinksProps = {
@@ -6,15 +7,16 @@ type NavLinksProps = {
 };
 
 function NavLinks({ onLinkClick, mobile = false }: NavLinksProps) {
+  const { t } = useTranslation();
   const linkClassName = mobile ? "nav-mobile-link" : "nav-link";
 
   return (
     <>
       <Link to="/animals" className={linkClassName} onClick={onLinkClick}>
-        Animals
+        {t('nav.animals')}
       </Link>
       <Link to="/about" className={linkClassName} onClick={onLinkClick}>
-        About
+        {t('nav.about')}
       </Link>
     </>
   );
