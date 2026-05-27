@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { useEffect, useState } from "react";
 import type { LocationDetail } from "../../types/Locations";
 import { Link, useParams } from "react-router-dom";

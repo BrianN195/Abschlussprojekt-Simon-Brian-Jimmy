@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import "../styles/AboutPage.css";
 import { authService } from "../services/authService";
 
 const AboutPage: React.FC = () => {
+  const { t } = useTranslation();
   const [isAuth, setIsAuth] = useState<boolean>(authService.isAuthenticated());
 
   useEffect(() => {
@@ -13,55 +15,44 @@ const AboutPage: React.FC = () => {
   }, []);
 
   const ctaTarget = isAuth ? "/profile" : "/register";
-  const ctaText = isAuth ? "View Profile" : "Join — register now";
+  const ctaText = isAuth ? t('about.ctaProfile') : t('about.ctaRegister');
 
   return (
     <main className="about-page">
         <section className="about-hero">
-          <h1>About Maldives Marine</h1>
-          <p>
-            Maldives Marine is a small web app aimed at divers, nature and marine
-            biology enthusiasts, and travelers who want to explore the wildlife
-            and protected areas of the Maldives.
-          </p>
+          <h1>{t('about.title')}</h1>
+          <p>{t('about.intro')}</p>
         </section>
 
         <section className="about-why">
-          <h2>Why this site?</h2>
-          <p>
-            The goal is to present observations, places and species clearly,
-            collect information about individual animals and locations, and
-            raise awareness for the conservation of the underwater world.
-          </p>
+          <h2>{t('about.whyTitle')}</h2>
+          <p>{t('about.whyText')}</p>
         </section>
 
         <section className="about-target">
-          <h2>Target audience</h2>
+          <h2>{t('about.targetTitle')}</h2>
           <ul>
-            <li>Divers and snorkelers who want to observe marine life</li>
-            <li>Researchers and independent scientists documenting sightings</li>
-            <li>Travelers looking for information about protected areas</li>
-            <li>Conservationists and educational programs</li>
+            <li>{t('about.target1')}</li>
+            <li>{t('about.target2')}</li>
+            <li>{t('about.target3')}</li>
+            <li>{t('about.target4')}</li>
           </ul>
         </section>
 
         <section className="about-features">
-          <h2>Key features</h2>
+          <h2>{t('about.featuresTitle')}</h2>
           <ul>
-            <li>Species profiles with images and important traits</li>
-            <li>Locations and map view with historical sightings</li>
-            <li>User profiles with avatar upload and personal favorites</li>
-            <li>Integrated search for species, places and posts</li>
-            <li>Responsive design for mobile, tablet and desktop</li>
+            <li>{t('about.feature1')}</li>
+            <li>{t('about.feature2')}</li>
+            <li>{t('about.feature3')}</li>
+            <li>{t('about.feature4')}</li>
+            <li>{t('about.feature5')}</li>
           </ul>
         </section>
 
         <section className="about-contribute">
-          <h2>Get involved</h2>
-          <p>
-            Sign up to add observations, upload images and support the community.
-            Every sighting helps to better understand species and habitats.
-          </p>
+          <h2>{t('about.contributeTitle')}</h2>
+          <p>{t('about.contributeText')}</p>
         </section>
 
         <div className="about-cta">
@@ -69,11 +60,8 @@ const AboutPage: React.FC = () => {
         </div>
 
         <section className="about-contact">
-          <h2>Contact & feedback</h2>
-          <p>
-            Please report feedback, ideas or bugs via the project repository or
-            by email to the development team.
-          </p>
+          <h2>{t('about.contactTitle')}</h2>
+          <p>{t('about.contactText')}</p>
         </section>
       </main>
   );

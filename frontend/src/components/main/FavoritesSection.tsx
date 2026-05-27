@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { Link } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import type { FavoriteAnimal } from "../../types/FavoriteAnimal";
@@ -8,6 +9,7 @@ import {
 import "../../styles/favorites.css";
 
 function FavoritesSection() {
+  const { t } = useTranslation();
   const [favorites, setFavorites] = useState<FavoriteAnimal[]>([]);
   const [selectedFavoriteIds, setSelectedFavoriteIds] = useState<number[]>([]);
   const carouselViewportRef = useRef<HTMLDivElement>(null);
@@ -124,17 +126,17 @@ function FavoritesSection() {
   return (
     <section className="favorites-section">
       <div className="favorites-header">
-        <h2>Favorites</h2>
+        <h2>{t('favorites.title')}</h2>
 
         <div className="favorites-actions">
           <label className="favorites-select-all">
-            <span>select all</span>
+            <span>{t('favorites.selectAll')}</span>
 
             <input
               type="checkbox"
               checked={allSelected}
               onChange={toggleSelectAll}
-              aria-label="Select all favorites"
+              aria-label={t('favorites.selectAll')}
             />
           </label>
 
@@ -144,7 +146,7 @@ function FavoritesSection() {
             onClick={handleDeleteSelected}
             disabled={selectedFavoriteIds.length === 0}
           >
-            Delete
+            {t('favorites.delete')}
           </button>
         </div>
       </div>
@@ -153,15 +155,13 @@ function FavoritesSection() {
         <article className="favorite-card favorite-card-default">
           <img
             src="/images/default/default-favorites-1-hell-desktop.png"
-            alt="Default favorite marine placeholder"
+            alt={t('favorites.placeholderAlt')}
             className="favorite-image"
           />
 
           <div className="favorite-info">
-            <p className="favorite-common-name">No favorites yet</p>
-            <p className="favorite-scientific-name">
-              Select animals with the favorite checkbox
-            </p>
+            <p className="favorite-common-name">{t('favorites.emptyTitle')}</p>
+            <p className="favorite-scientific-name">{t('favorites.emptySubtitle')}</p>
           </div>
         </article>
       ) : (

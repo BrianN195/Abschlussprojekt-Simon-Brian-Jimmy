@@ -1,8 +1,10 @@
+import { useTranslation } from 'react-i18next';
 import { useEffect, useState } from "react";
 import type { Location } from "../../types/Locations";
 import { locationService } from "../../services/locationService";
 
 export default function locationList() {
+  const { t } = useTranslation();
   const [locations, setlocations] = useState<Location[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -23,12 +25,12 @@ export default function locationList() {
     fetchlocations();
   }, []);
 
-  if (loading) return <p>Lade Locations...</p>;
+  if (loading) return <p>{t('list.loadingLocations')}</p>;
 
   return (
     <div className="grid gap-3">
       {locations.length === 0 ? (
-        <p>No Locations saved</p>
+        <p>{t('list.noLocations')}</p>
       ) : (
         locations.map((location) => (
           <div key={location.id} className="p-3 rounded-xl shadow bg-white">

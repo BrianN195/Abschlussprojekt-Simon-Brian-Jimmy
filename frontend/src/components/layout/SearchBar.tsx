@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { useEffect, useState, useRef } from "react";
 import type { Animal } from "../../types/Animal";
 import type { Location } from "../../types/Locations";
@@ -9,6 +10,7 @@ type SearchResults = {
 };
 
 export default function SearchBar() {
+  const { t } = useTranslation();
   const [search, setSearch] = useState("");
   const [results, setResults] = useState<SearchResults>({
     animals: [],
@@ -47,16 +49,16 @@ export default function SearchBar() {
         className="search-input"
         type="text"
         value={search}
-        placeholder="Search..."
+        placeholder={t('search.placeholder')}
         onChange={(e) => setSearch(e.target.value)}
-        aria-label="Search"
+        aria-label={t('search.ariaLabel')}
         autoComplete="off"
       />
 
       {(results.animals.length > 0 || results.locations.length > 0) && (
         <div className="search-results" role="listbox">
           {results.animals.length > 0 && (
-            <ul className="search-group" aria-label="Animal results">
+            <ul className="search-group" aria-label={t('search.animalsResults')}>
               {results.animals.map((animal) => (
                 <li key={animal.id} className="search-item" role="option">
                   <Link
@@ -75,7 +77,7 @@ export default function SearchBar() {
           )}
 
           {results.locations.length > 0 && (
-            <ul className="search-group" aria-label="Location results">
+            <ul className="search-group" aria-label={t('search.locationsResults')}>
               {results.locations.map((loc) => (
                 <li key={loc.id} className="search-item" role="option">
                   <Link

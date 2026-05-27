@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { Link, useNavigate } from "react-router-dom";
 import { authService } from "../../services/authService";
 
@@ -7,6 +8,7 @@ type AuthControlsProps = {
 };
 
 function AuthControls({ mobile = false, onAction }: AuthControlsProps) {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const isLoggedIn = authService.isAuthenticated();
   const user = authService.getUser();
@@ -25,7 +27,7 @@ function AuthControls({ mobile = false, onAction }: AuthControlsProps) {
     .join("");
 
   const avatarContent = user?.profileImage ? (
-    <img src={user.profileImage} alt="avatar" className="nav-user-avatar" />
+    <img src={user.profileImage} alt={t('profile.avatarLabel')} className="nav-user-avatar" />
   ) : (
     <span className="nav-user-avatar-fallback">{initials || "G"}</span>
   );
@@ -35,7 +37,9 @@ function AuthControls({ mobile = false, onAction }: AuthControlsProps) {
       <span className={mobile ? "nav-mobile-user" : "nav-user"}>
         {avatarContent}
         <span className="nav-user-greet">
-          Hi, {isLoggedIn ? user?.username || user?.email : "Guest"}
+          {t('nav.greeting', {
+            name: isLoggedIn ? user?.username || user?.email : t('auth.guest'),
+          })}
         </span>
       </span>
 
@@ -46,13 +50,13 @@ function AuthControls({ mobile = false, onAction }: AuthControlsProps) {
             className={mobile ? "nav-mobile-link" : "nav-link"}
             onClick={onAction}
           >
-            Profile
+            {t('nav.profile')}
           </Link>
           <button
             className={mobile ? "nav-mobile-logout" : "nav-logout-btn"}
             onClick={handleLogout}
           >
-            Logout
+            {t('auth.logout')}
           </button>
         </>
       ) : (
@@ -62,14 +66,14 @@ function AuthControls({ mobile = false, onAction }: AuthControlsProps) {
             className={mobile ? "nav-mobile-link" : "nav-link"}
             onClick={onAction}
           >
-            Login
+            {t('auth.login')}
           </Link>
           <Link
             to="/register"
             className={mobile ? "nav-mobile-link nav-register" : "nav-link nav-register"}
             onClick={onAction}
           >
-            Register
+            {t('auth.register')}
           </Link>
         </>
       )}

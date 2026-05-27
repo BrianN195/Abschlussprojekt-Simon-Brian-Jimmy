@@ -1,5 +1,6 @@
+import { useTranslation } from "react-i18next";
 import { useEffect, useState } from "react";
-import type { WeatherData } from '../../types/Weather';
+import type { WeatherData } from "../../types/Weather";
 import "../../styles/weather.css";
 import InlineSVG from "../../components/ui/InlineSVG";
 
@@ -102,6 +103,7 @@ function getWeatherIcon(weatherCode: number): WeatherIconInfo {
 }
 
 function WeatherSection() {
+  const { t } = useTranslation();
   const [weather, setWeather] = useState<WeatherData | null>(null);
   const [error, setError] = useState<string | null>(null);
 
@@ -128,37 +130,11 @@ function WeatherSection() {
 
   return (
     <section className="weather-section">
-      <h2>Weather</h2>
+      <h2>{t("weather.title")}</h2>
 
       {!weather ? (
         <div className="weather-content">
-          <div className="weather-current">
-            {(() => {
-              const loadingIcon = getWeatherIcon(-1);
-
-              return (
-            <div className="weather-current-header">
-              <div>
-                <p className="weather-location-label">current Weather</p>
-                <h3>Maldives</h3>
-              </div>
-
-              <div className="weather-icon-card">
-                <img
-                  src={loadingIcon.src}
-                  alt={loadingIcon.alt}
-                  className="weather-icon"
-                />
-                <span>{error ? "Unavailable" : "Loading"}</span>
-              </div>
-            </div>
-              );
-            })()}
-
-            <p>
-              {error ? error : "Loading weather data..."}
-            </p>
-          </div>
+          <p>{error ? error : t("weather.loading")}</p>
         </div>
       ) : (
         <div className="weather-content">
@@ -170,26 +146,26 @@ function WeatherSection() {
               <div className="weather-current">
                 <div className="weather-current-layout">
                   <div className="weather-current-summary">
-                    <p className="weather-location-label">current Weather</p>
+                    <p className="weather-location-label">Current Weather</p>
                     <h3>{weather.location}</h3>
                     <p className="weather-current-date">{currentDate}</p>
                   </div>
 
                   <div className="weather-current-metrics">
                     <p>
-                      Temperature: {weather.current.temperature_2m}°C
+                      {t("weather.temperature")}: {weather.current.temperature_2m}°C
                     </p>
 
                     <p>
-                      Humidity: {weather.current.relative_humidity_2m}%
+                      {t("weather.humidity")}: {weather.current.relative_humidity_2m}%
                     </p>
 
                     <p>
-                      Wind: {weather.current.wind_speed_10m} km/h
+                      {t("weather.wind")}: {weather.current.wind_speed_10m} km/h
                     </p>
 
                     <p>
-                      Rain: {weather.current.precipitation} mm
+                      {t("weather.rain")}: {weather.current.precipitation} mm
                     </p>
                   </div>
 
@@ -203,23 +179,19 @@ function WeatherSection() {
                     <span>{currentIcon.label}</span>
                   </div>
                 </div>
-
               </div>
             );
           })()}
 
           <div className="weather-forecast-panel">
-            <h3>7-Day Forecast</h3>
+            <h3>{t("weather.forecast")}</h3>
 
             <div className="weather-forecast">
               {weather.daily.time.map((day, index) => {
                 const icon = getWeatherIcon(weather.daily.weather_code[index]);
 
                 return (
-                  <div
-                    key={day}
-                    className="weather-day"
-                  >
+                  <div key={day} className="weather-day">
                     <div className="weather-day-header">
                       <p>{formatForecastDay(day)}</p>
 
@@ -231,23 +203,17 @@ function WeatherSection() {
                     </div>
 
                     <p>
-                      Max:
-                      {" "}
-                      {weather.daily.temperature_2m_max[index]}
+                      {t("weather.max")}: {weather.daily.temperature_2m_max[index]}
                       {weather.dailyUnits.temperature_2m_max}
                     </p>
 
                     <p>
-                      Min:
-                      {" "}
-                      {weather.daily.temperature_2m_min[index]}
+                      {t("weather.min")}: {weather.daily.temperature_2m_min[index]}
                       {weather.dailyUnits.temperature_2m_min}
                     </p>
 
                     <p>
-                      Rain:
-                      {" "}
-                      {weather.daily.precipitation_sum[index]}
+                      {t("weather.rain")}: {weather.daily.precipitation_sum[index]}
                       {weather.dailyUnits.precipitation_sum}
                     </p>
                   </div>

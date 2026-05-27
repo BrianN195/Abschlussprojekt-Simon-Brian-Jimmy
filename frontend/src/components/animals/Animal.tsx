@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { useEffect, useState, type ChangeEvent } from "react";
 import { Link, useParams } from "react-router-dom";
 import type { AnimalDetail } from "../../types/Animal";
@@ -10,6 +11,7 @@ import {
 import styles from "./Animalcopy.module.css";
 
 export default function Animal() {
+  const { t } = useTranslation();
   const { id } = useParams();
   const [animal, setAnimal] = useState<AnimalDetail | null>(null);
   const [isFavourite, setIsFavourite] = useState(false);
@@ -97,11 +99,14 @@ export default function Animal() {
             </label>
           </div>
         </div>
-        <img
+        <div className="imageWrapper">
+          <img
           src={animal.imageUrl}
           alt={animal.imageUrl}
           className={styles.bild}
         />
+        </div>
+        
         <div className={styles.appearList}>
           <h6 className={styles.title}>appears here</h6>
 
