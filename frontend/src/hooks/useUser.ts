@@ -3,11 +3,15 @@ import type { User } from "../types/User";
 
 function useUser() {
   const [user, setUser] = useState<User | null>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
 
-    if (!token) return;
+    if (!token) {
+      setLoading(false);
+      return;
+    }
 
     fetch("http://localhost:5000/api/v1/auth/me", {
       headers: {
@@ -15,9 +19,16 @@ function useUser() {
       },
     })
       .then((res) => res.json())
-      .then(setUser);
+      .then((data) => {
+        setUser(data);
+        setLoading(false);
+      })
+      .catch(() => {
+        setLoading(false);
+      });
   }, []);
 
-  return user;
+  return { user, loading };
 }
-export default useUser
+
+export default useUser;
