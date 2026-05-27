@@ -144,7 +144,9 @@ router.post('/login', apiLimiter, async (req: Request, res: Response) => {
 
 // GET /api/v1/auth/me (Protected)
 router.get('/me', async (req: Request, res: Response) => {
+  console.log("ME ROUTE HIT 1");
   try {
+    console.log("ME ROUTE HIT 2");
     const token = req.headers.authorization?.split(' ')[1];
     if (!token) {
       return res.status(401).json({ error: 'No token provided' });
