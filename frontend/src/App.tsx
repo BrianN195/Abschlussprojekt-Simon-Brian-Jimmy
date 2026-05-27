@@ -50,7 +50,7 @@ function App() {
             }
           />
           <Route
-            path="/create-animal"
+            path="/create-location"
             element={
               <ProtectedRoute
                 allowedRoles={["admin", "mod"]}
