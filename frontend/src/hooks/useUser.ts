@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import type { User } from "../types/User";
+import { authService } from "../services/authService";
 
 function useUser() {
   const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    const token = authService.getToken();
 
     if (!token) return;
 
