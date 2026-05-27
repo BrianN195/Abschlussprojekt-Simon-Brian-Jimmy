@@ -5,9 +5,8 @@
   padding: 1.5rem;
 
   border-radius: 24px;
-  border: 1px solid rgba(126, 231, 255, 0.32);
-  background: rgba(3, 28, 42, 0.38);
-  backdrop-filter: blur(12px);
+  background: rgba(22, 64, 88, 0.38);
+  backdrop-filter: blur(0.75px);
   box-shadow: 0 24px 80px rgba(0, 0, 0, 0.38);
 
   color: #ffffff;
@@ -57,12 +56,13 @@
 }
 
 .favorites-delete-button {
-  min-height: 40px;
-  padding: 0.6rem 1rem;
+  min-height: 48px;
+  padding: 0.8rem 1.25rem;
   border: 1px solid rgba(126, 231, 255, 0.35);
   border-radius: 999px;
   background: rgba(255, 107, 107, 0.18);
   color: #ffffff;
+  font-size: 1rem;
   font-weight: 700;
   cursor: pointer;
   transition:
@@ -204,7 +204,7 @@
   text-decoration: none;
   color: #ffffff;
   border-radius: 18px;
-  border: 1px solid transparent;
+  border: 1.15px solid rgba(126, 231, 255, 0.562);
   background: transparent;
   backdrop-filter: blur(0px);
   box-shadow: none;

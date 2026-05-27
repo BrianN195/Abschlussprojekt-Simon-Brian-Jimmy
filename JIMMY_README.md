@@ -2,13 +2,6 @@
  - **Prostgrespl**: Neueste Version runtergeladen und eingerichtet soweit ich konnte. (?? dbAdmin ??)
 
 ## Backend
-- **UserModel**: Gender und Geburtsdatum-Felder hinzugefügt.
-- **Auth-Routen**: Registrierung und Login um Gender/BirthDate erweitert.
-- **Server-Setup**: Sequelize-Sync für Tabellenaktualisierung.
-
-## Frontend
-- **Public/images**: 3 neue generierte Bilder für Background Landing-, Registrierung- und Profil page erstellt.
-- **AuthService**: Register-Funktion um Gender und BirthDate erweitert.
 - **RegisterPage**: Passwort-Wiederholung, Gender-Dropdown, Geburtsdatum hinzugefügt.
 - **Register-CSS**: Placeholder zentriert, Design für Inputs/Selects angepasst.
 
@@ -20,7 +13,6 @@ Füge hier die konkreten Dateipfade ein, damit du jederzeit zum Code springen ka
 
 Datum: 2026-05-16
 
-Übersicht der lokal veränderten Frontend-Dateien (heute):
 
 - [frontend/src/styles/login.css](frontend/src/styles/login.css) — lokal geändert
 - [frontend/src/styles/register.css](frontend/src/styles/register.css) — lokal geändert
@@ -31,7 +23,6 @@ Datum: 2026-05-16
 Neuer Plan:
 
 - Catalog fällt weg
-
 - Wetter Container ist schon gemacht/ Wir noch nicht richtig angezeigt und design nochmal überfliegen !!prüfen und reparieren!!
 
 - comments geht dirakt nach animals. dort soll/kann kommentiert werden.
@@ -42,7 +33,6 @@ Neuer Plan:
 diese Code bei Favoriten berücksichtigen, Die sind noch nich gemrged und/oder grcoded
 
 // animals als favorit setzen:
-await user.addFavorite(animal);
 //favorit enfernen:
 await user.removeFavorite(animal);
 //alle favoriten holen:
@@ -53,7 +43,6 @@ const favorites = await user.getFavorites()
 Auftrag reset Datenbank:
 Weil wir was in unserer Datenbank verändert/gemacht haben  muss ich  jetzt erstmal ein resete machen. Arbeitsablaufplan inklusiv Powershell bitte. Ich muss resten.
 
- Um datenbank anzulegen:
     - ganz wichtig: postgresql muss laufen! (systemctl start postgresql)
     - wenn resetet werden muss, im backendordner: npx sequelize-cli db:migrate:undo:all
     - erst migrieren: in den backend ordner und dann im terminal: npx sequelize-cli db:migrate
@@ -64,18 +53,20 @@ Weil wir was in unserer Datenbank verändert/gemacht haben  muss ich  jetzt erst
 	Auftrag erledigt und Datenbank auf neuestem Stand.
 
 
-## Letzte Änderungen (19.052026)
-- [Favorites-Container](frontend/src/components/main/FavoritesSection.tsx#L1): Favoriten kommen aus der Datenbank und sind direkt anklickbar.
-- [Favorites-Service](frontend/src/services/favouritesService.ts#L1): Zugriff läuft jetzt über die API statt über `localStorage`.
-- [Animal-Favoriten](frontend/src/components/animals/Animal.tsx#L1): Favoriten werden beim Setzen und Entfernen direkt gespeichert.
-- [Backend-Favorites-Route](backend/src/routes/favorites.routes.ts#L1): Neue Route zum Holen, Speichern und Löschen der Favoriten.
-- [Weather-Container](frontend/src/components/main/WeatherSection.tsx#L10): Wetter wird im Frontend als eigener Bereich angezeigt.
-- [Weather-Route](backend/src/routes/weather.routes.ts#L6): Backend liefert die Wetterdaten für den Container.
-- [Server-Setup](backend/src/server.ts#L12): Favorites- und Weather-Route sind im Backend eingebunden.
- - [Weather-Widget Component](frontend/src/components/main/WeatherSection.tsx#L1): Frontend-Component lädt das Widget-Script und rendert das Wetterbereich.
- - [Weather Styles](frontend/src/styles/weather.css#L1): CSS für das Weather-Layout und responsive Anpassungen.
+## Letzte Änderungen (19.05.2026)
  - [Weather-Types](frontend/src/types/Weather.ts#L1): `WeatherData` wurde ausgelagert; `WeatherSection.tsx` importiert jetzt den Typ.
 
+
+## Letzte Änderungen (27.05.2026)
+Tag: Dienstag, 27.05.2026
+
+- [WeatherSection.tsx](frontend/src/components/main/WeatherSection.tsx) - Die Wetteranzeige nutzt jetzt englische Datumsangaben statt deutscher Wochentage.
+- [InlineSVG.tsx](frontend/src/components/ui/InlineSVG.tsx) - SVGs werden inline geladen, damit SMIL-Animationen im Wetter-Icon laufen.
+- [weather.css](frontend/src/styles/weather.css) - Das Weather-Layout nutzt feste 7 Spalten für den Forecast und ist optisch beruhigt.
+- [favorites.css](frontend/src/styles/favorites.css) - Favoriten haben das gleiche ruhige Blur-Layout bekommen und der Delete-Button wurde größer gemacht.
+- [Weather.ts](frontend/src/types/Weather.ts) - Wetter-Typen wurden um `current.time` und `weather_code` erweitert.
+
+Kurz gesagt: Alles, was wir heute am Wetter-Container, an den SVG-Icons, an den Favoriten und an den Wetter-Typen angepasst haben, steht hier unten mit klickbaren Links.
 Auftrag heute:  (20.05.2026)
 
 Container Weather:
@@ -230,5 +221,16 @@ Hinweis: Ich habe nur die betroffenen Abschnitte als "Vorher"-Schnipsel eingefü
 - [cleanupFavoriteDuplicates.ts](backend/src/scripts/cleanupFavoriteDuplicates.ts) - Hilfsskript zum einmaligen Bereinigen alter doppelter Favoriten in der Join-Tabelle.
 
 Hinweis: Die Migration wurde bereits erfolgreich ausgeführt. Wenn du künftig nur die Datenbank aktualisieren willst, ist der richtige Befehl `npx sequelize-cli db:migrate` im `backend`-Ordner.
+
+## Letzte Änderungen (27.05.2026)
+Tag: Dienstag, 27.05.2026
+
+- [WeatherSection.tsx](frontend/src/components/main/WeatherSection.tsx) - Die Wetteranzeige nutzt jetzt englische Datumsangaben statt deutscher Wochentage.
+- [InlineSVG.tsx](frontend/src/components/ui/InlineSVG.tsx) - SVGs werden inline geladen, damit SMIL-Animationen im Wetter-Icon laufen.
+- [weather.css](frontend/src/styles/weather.css) - Das Weather-Layout nutzt feste 7 Spalten für den Forecast und ist optisch beruhigt.
+- [favorites.css](frontend/src/styles/favorites.css) - Favoriten haben das gleiche ruhige Blur-Layout bekommen und der Delete-Button wurde größer gemacht.
+- [Weather.ts](frontend/src/types/Weather.ts) - Wetter-Typen wurden um `current.time` und `weather_code` erweitert.
+
+Kurz gesagt: Alles, was wir heute am Wetter-Container, an den SVG-Icons, an den Favoriten und an den Wetter-Typen angepasst haben, steht hier unten mit klickbaren Links.
 
 
