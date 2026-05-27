@@ -7,6 +7,8 @@
   background-position: center;
   background-repeat: no-repeat;
   padding: 3em;
+  height: 100vh;
+  
 }
 
 @media (min-width: 768px) {
@@ -27,6 +29,7 @@
     justify-content: center;
     margin-top: 1em;
     margin-bottom: 1em;
+    width: 75%;
 }
 .card{
     border-style: solid;

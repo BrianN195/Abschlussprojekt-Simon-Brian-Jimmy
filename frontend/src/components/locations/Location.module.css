@@ -151,3 +151,12 @@
 .appearList li:hover {
   transform: scale(1.05);
 }
+.link {
+  text-decoration: underline;
+  color: inherit;
+  transition: transform 0.2s ease;
+  
+}
+.link:hover {
+  transform: scale(1.1);
+}
