@@ -213,7 +213,7 @@ const location1 = await LocationModel.create({
   longitude: 72.9461,
   depth: 30,
   type: "reef",
-  imageUrl: "https://malediven.reise/_next/image?url=%2Fimages%2Fatolle%2Fhaa-dhaalu-atoll.jpg&w=1920&q=75"
+  imageUrl: "/images/locations/Haa Dhaalu Atoll.jpg"
 });
 
 const location2 = await LocationModel.create({
@@ -225,7 +225,7 @@ const location2 = await LocationModel.create({
   longitude: 73.1586,
   depth: 40,
   type: "wreck",
-  imageUrl: "https://malediven.reise/_next/image?url=%2Fimages%2Fatolle%2Faddu-atoll.jpg&w=1920&q=75"
+  imageUrl: "/images/locations/Addu Atoll.jpg"
 });
 
 const location3 = await LocationModel.create({
@@ -237,7 +237,7 @@ const location3 = await LocationModel.create({
   longitude: 72.9656,
   depth: 28,
   type: "reef",
-  imageUrl: "https://malediven.reise/_next/image?url=%2Fimages%2Fatolle%2Ffaafu-atoll.jpg&w=1920&q=75"
+  imageUrl: "/images/locations/Faafu Atoll.jpg"
 });
 
 const location4 = await LocationModel.create({
@@ -249,7 +249,7 @@ const location4 = await LocationModel.create({
   longitude: 73.4597,
   depth: 35,
   type: "wall",
-  imageUrl: "https://malediven.reise/_next/image?url=%2Fimages%2Fatolle%2Fnord-male-atoll.jpg&w=1920&q=75"
+  imageUrl: "/images/locations/Noth Male Atoll.jpg"
 });
 
 const location5 = await LocationModel.create({
@@ -261,7 +261,7 @@ const location5 = await LocationModel.create({
   longitude: 72.9000,
   depth: 40,
   type: "reef",
-  imageUrl: "https://malediven.reise/_next/image?url=%2Fimages%2Fatolle%2Fsued-ari-atoll.jpg&w=1920&q=75"
+  imageUrl: "/images/locations/South Ari Atoll.jpg"
 });
 
 await AnimalLocationModel.create({

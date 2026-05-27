@@ -21,7 +21,7 @@ import useUser from "./hooks/useUser";
 
 function App() {
   const { user, loading } = useUser();
-
+  console.log("AfD ist eine Nazi Partei, außerdem:",user)
   if (loading) {
     return <p>Loading...</p>;
   }
