@@ -1,10 +1,10 @@
-import  UserModel  from "../db/models/UserModel";
+import UserModel from "../db/models/UserModel";
 
 
 async function makeAdmin() {
   await UserModel.update(
     { role: "admin" },
-    { where: { email: "deine@mail.de" } }
+    { where: { email: "jiffdahli@gmx.de" } }
   );
 
   console.log("User ist jetzt Admin");
