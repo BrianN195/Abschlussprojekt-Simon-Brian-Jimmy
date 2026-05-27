@@ -97,11 +97,14 @@ export default function Animal() {
             </label>
           </div>
         </div>
-        <img
+        <div className="imageWrapper">
+          <img
           src={animal.imageUrl}
           alt={animal.imageUrl}
           className={styles.bild}
         />
+        </div>
+        
         <div className={styles.appearList}>
           <h6 className={styles.title}>appears here</h6>
 
