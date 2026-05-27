@@ -19,9 +19,13 @@ import ProtectedRoute from "./components/creating/ProtectedRoute";
 
 import useUser from "./hooks/useUser";
 
-
 function App() {
-  const user = useUser();
+  const { user, loading } = useUser();
+
+  if (loading) {
+    return <p>Loading...</p>;
+  }
+
   return (
     <BrowserRouter>
       <Routes>
@@ -50,7 +54,7 @@ function App() {
             }
           />
           <Route
-            path="/create-animal"
+            path="/create-location"
             element={
               <ProtectedRoute
                 allowedRoles={["admin", "mod"]}

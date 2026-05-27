@@ -4,11 +4,15 @@ import { authService } from "../services/authService";
 
 function useUser() {
   const [user, setUser] = useState<User | null>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const token = authService.getToken();
 
-    if (!token) return;
+    if (!token) {
+      setLoading(false);
+      return;
+    }
 
     fetch("http://localhost:5000/api/v1/auth/me", {
       headers: {
@@ -16,9 +20,16 @@ function useUser() {
       },
     })
       .then((res) => res.json())
-      .then(setUser);
+      .then((data) => {
+        setUser(data);
+        setLoading(false);
+      })
+      .catch(() => {
+        setLoading(false);
+      });
   }, []);
 
-  return user;
+  return { user, loading };
 }
-export default useUser
+
+export default useUser;
