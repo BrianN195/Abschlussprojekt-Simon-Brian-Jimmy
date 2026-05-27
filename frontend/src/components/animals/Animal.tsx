@@ -1,13 +1,14 @@
 import { useTranslation } from 'react-i18next';
 import { useEffect, useState, type ChangeEvent } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import type { AnimalDetail } from "../../types/Animal";
 import {
   isFavouriteAnimal,
   removeFavoriteAnimal,
   saveFavoriteAnimal,
 } from "../../services/favouritesService";
-import "../../styles/animal.css";
+// import styles from "./Animal.module.css";
+import styles from "./Animalcopy.module.css";
 
 export default function Animal() {
   const { t } = useTranslation();
@@ -41,9 +42,9 @@ export default function Animal() {
   }, [id]);
 
   const handleFavouriteChange = async (
-    event: ChangeEvent<HTMLInputElement>
+    event: ChangeEvent<HTMLInputElement>,
   ) => {
-    if (!animal)  return;
+    if (!animal) return;
 
     const checked = event.target.checked;
     setIsFavourite(checked);
@@ -66,45 +67,60 @@ export default function Animal() {
     }
   };
 
-
-  if (!animal) return <p>{t('animal.loading')}</p>;
+  if (!animal) return <p>Loading</p>;
   return (
-    <main>
-      <div className="hardInfoContainer">
+    <main className={styles.animalCard}>
+      <div className={styles.uprow}>
+        <div className={styles.hardInfoContainer}>
+          <div className={styles.nameContainer}>
+            <h2 className={styles.title}>{animal.name}</h2>
+            <p className={styles.scientificName}>{animal.scientificName}</p>
+            <div className={styles.statContainer}>
+              <div className={styles.stat}>
+                <p>Depth Range</p>
+                <p>{animal.depthRange}</p>
+              </div>
+              <div className={styles.stat}>
+                <p>Category</p>
+                <p>{animal.category}</p>
+              </div>
+              <div className={styles.stat}>
+                <p>Size</p>
+                <p>{animal.size}</p>
+              </div>
+            </div>
+            <label className={styles.favoriteCheckboxLabel}>
+              <input
+                type="checkbox"
+                checked={isFavourite}
+                onChange={handleFavouriteChange}
+              />
+              Favorite
+            </label>
+          </div>
+        </div>
         <img
           src={animal.imageUrl}
           alt={animal.imageUrl}
-          className="bild"
+          className={styles.bild}
         />
-        <div className="nameContainer">
-          <h2 className="title">{animal.name}</h2>
-          <p className="scientificName">{animal.scientificName}</p>
-          <label className="favoriteCheckboxLabel">
-            <input
-              type="checkbox"
-              checked={isFavourite}
-              onChange={handleFavouriteChange}
-            />
-            {t('animal.favorite')}
-          </label>
+        <div className={styles.appearList}>
+          <h6 className={styles.title}>appears here</h6>
 
+          <ul>
+            {animal.locations?.map((location) => {
+              return <Link className={styles.link} to={`/location/${location.id}`}> <li key={location.id}>{location.name}</li></Link>;
+            })}
+          </ul>
         </div>
       </div>
-      <section className="about">
-        <h6 className="title">{t('animal.about')}</h6>
-        {/* der inline style ist für ein mehrzeiligen text einfach */}
-        <p style={{ whiteSpace: "pre-line" }}>{animal.description}</p>
-      </section>
-      <div className="appearList">
-        <h6 className="title">{t('animal.appearsHere')}</h6>
-        <ul>
-          {animal.locations?.map((location) => {
-            return <li key={location.id}>{location.name}</li>;
-            // hier noch Navlink dann zu den jewaligen locations
-          })}
-        </ul>
+      <div className={styles.downrow}>
+        <section className={styles.about}>
+          <h6 className={styles.aboutTitle}>About</h6>
+          {/* der inline style ist für ein mehrzeiligen text einfach */}
+          <p style={{ whiteSpace: "pre-line" }} className={styles.aboutText}>{animal.description}</p>
+        </section>
       </div>
-
     </main>
   );
 }

@@ -1,4 +1,4 @@
-import { UserModel } from "../db/models";
+import UserModel from "../db/models/UserModel";
 
 
 async function makeAdmin() {

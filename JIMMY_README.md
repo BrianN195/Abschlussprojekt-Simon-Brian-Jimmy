@@ -154,7 +154,6 @@ Die folgenden Änderungen wurden am 20.05.2026 vorgenommen (nur die betroffenen 
 Hinweis: Ich habe nur die betroffenen Abschnitte als "Vorher"-Schnipsel eingefügt (nicht ganze Dateien). Die Links zeigen auf die aktuellen Stellen mit den Kommentar-Markern (z. B. `// geänderter Code` oder `/* geänderter Code */`). Soll ich die README-Änderung direkt committen? Wenn ja, mache ich einen Commit mit Nachricht "docs: add 20.05.2026 changes summary".
 
 ## Letzte Änderungen (21.05.2026)
-- [MainNavigation.css](frontend/src/styles/MainNavigation.css#L170) und [MainNavigation.css](frontend/src/styles/MainNavigation.css#L258) - die letzten responsiven Feinanpassungen wurden wiederhergestellt, damit das mobile Menü und die Suche auf kleinen Screens sauber bleiben.
 
     Vorher (zurückgenommener Stand):
     ```css
@@ -211,6 +210,25 @@ Hinweis: Ich habe nur die betroffenen Abschnitte als "Vorher"-Schnipsel eingefü
     }
     ```
 
-- Hinweis: Die volle Browserbreite kommt weiterhin aus [frontend/src/index.css](frontend/src/index.css#L57) und [frontend/src/index.css](frontend/src/index.css#L64). Dort ist `#root` jetzt auf `width: 100%` statt auf eine feste Breite gesetzt.
+
+## Letzte Änderungen (21.05.2026)
+- [FavoritesSection](frontend/src/components/main/FavoritesSection.tsx) - Favoriten werden im Carousel angezeigt. Es sind immer nur 4 Karten gleichzeitig sichtbar; die Slide-Buttons erscheinen nur, wenn es eine vorherige oder nächste Seite gibt.
+- [favorites.css](frontend/src/styles/favorites.css) - Styling für das Carousel, die versteckten/aktiven Slide-Buttons und die festen Card-Abstände für die 4er-Ansicht.
+- [favorites.routes.ts](backend/src/routes/favorites.routes.ts) - Favoriten werden serverseitig dedupliziert, doppelte `addFavorite`-Aufrufe werden abgefangen und die Antwort bleibt eindeutig.
+- [UserFavoritAnimalModel.ts](backend/src/db/models/UserFavoritAnimalModel.ts) - Eindeutiger Index auf `userId` + `animalId`, damit ein Tier pro User nur einmal gespeichert wird.
+- [cleanupFavoriteDuplicates.ts](backend/src/scripts/cleanupFavoriteDuplicates.ts) - Einmaliges Script zum Entfernen bereits vorhandener doppelter Favoriten-Einträge aus der Join-Tabelle.
+- [index.css](frontend/src/index.css) - Das Root-Element füllt jetzt die komplette Browserbreite, damit keine schwarzen Ränder links/rechts bleiben.
+
+## Letzte Änderungen (21.05.2026) - Korrigierter Stand
+- [Animal.tsx](frontend/src/components/animals/Animal.tsx) - Die Favorite-Checkbox speichert Tiere direkt per API und entfernt sie beim Abwählen wieder sauber.
+- [favouritesService.ts](frontend/src/services/favouritesService.ts) - Zentrale API-Schicht für Laden, Speichern und Löschen der Favoriten; triggert danach `favourites-changed`.
+- [FavoritesSection.tsx](frontend/src/components/main/FavoritesSection.tsx) - Favoriten werden im Carousel gezeigt; es sind immer 4 Karten pro Seite sichtbar und die Slide-Buttons erscheinen nur, wenn wirklich eine vorherige oder nächste Seite existiert.
+- [favorites.css](frontend/src/styles/favorites.css) - Layout für Carousel, Button-Sichtbarkeit und feste 4er-Seitenansicht.
+- [favorites.routes.ts](backend/src/routes/favorites.routes.ts) - Backend-Route schützt jetzt gegen doppelte Favoriten, liefert die Liste eindeutig zurück und arbeitet ohne doppelte Einträge in der Antwort.
+- [UserFavoritAnimalModel.ts](backend/src/db/models/UserFavoritAnimalModel.ts) - Datenbank-Modell für die Join-Tabelle mit eindeutiger Kombination aus `userId` und `animalId`.
+- [20260521183000-add-unique-user-favorite-animal-index.js](backend/src/db/migrations/20260521183000-add-unique-user-favorite-animal-index.js) - Migration entfernt alte Duplikate und setzt anschließend den Unique-Index auf `userId` + `animalId`.
+- [cleanupFavoriteDuplicates.ts](backend/src/scripts/cleanupFavoriteDuplicates.ts) - Hilfsskript zum einmaligen Bereinigen alter doppelter Favoriten in der Join-Tabelle.
+
+Hinweis: Die Migration wurde bereits erfolgreich ausgeführt. Wenn du künftig nur die Datenbank aktualisieren willst, ist der richtige Befehl `npx sequelize-cli db:migrate` im `backend`-Ordner.
 
 

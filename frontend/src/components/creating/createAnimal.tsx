@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import styles from "./create.module.css"
 export default function CreateAnimal() {
   
   const [form, setForm] = useState({
@@ -43,45 +43,52 @@ export default function CreateAnimal() {
     });
   };
   return (
-    <>
-      <form onSubmit={handleCreate}>
-        <h2>Create Animal</h2>
+     <div className={styles.container}>
+      <form className={styles.form} onSubmit={handleCreate}>
+        <h2 className={styles.title}>Create Animal</h2>
+
         <input
+          className={styles.input}
           type="text"
           name="name"
-          id=""
           placeholder="Name"
           onChange={handleChange}
         />
+
         <input
+          className={styles.input}
           type="text"
           name="scientificName"
-          id=""
           placeholder="Scientific Name"
           onChange={handleChange}
         />
+
         <input
+          className={styles.input}
           type="text"
           name="description"
-          id=""
-          placeholder="description"
+          placeholder="Description"
           onChange={handleChange}
         />
+
         <input
+          className={styles.input}
           type="text"
           name="category"
-          id=""
-          placeholder="category"
+          placeholder="Category"
           onChange={handleChange}
         />
+
         <input
+          className={styles.input}
           type="number"
           name="dangerLevel"
-          id=""
-          placeholder="danger Level"
+          placeholder="Danger Level"
           onChange={handleChange}
         />
+
         <input
+          className={styles.fileInput}
           type="file"
           name="image"
           accept="image/*"
@@ -94,80 +101,96 @@ export default function CreateAnimal() {
             }
           }}
         />
+
         <input
+          className={styles.input}
           type="text"
           name="size"
-          id=""
-          placeholder="size"
+          placeholder="Size"
           onChange={handleChange}
         />
+
         <input
+          className={styles.input}
           type="text"
           name="weight"
-          id=""
-          placeholder="weight"
+          placeholder="Weight"
           onChange={handleChange}
         />
+
         <input
+          className={styles.input}
           type="text"
           name="habitat"
-          id=""
-          placeholder="habitat"
+          placeholder="Habitat"
           onChange={handleChange}
         />
+
         <input
+          className={styles.input}
           type="month"
           name="bestViewingTime"
-          id=""
-          placeholder="best viewing month"
+          placeholder="Best Viewing Month"
           onChange={handleChange}
         />
+
         <input
+          className={styles.input}
           name="depthRange"
           placeholder="Depth Range"
           onChange={handleChange}
         />
+
         <input
+          className={styles.input}
           type="text"
           name="diet"
           placeholder="Diet"
           onChange={handleChange}
         />
-        <div>
-          <p>Is Schooling?</p>
 
-          <label>
-            Yes
-            <input
-              type="radio"
-              name="isSchooling"
-              checked={form.isSchooling === true}
-              onChange={() =>
-                setForm((prev) => ({
-                  ...prev,
-                  isSchooling: true,
-                }))
-              }
-            />
-          </label>
+        <div className={styles.radioWrapper}>
+          <p className={styles.radioTitle}>Is Schooling?</p>
 
-          <label>
-            No
-            <input
-              type="radio"
-              name="isSchooling"
-              checked={form.isSchooling === false}
-              onChange={() =>
-                setForm((prev) => ({
-                  ...prev,
-                  isSchooling: false,
-                }))
-              }
-            />
-          </label>
+          <div className={styles.radioGroup}>
+            <label className={styles.radioLabel}>
+              Yes
+              <input
+                className={styles.radioInput}
+                type="radio"
+                name="isSchooling"
+                checked={form.isSchooling === true}
+                onChange={() =>
+                  setForm((prev) => ({
+                    ...prev,
+                    isSchooling: true,
+                  }))
+                }
+              />
+            </label>
+
+            <label className={styles.radioLabel}>
+              No
+              <input
+                className={styles.radioInput}
+                type="radio"
+                name="isSchooling"
+                checked={form.isSchooling === false}
+                onChange={() =>
+                  setForm((prev) => ({
+                    ...prev,
+                    isSchooling: false,
+                  }))
+                }
+              />
+            </label>
+          </div>
         </div>
-        <button type="submit">Create Animal</button>
+
+        <button className={styles.button} type="submit">
+          Create Animal
+        </button>
       </form>
-    </>
+    </div>
   );
 }

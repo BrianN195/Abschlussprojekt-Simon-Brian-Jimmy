@@ -1,5 +1,5 @@
 const es = {
-  brand: { alt: "Maldives Marine" },
+  brand: { alt: "Fauna marina de las Maldivas" },
   nav: {
     animals: "Animales",
     about: "Acerca de",
@@ -20,15 +20,15 @@ const es = {
   language: { label: "Idioma", ariaLabel: "Seleccionar idioma" },
   landing: {
     welcome: "Bienvenido a",
-    title: "Maldivas",
-    subtitleTitle: "Fauna marina",
+    title: "Fauna marina",
+    subtitleTitle: "de las Maldivas",
     subtitle: "descubrir, disfrutar y proteger",
   },
-  main: { title: "Vida marina de Maldivas" },
+  main: { title: "Fauna marina de las Maldivas" },
   about: {
-    title: "Acerca de Maldives Marine",
+    title: "Acerca de Fauna marina de las Maldivas",
     intro:
-      "Maldives Marine es una pequeña aplicación web dirigida a buceadores, amantes de la naturaleza y la biología marina, y viajeros que quieren explorar la fauna y las áreas protegidas de las Maldivas.",
+      "Fauna marina de las Maldivas es una pequeña aplicación web dirigida a buceadores, amantes de la naturaleza y la biología marina, y viajeros que quieren explorar la fauna y las áreas protegidas de las Maldivas.",
     whyTitle: "¿Por qué este sitio?",
     whyText:
       "El objetivo es presentar observaciones, lugares y especies de forma clara, recopilar información sobre animales y ubicaciones, y generar conciencia sobre la conservación del mundo submarino.",

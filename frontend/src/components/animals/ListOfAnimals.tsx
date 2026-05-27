@@ -30,24 +30,26 @@ export default function AnimalList() {
   if (loading) return <p>{t('list.loadingAnimals')}</p>;
 
   return (
-    <div className={style.cardContainer}>
-      {animals.length === 0 ? (
-        <p>{t('list.noAnimals')}</p>
-      ) : (
-        animals.map((animal) => (
-          <Link
-            key={animal.id}
-            to={`/animal/${animal.id}`}
-            className={style.cardLink}
-          >
-            <div key={animal.id} className={style.card}>
-              <h3 className="">{animal.name}</h3>
-              <img src={animal.imageUrl} alt="" className={style.pic} />
-              <p className={style.categoryName}>{animal.category}</p>
-            </div>
-          </Link>
-        ))
-      )}
-    </div>
+    <main className={style.mainContainer}>
+      <div className={style.cardContainer}>
+        {animals.length === 0 ? (
+          <p>Keine Tiere gespeichert</p>
+        ) : (
+          animals.map((animal) => (
+            <Link
+              key={animal.id}
+              to={`/animal/${animal.id}`}
+              className={style.cardLink}
+            >
+              <div key={animal.id} className={style.card}>
+                <h3 className="">{animal.name}</h3>
+                <img src={animal.imageUrl} alt="" className={style.pic} />
+                <p className={style.categoryName}>{animal.category}</p>
+              </div>
+            </Link>
+          ))
+        )}
+      </div>
+    </main>
   );
 }

@@ -1,5 +1,5 @@
 const zh = {
-  brand: { alt: "马尔代夫海洋" },
+  brand: { alt: "馬爾代夫的海洋生物" },
   nav: {
     animals: "动物",
     about: "关于",
@@ -15,15 +15,15 @@ const zh = {
   language: { label: "语言", ariaLabel: "选择语言" },
   landing: {
     welcome: "欢迎来到",
-    title: "马尔代夫",
-    subtitleTitle: "海洋生物",
+    title: "海洋動物",
+    subtitleTitle: "馬爾地夫的",
     subtitle: "探索、享受并保护",
   },
-  main: { title: "马尔代夫海洋生物" },
+  main: { title: "馬爾代夫的海洋生物" },
   about: {
-    title: "关于马尔代夫海洋",
+    title: "關於馬爾代夫的海洋生物",
     intro:
-      "马尔代夫海洋是一个面向潜水员、自然和海洋生物爱好者以及想要探索马尔代夫野生动物和保护区的旅行者的小型网页应用。",
+      "《馬爾地夫海洋生物》是一款專為潛水員、自然與海洋生物愛好者，以及希望探索馬爾地夫野生動物與保護區的旅客所設計的小型網路應用程式。",
     whyTitle: "为什么使用这个网站？",
     whyText:
       "目标是清晰展示观察记录、地点和物种，收集单个动物和地点的信息，并提升对海底世界保护的意识。",
