@@ -25,7 +25,7 @@ function LanguageSwitcher({ compact = false }: LanguageSwitcherProps) {
     <label className={compact ? 'language-switcher language-switcher-compact' : 'language-switcher'}>
       <span className="language-switcher-label">{t('language.label')}</span>
       <select
-        className="language-switcher-select"
+        className="language-switcher-select glass-dropdown glass-dropdown--compact"
         value={currentLanguage}
         onChange={(event) => changeLanguage(event.target.value)}
         aria-label={t('language.ariaLabel')}

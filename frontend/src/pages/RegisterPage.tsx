@@ -63,7 +63,7 @@ function RegisterPage() {
         className="back-button"
         onClick={() => navigate("/")}
       >
-        {t('common.back')}
+        {`<< ${t('common.back')}`}
       </button>
 
       <h1 className="register-title">{t('register.title')}</h1>
@@ -142,6 +142,7 @@ function RegisterPage() {
 
           <select
             id="register-gender"
+            className="glass-dropdown"
             value={gender}
             onChange={(event) => setGender(event.target.value)}
           >
