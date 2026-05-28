@@ -18,7 +18,7 @@ export type User = {
   id: number;
   username: string;
   email: string;
-  profilePicture: string;
+  profileImage: string | null;
   bio?: string;
   gender?: Gender;
   birthDate?: string;

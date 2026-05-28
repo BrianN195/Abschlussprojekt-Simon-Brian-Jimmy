@@ -1,15 +1,13 @@
 import { useEffect, useState } from "react";
-import type { User } from "../types/User";
-
+import { authService, type AuthUser } from "../services/authService";
 
 function useUser() {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<AuthUser | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const token = localStorage.getItem("authToken");
 
-    console.log("TOKEN:", token);
     if (!token) {
       setLoading(false);
       return;
@@ -22,7 +20,18 @@ function useUser() {
     })
       .then((res) => res.json())
       .then((data) => {
-        setUser(data);
+        if (data?.id) {
+          const normalizedUser: AuthUser = {
+            ...data,
+            profileImage: data.profileImage ?? null,
+          };
+
+          localStorage.setItem("user", JSON.stringify(normalizedUser));
+          setUser(normalizedUser);
+        } else {
+          setUser(null);
+        }
+
         setLoading(false);
       })
       .catch(() => {

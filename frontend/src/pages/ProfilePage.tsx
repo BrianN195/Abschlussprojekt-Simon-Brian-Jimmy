@@ -33,28 +33,29 @@ function ProfilePage() {
   }
 
   useEffect(() => {
-    const local = authService.getUser();
-    if (local) {
-      setUser(local);
-      syncForm(local);
-      return;
-    }
-
-    async function load() {
+    async function loadProfile() {
       setLoading(true);
       try {
+        const local = authService.getUser();
+
+        if (local?.profileImage) {
+          setUser(local);
+          syncForm(local);
+          return;
+        }
+
         const profile = await authService.fetchProfile();
         setUser(profile);
         syncForm(profile);
       } catch (err: any) {
-        setError(err.message || t('profile.failedLoad'));
+        setError(err.message || t("profile.failedLoad"));
       } finally {
         setLoading(false);
       }
     }
 
-    load();
-  }, []);
+    loadProfile();
+  }, [t]);
 
   function handleChange(
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -101,9 +102,9 @@ function ProfilePage() {
       setUser(updated);
       syncForm(updated);
       setAvatarPreview((updated.profileImage as string) || "");
-      setSuccess(t('profile.saved'));
+      setSuccess(t("profile.saved"));
     } catch (err: any) {
-      setError(err.message || t('profile.failedSave'));
+      setError(err.message || t("profile.failedSave"));
     } finally {
       setSaving(false);
     }
@@ -111,8 +112,8 @@ function ProfilePage() {
 
   return (
     <main className="profile-page">
-      <h1 className="main-title">{t('profile.title')}</h1>
-      {loading && <p>{t('profile.loading')}</p>}
+      <h1 className="main-title">{t("profile.title")}</h1>
+      {loading && <p>{t("profile.loading")}</p>}
       {error && <p style={{ color: "red" }}>{error}</p>}
       {success && <p style={{ color: "#b8f7d2" }}>{success}</p>}
 
@@ -120,7 +121,7 @@ function ProfilePage() {
 
       {!loading && !error && (
         <section className="profile-edit-section">
-          <h2 className="section-title">{t('profile.editTitle')}</h2>
+          <h2 className="section-title">{t("profile.editTitle")}</h2>
 
           <form onSubmit={handleSubmit} className="profile-edit-form">
             <div className="profile-edit-grid">
@@ -134,9 +135,9 @@ function ProfilePage() {
                 </div>
 
                 <div>
-                  <p className="profile-helper-text">{t('profile.helperText')}</p>
+                  <p className="profile-helper-text">{t("profile.helperText")}</p>
                   <label htmlFor="avatar" className="file-button">
-                    {t('profile.chooseAvatar')}
+                    {t("profile.chooseAvatar")}
                   </label>
                   <input
                     id="avatar"
@@ -151,7 +152,9 @@ function ProfilePage() {
 
               <div className="profile-form-fields">
                 <div>
-                  <label htmlFor="username" className="form-label">{t('profile.username')}</label>
+                  <label htmlFor="username" className="form-label">
+                    {t("profile.username")}
+                  </label>
                   <input
                     id="username"
                     name="username"
@@ -163,7 +166,9 @@ function ProfilePage() {
                 </div>
 
                 <div>
-                  <label htmlFor="bio" className="form-label">{t('profile.bio')}</label>
+                  <label htmlFor="bio" className="form-label">
+                    {t("profile.bio")}
+                  </label>
                   <textarea
                     id="bio"
                     name="bio"
@@ -176,7 +181,9 @@ function ProfilePage() {
 
                 <div className="profile-form-row">
                   <div>
-                    <label htmlFor="gender" className="form-label">{t('profile.gender')}</label>
+                    <label htmlFor="gender" className="form-label">
+                      {t("profile.gender")}
+                    </label>
                     <select
                       id="gender"
                       name="gender"
@@ -184,15 +191,17 @@ function ProfilePage() {
                       onChange={handleChange}
                       className="form-input"
                     >
-                      <option value="">{t('profile.notSet')}</option>
-                      <option value="male">{t('profile.male')}</option>
-                      <option value="female">{t('profile.female')}</option>
-                      <option value="others">{t('profile.others')}</option>
+                      <option value="">{t("profile.notSet")}</option>
+                      <option value="male">{t("profile.male")}</option>
+                      <option value="female">{t("profile.female")}</option>
+                      <option value="others">{t("profile.others")}</option>
                     </select>
                   </div>
 
                   <div>
-                    <label htmlFor="birthDate" className="form-label">{t('profile.birthDate')}</label>
+                    <label htmlFor="birthDate" className="form-label">
+                      {t("profile.birthDate")}
+                    </label>
                     <input
                       id="birthDate"
                       name="birthDate"
@@ -205,7 +214,7 @@ function ProfilePage() {
                 </div>
 
                 <button type="submit" className="app-button profile-save-button" disabled={saving}>
-                  {saving ? t('profile.saving') : t('profile.saveProfile')}
+                  {saving ? t("profile.saving") : t("profile.saveProfile")}
                 </button>
               </div>
             </div>

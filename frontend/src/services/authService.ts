@@ -1,5 +1,3 @@
-// frontend/src/services/authService.ts
-
 const API_URL =
   import.meta.env.VITE_API_URL?.replace(/\/$/, "") ||
   "http://localhost:5000/api/v1/auth";
@@ -31,17 +29,29 @@ async function parseJsonSafe(response: Response): Promise<AuthResponse> {
   }
 }
 
+function normalizeUser(raw: any): AuthUser | null {
+  if (!raw || typeof raw !== "object") return null;
+
+  return {
+    ...raw,
+    profileImage: raw.profileImage ?? raw.profilePicture ?? null,
+  } as AuthUser;
+}
+
 function persistAuth(data: AuthResponse) {
   if (data.token) {
     localStorage.setItem("authToken", data.token);
   }
+
   if (data.user) {
-    localStorage.setItem("user", JSON.stringify(data.user));
+    const user = normalizeUser(data.user);
+    if (user) {
+      localStorage.setItem("user", JSON.stringify(user));
+    }
   }
 }
 
 export const authService = {
-  // Register
   register: async (
     email: string,
     password: string,
@@ -57,7 +67,7 @@ export const authService = {
         password,
         username,
         gender,
-        birthDate
+        birthDate,
       }),
     });
 
@@ -67,14 +77,11 @@ export const authService = {
       throw new Error(data.error || data.message || "Registration failed");
     }
 
-    // Falls Backend beim Register bereits Token/User liefert, direkt speichern
     persistAuth(data);
     return data;
   },
 
-  // Login
   login: async (username: string, password: string) => {
-    
     const response = await fetch(`${API_URL}/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -84,7 +91,6 @@ export const authService = {
     const data = await parseJsonSafe(response);
 
     if (!response.ok) {
-      console.log("response nicht ok")
       throw new Error(data.error || data.message || "Login failed");
     }
 
@@ -92,13 +98,11 @@ export const authService = {
     return data;
   },
 
-  // Logout
   logout: () => {
     localStorage.removeItem("authToken");
     localStorage.removeItem("user");
   },
 
-  // Helpers
   getToken: () => localStorage.getItem("authToken"),
 
   getUser: (): AuthUser | null => {
@@ -106,7 +110,7 @@ export const authService = {
     if (!raw) return null;
 
     try {
-      return JSON.parse(raw) as AuthUser;
+      return normalizeUser(JSON.parse(raw));
     } catch {
       localStorage.removeItem("user");
       return null;
@@ -119,7 +123,7 @@ export const authService = {
     const token = localStorage.getItem("authToken");
     return token ? { Authorization: `Bearer ${token}` } : undefined;
   },
-  // Fetch profile from backend (/me)
+
   fetchProfile: async (): Promise<AuthUser | null> => {
     const authHeader = authService.getAuthHeader();
     const headers: Record<string, string> = {
@@ -139,13 +143,16 @@ export const authService = {
     }
 
     if (data && (data as any).id) {
-      // persist minimal user
-      localStorage.setItem("user", JSON.stringify(data));
-      return data as AuthUser;
+      const user = normalizeUser(data);
+      if (user) {
+        localStorage.setItem("user", JSON.stringify(user));
+      }
+      return user;
     }
 
     return null;
   },
+
   updateProfile: async (payload: FormData): Promise<AuthUser> => {
     const headers = authService.getAuthHeader();
 
@@ -162,8 +169,11 @@ export const authService = {
     }
 
     if (data && (data as any).id) {
-      localStorage.setItem("user", JSON.stringify(data));
-      return data as AuthUser;
+      const user = normalizeUser(data);
+      if (user) {
+        localStorage.setItem("user", JSON.stringify(user));
+        return user;
+      }
     }
 
     throw new Error("Invalid profile response");
