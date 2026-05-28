@@ -40,8 +40,8 @@
   align-items: center;
 }
 
-.landing-language-row .language-switcher-select.glass-dropdown--compact {
-  min-width: 84px;
+.landing-language-row .language-switcher-dropdown {
+  min-width: 96px;
 }
 
 .landing-greeting {
