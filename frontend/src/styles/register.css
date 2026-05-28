@@ -122,8 +122,7 @@
 }
 
 /* INPUTS + SELECTS */
-.register-form input,
-.register-form select {
+.register-form input {
   width: fit-content;
   min-width: 150px;
   max-width: 100%;
@@ -152,9 +151,27 @@
     color 0.45s ease;
 }
 
+/* SELECTS */
+.register-form .glass-dropdown {
+  width: fit-content;
+  min-width: 150px;
+  max-width: 100%;
+  padding: 0.85rem 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.05);
+  color: #f7feff;
+  font-size: 1rem;
+  text-align: center;
+  appearance: none;
+  outline: none;
+  backdrop-filter: blur(0px);
+  box-shadow: none;
+}
+
 /* PLACEHOLDER + SELECT TEXT */
 .register-form input::placeholder,
-.register-form select {
+.register-form .glass-dropdown {
   color: rgba(255, 255, 255, 0.72);
 
   text-align: center;
@@ -168,9 +185,9 @@
 
 /* HOVER + FOCUS */
 .register-form input:hover,
-.register-form select:hover,
 .register-form input:focus,
-.register-form select:focus {
+.register-form .glass-dropdown:hover,
+.register-form .glass-dropdown:focus {
   background: rgba(8, 90, 120, 0.22);
 
   border-color: rgba(126, 231, 255, 0.55);
@@ -186,9 +203,9 @@
 /* Apply same hover/focus styling when hovering the label or the whole field
    so moving between label and input doesn't toggle styles (prevents flicker) */
 .form-field:hover input,
-.form-field:hover select,
 .form-field:focus-within input,
-.form-field:focus-within select {
+.form-field:hover .glass-dropdown,
+.form-field:focus-within .glass-dropdown {
   background: rgba(8, 90, 120, 0.22);
 
   border-color: rgba(126, 231, 255, 0.55);
@@ -213,7 +230,7 @@
 }
 
 /* SELECT OPTIONEN */
-.register-form select option {
+.register-form .glass-dropdown option {
   background: #061826;
   color: #ffffff;
 }

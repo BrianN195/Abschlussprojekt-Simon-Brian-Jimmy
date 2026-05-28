@@ -99,7 +99,7 @@ export default function CreateLocation() {
           onChange={handleChange}
         />
 
-        <select className={styles.input} name="type" onChange={handleChange}>
+        <select className="glass-dropdown" name="type" onChange={handleChange}>
           <option value="reef">Reef</option>
           <option value="wreck">Wreck</option>
           <option value="cave">Cave</option>

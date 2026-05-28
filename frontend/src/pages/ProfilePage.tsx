@@ -182,7 +182,7 @@ function ProfilePage() {
                       name="gender"
                       value={formData.gender}
                       onChange={handleChange}
-                      className="form-input"
+                      className="form-input glass-dropdown"
                     >
                       <option value="">{t('profile.notSet')}</option>
                       <option value="male">{t('profile.male')}</option>

@@ -3,6 +3,7 @@
 
 ## Backend
 - **RegisterPage**: Passwort-Wiederholung, Gender-Dropdown, Geburtsdatum hinzugefügt.
+
 - **Register-CSS**: Placeholder zentriert, Design für Inputs/Selects angepasst.
 
 Füge hier die konkreten Dateipfade ein, damit du jederzeit zum Code springen kannst!
@@ -11,18 +12,20 @@ Füge hier die konkreten Dateipfade ein, damit du jederzeit zum Code springen ka
 
 **Remote vs Local — Frontend Vergleich (automatisch erstellt)**
 
-Datum: 2026-05-16
-
-
 - [frontend/src/styles/login.css](frontend/src/styles/login.css) — lokal geändert
+
 - [frontend/src/styles/register.css](frontend/src/styles/register.css) — lokal geändert
+
 - [frontend/src/styles/landing.css](frontend/src/styles/landing.css) — lokal geändert
+
 - [frontend/src/pages/LoginPage.tsx](frontend/src/pages/LoginPage.tsx) — lokal geändert
+
 - [frontend/src/pages/RegisterPage.tsx](frontend/src/pages/RegisterPage.tsx) — lokal geändert
 
 Neuer Plan:
 
 - Catalog fällt weg
+
 - Wetter Container ist schon gemacht/ Wir noch nicht richtig angezeigt und design nochmal überfliegen !!prüfen und reparieren!!
 
 - comments geht dirakt nach animals. dort soll/kann kommentiert werden.
@@ -61,9 +64,13 @@ Weil wir was in unserer Datenbank verändert/gemacht haben  muss ich  jetzt erst
 Tag: Dienstag, 27.05.2026
 
 - [WeatherSection.tsx](frontend/src/components/main/WeatherSection.tsx) - Die Wetteranzeige nutzt jetzt englische Datumsangaben statt deutscher Wochentage.
+
 - [InlineSVG.tsx](frontend/src/components/ui/InlineSVG.tsx) - SVGs werden inline geladen, damit SMIL-Animationen im Wetter-Icon laufen.
+
 - [weather.css](frontend/src/styles/weather.css) - Das Weather-Layout nutzt feste 7 Spalten für den Forecast und ist optisch beruhigt.
+
 - [favorites.css](frontend/src/styles/favorites.css) - Favoriten haben das gleiche ruhige Blur-Layout bekommen und der Delete-Button wurde größer gemacht.
+
 - [Weather.ts](frontend/src/types/Weather.ts) - Wetter-Typen wurden um `current.time` und `weather_code` erweitert.
 
 Kurz gesagt: Alles, was wir heute am Wetter-Container, an den SVG-Icons, an den Favoriten und an den Wetter-Typen angepasst haben, steht hier unten mit klickbaren Links.
@@ -204,33 +211,51 @@ Hinweis: Ich habe nur die betroffenen Abschnitte als "Vorher"-Schnipsel eingefü
 
 ## Letzte Änderungen (21.05.2026)
 - [FavoritesSection](frontend/src/components/main/FavoritesSection.tsx) - Favoriten werden im Carousel angezeigt. Es sind immer nur 4 Karten gleichzeitig sichtbar; die Slide-Buttons erscheinen nur, wenn es eine vorherige oder nächste Seite gibt.
+
 - [favorites.css](frontend/src/styles/favorites.css) - Styling für das Carousel, die versteckten/aktiven Slide-Buttons und die festen Card-Abstände für die 4er-Ansicht.
-- [favorites.routes.ts](backend/src/routes/favorites.routes.ts) - Favoriten werden serverseitig dedupliziert, doppelte `addFavorite`-Aufrufe werden abgefangen und die Antwort bleibt eindeutig.
+
+- [favorites.routes.ts](backend/src/routes/favorites.routes.ts) - Favoriten werden serverseitig 
+dedupliziert, doppelte `addFavorite`-Aufrufe werden abgefangen und die Antwort bleibt eindeutig.
+
 - [UserFavoritAnimalModel.ts](backend/src/db/models/UserFavoritAnimalModel.ts) - Eindeutiger Index auf `userId` + `animalId`, damit ein Tier pro User nur einmal gespeichert wird.
+
 - [cleanupFavoriteDuplicates.ts](backend/src/scripts/cleanupFavoriteDuplicates.ts) - Einmaliges Script zum Entfernen bereits vorhandener doppelter Favoriten-Einträge aus der Join-Tabelle.
+
 - [index.css](frontend/src/index.css) - Das Root-Element füllt jetzt die komplette Browserbreite, damit keine schwarzen Ränder links/rechts bleiben.
 
 ## Letzte Änderungen (21.05.2026) - Korrigierter Stand
 - [Animal.tsx](frontend/src/components/animals/Animal.tsx) - Die Favorite-Checkbox speichert Tiere direkt per API und entfernt sie beim Abwählen wieder sauber.
+
 - [favouritesService.ts](frontend/src/services/favouritesService.ts) - Zentrale API-Schicht für Laden, Speichern und Löschen der Favoriten; triggert danach `favourites-changed`.
+
 - [FavoritesSection.tsx](frontend/src/components/main/FavoritesSection.tsx) - Favoriten werden im Carousel gezeigt; es sind immer 4 Karten pro Seite sichtbar und die Slide-Buttons erscheinen nur, wenn wirklich eine vorherige oder nächste Seite existiert.
+
 - [favorites.css](frontend/src/styles/favorites.css) - Layout für Carousel, Button-Sichtbarkeit und feste 4er-Seitenansicht.
+
 - [favorites.routes.ts](backend/src/routes/favorites.routes.ts) - Backend-Route schützt jetzt gegen doppelte Favoriten, liefert die Liste eindeutig zurück und arbeitet ohne doppelte Einträge in der Antwort.
+
 - [UserFavoritAnimalModel.ts](backend/src/db/models/UserFavoritAnimalModel.ts) - Datenbank-Modell für die Join-Tabelle mit eindeutiger Kombination aus `userId` und `animalId`.
+
 - [20260521183000-add-unique-user-favorite-animal-index.js](backend/src/db/migrations/20260521183000-add-unique-user-favorite-animal-index.js) - Migration entfernt alte Duplikate und setzt anschließend den Unique-Index auf `userId` + `animalId`.
+
 - [cleanupFavoriteDuplicates.ts](backend/src/scripts/cleanupFavoriteDuplicates.ts) - Hilfsskript zum einmaligen Bereinigen alter doppelter Favoriten in der Join-Tabelle.
 
 Hinweis: Die Migration wurde bereits erfolgreich ausgeführt. Wenn du künftig nur die Datenbank aktualisieren willst, ist der richtige Befehl `npx sequelize-cli db:migrate` im `backend`-Ordner.
 
+
+
+
 ## Letzte Änderungen (27.05.2026)
 Tag: Dienstag, 27.05.2026
 
-- [WeatherSection.tsx](frontend/src/components/main/WeatherSection.tsx) - Die Wetteranzeige nutzt jetzt englische Datumsangaben statt deutscher Wochentage.
-- [InlineSVG.tsx](frontend/src/components/ui/InlineSVG.tsx) - SVGs werden inline geladen, damit SMIL-Animationen im Wetter-Icon laufen.
-- [weather.css](frontend/src/styles/weather.css) - Das Weather-Layout nutzt feste 7 Spalten für den Forecast und ist optisch beruhigt.
-- [favorites.css](frontend/src/styles/favorites.css) - Favoriten haben das gleiche ruhige Blur-Layout bekommen und der Delete-Button wurde größer gemacht.
-- [Weather.ts](frontend/src/types/Weather.ts) - Wetter-Typen wurden um `current.time` und `weather_code` erweitert.
-
 Kurz gesagt: Alles, was wir heute am Wetter-Container, an den SVG-Icons, an den Favoriten und an den Wetter-Typen angepasst haben, steht hier unten mit klickbaren Links.
 
+- [WeatherSection.tsx](frontend/src/components/main/WeatherSection.tsx) - Die Wetteranzeige nutzt jetzt englische Datumsangaben statt deutscher Wochentage.
 
+- [InlineSVG.tsx](frontend/src/components/ui/InlineSVG.tsx) - SVGs werden inline geladen, damit SMIL-Animationen im Wetter-Icon laufen.
+
+- [weather.css](frontend/src/styles/weather.css) - Das Weather-Layout nutzt feste 7 Spalten für den Forecast und ist optisch beruhigt.
+
+- [favorites.css](frontend/src/styles/favorites.css) - Favoriten haben das gleiche ruhige Blur-Layout bekommen und der Delete-Button wurde größer gemacht.
+
+- [Weather.ts](frontend/src/types/Weather.ts) - Wetter-Typen wurden um `current.time` und `weather_code` erweitert.

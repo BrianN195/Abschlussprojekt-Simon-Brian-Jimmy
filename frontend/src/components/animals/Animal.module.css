@@ -28,6 +28,7 @@
     background-image: url("../../../public/images/tablet/login-diver-tablet.png");
   }
 }
+
 @media (min-width: 1024px) {
   .animalCard {
     background-image: url("../../../public/images/desktop/login-diver-desktop.png");

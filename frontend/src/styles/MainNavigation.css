@@ -224,20 +224,8 @@
   white-space: nowrap;
 }
 
-.language-switcher-select {
+.language-switcher-select.glass-dropdown--compact {
   min-width: 84px;
-  border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  background: rgba(255, 255, 255, 0.04);
-  color: var(--text);
-  padding: 0.45rem 0.7rem;
-  font: inherit;
-  cursor: pointer;
-}
-
-.language-switcher-select:focus {
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(90, 215, 199, 0.2);
 }
 
 .language-switcher-compact .language-switcher-label {

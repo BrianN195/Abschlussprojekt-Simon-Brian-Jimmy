@@ -142,6 +142,7 @@ function RegisterPage() {
 
           <select
             id="register-gender"
+            className="glass-dropdown"
             value={gender}
             onChange={(event) => setGender(event.target.value)}
           >
