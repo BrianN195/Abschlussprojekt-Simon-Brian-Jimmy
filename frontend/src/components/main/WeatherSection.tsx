@@ -10,27 +10,27 @@ type WeatherIconInfo = {
   label: string;
 };
 
-function formatForecastDay(day: string) {
+function formatForecastDay(day: string, locale: string) {
   const date = new Date(day);
 
   if (Number.isNaN(date.getTime())) {
     return day;
   }
 
-  return new Intl.DateTimeFormat("en-US", {
+  return new Intl.DateTimeFormat(locale, {
     weekday: "short",
     day: "2-digit",
   }).format(date);
 }
 
-function formatCurrentDate(day: string) {
+function formatCurrentDate(day: string, locale: string) {
   const date = new Date(day);
 
   if (Number.isNaN(date.getTime())) {
     return "";
   }
 
-  return new Intl.DateTimeFormat("en-US", {
+  return new Intl.DateTimeFormat(locale, {
     weekday: "long",
     day: "2-digit",
     month: "2-digit",
@@ -103,7 +103,6 @@ function getWeatherIcon(weatherCode: number): WeatherIconInfo {
 }
 
 function WeatherSection() {
-  const { t } = useTranslation();
   const [weather, setWeather] = useState<WeatherData | null>(null);
   const [error, setError] = useState<string | null>(null);
 
@@ -128,6 +127,8 @@ function WeatherSection() {
     fetchWeather();
   }, []);
 
+  const { i18n, t } = useTranslation();
+
   return (
     <section className="weather-section">
       <h2>{t("weather.title")}</h2>
@@ -140,7 +141,7 @@ function WeatherSection() {
         <div className="weather-content">
           {(() => {
             const currentIcon = getWeatherIcon(weather.current.weather_code);
-            const currentDate = formatCurrentDate(weather.current.time);
+            const currentDate = formatCurrentDate(weather.current.time, i18n.resolvedLanguage ?? i18n.language ?? 'en');
 
             return (
               <div className="weather-current">
@@ -193,7 +194,7 @@ function WeatherSection() {
                 return (
                   <div key={day} className="weather-day">
                     <div className="weather-day-header">
-                      <p>{formatForecastDay(day)}</p>
+                      <p>{formatForecastDay(day, i18n.resolvedLanguage ?? i18n.language ?? 'en')}</p>
 
                       <InlineSVG
                         src={icon.src}

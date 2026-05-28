@@ -97,7 +97,7 @@ function LoginPage() {
         type="button"
         onClick={handleCancel}
       >
-        {t('common.back')}
+        {`<< ${t('common.back')}`}
       </button>
 
       <h1 className="login-title">{t('login.title')}</h1>

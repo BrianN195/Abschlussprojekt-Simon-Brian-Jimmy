@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { Link } from "react-router-dom";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import type { FavoriteAnimal } from "../../types/FavoriteAnimal";
 import {
   getFavoriteAnimals,
@@ -15,6 +15,16 @@ function FavoritesSection() {
   const carouselViewportRef = useRef<HTMLDivElement>(null);
   const [currentPage, setCurrentPage] = useState(0);
   const visibleCount = 4;
+  const favoritePages = useMemo(() => {
+    const pages: FavoriteAnimal[][] = [];
+
+    for (let index = 0; index < favorites.length; index += visibleCount) {
+      pages.push(favorites.slice(index, index + visibleCount));
+    }
+
+    return pages;
+  }, [favorites]);
+  const pageCount = Math.max(1, favoritePages.length);
 
   const loadFavorites = async () => {
     const favs = await getFavoriteAnimals();
@@ -54,8 +64,6 @@ function FavoritesSection() {
     }
   };
 
-  const getPageCount = () => Math.max(1, Math.ceil(favorites.length / visibleCount));
-
   const updateCurrentPage = () => {
     const viewport = carouselViewportRef.current;
 
@@ -65,7 +73,7 @@ function FavoritesSection() {
     }
 
     const nextPage = Math.round(viewport.scrollLeft / viewport.clientWidth);
-    setCurrentPage(Math.min(Math.max(nextPage, 0), getPageCount() - 1));
+    setCurrentPage(Math.min(Math.max(nextPage, 0), pageCount - 1));
   };
 
   const scrollCarousel = (direction: -1 | 1) => {
@@ -75,7 +83,7 @@ function FavoritesSection() {
       return;
     }
 
-    const nextPage = Math.min(Math.max(currentPage + direction, 0), getPageCount() - 1);
+    const nextPage = Math.min(Math.max(currentPage + direction, 0), pageCount - 1);
 
     viewport.scrollTo({
       left: nextPage * viewport.clientWidth,
@@ -118,8 +126,8 @@ function FavoritesSection() {
   }, [favorites]);
 
   useEffect(() => {
-    setCurrentPage((current) => Math.min(current, getPageCount() - 1));
-  }, [favorites]);
+    setCurrentPage((current) => Math.min(current, pageCount - 1));
+  }, [pageCount]);
 
   const allSelected = favorites.length > 0 && selectedFavoriteIds.length === favorites.length;
 
@@ -179,40 +187,43 @@ function FavoritesSection() {
 
           <div className="favorites-carousel-viewport" ref={carouselViewportRef}>
             <div className="favorites-carousel-track">
-              {favorites.map((animal) => (
-                // geänderter Code: per-item checkbox added (20.05.2026)
-                <article
-                  key={animal.id}
-                  className="favorite-card"
-                >
-                  <input
-                    className="favorite-card-checkbox"
-                    type="checkbox"
-                    checked={selectedFavoriteIds.includes(animal.id)}
-                    onChange={() => toggleFavoriteSelection(animal.id)}
-                    aria-label={`Select ${animal.name}`}
-                  />
+              {favoritePages.map((page, pageIndex) => (
+                <div className="favorites-carousel-page" key={pageIndex}>
+                  {page.map((animal) => (
+                    <article
+                      key={animal.id}
+                      className="favorite-card"
+                    >
+                      <input
+                        className="favorite-card-checkbox"
+                        type="checkbox"
+                        checked={selectedFavoriteIds.includes(animal.id)}
+                        onChange={() => toggleFavoriteSelection(animal.id)}
+                        aria-label={`Select ${animal.name}`}
+                      />
 
-                  <Link to={`/animal/${animal.id}`} className="favorite-card-link">
-                    <img
-                      src={animal.imageUrl}
-                      alt={animal.name}
-                      className="favorite-image"
-                    />
+                      <Link to={`/animal/${animal.id}`} className="favorite-card-link">
+                        <img
+                          src={animal.imageUrl}
+                          alt={animal.name}
+                          className="favorite-image"
+                        />
 
-                    <div className="favorite-info">
-                      <p className="favorite-scientific-name">
-                        {animal.scientificName}
-                      </p>
-                      <p className="favorite-common-name">{animal.name}</p>
-                    </div>
-                  </Link>
-                </article>
+                        <div className="favorite-info">
+                          <p className="favorite-scientific-name">
+                            {animal.scientificName}
+                          </p>
+                          <p className="favorite-common-name">{animal.name}</p>
+                        </div>
+                      </Link>
+                    </article>
+                  ))}
+                </div>
               ))}
             </div>
           </div>
 
-          {favorites.length > visibleCount && currentPage < getPageCount() - 1 && (
+          {favorites.length > visibleCount && currentPage < pageCount - 1 && (
             <button
               type="button"
               className="favorites-carousel-button favorites-carousel-button-right visible"
