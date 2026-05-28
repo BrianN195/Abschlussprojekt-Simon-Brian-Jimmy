@@ -259,3 +259,6 @@ Kurz gesagt: Alles, was wir heute am Wetter-Container, an den SVG-Icons, an den 
 - [favorites.css](frontend/src/styles/favorites.css) - Favoriten haben das gleiche ruhige Blur-Layout bekommen und der Delete-Button wurde größer gemacht.
 
 - [Weather.ts](frontend/src/types/Weather.ts) - Wetter-Typen wurden um `current.time` und `weather_code` erweitert.
+
+
+Auftrag morgen das Design für die about Seite. ( ?? Vogelperspektive Malediven ??)

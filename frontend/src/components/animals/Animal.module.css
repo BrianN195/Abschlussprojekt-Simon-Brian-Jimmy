@@ -60,8 +60,6 @@
   margin-right: 2em;
 }
 
-.nameContainer {
-}
 
 .favoriteCheckboxLabel {
   display: flex;
@@ -89,8 +87,6 @@
   text-decoration: underline;
 }
 
-.about {
-}
 
 .aboutTitle {
   font-style: italic;
