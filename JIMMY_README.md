@@ -305,3 +305,26 @@ Kurz gesagt: Alles, was wir heute am Wetter-Container, an den SVG-Icons, an den 
 Kurz gesagt: Das ist der aktuelle Stand zu Favoriten, Login-Persistenz, Animal-Ansicht und dem aufgeräumten Merge nach `main`.
 
 Auftrag morgen das Design für die about Seite. ( ?? Vogelperspektive Malediven ??) und Brian fragen wieso er die Animalcopy.module.css erstellt hat und wofür er dann die andere braucht.
+
+## Letzte Änderungen (Freitag, 29. Mai 2026)
+
+- **Favorites — Platzhalterbild skaliert & ausgerichtet:** [frontend/src/styles/favorites.css](frontend/src/styles/favorites.css) — Das leere-Favorites-Placeholder-Bild wurde herunter skaliert (Höhe reduziert), auf links ausgerichtet (`object-position: left center`) und `object-fit: contain` gesetzt; die Card-Höhe wurde angepasst, damit das Layout wieder kompakter wirkt.
+
+- **Favorites — Textposition & Stil:** [frontend/src/styles/favorites.css](frontend/src/styles/favorites.css) · [frontend/src/components/main/FavoritesSection.tsx](frontend/src/components/main/FavoritesSection.tsx) — Der Leerzustandstext ("Noch keine Favoriten / Wähle Tiere über die Favoriten-Checkbox aus") wurde ganz rechts außen und vertikal mittig im Card-Container positioniert (absolute Positionierung). Die Titelschrift wurde vergrößert (`.favorite-common-name` mit `clamp()`), der wissenschaftliche Name hat eine eigene Farbe.
+
+- **Favorites — Blur entfernt:** [frontend/src/styles/favorites.css](frontend/src/styles/favorites.css) — Alle verbliebenen weichen Blur-Effekte auf dem Favorites-Panel und dem Placeholder-Bild wurden entfernt (`backdrop-filter: none`, `filter: none`), damit das Bild scharf dargestellt wird.
+
+- **Favorites — Sofort-Update / Sync:** [frontend/src/components/main/FavoritesSection.tsx](frontend/src/components/main/FavoritesSection.tsx) — Die Komponente reagiert jetzt unmittelbar auf das `favourites-changed`-Event und entfernt entfernte Favoriten sofort aus der Ansicht (lokales Filtern + Nachladen der Liste).
+
+- **Auth/Register — Register-Button:** [frontend/src/components/auth/RegisterButton.tsx](frontend/src/components/auth/RegisterButton.tsx) · [frontend/src/styles/landing.css](frontend/src/styles/landing.css) — Der Register-Button wurde mit einer speziellen Klasse versehen und der Hover-Blur wurde an das Design der anderen Auth-Buttons angepasst (stärkeres Hover-Backdrop für bessere Konsistenz).
+
+- **Validierung:** Geänderte CSS-Dateien wurden auf Syntax geprüft — keine Fehler gemeldet.
+
+- **Language Flags & LanguageSwitcher:** [frontend/public/images/flags/de.svg](frontend/public/images/flags/de.svg), [frontend/public/images/flags/en.svg](frontend/public/images/flags/en.svg), [frontend/public/images/flags/fr.svg](frontend/public/images/flags/fr.svg), [frontend/public/images/flags/es.svg](frontend/public/images/flags/es.svg), [frontend/public/images/flags/cn.svg](frontend/public/images/flags/cn.svg) · [frontend/src/components/layout/LanguageSwitcher.tsx](frontend/src/components/layout/LanguageSwitcher.tsx) — Flaggen-SVGs wurden hinzugefügt und `LanguageSwitcher` auf bildbasierte Flags umgestellt (Fallback auf Emojis möglich). Pfad-Rendering wurde korrigiert, sodass die Flags nicht mehr als Text angezeigt werden.
+
+- **About Page — Redesign & Styles:** [frontend/src/pages/AboutPage.tsx](frontend/src/pages/AboutPage.tsx) · [frontend/src/styles/AboutPage.css](frontend/src/styles/AboutPage.css) — About-Page wurde so überarbeitet, dass die Container dem MainPage-Layout entsprechen, inklusive responsiver Hintergrundbilder (`background-about-page.png`) für Desktop/Tablet/Mobile, dunklerem Blur für Feature-Karten und höherem Textkontrast.
+
+- **Favorites / Events / Services (Code):** [frontend/src/services/favouritesService.ts](frontend/src/services/favouritesService.ts) · [frontend/src/components/main/FavoritesSection.tsx](frontend/src/components/main/FavoritesSection.tsx) · [frontend/src/components/animals/Animal.tsx](frontend/src/components/animals/Animal.tsx) — `favouritesService` dispatcht jetzt ein `favourites-changed` CustomEvent mit `{ action, animalId }`; die Favorites-Komponente reagiert darauf sofort und synct die Anzeige; `Animal.tsx` hört auf das Event, sodass Checkboxen konsistent bleiben.
+
+
+Kurzbeschreibung: Heute lag der Fokus auf Feinschliff im Favorites-Bereich (sichtbares Placeholder-Bild, Bildausrichtung, Entfernen von Blur, bessere Textplatzierung, größere Titel-Schrift) sowie einer kleinen Anpassung am Register-Button. Alle Änderungen sind oben per Link verlinkt, damit du direkt in die betroffenen Dateien springen kannst.
