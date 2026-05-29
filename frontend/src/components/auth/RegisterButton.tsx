@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 function RegisterButton() {
     const { t } = useTranslation();
     return (
-        <Link className="auth-button" to="/register">
+        <Link className="auth-button auth-button-register" to="/register">
             {t('auth.register')}
         </Link>
     );

@@ -10,6 +10,11 @@ type ApiError = {
     message?: string;
 };
 
+type FavoriteChangeDetail = {
+    action: "added" | "removed";
+    animalId: number;
+};
+
 async function parseJsonSafe<T>(response: Response): Promise<T> {
     try {
         return (await response.json()) as T;
@@ -25,6 +30,10 @@ function buildHeaders(): HeadersInit {
         "Content-Type": "application/json",
         ...(authHeader ? (authHeader as Record<string, string>) : {}),
     };
+}
+
+function dispatchFavoriteChange(detail: FavoriteChangeDetail) {
+    window.dispatchEvent(new CustomEvent<FavoriteChangeDetail>("favourites-changed", { detail }));
 }
 
 // Get all favorite animals from the backend database
@@ -70,7 +79,7 @@ export async function saveFavoriteAnimal(animal: FavoriteAnimal): Promise<void> 
             throw new Error((data as ApiError).error || "Failed to save favourite");
         }
 
-        window.dispatchEvent(new Event("favourites-changed"));
+        dispatchFavoriteChange({ action: "added", animalId: animal.id });
     } catch (error) {
         console.error("Failed to save favourite:", error);
         throw error;
@@ -95,7 +104,7 @@ export async function removeFavoriteAnimal(animalId: number): Promise<void> {
             throw new Error((data as ApiError).error || "Failed to remove favourite");
         }
 
-        window.dispatchEvent(new Event("favourites-changed"));
+        dispatchFavoriteChange({ action: "removed", animalId: animalId });
     } catch (error) {
         console.error("Failed to remove favourite:", error);
         throw error;
