@@ -26,7 +26,7 @@
   background: rgba(22, 64, 88, 0.38);
   backdrop-filter: blur(0.75px);
   box-shadow: 0 24px 80px rgba(0, 0, 0, 0.38);
-  border: 1px solid rgba(126, 231, 255, 0.12);
+  border: none;
 }
 
 .landing-language-row {
@@ -98,8 +98,6 @@
 }
 
 .auth-button {
-  position: relative;
-
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -113,10 +111,10 @@
   border-radius: 12px;
 
   background: transparent;
-  color: #e6f7ff;
+  color: #ffffff;
 
   font-size: 1rem;
-  font-weight: 500;
+  font-weight: 600;
   font-family: "Inter", sans-serif;
 
   cursor: pointer;
@@ -131,26 +129,20 @@
 
   backdrop-filter: blur(0px);
   box-shadow: none;
-
-  /* performance hints to avoid paint/layout jitter on hover */
-  will-change: box-shadow, background, color;
-  transform-origin: center;
-  transform: translateZ(0);
-  backface-visibility: hidden;
-  -webkit-font-smoothing: antialiased;
 }
 
 .auth-button:hover {
   background: rgba(8, 90, 120, 0.22);
   border-color: rgba(126, 231, 255, 0.55);
-  backdrop-filter: blur(8px);
+  backdrop-filter: blur(10px);
 
   box-shadow:
     0 0 14px rgba(0, 255, 255, 0.3),
     0 0 28px rgba(0, 180, 255, 0.22),
     0 0 46px rgba(0, 120, 255, 0.14);
 
-  color: #f4fbff;
+  color: #ffffff;
+  transform: translateY(-2px) scale(1.03);
 }
 
 .auth-button::after {
@@ -162,9 +154,8 @@
 }
 
 .auth-button:focus-visible {
-  /* avoid outline-induced layout shift; use box-shadow for focus indication */
-  outline: none;
-  box-shadow: 0 0 0 4px rgba(126, 231, 255, 0.25);
+  outline: 3px solid rgba(126, 231, 255, 0.75);
+  outline-offset: 4px;
 }
 
 @media (max-width: 1024px) {
