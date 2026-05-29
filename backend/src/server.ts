@@ -10,6 +10,7 @@ import searchRoutes from './routes/search.routes'
 import { sequelize } from './db/config/database';
 import "./db/models/index"
 import weatherRoutes from './routes/weather.routes';
+import localeMiddleware from './middlewares/localeMiddleware';
 
 dotenv.config();
 
@@ -38,6 +39,8 @@ const corsOptions: CorsOptions = {
 app.use(cors(corsOptions));
 app.options(/.*/, cors(corsOptions));
 app.use(express.json());
+// Locale middleware: stellt `req.locale` / `res.locals.locale` bereit
+app.use(localeMiddleware);
 app.use('/uploads', express.static(path.resolve(process.cwd(), 'public/uploads')));
 app.use("/images", express.static("public/images"));
 app.use('/api/v1/weather', weatherRoutes);
