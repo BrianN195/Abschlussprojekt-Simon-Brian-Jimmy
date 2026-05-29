@@ -26,6 +26,11 @@ function FavoritesSection() {
   }, [favorites]);
   const pageCount = Math.max(1, favoritePages.length);
 
+  type FavoriteChangeDetail = {
+    action: "added" | "removed";
+    animalId: number;
+  };
+
   const loadFavorites = async () => {
     const favs = await getFavoriteAnimals();
     setFavorites(favs);
@@ -94,12 +99,24 @@ function FavoritesSection() {
   };
 
   useEffect(() => {
-    loadFavorites();
+    const handleFavoriteChange = async (event: Event) => {
+      const customEvent = event as CustomEvent<FavoriteChangeDetail>;
 
-    window.addEventListener("favourites-changed", loadFavorites);
+      if (customEvent.detail?.action === "removed") {
+        setFavorites((currentFavorites) =>
+          currentFavorites.filter((animal) => animal.id !== customEvent.detail.animalId)
+        );
+      }
+
+      await loadFavorites();
+    };
+
+    void handleFavoriteChange(new Event("favourites-changed"));
+
+    window.addEventListener("favourites-changed", handleFavoriteChange);
 
     return () => {
-      window.removeEventListener("favourites-changed", loadFavorites);
+      window.removeEventListener("favourites-changed", handleFavoriteChange);
     };
   }, []);
 
