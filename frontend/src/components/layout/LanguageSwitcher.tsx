@@ -2,12 +2,12 @@ import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 const languages = [
-  { code: 'en', label: 'EN', flag: '🇬🇧', name: 'English' },
-  { code: 'de', label: 'DE', flag: '🇩🇪', name: 'Deutsch' },
-  { code: 'fr', label: 'FR', flag: '🇫🇷', name: 'Français' },
-  { code: 'es', label: 'ES', flag: '🇪🇸', name: 'Español' },
-  { code: 'ar', label: 'AR', flag: '🇸🇦', name: 'العربية' },
-  { code: 'zh', label: '中文', flag: '🇨🇳', name: '中文' },
+  { code: 'en', label: 'EN', flag: '/images/flags/en.svg', name: 'English' },
+  { code: 'de', label: 'DE', flag: '/images/flags/de.svg', name: 'Deutsch' },
+  { code: 'fr', label: 'FR', flag: '/images/flags/fr.svg', name: 'Français' },
+  { code: 'es', label: 'ES', flag: '/images/flags/es.svg', name: 'Español' },
+  { code: 'ar', label: 'AR', flag: '/images/flags/sa.svg', name: 'العربية' },
+  { code: 'zh', label: '中文', flag: '/images/flags/cn.svg', name: '中文' },
 ] as const;
 
 type LanguageSwitcherProps = {
@@ -56,9 +56,15 @@ function LanguageSwitcher({ compact = false }: LanguageSwitcherProps) {
           aria-haspopup="menu"
         >
           <span className="language-switcher-code">{currentLanguageItem.label}</span>
-          <span className="language-switcher-flag" aria-hidden="true">
-            {currentLanguageItem.flag}
-          </span>
+          <img
+            className="language-switcher-flag"
+            src={currentLanguageItem.flag}
+            alt={currentLanguageItem.name}
+            width="24"
+            height="18"
+            loading="eager"
+            decoding="async"
+          />
           <span className={menuOpen ? 'language-switcher-chevron is-open' : 'language-switcher-chevron'} aria-hidden="true">
             ▾
           </span>
@@ -79,9 +85,15 @@ function LanguageSwitcher({ compact = false }: LanguageSwitcherProps) {
                   aria-checked={isActive}
                 >
                   <span className="language-switcher-code">{language.label}</span>
-                  <span className="language-switcher-flag" aria-hidden="true">
-                    {language.flag}
-                  </span>
+                  <img
+                    className="language-switcher-flag"
+                    src={language.flag}
+                    alt={language.name}
+                    width="24"
+                    height="18"
+                    loading="lazy"
+                    decoding="async"
+                  />
                 </button>
               );
             })}
