@@ -179,7 +179,7 @@ function FavoritesSection() {
       {favorites.length === 0 ? (
         <article className="favorite-card favorite-card-default">
           <img
-            src="/images/default/default-favorites-1-hell-desktop.png"
+            src="/images/default/background-favorites-container-desktop.png"
             alt={t('favorites.placeholderAlt')}
             className="favorite-image"
           />
