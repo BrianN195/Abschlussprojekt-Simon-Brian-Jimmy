@@ -214,6 +214,19 @@ Hinweis: Ich habe nur die betroffenen Abschnitte als "Vorher"-Schnipsel eingefü
 
 - [favorites.css](frontend/src/styles/favorites.css) - Styling für das Carousel, die versteckten/aktiven Slide-Buttons und die festen Card-Abstände für die 4er-Ansicht.
 
+## Letzte Änderungen (28.05.2026)
+
+- [README.md](README.md) - die wichtigsten Projektinfos sind jetzt unten mit klickbaren Links zusammengefasst.
+- [MERGE_WORKFLOW.md](MERGE_WORKFLOW.md) - der Merge von `components` nach `main` ist dokumentiert und sauber abgeschlossen.
+- [FavoritesSection.tsx](frontend/src/components/main/FavoritesSection.tsx) - Favoriten bleiben im 4er-Carousel und lassen sich gesammelt oder einzeln löschen.
+- [Animal.tsx](frontend/src/components/animals/Animal.tsx) - Checkboxen synchronisieren den Favoriten-Status.
+- [favouritesService.ts](frontend/src/services/favouritesService.ts) - zentrale Favoriten-API.
+- [favorites.routes.ts](backend/src/routes/favorites.routes.ts) - Backend liefert Favoriten eindeutig zurück.
+- [UserFavoritAnimalModel.ts](backend/src/db/models/UserFavoritAnimalModel.ts) - eindeutige Favoriten-Join-Table.
+- [Animalcopy.module.css](frontend/src/components/animals/Animalcopy.module.css) - aktuell aktive Animal-Styles.
+
+Kurz gesagt: Das ist die aktuelle Aufgabenlage, die ihr beim nächsten Weitermachen direkt wiederfinden könnt.
+
 - [favorites.routes.ts](backend/src/routes/favorites.routes.ts) - Favoriten werden serverseitig 
 dedupliziert, doppelte `addFavorite`-Aufrufe werden abgefangen und die Antwort bleibt eindeutig.
 
@@ -242,6 +255,19 @@ dedupliziert, doppelte `addFavorite`-Aufrufe werden abgefangen und die Antwort b
 
 Hinweis: Die Migration wurde bereits erfolgreich ausgeführt. Wenn du künftig nur die Datenbank aktualisieren willst, ist der richtige Befehl `npx sequelize-cli db:migrate` im `backend`-Ordner.
 
+## Letzte Änderungen (28.05.2026)
+
+- [README.md](README.md) - die wichtigsten Projektinfos sind jetzt unten mit klickbaren Links zusammengefasst.
+- [MERGE_WORKFLOW.md](MERGE_WORKFLOW.md) - der Merge von `components` nach `main` ist dokumentiert und sauber abgeschlossen.
+- [FavoritesSection.tsx](frontend/src/components/main/FavoritesSection.tsx) - Favoriten bleiben im 4er-Carousel und lassen sich gesammelt oder einzeln löschen.
+- [Animal.tsx](frontend/src/components/animals/Animal.tsx) - Checkboxen synchronisieren den Favoriten-Status.
+- [favouritesService.ts](frontend/src/services/favouritesService.ts) - zentrale Favoriten-API.
+- [favorites.routes.ts](backend/src/routes/favorites.routes.ts) - Backend liefert Favoriten eindeutig zurück.
+- [UserFavoritAnimalModel.ts](backend/src/db/models/UserFavoritAnimalModel.ts) - eindeutige Favoriten-Join-Table.
+- [Animalcopy.module.css](frontend/src/components/animals/Animalcopy.module.css) - aktuell aktive Animal-Styles.
+
+Kurz gesagt: Das ist die aktuelle Aufgabenlage, die ihr beim nächsten Weitermachen direkt wiederfinden könnt.
+
 
 
 
@@ -259,3 +285,23 @@ Kurz gesagt: Alles, was wir heute am Wetter-Container, an den SVG-Icons, an den 
 - [favorites.css](frontend/src/styles/favorites.css) - Favoriten haben das gleiche ruhige Blur-Layout bekommen und der Delete-Button wurde größer gemacht.
 
 - [Weather.ts](frontend/src/types/Weather.ts) - Wetter-Typen wurden um `current.time` und `weather_code` erweitert.
+
+## Letzte Änderungen (28.05.2026)
+
+- [FavoritesSection.tsx](frontend/src/components/main/FavoritesSection.tsx) - Favoriten laufen als 4er-Carousel, mit Select-all und Batch-Löschung.
+
+- [Animal.tsx](frontend/src/components/animals/Animal.tsx) - Favoriten-Checkboxen werden mit dem Favoriten-Status synchron gehalten.
+
+- [favouritesService.ts](frontend/src/services/favouritesService.ts) - Zentrale API für Laden, Speichern und Löschen der Favoriten.
+
+- [favorites.routes.ts](backend/src/routes/favorites.routes.ts) - Serverseite für eindeutige Favoriten ohne Duplikate.
+
+- [UserFavoritAnimalModel.ts](backend/src/db/models/UserFavoritAnimalModel.ts) - Join-Table für Favoriten mit Unique-Index auf `userId` + `animalId`.
+
+- [LandingPage.tsx](frontend/src/pages/LandingPage.tsx) und [useUser.ts](frontend/src/hooks/useUser.ts) - Authentifizierte Nutzer landen direkt wieder auf der Main-Page.
+
+- [Animalcopy.module.css](frontend/src/components/animals/Animalcopy.module.css) - Aktive Styles für die Animal-Ansicht.
+
+Kurz gesagt: Das ist der aktuelle Stand zu Favoriten, Login-Persistenz, Animal-Ansicht und dem aufgeräumten Merge nach `main`.
+
+Auftrag morgen das Design für die about Seite. ( ?? Vogelperspektive Malediven ??) und Brian fragen wieso er die Animalcopy.module.css erstellt hat und wofür er dann die andere braucht.

@@ -44,12 +44,14 @@
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  border: 3px solid aquamarine;
+  border: 1.15px solid rgba(126, 231, 255, 0.562);
   border-radius: 25px;
   padding: 2px;
   margin-bottom: 1em;
   margin-right: auto;
   margin-left: 3em;
+  background: transparent;
+  backdrop-filter: blur(2px);
 }
 
 .nameContainer {
@@ -58,9 +60,11 @@
   flex-direction: column;
   align-items: center;
   justify-content: left;
+  
 }
 
 .scientificName {
+  margin-top: 0.5em;
   color: darkgray;
   font-style: italic;
   text-decoration: wavy;
@@ -114,7 +118,7 @@
   height: auto;
   object-fit: contain;
   border-radius: 25px;
-  border: 3px solid aquamarine;
+  border: 1.15px solid rgba(126, 231, 255, 0.562);
   display: block;
 }
 .appearList {
@@ -125,11 +129,24 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border: 3px solid aquamarine;
+  border: 1.15px solid rgba(126, 231, 255, 0.562);
   border-radius: 25px;
   padding: 2px;
   margin-bottom: 1em;
   margin-right: 3em;
+  background: transparent;
+  backdrop-filter: blur(2px);
+}
+.appearList:hover,
+.hardInfoContainer:hover{
+background: rgba(8, 90, 120, 0.22);
+  border-color: rgba(126, 231, 255, 0.55);
+  backdrop-filter: blur(10px);
+  box-shadow:
+    0 0 14px rgba(0, 255, 255, 0.3),
+    0 0 28px rgba(0, 180, 255, 0.22),
+    0 0 46px rgba(0, 120, 255, 0.14);
+  transform: translateY(-2px);
 }
 .appearList h6{
   font-size: larger;
@@ -138,39 +155,41 @@
   display: flex;
   flex-direction: column;
   gap: 1em;
-    list-style: none;
+  list-style: none;
   padding: 0;
   margin: 0;
 }
+.appearList li {
+  margin: 1em;
+  font-size: larger;
+}
 .link {
-  text-decoration: underline;
+  text-decoration: none;
   color: inherit;
   transition: transform 0.2s ease;
-  
 }
 .link:hover {
   transform: scale(1.1);
 }
-/* .appearList li {
-  list-style: none;
-  border: 1px solid red;
-} */
 
 .title {
   font-style: italic;
   text-decoration: underline;
+  margin-top: 0.5em;
 }
 
 .about {
+  padding: 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 10px;
-
+  background: transparent;
+  backdrop-filter: blur(2px);
   justify-content: flex-start;
+  border: 1.15px solid rgba(126, 231, 255, 0.562);
+  border-radius: 25px;
 }
-
-
 
 .aboutTitle {
   font-style: italic;
@@ -179,6 +198,9 @@
   margin-bottom: 1em;
   
 }
-.aboutText{
+.aboutText {
   font-size: larger;
+
+  min-width: 0;
+  overflow-wrap: break-word;
 }

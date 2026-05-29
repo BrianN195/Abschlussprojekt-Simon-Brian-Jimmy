@@ -7,7 +7,7 @@ import {
   removeFavoriteAnimal,
   saveFavoriteAnimal,
 } from "../../services/favouritesService";
-// import styles from "./Animal.module.css";
+
 import styles from "./Animalcopy.module.css";
 
 export default function Animal() {

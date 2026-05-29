@@ -249,8 +249,13 @@
 }
 
 .language-switcher-flag {
-  font-size: 1rem;
-  line-height: 1;
+  display: block;
+  width: 1.45rem;
+  height: 1.1rem;
+  flex: none;
+  object-fit: cover;
+  border-radius: 3px;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.12);
 }
 
 .language-switcher-chevron {

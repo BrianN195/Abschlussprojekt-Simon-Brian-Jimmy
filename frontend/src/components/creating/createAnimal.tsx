@@ -1,7 +1,6 @@
 import { useState } from "react";
-import styles from "./create.module.css"
+import styles from "./create.module.css";
 export default function CreateAnimal() {
-  
   const [form, setForm] = useState({
     name: "",
     scientificName: "",
@@ -11,6 +10,7 @@ export default function CreateAnimal() {
     size: "",
     weight: "",
     habitat: "",
+    bestViewingTime: "",
     depthRange: "",
     diet: "",
     isSchooling: false,
@@ -18,32 +18,65 @@ export default function CreateAnimal() {
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
+    const { name, value, type } = e.target;
 
     setForm((prev) => ({
       ...prev,
-      [name]: value,
+      [name]: type === "number" ? Number(value) : value,
     }));
   };
 
   const handleCreate = async (e: React.FormEvent) => {
     e.preventDefault();
-
+    console.log("FORM SUBMIT");
     const formData = new FormData();
 
-    Object.entries(form).forEach(([key, value]) => {
-      if (value !== null) {
-        formData.append(key, value as any);
-      }
-    });
+    // Alles explizit setzen
+    formData.append("name", form.name);
+    formData.append("scientificName", form.scientificName);
+    formData.append("description", form.description);
+    formData.append("category", form.category);
 
-    await fetch("http://localhost:5000/api/v1/species/createAnimal", {
-      method: "POST",
-      body: formData,
-    });
+    formData.append("dangerLevel", String(form.dangerLevel));
+
+    formData.append("size", form.size);
+    formData.append("weight", form.weight);
+    formData.append("habitat", form.habitat);
+    if (form.bestViewingTime) {
+      formData.append("bestViewingTime", form.bestViewingTime);
+    }
+
+    formData.append("depthRange", form.depthRange);
+    formData.append("diet", form.diet);
+
+    formData.append("isSchooling", String(form.isSchooling));
+
+    if (form.image) {
+      formData.append("image", form.image);
+    }
+    for (const pair of formData.entries()) {
+      console.log(pair[0], pair[1]);
+    }
+    try {
+      const response = await fetch(
+        "http://localhost:5000/api/v1/species/createAnimal",
+        {
+          method: "POST",
+          body: formData,
+        },
+      );
+
+      console.log("STATUS:", response.status);
+
+      const data = await response.json();
+
+      console.log("RESPONSE:", data);
+    } catch (error) {
+      console.error("FETCH ERROR:", error);
+    }
   };
   return (
-     <div className={styles.container}>
+    <div className={styles.container}>
       <form className={styles.form} onSubmit={handleCreate}>
         <h2 className={styles.title}>Create Animal</h2>
 
