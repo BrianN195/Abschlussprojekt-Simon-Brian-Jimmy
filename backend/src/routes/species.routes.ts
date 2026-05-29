@@ -3,6 +3,7 @@ import AnimalModel from "../db/models/AnimalModel";
 import LocationModel from "../db/models/LocationModel";
 import upload from "../middlewares/uploadMiddleware";
 import { animalSchema } from "../validation/animalSchema";
+import z from "zod";
 
 const router = Router();
 
@@ -69,33 +70,39 @@ router.post(
     }
 
     const data = parsed.data;
+    const bestViewingTime = data.bestViewingTime || [];
+
     try {
       const imageUrl = req.file ? `/images/animals/${req.file.filename}` : "";
-
       const newAnimal = await AnimalModel.create({
         name: data.name,
         scientificName: data.scientificName,
         description: data.description,
         category: data.category,
+
         dangerLevel: data.dangerLevel,
         imageUrl,
+
         size: data.size,
         weight: data.weight,
         habitat: data.habitat,
-        bestViewingTime: data.bestViewingTime
-          ? [data.bestViewingTime]
-          : [],
+
+        bestViewingTime,
+
         depthRange: data.depthRange,
         diet: data.diet,
+
         isSchooling: data.isSchooling,
       });
 
       return res.status(201).json(newAnimal);
     } catch (error) {
+      console.error("CREATE ANIMAL ERROR:");
       console.error(error);
-
+      console.log("im backend error");
       return res.status(500).json({
         message: "Error creating animal",
+        error,
       });
     }
   },
