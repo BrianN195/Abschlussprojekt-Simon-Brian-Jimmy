@@ -1,5 +1,6 @@
 import { Router, Request, Response } from "express";
 import AnimalModel from "../db/models/AnimalModel";
+import { Op } from "sequelize";
 import AnimalTranslationModel from "../db/models/AnimalTranslationModel";
 import LocationTranslationModel from "../db/models/LocationTranslationModel";
 import LocationModel from "../db/models/LocationModel";
@@ -23,6 +24,7 @@ function pickTranslation(translations: any[], locale: string) {
 router.get("/", async (req: Request, res: Response) => {
   try {
     const locale = (req as any).locale || "en";
+    const search = (req.query.search as string)?.trim() || "";
 
     const animals = await AnimalModel.findAll({
       include: [
@@ -32,6 +34,15 @@ router.get("/", async (req: Request, res: Response) => {
           required: false,
         },
       ],
+      where: search
+        ? {
+            [Op.or]: [
+              { name: { [Op.iLike]: `%${search}%` } },
+              { "$translations.name$": { [Op.iLike]: `%${search}%` } },
+            ],
+          }
+        : undefined,
+      subQuery: false,
     });
 
     const result = animals.map((a) => {

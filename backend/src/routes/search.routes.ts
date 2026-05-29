@@ -1,38 +1,100 @@
-import { Router, Request, Response } from 'express';
-import LocationModel from '../db/models/LocationModel';
-import AnimalModel from '../db/models/AnimalModel';
-import { Op } from 'sequelize';
+import { Router, Request, Response } from "express";
+import LocationModel from "../db/models/LocationModel";
+import AnimalModel from "../db/models/AnimalModel";
+import AnimalTranslationModel from "../db/models/AnimalTranslationModel";
+import LocationTranslationModel from "../db/models/LocationTranslationModel";
+import { Op } from "sequelize";
 
 const router = Router();
 
+function pickTranslation(translations: any[], locale: string) {
+  return (
+    translations.find((t) => t.locale === locale) ||
+    translations.find((t) => t.locale === "en") ||
+    translations[0]
+  );
+}
+
 router.get("/search", async (req: Request, res: Response) => {
-  const search =
-    typeof req.query.search === "string"
-      ? req.query.search
-      : "";
+  const raw = typeof req.query.search === "string" ? req.query.search.trim() : "";
+  const search = raw || "";
+  const locale = (req as any).locale || "en";
 
   try {
     const [animals, locations] = await Promise.all([
       AnimalModel.findAll({
-        where: {
-          name: {
-            [Op.iLike]: `%${search}%`,
+        include: [
+          {
+            model: AnimalTranslationModel,
+            as: "translations",
+            required: false,
           },
-        },attributes: ["id", "name"],
+        ],
+        where: search
+          ? {
+              [Op.or]: [
+                { name: { [Op.iLike]: `%${search}%` } },
+                { "$translations.name$": { [Op.iLike]: `%${search}%` } },
+              ],
+            }
+          : undefined,
+        subQuery: false,
+        attributes: ["id", "name", "imageUrl"],
       }),
 
       LocationModel.findAll({
-        where: {
-          name: {
-            [Op.iLike]: `%${search}%`,
+        include: [
+          {
+            model: LocationTranslationModel,
+            as: "translations",
+            required: false,
           },
-        },attributes: ["id", "name"],
+        ],
+        where: search
+          ? {
+              [Op.or]: [
+                { name: { [Op.iLike]: `%${search}%` } },
+                { "$translations.name$": { [Op.iLike]: `%${search}%` } },
+              ],
+            }
+          : undefined,
+        subQuery: false,
+        attributes: ["id", "name", "imageUrl", "region"],
       }),
     ]);
 
+    const mappedAnimals = animals.map((a) => {
+      const data = (a as any).toJSON();
+      const translations = data.translations || [];
+      const tr = pickTranslation(translations, locale);
+
+      return {
+        id: data.id,
+        name: tr?.name ?? data.name,
+        imageUrl: data.imageUrl,
+        translationUsedLocale: tr?.locale ?? null,
+      };
+    });
+
+    const mappedLocations = locations.map((l) => {
+      const data = (l as any).toJSON();
+      const translations = data.translations || [];
+      const tr = pickTranslation(translations, locale);
+
+      return {
+        id: data.id,
+        name: tr?.name ?? data.name,
+        imageUrl: data.imageUrl,
+        region: tr?.region ?? data.region,
+        translationUsedLocale: tr?.locale ?? null,
+      };
+    });
+
     return res.json({
-      animals,
-      locations,
+      animals: mappedAnimals,
+      locations: mappedLocations,
+      localeRequested: (req as any).localeRequested || null,
+      localeResolved: locale,
     });
   } catch (err) {
     console.error(err);

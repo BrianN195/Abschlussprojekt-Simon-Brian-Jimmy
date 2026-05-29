@@ -249,7 +249,7 @@ const location4 = await LocationModel.create({
   longitude: 73.4597,
   depth: 35,
   type: "wall",
-  imageUrl: "/images/locations/Noth Male Atoll.jpg"
+  imageUrl: "/images/locations/North Male Atoll.jpg"
 });
 
 const location5 = await LocationModel.create({
