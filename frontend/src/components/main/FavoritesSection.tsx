@@ -178,11 +178,21 @@ function FavoritesSection() {
 
       {favorites.length === 0 ? (
         <article className="favorite-card favorite-card-default">
-          <img
-            src="/images/default/default-favorites-1-hell-desktop.png"
-            alt={t('favorites.placeholderAlt')}
-            className="favorite-image"
-          />
+          <picture>
+            <source
+              media="(max-width: 600px)"
+              srcSet="/images/default/default-favorites-1-hell-mobile.png"
+            />
+            <source
+              media="(max-width: 1024px)"
+              srcSet="/images/default/default-favorites-1-hell-tablet.png"
+            />
+            <img
+              src="/images/default/default-favorites-1-hell-desktop.png"
+              alt={t('favorites.placeholderAlt')}
+              className="favorite-image"
+            />
+          </picture>
 
           <div className="favorite-info">
             <p className="favorite-common-name">{t('favorites.emptyTitle')}</p>

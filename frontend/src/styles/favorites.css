@@ -6,7 +6,7 @@
 
   border-radius: 24px;
   background: rgba(22, 64, 88, 0.38);
-  backdrop-filter: blur(0.75px);
+  backdrop-filter: none;
   box-shadow: 0 24px 80px rgba(0, 0, 0, 0.38);
 
   color: #ffffff;
@@ -119,6 +119,9 @@
   min-width: 0;
   width: 100%;
   scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
 }
 
 .favorite-card-checkbox {
@@ -235,6 +238,7 @@
   display: flex;
   flex-direction: column;
   height: 100%;
+  min-height: 0;
   overflow: hidden;
 
   text-decoration: none;
@@ -268,9 +272,48 @@
   outline-offset: 4px;
 }
 
+.favorite-card-default {
+  min-height: 280px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.favorite-card-default picture {
+  display: block;
+  width: 100%;
+}
+
+.favorite-card-default .favorite-image {
+  width: 100%;
+  height: 300px;
+  object-fit: contain;
+  object-position: left center;
+  background: none;
+  filter: none;
+  backdrop-filter: none;
+}
+
+.favorite-card-default .favorite-info {
+  position: absolute;
+  top: 50%;
+  right: 1rem;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  width: auto;
+  max-width: 45%;
+  padding: 0;
+  text-align: right;
+}
+
 .favorite-image {
   width: 100%;
-  height: 220px;
+  height: 300px;
   object-fit: cover;
   display: block;
 }
@@ -285,20 +328,19 @@
   margin: 0;
   font-size: 0.95rem;
   font-style: italic;
-  color: rgba(202, 240, 248, 0.85);
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  color: rgb(248, 248, 248);
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .favorite-common-name {
   margin: 0;
-  font-size: 1rem;
+  font-size: clamp(0.85rem, 1.6vw, 1rem);
   font-weight: 600;
   color: #ffffff;
+  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
 }
 
 /* TABLET */
@@ -363,6 +405,12 @@
 
   .favorite-card-default {
     max-width: 100%;
+    min-height: 250px;
+  }
+
+  .favorite-card-default .favorite-info {
+    right: 0.75rem;
+    max-width: 50%;
   }
 
   .favorite-image {

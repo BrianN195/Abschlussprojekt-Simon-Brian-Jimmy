@@ -5,34 +5,7 @@ import UserModel from "../models/UserModel";
 
 
 async function seed() {
-
-// const animalX = await AnimalModel.create({
-//   name: "",
-//   scientificName: "",
-//   description: "",
-//   category: "",
-//   dangerLevel: 0,
-//   imageUrl: "",
-
-//   size: null,
-//   weight: null,
-//   habitat: null,
-//   depthRange: null,
-//   diet: null,
-//   isSchooling: false,
-// });
-
-// const locationX = await LocationModel.create({
-  
-//   name: ,
-//   description: ,
-//   region: ,
-//   latitude: ,
-//   longitude: ,
-//   depth: ,
-//   type: "reef" | "wreck" | "cave" | "wall" | "sandbank",
-//   imageUrl: 
-// });
+    
 const animal1 = await AnimalModel.create({
   name: "Mantarochen",
   scientificName: "Mobula alfredi",
@@ -203,6 +176,34 @@ const animal10 = await AnimalModel.create({
   isSchooling: true,
 });
 
+// const animalX = await AnimalModel.create({
+//   name: "",
+//   scientificName: "",
+//   description: "",
+//   category: "",
+//   dangerLevel: 0,
+//   imageUrl: "",
+
+//   size: null,
+//   weight: null,
+//   habitat: null,
+//   depthRange: null,
+//   diet: null,
+//   isSchooling: false,
+// });
+
+// const locationX = await LocationModel.create({
+  
+//   name: ,
+//   description: ,
+//   region: ,
+//   latitude: ,
+//   longitude: ,
+//   depth: ,
+//   type: "reef" | "wreck" | "cave" | "wall" | "sandbank",
+//   imageUrl: 
+// });
+
 const location1 = await LocationModel.create({
   name: "Haa Dhaalu Atoll",
   description:
@@ -248,7 +249,7 @@ const location4 = await LocationModel.create({
   longitude: 73.4597,
   depth: 35,
   type: "wall",
-  imageUrl: "/images/locations/North Male Atoll.jpg"
+  imageUrl: "/images/locations/Noth Male Atoll.jpg"
 });
 
 const location5 = await LocationModel.create({
