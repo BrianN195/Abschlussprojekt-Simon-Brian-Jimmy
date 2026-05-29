@@ -328,3 +328,22 @@ Auftrag morgen das Design für die about Seite. ( ?? Vogelperspektive Malediven 
 
 
 Kurzbeschreibung: Heute lag der Fokus auf Feinschliff im Favorites-Bereich (sichtbares Placeholder-Bild, Bildausrichtung, Entfernen von Blur, bessere Textplatzierung, größere Titel-Schrift) sowie einer kleinen Anpassung am Register-Button. Alle Änderungen sind oben per Link verlinkt, damit du direkt in die betroffenen Dateien springen kannst.
+
+## DB Image Fix (29.05.2026)
+
+- **Problem:** Für `North Male Atoll` war in der Datenbank ein falscher Bildpfad gesetzt (`/images/locations/Noth Male Atoll.jpg`), deswegen wurde das Bild beim Klick nicht geladen.
+- **Gefixt (Code):** Seed korrigiert: [backend/src/db/seeders/seed.ts](backend/src/db/seeders/seed.ts#L232) → now `"/images/locations/North Male Atoll.jpg"`.
+- **Scripts:** TypeScript-Updater: [backend/src/scripts/fixLocationImage.ts](backend/src/scripts/fixLocationImage.ts) — führt ein `Sequelize`-Update aus. Fallback-JS (falls ts-node/PowerShell Probleme auftreten): [backend/src/scripts/fixLocationImage.js](backend/src/scripts/fixLocationImage.js).
+- **Wie ausführen (vorzugsweise TS):** Stelle sicher, dass `backend/.env` die korrekten DB-Zugangsdaten enthält, dann im `backend`-Ordner:
+
+```bash
+npm run fix-image
+```
+
+- **Fallback (wenn TS nicht läuft):**
+
+```bash
+node src/scripts/fixLocationImage.js
+```
+
+- **Status:** DB-Update lokal noch nicht ausgeführt (fehlende/ungültige DB-Creds beim Versuch); Script und Seed sind bereit. Wenn du möchtest, führe bitte `npm run fix-image` aus oder gib mir die Erlaubnis, es mit den korrekten Umgebungsvariablen zu starten.
