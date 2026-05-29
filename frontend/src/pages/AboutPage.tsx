@@ -19,17 +19,18 @@ const AboutPage: React.FC = () => {
 
   return (
     <main className="about-page">
-        <section className="about-hero">
+      <div className="about-content">
+        <section className="about-card about-hero">
           <h1>{t('about.title')}</h1>
           <p>{t('about.intro')}</p>
         </section>
 
-        <section className="about-why">
+        <section className="about-card about-why">
           <h2>{t('about.whyTitle')}</h2>
           <p>{t('about.whyText')}</p>
         </section>
 
-        <section className="about-target">
+        <section className="about-card about-target">
           <h2>{t('about.targetTitle')}</h2>
           <ul>
             <li>{t('about.target1')}</li>
@@ -39,7 +40,7 @@ const AboutPage: React.FC = () => {
           </ul>
         </section>
 
-        <section className="about-features">
+        <section className="about-card about-features">
           <h2>{t('about.featuresTitle')}</h2>
           <ul>
             <li>{t('about.feature1')}</li>
@@ -50,7 +51,7 @@ const AboutPage: React.FC = () => {
           </ul>
         </section>
 
-        <section className="about-contribute">
+        <section className="about-card about-contribute">
           <h2>{t('about.contributeTitle')}</h2>
           <p>{t('about.contributeText')}</p>
         </section>
@@ -59,10 +60,11 @@ const AboutPage: React.FC = () => {
           <Link to={ctaTarget} className="about-cta-button">{ctaText}</Link>
         </div>
 
-        <section className="about-contact">
+        <section className="about-card about-contact">
           <h2>{t('about.contactTitle')}</h2>
           <p>{t('about.contactText')}</p>
         </section>
+      </div>
       </main>
   );
 };
