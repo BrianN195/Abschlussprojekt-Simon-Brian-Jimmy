@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import path from 'path';
 import authRoutes from './routes/auth.routes';
 import favoritesRoutes from './routes/favorites.routes';
+import connectRoutes from './routes/connect.routes'
 import speciesRoutes from './routes/species.routes';
 import resortsRoutes from './routes/resorts.routes';
 import searchRoutes from './routes/search.routes'
@@ -53,7 +54,7 @@ app.use('/api/v1/favorites', favoritesRoutes);
 app.use('/api/v1/species', speciesRoutes);
 app.use('/api/v1/resorts', resortsRoutes);
 app.use('/api/v1/search', searchRoutes);
-
+app.use('/api/v1/connect', connectRoutes)
 // Error Handler Middleware
 app.use((err: any, req: Request, res: Response, next: NextFunction) => {
   console.error(err);

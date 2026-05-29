@@ -129,7 +129,7 @@ Favoriten: Speichern bestimmter Tiere in einer persönlichen Merkliste.
     - 2x animal mit Id 11 => fehler, datenbank reset
 - Außerdem: die datenbank wird eh noch einmal final resetet wenn ich den emailbranch merge samstag oder Montag
 - was von Brian bis Montag Vormittag erledigt sein wird:
-    - Animal Location Verbidung auch über seite
+    - Animal Location Verbidung auch über seite (gemacht)
     - One Pie.. äh Datenbank für alle. 
 - wenn über seite gemacht: alles weg davon.
 - du willst trotzdem was hinzufügen?

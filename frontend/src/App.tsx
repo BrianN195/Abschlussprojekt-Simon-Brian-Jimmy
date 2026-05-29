@@ -18,6 +18,7 @@ import CreateLocation from "./components/creating/createLocation";
 import ProtectedRoute from "./components/creating/ProtectedRoute";
 
 import useUser from "./hooks/useUser";
+import ConnectAnimalLocation from "./components/creating/ConnectAnimalLocation";
 
 function App() {
   const { user, loading } = useUser();
@@ -65,6 +66,17 @@ function App() {
             }
           />
         </Route>
+        <Route
+            path="/connect"
+            element={
+              <ProtectedRoute
+                allowedRoles={["admin", "mod"]}
+                userRole={user?.role}
+              >
+                <ConnectAnimalLocation />
+              </ProtectedRoute>
+            }
+          />
       </Routes>
     </BrowserRouter>
   );
