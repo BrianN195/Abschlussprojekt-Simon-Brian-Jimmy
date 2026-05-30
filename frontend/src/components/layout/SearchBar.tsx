@@ -10,7 +10,7 @@ type SearchResults = {
 };
 
 export default function SearchBar() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [search, setSearch] = useState("");
   const [results, setResults] = useState<SearchResults>({
     animals: [],
@@ -30,7 +30,12 @@ export default function SearchBar() {
 
       try {
         const res = await fetch(
-          `/api/v1/search/search?search=${encodeURIComponent(search)}`,
+          `/api/v1/search?search=${encodeURIComponent(search)}`,
+          {
+            headers: {
+              "Accept-Language": i18n.language,
+            },
+          },
         );
 
         const data = await res.json();
@@ -41,11 +46,12 @@ export default function SearchBar() {
     };
 
     fetchData();
-  }, [search]);
+  }, [search, i18n.language]);
 
   return (
     <div className="search-bar" role="search">
       <input
+        ref={inputRef}
         className="search-input"
         type="text"
         value={search}

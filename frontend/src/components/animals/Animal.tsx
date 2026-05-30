@@ -1,7 +1,8 @@
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
 import { useEffect, useState, type ChangeEvent } from "react";
 import { Link, useParams } from "react-router-dom";
 import type { AnimalDetail } from "../../types/Animal";
+import type { Location } from "../../types/Locations";
 import {
   isFavouriteAnimal,
   removeFavoriteAnimal,
@@ -11,31 +12,65 @@ import {
 import styles from "./Animalcopy.module.css";
 
 export default function Animal() {
-  const { t } = useTranslation();
+  const { i18n, t } = useTranslation();
   const { id } = useParams();
   const [animal, setAnimal] = useState<AnimalDetail | null>(null);
+  const [locations, setLocations] = useState<Location[]>([]);
   const [isFavourite, setIsFavourite] = useState(false);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/v1/species/${id}/locations`)
-      .then((res) => res.json())
-      .then((data) => setAnimal(data));
-  }, [id]);
+    if (!id) return;
+    const controller = new AbortController();
+    const signal = controller.signal;
+
+    const loadAnimal = async () => {
+      try {
+        const res = await fetch(`http://localhost:5000/api/v1/species/${id}`, {
+          headers: { "Accept-Language": i18n.language },
+          signal,
+        });
+        if (!res.ok) throw new Error("Failed to load animal");
+        const data = await res.json();
+        setAnimal(data);
+      } catch (err) {
+        if ((err as any).name !== "AbortError") console.error(err);
+      }
+    };
+
+    const loadLocations = async () => {
+      try {
+        const res = await fetch(
+          `http://localhost:5000/api/v1/species/${id}/locations`,
+          {
+            headers: { "Accept-Language": i18n.language },
+            signal,
+          },
+        );
+        if (!res.ok) throw new Error("Failed to load locations");
+        const data = await res.json();
+        // backend may return { locations: [...] } or an array
+        setLocations(data.locations ?? data);
+      } catch (err) {
+        if ((err as any).name !== "AbortError") console.error(err);
+      }
+    };
+
+    loadAnimal();
+    loadLocations();
+
+    return () => controller.abort();
+  }, [id, i18n.language]);
 
   useEffect(() => {
     const loadFavouriteState = async () => {
       if (!id) return;
-
       const animalId = Number(id);
       const favourite = await isFavouriteAnimal(animalId);
       setIsFavourite(favourite);
     };
 
     loadFavouriteState();
-
-    // geänderter Code: listen for favourites-changed to sync checkbox state (20.05.2026)
     window.addEventListener("favourites-changed", loadFavouriteState);
-
     return () => {
       window.removeEventListener("favourites-changed", loadFavouriteState);
     };
@@ -68,6 +103,7 @@ export default function Animal() {
   };
 
   if (!animal) return <p>Loading</p>;
+
   return (
     <main className={styles.animalCard}>
       <div className={styles.uprow}>
@@ -75,20 +111,22 @@ export default function Animal() {
           <div className={styles.nameContainer}>
             <h2 className={styles.title}>{animal.name}</h2>
             <p className={styles.scientificName}>{animal.scientificName}</p>
+
             <div className={styles.statContainer}>
               <div className={styles.stat}>
-                <p>Depth Range</p>
+                <p>{t("animal.depthRange")}</p>
                 <p>{animal.depthRange}</p>
               </div>
               <div className={styles.stat}>
-                <p>Category</p>
-                <p>{animal.category}</p>
+                <p>{t("animal.category")}</p>
+                <p>{t(`animalCategories.${animal.category}`)}</p>
               </div>
               <div className={styles.stat}>
-                <p>Size</p>
+                <p>{t("animal.size")}</p>
                 <p>{animal.size}</p>
               </div>
             </div>
+
             <label className={styles.favoriteCheckboxLabel}>
               <input
                 type="checkbox"
@@ -99,29 +137,38 @@ export default function Animal() {
             </label>
           </div>
         </div>
+
         <div className="imageWrapper">
           <img
-          src={animal.imageUrl}
-          alt={animal.imageUrl}
-          className={styles.bild}
-        />
+            src={animal.imageUrl}
+            alt={animal.imageUrl}
+            className={styles.bild}
+          />
         </div>
-        
+
         <div className={styles.appearList}>
-          <h6 className={styles.title}>appears here</h6>
+          <h6 className={styles.title}>{t("animal.locations")}</h6>
 
           <ul>
-            {animal.locations?.map((location) => {
-              return <Link className={styles.link} to={`/location/${location.id}`}> <li key={location.id}>{location.name}</li></Link>;
-            })}
+            {locations.map((location) => (
+              <Link
+                className={styles.link}
+                to={`/location/${location.id}`}
+                key={location.id}
+              >
+                <li>{location.name}</li>
+              </Link>
+            ))}
           </ul>
         </div>
       </div>
+
       <div className={styles.downrow}>
         <section className={styles.about}>
-          <h6 className={styles.aboutTitle}>About</h6>
-          {/* der inline style ist für ein mehrzeiligen text einfach */}
-          <p style={{ whiteSpace: "pre-line" }} className={styles.aboutText}>{animal.description}</p>
+          <h6 className={styles.aboutTitle}>{t("animal.about")}</h6>
+          <p style={{ whiteSpace: "pre-line" }} className={styles.aboutText}>
+            {animal.description}
+          </p>
         </section>
       </div>
     </main>
