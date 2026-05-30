@@ -101,7 +101,9 @@ export default function AnimalList() {
                   <div className={style.wrapper}>
                     <img src={animal.imageUrl} alt="" className={style.pic} />
                   </div>
-                  <p className={style.categoryName}>{animal.category}</p>
+                  <p className={style.categoryName}>
+                    {t(`animalCategories.${animal.category}`)}
+                  </p>
                 </div>
               </Link>
               <label className={style.favoriteCheckboxLabel}>

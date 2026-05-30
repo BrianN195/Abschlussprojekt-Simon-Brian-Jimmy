@@ -3,7 +3,7 @@ import LocationModel from "../db/models/LocationModel";
 import AnimalModel from "../db/models/AnimalModel";
 import AnimalTranslationModel from "../db/models/AnimalTranslationModel";
 import LocationTranslationModel from "../db/models/LocationTranslationModel";
-import { Op } from "sequelize";
+import { Op, col, where as sequelizeWhere } from "sequelize";
 
 const router = Router();
 
@@ -15,53 +15,56 @@ function pickTranslation(translations: any[], locale: string) {
   );
 }
 
-router.get("/search", async (req: Request, res: Response) => {
-  const raw = typeof req.query.search === "string" ? req.query.search.trim() : "";
-  const search = raw || "";
-  const locale = (req as any).locale || "en";
-
+router.get("/", async (req: Request, res: Response) => {
   try {
-    const [animals, locations] = await Promise.all([
-      AnimalModel.findAll({
-        include: [
-          {
-            model: AnimalTranslationModel,
-            as: "translations",
-            required: false,
-          },
-        ],
-        where: search
-          ? {
-              [Op.or]: [
-                { name: { [Op.iLike]: `%${search}%` } },
-                { "$translations.name$": { [Op.iLike]: `%${search}%` } },
-              ],
-            }
-          : undefined,
-        subQuery: false,
-        attributes: ["id", "name", "imageUrl"],
-      }),
+    const raw =
+      typeof req.query.search === "string" ? req.query.search.trim() : "";
+    const search = raw || "";
+    const locale = (req as any).locale || "en";
 
-      LocationModel.findAll({
-        include: [
-          {
-            model: LocationTranslationModel,
-            as: "translations",
-            required: false,
-          },
-        ],
-        where: search
-          ? {
-              [Op.or]: [
-                { name: { [Op.iLike]: `%${search}%` } },
-                { "$translations.name$": { [Op.iLike]: `%${search}%` } },
-              ],
-            }
-          : undefined,
-        subQuery: false,
-        attributes: ["id", "name", "imageUrl", "region"],
-      }),
-    ]);
+    const animals = await AnimalModel.findAll({
+      include: [
+        {
+          model: AnimalTranslationModel,
+          as: "translations",
+          required: false,
+        },
+      ],
+      where: search
+        ? {
+            [Op.or]: [
+              { name: { [Op.iLike]: `%${search}%` } },
+              sequelizeWhere(col("translations.name"), {
+                [Op.iLike]: `%${search}%`,
+              }),
+            ],
+          }
+        : {},
+      subQuery: false,
+      attributes: ["id", "name", "imageUrl"],
+    });
+
+    const locations = await LocationModel.findAll({
+      include: [
+        {
+          model: LocationTranslationModel,
+          as: "translations",
+          required: false,
+        },
+      ],
+      where: search
+        ? {
+            [Op.or]: [
+              { name: { [Op.iLike]: `%${search}%` } },
+              sequelizeWhere(col("translations.name"), {
+                [Op.iLike]: `%${search}%`,
+              }),
+            ],
+          }
+        : {},
+      subQuery: false,
+      attributes: ["id", "name", "imageUrl", "region"],
+    });
 
     const mappedAnimals = animals.map((a) => {
       const data = (a as any).toJSON();

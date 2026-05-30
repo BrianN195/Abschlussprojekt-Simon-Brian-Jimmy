@@ -41,10 +41,4 @@ AnimalTranslationModel.init(
   }
 );
 
-AnimalModel.hasMany(AnimalTranslationModel, {
-  foreignKey: "animalId",
-  as: "translations",
-});
-AnimalTranslationModel.belongsTo(AnimalModel, { foreignKey: "animalId" });
-
 export default AnimalTranslationModel;

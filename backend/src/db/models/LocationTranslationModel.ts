@@ -31,10 +31,4 @@ LocationTranslationModel.init(
   }
 );
 
-LocationModel.hasMany(LocationTranslationModel, {
-  foreignKey: "locationId",
-  as: "translations",
-});
-LocationTranslationModel.belongsTo(LocationModel, { foreignKey: "locationId" });
-
 export default LocationTranslationModel;

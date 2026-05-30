@@ -1,12 +1,11 @@
 import { Router, Request, Response } from "express";
 import AnimalModel from "../db/models/AnimalModel";
-import { Op } from "sequelize";
+import { Op, col, where as sequelizeWhere } from "sequelize";
 import AnimalTranslationModel from "../db/models/AnimalTranslationModel";
 import LocationTranslationModel from "../db/models/LocationTranslationModel";
 import LocationModel from "../db/models/LocationModel";
 import upload from "../middlewares/uploadMiddleware";
 import { animalSchema } from "../validation/animalSchema";
-import z from "zod";
 
 const router = Router();
 
@@ -27,23 +26,23 @@ router.get("/", async (req: Request, res: Response) => {
     const search = (req.query.search as string)?.trim() || "";
 
     const animals = await AnimalModel.findAll({
-      include: [
-        {
-          model: AnimalTranslationModel,
-          as: "translations",
-          required: false,
-        },
-      ],
-      where: search
-        ? {
-            [Op.or]: [
-              { name: { [Op.iLike]: `%${search}%` } },
-              { "$translations.name$": { [Op.iLike]: `%${search}%` } },
-            ],
-          }
-        : undefined,
-      subQuery: false,
-    });
+  include: [
+    {
+      model: AnimalTranslationModel,
+      as: "translations",
+      required: false,
+    },
+  ],
+  where: search
+    ? {
+        [Op.or]: [
+          { name: { [Op.iLike]: `%${search}%` } },
+          sequelizeWhere(col("translations.name"), { [Op.iLike]: `%${search}%` }),
+        ],
+      }
+    : {},
+  subQuery: false,
+});
 
     const result = animals.map((a) => {
       const data = a.toJSON() as any;

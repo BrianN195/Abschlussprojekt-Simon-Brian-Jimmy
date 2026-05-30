@@ -6,7 +6,7 @@ export default function localeMiddleware(req: Request, res: Response, next: Next
   const q = (req.query.lang as string) || "";
   const header = req.header("accept-language") || "";
   const requested = (q || header.split(",")[0] || "").trim().toLowerCase();
-  const base = requested.split("-")[0];
+  const base = requested.split("-")[0] ?? "";
 
   const resolved = SUPPORTED.includes(base) ? base : "en";
 
