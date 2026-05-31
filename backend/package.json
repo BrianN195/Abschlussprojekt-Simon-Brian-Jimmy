@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "tsx src/server.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "seed": "ts-node src/db/seeders/oldSeed.ts",
+    "seed": "ts-node src/db/seeders/seed.ts",
     "make-admin": "ts-node src/scripts/makeAdmin.ts",
     "fix-image": "ts-node src/scripts/fixLocationImage.ts"
   },
