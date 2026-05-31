@@ -53,7 +53,7 @@ const de = {
     ctaProfile: "Profil ansehen",
     ctaRegister: "Mitmachen - jetzt registrieren",
   },
-  common: { back: "Zurück", cancel: "Abbrechen" },
+  common: { back: "Zurück", cancel: "Abbrechen", loading: "Wird geladen..." },
   login: {
     title: "Anmelden",
     username: "Benutzername",
@@ -124,6 +124,8 @@ const de = {
     emptyTitle: "Noch keine Favoriten",
     emptySubtitle: "Wähle Tiere über die Favoriten-Checkbox aus",
     selectAnimal: "{{name}} auswählen",
+    scrollLeft: "Favoriten nach links scrollen",
+    scrollRight: "Favoriten nach rechts scrollen",
   },
   weather: {
     title: "Wetter",
@@ -148,6 +150,7 @@ const de = {
     about: "Über",
     appearsHere: "Kommt hier vor",
     locations: "Orte",
+    scientificName: "Wissenschaftlicher Name",
     depthRange: "Tiefenbereich",
     category: "Kategorie",
     size: "Größe",
@@ -168,6 +171,13 @@ const de = {
     region: "Region",
     locationType: "Ortstyp",
     animalsHere: "Tiere hier",
+  },
+  locationTypes: {
+    reef: "Riff",
+    wreck: "Wrack",
+    cave: "Höhle",
+    wall: "Steilwand",
+    sandbank: "Sandbank",
   },
   list: {
     loadingAnimals: "Tiere werden geladen...",

@@ -54,7 +54,7 @@ const es = {
     ctaProfile: "Ver perfil",
     ctaRegister: "Unirse - regístrate ahora",
   },
-  common: { back: "Atrás", cancel: "Cancelar" },
+  common: { back: "Atrás", cancel: "Cancelar", loading: "Cargando..." },
   login: {
     title: "Iniciar sesión",
     username: "Usuario",
@@ -125,6 +125,8 @@ const es = {
     emptyTitle: "Aún no hay favoritos",
     emptySubtitle: "Selecciona animales con la casilla de favoritos",
     selectAnimal: "Seleccionar {{name}}",
+    scrollLeft: "Desplazar favoritos a la izquierda",
+    scrollRight: "Desplazar favoritos a la derecha",
   },
   weather: {
     title: "Clima",
@@ -149,6 +151,7 @@ const es = {
     about: "Acerca de",
     appearsHere: "Aparece aquí",
     locations: "Ubicaciones",
+    scientificName: "Nombre científico",
     depthRange: "Rango de profundidad",
     category: "Categoría",
     size: "Tamaño",
@@ -169,6 +172,13 @@ const es = {
     region: "Región",
     locationType: "Tipo de lugar",
     animalsHere: "Animales aquí",
+  },
+  locationTypes: {
+    reef: "Arrecife",
+    wreck: "Naufragio",
+    cave: "Cueva",
+    wall: "Pared",
+    sandbank: "Banco de arena",
   },
   list: {
     loadingAnimals: "Cargando animales...",

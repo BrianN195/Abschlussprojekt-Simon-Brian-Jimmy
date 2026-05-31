@@ -52,7 +52,7 @@ const en = {
     ctaProfile: "View Profile",
     ctaRegister: "Join - register now",
   },
-  common: { back: "Back", cancel: "Cancel" },
+  common: { back: "Back", cancel: "Cancel", loading: "Loading..." },
   login: {
     title: "Login",
     username: "Username",
@@ -123,6 +123,8 @@ const en = {
     emptyTitle: "No favorites yet",
     emptySubtitle: "Select animals with the favorite checkbox",
     selectAnimal: "Select {{name}}",
+    scrollLeft: "Scroll favorites left",
+    scrollRight: "Scroll favorites right",
   },
   weather: {
     title: "Weather",
@@ -147,6 +149,7 @@ const en = {
     about: "About",
     appearsHere: "Appears here",
     locations: "Locations",
+    scientificName: "Scientific name",
     depthRange: "Depth range",
     category: "Category",
     size: "Size",
@@ -167,6 +170,13 @@ const en = {
     region: "Region",
     locationType: "Location type",
     animalsHere: "Animals here",
+  },
+  locationTypes: {
+    reef: "Reef",
+    wreck: "Wreck",
+    cave: "Cave",
+    wall: "Wall",
+    sandbank: "Sandbank",
   },
   list: {
     loadingAnimals: "Loading animals...",

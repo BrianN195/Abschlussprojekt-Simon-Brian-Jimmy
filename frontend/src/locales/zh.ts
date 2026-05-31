@@ -46,7 +46,7 @@ const zh = {
     ctaProfile: "查看资料",
     ctaRegister: "加入 - 立即注册",
   },
-  common: { back: "返回", cancel: "取消" },
+  common: { back: "返回", cancel: "取消", loading: "加载中..." },
   login: {
     title: "登录",
     username: "用户名",
@@ -116,6 +116,8 @@ const zh = {
     emptyTitle: "暂无收藏",
     emptySubtitle: "使用收藏复选框选择动物",
     selectAnimal: "选择 {{name}}",
+    scrollLeft: "向左滚动收藏",
+    scrollRight: "向右滚动收藏",
   },
   weather: {
     title: "天气",
@@ -140,6 +142,7 @@ const zh = {
     about: "关于",
     appearsHere: "出现在这里",
     locations: "地点",
+    scientificName: "学名",
     depthRange: "深度范围",
     category: "类别",
     size: "大小",
@@ -150,14 +153,24 @@ const zh = {
     fish: "鱼",
     turtle: "海龟",
   },
-  location: { loading: "正在加载", about: "关于", appearsHere: "出现在这里" },
+  location: {
+    loading: "正在加载",
+    about: "关于",
+    appearsHere: "出现在这里",
     depth: "深度",
     latitude: "纬度",
     longitude: "经度",
     region: "区域",
     locationType: "地点类型",
     animalsHere: "此处动物",
-  
+  },
+  locationTypes: {
+    reef: "珊瑚礁",
+    wreck: "沉船",
+    cave: "洞穴",
+    wall: "海墙",
+    sandbank: "沙洲",
+  },
   list: {
     loadingAnimals: "正在加载动物...",
     noAnimals: "没有保存的动物",

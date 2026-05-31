@@ -102,7 +102,7 @@ export default function Animal() {
     }
   };
 
-  if (!animal) return <p>Loading</p>;
+  if (!animal) return <p>{t("animal.loading")}</p>;
 
   return (
     <main className={styles.animalCard}>
@@ -133,7 +133,7 @@ export default function Animal() {
                 checked={isFavourite}
                 onChange={handleFavouriteChange}
               />
-              Favorite
+              {t("animal.favorite")}
             </label>
           </div>
         </div>

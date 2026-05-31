@@ -32,12 +32,16 @@ function buildHeaders(): HeadersInit {
     };
 }
 
+function buildLocaleHeaders(locale?: string): HeadersInit {
+    return locale ? { "Accept-Language": locale } : {};
+}
+
 function dispatchFavoriteChange(detail: FavoriteChangeDetail) {
     window.dispatchEvent(new CustomEvent<FavoriteChangeDetail>("favourites-changed", { detail }));
 }
 
 // Get all favorite animals from the backend database
-export async function getFavoriteAnimals(): Promise<FavoriteAnimal[]> {
+export async function getFavoriteAnimals(locale?: string): Promise<FavoriteAnimal[]> {
     try {
         if (!authService.isAuthenticated()) {
             return [];
@@ -45,7 +49,7 @@ export async function getFavoriteAnimals(): Promise<FavoriteAnimal[]> {
 
         const response = await fetch(API_URL, {
             method: "GET",
-            headers: buildHeaders(),
+            headers: { ...buildHeaders(), ...buildLocaleHeaders(locale) },
         });
 
         const data = await parseJsonSafe<FavoriteAnimal[] | ApiError>(response);

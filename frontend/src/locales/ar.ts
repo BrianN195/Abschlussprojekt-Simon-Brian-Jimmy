@@ -53,7 +53,7 @@ const ar = {
     ctaProfile: "عرض الملف الشخصي",
     ctaRegister: "انضم - سجّل الآن",
   },
-  common: { back: "رجوع", cancel: "إلغاء" },
+  common: { back: "رجوع", cancel: "إلغاء", loading: "جارٍ التحميل..." },
   login: {
     title: "تسجيل الدخول",
     username: "اسم المستخدم",
@@ -124,6 +124,8 @@ const ar = {
     emptyTitle: "لا توجد مفضلة بعد",
     emptySubtitle: "حدد الحيوانات باستخدام مربع المفضلة",
     selectAnimal: "تحديد {{name}}",
+    scrollLeft: "تمرير المفضلة إلى اليسار",
+    scrollRight: "تمرير المفضلة إلى اليمين",
   },
   weather: {
     title: "الطقس",
@@ -148,6 +150,7 @@ const ar = {
     about: "حول",
     appearsHere: "يظهر هنا",
     locations: "الأماكن",
+    scientificName: "الاسم العلمي",
     depthRange: "نطاق العمق",
     category: "الفئة",
     size: "الحجم",
@@ -158,14 +161,24 @@ const ar = {
     fish: "سمك",
     turtle: "سلحفاة",
   },
-  location: { loading: "جاري التحميل", about: "حول", appearsHere: "يظهر هنا" },
+  location: {
+    loading: "جاري التحميل",
+    about: "حول",
+    appearsHere: "يظهر هنا",
     depth: "العمق",
     latitude: "خط العرض",
     longitude: "خط الطول",
     region: "المنطقة",
     locationType: "نوع المكان",
     animalsHere: "الحيوانات هنا",
-  
+  },
+  locationTypes: {
+    reef: "شعاب مرجانية",
+    wreck: "حطام",
+    cave: "كهف",
+    wall: "جدار",
+    sandbank: "لسان رملي",
+  },
   list: {
     loadingAnimals: "جاري تحميل الحيوانات...",
     noAnimals: "لا توجد حيوانات محفوظة",

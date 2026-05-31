@@ -175,7 +175,7 @@ async function seed() {
       name: "Haa Dhaalu Atoll",
       description:
         "Abgelegenes Atoll im Norden der Malediven mit zahlreichen Korallenriffen, Wracks und artenreicher Unterwasserwelt. Bekannt für Mantas, Leopardenhaie sowie Weiß- und Schwarzspitzenriffhaie. Beliebtes Gebiet zum Tauchen und Schnorcheln.",
-      region: "Northern Maldives",
+      region: "Nördliche Malediven",
       latitude: 6.5783,
       longitude: 72.9461,
       depth: 30,
@@ -186,7 +186,7 @@ async function seed() {
       name: "Addu Atoll",
       description:
         "Südlichstes Atoll der Malediven mit farbenreichen Korallenriffen, Steilwänden und berühmten Wracktauchplätzen. Bekannt für Mantarochen, Schildkröten, Adlerrochen und große Fischschwärme. Besonders beliebt ist das Wrack der British Loyalty.",
-      region: "Southern Maldives",
+      region: "Südliche Malediven",
       latitude: -0.6292,
       longitude: 73.1586,
       depth: 40,
@@ -197,7 +197,7 @@ async function seed() {
       name: "Faafu Atoll",
       description:
         "Ruhiges Atoll der zentralen Malediven mit unberührten Korallenriffen, Kanälen und vielfältiger Unterwasserwelt. Bekannt für Schildkröten, Riffhaie, Adlerrochen und farbenreiche Rifffische. Besonders beliebt bei Tauchern wegen der klaren Sicht und gesunden Korallenformationen.",
-      region: "Central Maldives",
+      region: "Zentrale Malediven",
       latitude: 3.1078,
       longitude: 72.9656,
       depth: 28,
@@ -208,7 +208,7 @@ async function seed() {
       name: "North Male Atoll",
       description:
         "Eines der bekanntesten Atolle der Malediven mit zahlreichen Tauchspots, Steilwänden und Höhlen. Berühmt für starke Strömungstauchgänge, große Fischschwärme, Riffhaie, Mantas und farbenreiche Korallenriffe.",
-      region: "Central Maldives",
+      region: "Zentrale Malediven",
       latitude: 4.3239,
       longitude: 73.4597,
       depth: 35,
@@ -219,7 +219,7 @@ async function seed() {
       name: "South Ari Atoll",
       description:
         "Weltbekanntes Tauchgebiet im Westen der Malediven mit hoher Chance auf Walhaie und Mantarochen. Das Atoll bietet große Korallenriffe, Kanäle und beeindruckende Begegnungen mit Großfischen.",
-      region: "Western Maldives",
+      region: "Westliche Malediven",
       latitude: 3.65,
       longitude: 72.9,
       depth: 40,
@@ -375,7 +375,7 @@ async function seed() {
       name: "Haa Dhaalu Atoll",
       description:
         "Abgelegenes Atoll im Norden der Malediven mit zahlreichen Korallenriffen, Wracks und artenreicher Unterwasserwelt. Bekannt für Mantas, Leopardenhaie sowie Weiß- und Schwarzspitzenriffhaie. Beliebtes Gebiet zum Tauchen und Schnorcheln.",
-      region: "Northern Maldives",
+      region: "Nördliche Malediven",
     },
     {
       locationName: "Addu Atoll",
@@ -383,7 +383,7 @@ async function seed() {
       name: "Addu Atoll",
       description:
         "Südlichstes Atoll der Malediven mit farbenreichen Korallenriffen, Steilwänden und berühmten Wracktauchplätzen. Bekannt für Mantarochen, Schildkröten, Adlerrochen und große Fischschwärme. Besonders beliebt ist das Wrack der British Loyalty.",
-      region: "Southern Maldives",
+      region: "Südliche Malediven",
     },
     {
       locationName: "Faafu Atoll",
@@ -391,7 +391,7 @@ async function seed() {
       name: "Faafu Atoll",
       description:
         "Ruhiges Atoll der zentralen Malediven mit unberührten Korallenriffen, Kanälen und vielfältiger Unterwasserwelt. Bekannt für Schildkröten, Riffhaie, Adlerrochen und farbenreiche Rifffische. Besonders beliebt bei Tauchern wegen der klaren Sicht und gesunden Korallenformationen.",
-      region: "Central Maldives",
+      region: "Zentrale Malediven",
     },
     {
       locationName: "North Male Atoll",
@@ -399,7 +399,7 @@ async function seed() {
       name: "North Male Atoll",
       description:
         "Eines der bekanntesten Atolle der Malediven mit zahlreichen Tauchspots, Steilwänden und Höhlen. Berühmt für starke Strömungstauchgänge, große Fischschwärme, Riffhaie, Mantas und farbenreiche Korallenriffe.",
-      region: "Central Maldives",
+      region: "Zentrale Malediven",
     },
     {
       locationName: "South Ari Atoll",
@@ -407,7 +407,7 @@ async function seed() {
       name: "South Ari Atoll",
       description:
         "Weltbekanntes Tauchgebiet im Westen der Malediven mit hoher Chance auf Walhaie und Mantarochen. Das Atoll bietet große Korallenriffe, Kanäle und beeindruckende Begegnungen mit Großfischen.",
-      region: "Western Maldives",
+      region: "Westliche Malediven",
     },
   ];
 
@@ -571,11 +571,11 @@ async function seed() {
   ];
 
   const locationTranslationsFr = [
-    { locationName: "Haa Dhaalu Atoll", locale: "fr", name: "Haa Dhaalu Atoll", description: "Atoll isolé au nord des Maldives avec de nombreux récifs, épaves et une vie sous-marine riche.", region: "Northern Maldives" },
-    { locationName: "Addu Atoll", locale: "fr", name: "Addu Atoll", description: "Atoll le plus au sud offrant récifs colorés, murs escarpés et plongées sur épaves célèbres.", region: "Southern Maldives" },
-    { locationName: "Faafu Atoll", locale: "fr", name: "Faafu Atoll", description: "Atoll central calme avec récifs vierges, canaux et faune diversifiée, apprécié pour sa bonne visibilité.", region: "Central Maldives" },
-    { locationName: "North Male Atoll", locale: "fr", name: "North Male Atoll", description: "Atoll bien connu avec de nombreux sites de plongée, murs et grottes impressionnants.", region: "Central Maldives" },
-    { locationName: "South Ari Atoll", locale: "fr", name: "South Ari Atoll", description: "Zone de plongée mondialement reconnue avec grande probabilité d'observer des requins-baleines et des raies manta.", region: "Western Maldives" },
+    { locationName: "Haa Dhaalu Atoll", locale: "fr", name: "Haa Dhaalu Atoll", description: "Atoll isolé au nord des Maldives avec de nombreux récifs, épaves et une vie sous-marine riche.", region: "Maldives du Nord" },
+    { locationName: "Addu Atoll", locale: "fr", name: "Addu Atoll", description: "Atoll le plus au sud offrant récifs colorés, murs escarpés et plongées sur épaves célèbres.", region: "Maldives du Sud" },
+    { locationName: "Faafu Atoll", locale: "fr", name: "Faafu Atoll", description: "Atoll central calme avec récifs vierges, canaux et faune diversifiée, apprécié pour sa bonne visibilité.", region: "Maldives centrales" },
+    { locationName: "North Male Atoll", locale: "fr", name: "North Male Atoll", description: "Atoll bien connu avec de nombreux sites de plongée, murs et grottes impressionnants.", region: "Maldives centrales" },
+    { locationName: "South Ari Atoll", locale: "fr", name: "South Ari Atoll", description: "Zone de plongée mondialement reconnue avec grande probabilité d'observer des requins-baleines et des raies manta.", region: "Maldives occidentales" },
   ];
 
   const animalTranslationsEs = [
@@ -592,11 +592,11 @@ async function seed() {
   ];
 
   const locationTranslationsEs = [
-    { locationName: "Haa Dhaalu Atoll", locale: "es", name: "Haa Dhaalu Atoll", description: "Atolón remoto en el norte de Maldivas con numerosos arrecifes, pecios y rica vida submarina.", region: "Northern Maldives" },
-    { locationName: "Addu Atoll", locale: "es", name: "Addu Atoll", description: "Atolón más al sur con arrecifes coloridos, paredes y buceos en pecios famosos.", region: "Southern Maldives" },
-    { locationName: "Faafu Atoll", locale: "es", name: "Faafu Atoll", description: "Atolón central tranquilo con arrecifes prístinos, canales y diversa fauna marina.", region: "Central Maldives" },
-    { locationName: "North Male Atoll", locale: "es", name: "North Male Atoll", description: "Uno de los atolones más conocidos con numerosos sitios de buceo y impresionantes paredes.", region: "Central Maldives" },
-    { locationName: "South Ari Atoll", locale: "es", name: "South Ari Atoll", description: "Zona de buceo de fama mundial con alta probabilidad de ver tiburones ballena y mantas.", region: "Western Maldives" },
+    { locationName: "Haa Dhaalu Atoll", locale: "es", name: "Haa Dhaalu Atoll", description: "Atolón remoto en el norte de Maldivas con numerosos arrecifes, pecios y rica vida submarina.", region: "Maldivas del Norte" },
+    { locationName: "Addu Atoll", locale: "es", name: "Addu Atoll", description: "Atolón más al sur con arrecifes coloridos, paredes y buceos en pecios famosos.", region: "Maldivas del Sur" },
+    { locationName: "Faafu Atoll", locale: "es", name: "Faafu Atoll", description: "Atolón central tranquilo con arrecifes prístinos, canales y diversa fauna marina.", region: "Maldivas centrales" },
+    { locationName: "North Male Atoll", locale: "es", name: "North Male Atoll", description: "Uno de los atolones más conocidos con numerosos sitios de buceo y impresionantes paredes.", region: "Maldivas centrales" },
+    { locationName: "South Ari Atoll", locale: "es", name: "South Ari Atoll", description: "Zona de buceo de fama mundial con alta probabilidad de ver tiburones ballena y mantas.", region: "Maldivas occidentales" },
   ];
 
   const animalTranslationsAr = [
@@ -613,11 +613,11 @@ async function seed() {
   ];
 
   const locationTranslationsAr = [
-    { locationName: "Haa Dhaalu Atoll", locale: "ar", name: "Haa Dhaalu Atoll", description: "أطلس نائي شمال جزر المالديف مع العديد من الشعاب المرجانية والحطام وحياة بحرية غنية.", region: "Northern Maldives" },
-    { locationName: "Addu Atoll", locale: "ar", name: "Addu Atoll", description: "أقصى الأطلس جنوبًا مع شعاب ملونة وجدران حادة وغوص على حطام مشهور.", region: "Southern Maldives" },
-    { locationName: "Faafu Atoll", locale: "ar", name: "Faafu Atoll", description: "أطلس مركزي هادئ مع شعاب بكر وقنوات وحياة بحرية متنوعة، مشهور برؤية السلاحف.", region: "Central Maldives" },
-    { locationName: "North Male Atoll", locale: "ar", name: "North Male Atoll", description: "أحد الأطلس المشهورة مع مواقع غوص عديدة وجدران وكهوف مدهشة.", region: "Central Maldives" },
-    { locationName: "South Ari Atoll", locale: "ar", name: "South Ari Atoll", description: "منطقة غوص مشهورة عالميًا مع فرص عالية لرؤية قرش الحوت ومانتا.", region: "Western Maldives" },
+    { locationName: "Haa Dhaalu Atoll", locale: "ar", name: "Haa Dhaalu Atoll", description: "أطلس نائي شمال جزر المالديف مع العديد من الشعاب المرجانية والحطام وحياة بحرية غنية.", region: "شمال المالديف" },
+    { locationName: "Addu Atoll", locale: "ar", name: "Addu Atoll", description: "أقصى الأطلس جنوبًا مع شعاب ملونة وجدران حادة وغوص على حطام مشهور.", region: "جنوب المالديف" },
+    { locationName: "Faafu Atoll", locale: "ar", name: "Faafu Atoll", description: "أطلس مركزي هادئ مع شعاب بكر وقنوات وحياة بحرية متنوعة، مشهور برؤية السلاحف.", region: "وسط المالديف" },
+    { locationName: "North Male Atoll", locale: "ar", name: "North Male Atoll", description: "أحد الأطلس المشهورة مع مواقع غوص عديدة وجدران وكهوف مدهشة.", region: "وسط المالديف" },
+    { locationName: "South Ari Atoll", locale: "ar", name: "South Ari Atoll", description: "منطقة غوص مشهورة عالميًا مع فرص عالية لرؤية قرش الحوت ومانتا.", region: "المالديف الغربية" },
   ];
 
   const animalTranslationsZh = [
@@ -634,11 +634,11 @@ async function seed() {
   ];
 
   const locationTranslationsZh = [
-    { locationName: "Haa Dhaalu Atoll", locale: "zh", name: "Haa Dhaalu Atoll", description: "马尔代夫北部的偏远环礁，拥有众多珊瑚礁、沉船和丰富的海底生物。", region: "Northern Maldives" },
-    { locationName: "Addu Atoll", locale: "zh", name: "Addu Atoll", description: "马尔代夫最南端的环礁，拥有五彩珊瑚礁、陡峭海墙和著名的沉船潜点。", region: "Southern Maldives" },
-    { locationName: "Faafu Atoll", locale: "zh", name: "Faafu Atoll", description: "中部安静的环礁，拥有原始珊瑚礁、河道和多样的海洋生物，潜水能见度佳。", region: "Central Maldives" },
-    { locationName: "North Male Atoll", locale: "zh", name: "North Male Atoll", description: "马尔代夫著名环礁之一，拥有众多潜点、陡壁和洞穴。", region: "Central Maldives" },
-    { locationName: "South Ari Atoll", locale: "zh", name: "South Ari Atoll", description: "世界知名的潜区，高概率遇到鲸鲨与魔鬼鱼。", region: "Western Maldives" },
+    { locationName: "Haa Dhaalu Atoll", locale: "zh", name: "Haa Dhaalu Atoll", description: "马尔代夫北部的偏远环礁，拥有众多珊瑚礁、沉船和丰富的海底生物。", region: "马尔代夫北部" },
+    { locationName: "Addu Atoll", locale: "zh", name: "Addu Atoll", description: "马尔代夫最南端的环礁，拥有五彩珊瑚礁、陡峭海墙和著名的沉船潜点。", region: "马尔代夫南部" },
+    { locationName: "Faafu Atoll", locale: "zh", name: "Faafu Atoll", description: "中部安静的环礁，拥有原始珊瑚礁、河道和多样的海洋生物，潜水能见度佳。", region: "马尔代夫中部" },
+    { locationName: "North Male Atoll", locale: "zh", name: "North Male Atoll", description: "马尔代夫著名环礁之一，拥有众多潜点、陡壁和洞穴。", region: "马尔代夫中部" },
+    { locationName: "South Ari Atoll", locale: "zh", name: "South Ari Atoll", description: "世界知名的潜区，高概率遇到鲸鲨与魔鬼鱼。", region: "马尔代夫西部" },
   ];
 
   // Insert animal translations idempotently
@@ -679,6 +679,18 @@ async function seed() {
     }),
   );
 
+  // Ensure existing translations get updated for region (in case defaults existed before)
+  await Promise.all(
+    locationTranslations.map(async (l) => {
+      const location = locationsMap.get(l.locationName);
+      if (!location) return;
+      await LocationTranslationModel.update(
+        { region: l.region },
+        { where: { locationId: location.id, locale: l.locale } },
+      );
+    }),
+  );
+
   await Promise.all(
     animalTranslationsEn.map(async (t) => {
       const animal = animalsMap.get(t.scientificKey);
@@ -715,6 +727,17 @@ async function seed() {
     }),
   );
 
+  await Promise.all(
+    locationTranslationsEn.map(async (l) => {
+      const location = locationsMap.get(l.locationName);
+      if (!location) return;
+      await LocationTranslationModel.update(
+        { region: l.region },
+        { where: { locationId: location.id, locale: l.locale } },
+      );
+    }),
+  );
+
   // Insert French translations
   await Promise.all(
     animalTranslationsFr.map(async (t) => {
@@ -735,6 +758,17 @@ async function seed() {
         where: { locationId: location.id, locale: l.locale },
         defaults: { locationId: location.id, locale: l.locale, name: l.name, description: l.description, region: l.region },
       });
+    }),
+  );
+
+  await Promise.all(
+    locationTranslationsFr.map(async (l) => {
+      const location = locationsMap.get(l.locationName);
+      if (!location) return;
+      await LocationTranslationModel.update(
+        { region: l.region },
+        { where: { locationId: location.id, locale: l.locale } },
+      );
     }),
   );
 
@@ -761,6 +795,17 @@ async function seed() {
     }),
   );
 
+  await Promise.all(
+    locationTranslationsEs.map(async (l) => {
+      const location = locationsMap.get(l.locationName);
+      if (!location) return;
+      await LocationTranslationModel.update(
+        { region: l.region },
+        { where: { locationId: location.id, locale: l.locale } },
+      );
+    }),
+  );
+
   // Insert Arabic translations
   await Promise.all(
     animalTranslationsAr.map(async (t) => {
@@ -784,6 +829,17 @@ async function seed() {
     }),
   );
 
+  await Promise.all(
+    locationTranslationsAr.map(async (l) => {
+      const location = locationsMap.get(l.locationName);
+      if (!location) return;
+      await LocationTranslationModel.update(
+        { region: l.region },
+        { where: { locationId: location.id, locale: l.locale } },
+      );
+    }),
+  );
+
   // Insert Chinese translations
   await Promise.all(
     animalTranslationsZh.map(async (t) => {
@@ -804,6 +860,17 @@ async function seed() {
         where: { locationId: location.id, locale: l.locale },
         defaults: { locationId: location.id, locale: l.locale, name: l.name, description: l.description, region: l.region },
       });
+    }),
+  );
+
+  await Promise.all(
+    locationTranslationsZh.map(async (l) => {
+      const location = locationsMap.get(l.locationName);
+      if (!location) return;
+      await LocationTranslationModel.update(
+        { region: l.region },
+        { where: { locationId: location.id, locale: l.locale } },
+      );
     }),
   );
 

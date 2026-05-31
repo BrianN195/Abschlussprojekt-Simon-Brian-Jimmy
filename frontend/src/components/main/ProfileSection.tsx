@@ -22,6 +22,9 @@ function getInitials(name?: string) {
 function ProfileSection({ user }: Props) {
     const { t } = useTranslation();
     const avatarUrl = user?.profileImage || null;
+    const genderLabel = user?.gender
+        ? t(`profile.${user.gender}` as "profile.male")
+        : t('profile.notSet');
 
     return (
         <section className="profile-section profile-summary-card">
@@ -45,7 +48,7 @@ function ProfileSection({ user }: Props) {
                 <div className="profile-stats">
                     <div>
                         <span className="profile-stat-label">{t('profile.gender')}</span>
-                        <strong>{user.gender || t('profile.notSet')}</strong>
+                        <strong>{genderLabel}</strong>
                     </div>
 
                     <div>

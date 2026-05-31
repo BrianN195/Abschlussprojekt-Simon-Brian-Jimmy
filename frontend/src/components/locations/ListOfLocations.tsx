@@ -4,7 +4,7 @@ import type { Location } from "../../types/Locations";
 import { locationService } from "../../services/locationService";
 
 export default function locationList() {
-  const { t } = useTranslation();
+  const { i18n, t } = useTranslation();
   const [locations, setlocations] = useState<Location[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -13,7 +13,7 @@ export default function locationList() {
       try {
         setLoading(true);
 
-        const data = await locationService.getAll();
+        const data = await locationService.getAll(i18n.language);
         setlocations(data);
       } catch (err) {
         console.log(err);
@@ -23,7 +23,7 @@ export default function locationList() {
     }
 
     fetchlocations();
-  }, []);
+  }, [i18n.language]);
 
   if (loading) return <p>{t('list.loadingLocations')}</p>;
 

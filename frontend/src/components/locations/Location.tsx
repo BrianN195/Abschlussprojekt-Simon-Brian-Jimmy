@@ -23,7 +23,7 @@ export default function Location() {
       });
   }, [id, i18n.language]);
 
-  if (!location) return <p>Loading</p>;
+  if (!location) return <p>{t("location.loading")}</p>;
 
   return (
     <main className={styles.locationPage}>
@@ -51,7 +51,7 @@ export default function Location() {
               </div>
               <div className={styles.stat}>
                 <p>{t("location.locationType")}</p>
-                <p>{location.type}</p>
+                <p>{t(`locationTypes.${location.type}`)}</p>
               </div>
             </div>
           </div>

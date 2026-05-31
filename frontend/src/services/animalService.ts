@@ -15,10 +15,15 @@ async function parseJsonSafe<T>(response: Response): Promise<T> {
     return {} as T;
   }
 }
+
+function buildHeaders(locale?: string) {
+  return locale ? { "Accept-Language": locale } : undefined;
+}
+
 export const speciesService = {
   // Alle Tiere holen
-  getAll: async (): Promise<Animal[]> => {
-    const res = await fetch(`${API_URL}`);
+  getAll: async (locale?: string): Promise<Animal[]> => {
+    const res = await fetch(`${API_URL}`, { headers: buildHeaders(locale) });
 
     const data = await parseJsonSafe<Animal[] | ApiError>(res);
 
@@ -30,8 +35,8 @@ export const speciesService = {
   },
 
   // Einzelnes Tier
-  getById: async (id: number): Promise<Animal> => {
-    const res = await fetch(`${API_URL}/${id}`);
+  getById: async (id: number, locale?: string): Promise<Animal> => {
+    const res = await fetch(`${API_URL}/${id}`, { headers: buildHeaders(locale) });
 
     const data = await parseJsonSafe<Animal | ApiError>(res);
 
@@ -43,8 +48,8 @@ export const speciesService = {
   },
 
   // Locations (falls dein Backend das sauber fixed hat)
-  getLocations: async (id: number) => {
-    const res = await fetch(`${API_URL}/${id}/locations`);
+  getLocations: async (id: number, locale?: string) => {
+    const res = await fetch(`${API_URL}/${id}/locations`, { headers: buildHeaders(locale) });
 
     const data = await parseJsonSafe<any | ApiError>(res);
 

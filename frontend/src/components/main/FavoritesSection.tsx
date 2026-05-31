@@ -9,7 +9,7 @@ import {
 import "../../styles/favorites.css";
 
 function FavoritesSection() {
-  const { t } = useTranslation();
+  const { i18n, t } = useTranslation();
   const [favorites, setFavorites] = useState<FavoriteAnimal[]>([]);
   const [selectedFavoriteIds, setSelectedFavoriteIds] = useState<number[]>([]);
   const carouselViewportRef = useRef<HTMLDivElement>(null);
@@ -32,7 +32,7 @@ function FavoritesSection() {
   };
 
   const loadFavorites = async () => {
-    const favs = await getFavoriteAnimals();
+    const favs = await getFavoriteAnimals(i18n.language);
     setFavorites(favs);
   };
 
@@ -118,7 +118,7 @@ function FavoritesSection() {
     return () => {
       window.removeEventListener("favourites-changed", handleFavoriteChange);
     };
-  }, []);
+  }, [i18n.language]);
 
   useEffect(() => {
     setSelectedFavoriteIds((currentSelected) =>
@@ -206,7 +206,7 @@ function FavoritesSection() {
               type="button"
               className="favorites-carousel-button favorites-carousel-button-left visible"
               onClick={() => scrollCarousel(-1)}
-              aria-label="Scroll favorites left"
+              aria-label={t("favorites.scrollLeft")}
             >
               ‹
             </button>
@@ -226,7 +226,7 @@ function FavoritesSection() {
                         type="checkbox"
                         checked={selectedFavoriteIds.includes(animal.id)}
                         onChange={() => toggleFavoriteSelection(animal.id)}
-                        aria-label={`Select ${animal.name}`}
+                        aria-label={t("favorites.selectAnimal", { name: animal.name })}
                       />
 
                       <Link to={`/animal/${animal.id}`} className="favorite-card-link">
@@ -255,7 +255,7 @@ function FavoritesSection() {
               type="button"
               className="favorites-carousel-button favorites-carousel-button-right visible"
               onClick={() => scrollCarousel(1)}
-              aria-label="Scroll favorites right"
+              aria-label={t("favorites.scrollRight")}
             >
               ›
             </button>

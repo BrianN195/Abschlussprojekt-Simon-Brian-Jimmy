@@ -183,6 +183,12 @@ router.put('/me', upload.single('avatar'),apiLimiter,  async (req: Request, res:
     }
 
     const { username, bio, gender, birthDate, profileImage } = req.body;
+    const normalizedBirthDate =
+      birthDate === undefined || birthDate === null
+        ? undefined
+        : String(birthDate).trim() === ''
+          ? null
+          : String(birthDate).trim();
 
     if (username !== undefined) {
       user.username = username;
@@ -193,8 +199,8 @@ router.put('/me', upload.single('avatar'),apiLimiter,  async (req: Request, res:
     if (gender !== undefined) {
       user.gender = gender;
     }
-    if (birthDate !== undefined) {
-      user.birthDate = birthDate;
+    if (normalizedBirthDate !== undefined) {
+      user.birthDate = normalizedBirthDate;
     }
     if (req.file) {
       // process uploaded file (resize + convert to webp)
@@ -231,7 +237,14 @@ router.put('/me', upload.single('avatar'),apiLimiter,  async (req: Request, res:
 
     res.json(serializeUser(req, user));
   } catch (error) {
-    res.status(401).json({ error: 'Invalid token' });
+    console.error('Profile update failed:', error);
+
+    if (error instanceof jwt.JsonWebTokenError || error instanceof jwt.TokenExpiredError) {
+      return res.status(401).json({ error: 'Invalid token' });
+    }
+
+    const message = error instanceof Error ? error.message : 'Failed to update profile';
+    return res.status(400).json({ error: message });
   }
 });
 

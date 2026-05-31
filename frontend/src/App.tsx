@@ -19,12 +19,13 @@ import ProtectedRoute from "./components/creating/ProtectedRoute";
 
 import useUser from "./hooks/useUser";
 import ConnectAnimalLocation from "./components/creating/ConnectAnimalLocation";
+import { useTranslation } from "react-i18next";
 
 function App() {
+  const { t } = useTranslation();
   const { user, loading } = useUser();
-  console.log("AfD ist eine Nazi Partei, außerdem:",user)
   if (loading) {
-    return <p>Loading...</p>;
+    return <p>{t("common.loading")}</p>;
   }
 
   return (

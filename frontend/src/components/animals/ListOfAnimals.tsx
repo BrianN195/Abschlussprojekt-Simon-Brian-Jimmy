@@ -11,14 +11,14 @@ import {
 } from "../../services/favouritesService";
 
 export default function AnimalList() {
-  const { t } = useTranslation();
+  const { i18n, t } = useTranslation();
   const [animals, setAnimals] = useState<Animal[]>([]);
   const [loading, setLoading] = useState(true);
   // =================================================
   useEffect(() => {
     async function loadFavourites() {
       try {
-        const favourites = await getFavoriteAnimals();
+        const favourites = await getFavoriteAnimals(i18n.language);
 
         setIsFavourite(favourites.map((fav) => fav.id));
       } catch (error) {
@@ -33,7 +33,7 @@ export default function AnimalList() {
     return () => {
       window.removeEventListener("favourites-changed", loadFavourites);
     };
-  }, []);
+  }, [i18n.language]);
   // const [animal, setAnimal] = useState<AnimalDetail | null>(null);
   const [isFavourite, setIsFavourite] = useState<number[]>([]);
   const handleFavouriteChange = async (
@@ -69,7 +69,7 @@ export default function AnimalList() {
       try {
         setLoading(true);
 
-        const data = await speciesService.getAll();
+        const data = await speciesService.getAll(i18n.language);
         setAnimals(data);
       } catch (err) {
         console.log(err);
@@ -79,7 +79,7 @@ export default function AnimalList() {
     }
 
     fetchAnimals();
-  }, []);
+  }, [i18n.language]);
 
   if (loading) return <p>{t("list.loadingAnimals")}</p>;
 
@@ -87,16 +87,15 @@ export default function AnimalList() {
     <main className={style.mainContainer}>
       <div className={style.cardContainer}>
         {animals.length === 0 ? (
-          <p>Keine Tiere gespeichert</p>
+          <p>{t("list.noAnimals")}</p>
         ) : (
           animals.map((animal) => (
-            <div className={style.cardwrapper}>
+            <div key={animal.id} className={style.cardwrapper}>
               <Link
-                key={animal.id}
                 to={`/animal/${animal.id}`}
                 className={style.cardLink}
               >
-                <div key={animal.id} className={style.card}>
+                <div className={style.card}>
                   <h3 className="">{animal.name}</h3>
                   <div className={style.wrapper}>
                     <img src={animal.imageUrl} alt="" className={style.pic} />
@@ -112,7 +111,7 @@ export default function AnimalList() {
                   checked={isFavourite.includes(animal.id)}
                   onChange={(event) => handleFavouriteChange(event, animal)}
                 />
-                Favorite
+                {t("animal.favorite")}
               </label>
             </div>
           ))
