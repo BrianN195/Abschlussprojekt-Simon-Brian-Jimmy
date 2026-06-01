@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Unknown weather icon">
+  <circle cx="64" cy="64" r="48" fill="#DCEEFF" opacity="0.2"/>
+  <path d="M46 48c0-10 8-18 18-18s18 7 18 17c0 12-14 14-14 24h-8c0-13 14-15 14-24 0-6-5-10-10-10s-10 4-10 11H46Z" fill="#FFFFFF"/>
+  <circle cx="64" cy="94" r="6" fill="#FFFFFF"/>
+</svg>

@@ -120,3 +120,28 @@ Favoriten: Speichern bestimmter Tiere in einer persönlichen Merkliste.
 
     Create Seiten:
     Sind soweit fertig, sollten nur für Admin nutzbar und sichtbar sein
+
+### Tiere und Locatins hinzufügen, was muss ich beachten?
+- Erst Lesen!
+-  gibt sonst probleme weil jeder eine lokale datenbank hat. Beispiel:
+    - Jimmy fügt ein tier hinzu -> bekommt aktuell Id 11
+    - Simon fügt auch ein tier hinzu -> bekommt auch Id 11 (Weil die datenbank ja bei jedem lokal läuft)
+    - 2x animal mit Id 11 => fehler, datenbank reset
+- Außerdem: die datenbank wird eh noch einmal final resetet wenn ich den emailbranch merge samstag oder Montag
+- was von Brian bis Montag Vormittag erledigt sein wird:
+    - Animal Location Verbidung auch über seite (gemacht)
+    - One Pie.. äh Datenbank für alle. 
+- wenn über seite gemacht: alles weg davon.
+- du willst trotzdem was hinzufügen?
+- du musst über die seed datei gehen und es da eintragen
+- vorteil: bei dem finalem reset sind die daten trotzdem noch im seed, damit nicht verloren und werden beim nächsten npm run seed wieder hinzugefügt
+- nachteil: bevor du npm run seed machst erst wieder undun und migrieren, dann seeden
+- gaaanz oben in der seed funktion sind die beispiele für Tiere und Location einfach kopieren und ausfüllen. 
+- Beziehungen zwischen Animal und Location:
+    ```ts
+    await AnimalLocationModel.create({
+  animalId: animalx.id, //die id deines tieres
+  locationId: locationx.id, //die id der location zu der es gehört. Wenn es zu mehreren gehört muss es für jede Location gemacht werden
+  rarity: "rare",
+    });
+

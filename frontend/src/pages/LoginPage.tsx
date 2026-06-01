@@ -1,9 +1,11 @@
+import { useTranslation } from "react-i18next";
 import { useEffect, useState, type FormEvent } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { authService } from "../services/authService";
 import "../styles/login.css";
 
 function LoginPage() {
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   const [username, setUsername] = useState("");
@@ -80,7 +82,7 @@ function LoginPage() {
       const message =
         error instanceof Error
           ? error.message
-          : "Login failed";
+          : t('login.failed');
 
       setErrorMessage(message);
     } finally {
@@ -95,10 +97,10 @@ function LoginPage() {
         type="button"
         onClick={handleCancel}
       >
-        {`<< Back`}
+        {`<< ${t('common.back')}`}
       </button>
 
-      <h1 className="login-title">Login</h1>
+      <h1 className="login-title">{t('login.title')}</h1>
 
       <form
         className="login-form"
@@ -106,7 +108,7 @@ function LoginPage() {
       >
         <div className="form-field">
           <label htmlFor="login-username">
-            Username
+            {t('login.username')}
           </label>
 
           <input
@@ -117,11 +119,11 @@ function LoginPage() {
               setUsername(event.target.value)
             }
             required
-            placeholder="Enter Username"
+            placeholder={t('login.usernamePlaceholder')}
           />
 
           <label className="remember-login">
-            <span>Remember username</span>
+            <span>{t('login.rememberUsername')}</span>
 
             <input
               type="checkbox"
@@ -137,7 +139,7 @@ function LoginPage() {
 
         <div className="form-field">
           <label htmlFor="login-password">
-            Password
+            {t('login.password')}
           </label>
 
           <input
@@ -148,11 +150,11 @@ function LoginPage() {
               setPassword(event.target.value)
             }
             required
-            placeholder="Enter Password"
+            placeholder={t('login.passwordPlaceholder')}
           />
 
           <label className="remember-login">
-            <span>Remember password</span>
+            <span>{t('login.rememberPassword')}</span>
 
             <input
               type="checkbox"
@@ -172,7 +174,7 @@ function LoginPage() {
             type="button"
             onClick={handleCancel}
           >
-            Cancel
+            {t('common.cancel')}
           </button>
 
           <button
@@ -180,9 +182,7 @@ function LoginPage() {
             type="submit"
             disabled={loading}
           >
-            {loading
-              ? "Logging in..."
-              : "Login"}
+            {loading ? t('login.loading') : t('login.login')}
           </button>
         </div>
       </form>
@@ -194,9 +194,9 @@ function LoginPage() {
       ) : null}
 
       <p>
-        No account yet?{" "}
+        {t('login.noAccount')} {" "}
         <Link to="/register">
-          Create one
+          {t('login.createOne')}
         </Link>
       </p>
     </main>

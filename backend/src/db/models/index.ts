@@ -4,6 +4,9 @@ import UserModel from "./UserModel";
 import AnimalLocationModel from "./AnimalLocationModel";
 import UserFavoriteAnimalModel from "./UserFavoritAnimalModel";
 import AnimalCommentModel from "./AnimalCommentModel";
+import AnimalTranslationModel from "./AnimalTranslationModel";
+import LocationTranslationModel from "./LocationTranslationModel";
+
 
 
 // 🐠 Animal ↔ 🌊 Location (Many-to-Many)
@@ -22,11 +25,15 @@ LocationModel.belongsToMany(AnimalModel, {
 UserModel.belongsToMany(AnimalModel, {
   through: UserFavoriteAnimalModel,
   as: "favorites",
+  foreignKey: "userId",
+  otherKey: "animalId",
 });
 
 AnimalModel.belongsToMany(UserModel, {
   through: UserFavoriteAnimalModel,
   as: "fans",
+  foreignKey: "animalId",
+  otherKey: "userId",
 });
 
 UserModel.hasMany(AnimalCommentModel, {
@@ -45,11 +52,30 @@ AnimalCommentModel.belongsTo(AnimalModel, {
   foreignKey: "animalId",
 });
 
+// Translations associations
+AnimalModel.hasMany(AnimalTranslationModel, {
+  foreignKey: "animalId",
+  as: "translations",
+});
+AnimalTranslationModel.belongsTo(AnimalModel, {
+  foreignKey: "animalId",
+});
+
+LocationModel.hasMany(LocationTranslationModel, {
+  foreignKey: "locationId",
+  as: "translations",
+});
+LocationTranslationModel.belongsTo(LocationModel, {
+  foreignKey: "locationId",
+});
+
 export {
   AnimalModel,
   LocationModel,
   AnimalLocationModel,
   UserModel,
   UserFavoriteAnimalModel,
-  AnimalCommentModel
+  AnimalCommentModel,
+  AnimalTranslationModel,
+  LocationTranslationModel
 };

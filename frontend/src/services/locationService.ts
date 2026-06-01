@@ -17,10 +17,14 @@ async function parseJsonSafe<T>(response: Response): Promise<T> {
   }
 }
 
+function buildHeaders(locale?: string) {
+  return locale ? { "Accept-Language": locale } : undefined;
+}
+
 export const locationService = {
   // Alle Locations / Resorts holen
-  getAll: async (): Promise<Location[]> => {
-    const res = await fetch(`${API_URL}`);
+  getAll: async (locale?: string): Promise<Location[]> => {
+    const res = await fetch(`${API_URL}`, { headers: buildHeaders(locale) });
 
     const data = await parseJsonSafe<Location[] | ApiError>(res);
 
@@ -32,8 +36,8 @@ export const locationService = {
   },
 
   // Einzelne Location
-  getById: async (id: number): Promise<Location> => {
-    const res = await fetch(`${API_URL}/${id}`);
+  getById: async (id: number, locale?: string): Promise<Location> => {
+    const res = await fetch(`${API_URL}/${id}`, { headers: buildHeaders(locale) });
 
     const data = await parseJsonSafe<Location | ApiError>(res);
 
@@ -45,8 +49,8 @@ export const locationService = {
   },
 
   // Tiere einer Location holen (JOIN Endpoint)
-  getAnimalsByLocation: async (id: number) => {
-    const res = await fetch(`${API_URL}/${id}/animals`);
+  getAnimalsByLocation: async (id: number, locale?: string) => {
+    const res = await fetch(`${API_URL}/${id}/animals`, { headers: buildHeaders(locale) });
 
     const data = await parseJsonSafe<any | ApiError>(res);
 

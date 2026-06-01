@@ -11,8 +11,8 @@ router.get('/', async (req: Request, res: Response) => {
       `https://api.open-meteo.com/v1/forecast` +
       `?latitude=${latitude}` +
       `&longitude=${longitude}` +
-      `&current=temperature_2m,relative_humidity_2m,precipitation,wind_speed_10m` +
-      `&daily=temperature_2m_max,temperature_2m_min,precipitation_sum` +
+      `&current=temperature_2m,relative_humidity_2m,precipitation,wind_speed_10m,weather_code` +
+      `&daily=temperature_2m_max,temperature_2m_min,precipitation_sum,weather_code` +
       `&timezone=Indian%2FMaldives`;
 
       const response = await fetch(weatherUrl);

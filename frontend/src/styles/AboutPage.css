@@ -1,0 +1,243 @@
+.about-page {
+  min-height: 100vh;
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+
+  background-image: url("/images/desktop/background-about-page-desktop.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #061826;
+
+  padding: 6rem 2rem 2rem;
+  color: #ffffff;
+}
+
+.about-content {
+  width: min(100%, 1200px);
+  display: grid;
+  gap: 1.25rem;
+}
+
+.about-card {
+  padding: 1.5rem;
+  border-radius: 24px;
+  background: rgba(22, 54, 72, 0.38);
+  backdrop-filter: blur(0.75px);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.38);
+}
+
+.about-features {
+  background: rgba(22, 54, 72, 0.38);
+  backdrop-filter: blur(1.5px);
+}
+
+.about-hero {
+  text-align: center;
+}
+
+.about-card h1,
+.about-card h2 {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  color: #ffffff;
+  text-shadow:
+    0 0 10px rgba(126, 231, 255, 0.3),
+    0 8px 24px rgba(0, 0, 0, 0.65);
+}
+
+.about-card h1 {
+  font-size: clamp(2.2rem, 5.5vw, 4.8rem);
+  line-height: 0.95;
+}
+
+.about-card h2 {
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  margin-bottom: 0.85rem;
+}
+
+.about-card p,
+.about-card li {
+  margin: 0;
+  color: #ffffff;
+  font-family: "Inter", "Noto Sans", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  line-height: 1.65;
+}
+
+.about-hero p {
+  margin-top: 1rem;
+  font-size: 1.05rem;
+  max-width: 72ch;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.about-card ul {
+  margin: 0.25rem 0 0;
+  padding-left: 0;
+  margin-left: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.65rem;
+}
+
+.about-card li {
+  padding-left: 0;
+}
+
+.about-cta {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.25rem 0;
+}
+
+.about-cta-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: fit-content;
+  min-width: unset;
+  padding: 0.45rem 0.8rem;
+
+  border: 1px solid transparent;
+  border-radius: 12px;
+
+  background: transparent;
+  color: #dff7ff;
+
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: "Inter", sans-serif;
+
+  cursor: pointer;
+  text-decoration: none;
+
+  transition:
+    background 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease,
+    transform 0.25s ease,
+    color 0.35s ease;
+
+  backdrop-filter: blur(0px);
+  box-shadow: none;
+}
+
+.about-cta-button:hover,
+.about-cta-button:focus-visible {
+  background: rgba(8, 90, 120, 0.22);
+  border-color: rgba(126, 231, 255, 0.55);
+  backdrop-filter: blur(10px);
+  box-shadow:
+    0 0 14px rgba(0, 255, 255, 0.3),
+    0 0 28px rgba(0, 180, 255, 0.22),
+    0 0 46px rgba(0, 120, 255, 0.14);
+  color: #ffffff;
+  transform: translateY(-2px) scale(1.03);
+  text-decoration: none;
+}
+
+.about-cta-button:focus-visible {
+  outline: 3px solid rgba(126, 231, 255, 0.75);
+  outline-offset: 4px;
+}
+
+.about-cta-button:active {
+  transform: scale(0.97);
+}
+
+@media (max-width: 1024px) {
+  .about-page {
+    background-image: url("/images/tablet/background-about-page-tablet.png");
+    padding: 5.5rem 1.5rem 1.5rem;
+  }
+
+  .about-content {
+    gap: 1rem;
+  }
+
+  .about-card {
+    padding: 1.25rem;
+    border-radius: 22px;
+  }
+}
+
+@media (max-width: 600px) {
+  .about-page {
+    background-image: url("/images/handy/background-about-page-mobile.png");
+    padding: 5rem 1rem 1rem;
+  }
+
+  .about-content {
+    gap: 0.9rem;
+  }
+
+  .about-card {
+    padding: 1rem;
+    border-radius: 20px;
+  }
+
+  .about-card h1 {
+    font-size: clamp(1.8rem, 7vw, 3rem);
+  }
+
+  .about-card h2 {
+    font-size: 1.2rem;
+  }
+
+  .about-hero p {
+    font-size: 0.95rem;
+  }
+
+  .about-card ul {
+    padding-left: 0;
+    list-style: none;
+  }
+
+  .about-cta {
+    width: 100%;
+  }
+
+  .about-cta-button {
+    width: 100%;
+    max-width: 320px;
+  }
+}
+
+@media (max-height: 500px) and (orientation: landscape) {
+  .about-page {
+    background-image: url("/images/handy/background-about-page-mobile.png");
+    padding: 4.5rem 0.75rem 0.75rem;
+  }
+
+  .about-content {
+    gap: 0.75rem;
+  }
+
+  .about-card {
+    padding: 0.9rem 1rem;
+    border-radius: 18px;
+  }
+
+  .about-card h1 {
+    font-size: clamp(1.6rem, 5vw, 2.6rem);
+  }
+
+  .about-card h2 {
+    font-size: 1.1rem;
+    margin-bottom: 0.65rem;
+  }
+
+  .about-hero p {
+    margin-top: 0.75rem;
+    font-size: 0.9rem;
+  }
+
+  .about-card ul {
+    gap: 0.45rem;
+  }
+}

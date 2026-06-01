@@ -116,8 +116,13 @@ export const authService = {
   isAuthenticated: () => !!localStorage.getItem("authToken"),
 
   getAuthHeader: (): HeadersInit | undefined => {
-    const token = localStorage.getItem("authToken");
-    return token ? { Authorization: `Bearer ${token}` } : undefined;
+    let token = localStorage.getItem("authToken");
+    if (!token) return undefined;
+    // strip accidental surrounding quotes
+    if (token.startsWith('"') && token.endsWith('"')) {
+      token = token.slice(1, -1);
+    }
+    return { Authorization: `Bearer ${token}` };
   },
   // Fetch profile from backend (/me)
   fetchProfile: async (): Promise<AuthUser | null> => {
@@ -148,7 +153,11 @@ export const authService = {
   },
   updateProfile: async (payload: FormData): Promise<AuthUser> => {
     const headers = authService.getAuthHeader();
+    if (!headers) {
+      throw new Error("Not authenticated: missing token");
+    }
 
+    // Do not set Content-Type; browser will set multipart boundary for FormData
     const response = await fetch(`${API_URL}/me`, {
       method: "PUT",
       headers,

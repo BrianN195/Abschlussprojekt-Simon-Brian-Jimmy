@@ -253,6 +253,32 @@
   background: rgba(255, 255, 255, 0.08);
 }
 
+select.form-input.glass-dropdown {
+  width: 100%;
+  min-height: 48px;
+  padding: 0.85rem 1rem;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.05);
+  color: #f7feff;
+  outline: none;
+  appearance: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, transform 0.2s ease;
+}
+
+select.form-input.glass-dropdown:hover,
+select.form-input.glass-dropdown:focus {
+  border-color: rgba(103, 232, 249, 0.85);
+  box-shadow: 0 0 0 4px rgba(103, 232, 249, 0.12);
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateY(-1px);
+}
+
+select.form-input.glass-dropdown option {
+  background: #061826;
+  color: #ffffff;
+}
+
 textarea.form-input {
   min-height: 140px;
   resize: vertical;
@@ -310,13 +336,6 @@ textarea.form-input {
     padding: 0 16px;
   }
 
-
-@media (min-width: 769px) {
-  .profile-section,
-  .profile-edit-section {
-    padding: 0 20px; /* match .nav-container padding at desktop */
-  }
-}
   .profile-summary-header,
   .profile-edit-grid {
     grid-template-columns: 1fr;
@@ -332,6 +351,13 @@ textarea.form-input {
     width: auto;
     min-width: 0;
     justify-self: center;
+  }
+}
+
+@media (min-width: 769px) {
+  .profile-section,
+  .profile-edit-section {
+    padding: 0 20px; /* match .nav-container padding at desktop */
   }
 }
 

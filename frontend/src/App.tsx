@@ -12,8 +12,22 @@ import "./App.css";
 
 import Location from "./components/locations/Location";
 import AnimalList from "./components/animals/ListOfAnimals";
+import AboutPage from "./pages/AboutPage";
+import CreateAnimal from "./components/creating/createAnimal";
+import CreateLocation from "./components/creating/createLocation";
+import ProtectedRoute from "./components/creating/ProtectedRoute";
+
+import useUser from "./hooks/useUser";
+import ConnectAnimalLocation from "./components/creating/ConnectAnimalLocation";
+import { useTranslation } from "react-i18next";
 
 function App() {
+  const { t } = useTranslation();
+  const { user, loading } = useUser();
+  if (loading) {
+    return <p>{t("common.loading")}</p>;
+  }
+
   return (
     <BrowserRouter>
       <Routes>
@@ -26,11 +40,44 @@ function App() {
         <Route element={<MainLayout />}>
           <Route path="/main" element={<MainPage />} />
           <Route path="/profile" element={<ProfilePage />} />
-          <Route path="/about" element={<div>About Page (TODO)</div>} />
-          <Route path="/animal/:id" element={<Animal/>}/>
-          <Route path="/location/:id" element={<Location/>}/>
-          <Route path="/animals" element={<AnimalList/>}/>
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/animal/:id" element={<Animal />} />
+          <Route path="/location/:id" element={<Location />} />
+          <Route path="/animals" element={<AnimalList />} />
+          <Route
+            path="/create-animal"
+            element={
+              <ProtectedRoute
+                allowedRoles={["admin", "mod"]}
+                userRole={user?.role}
+              >
+                <CreateAnimal />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/create-location"
+            element={
+              <ProtectedRoute
+                allowedRoles={["admin", "mod"]}
+                userRole={user?.role}
+              >
+                <CreateLocation />
+              </ProtectedRoute>
+            }
+          />
         </Route>
+        <Route
+            path="/connect"
+            element={
+              <ProtectedRoute
+                allowedRoles={["admin", "mod"]}
+                userRole={user?.role}
+              >
+                <ConnectAnimalLocation />
+              </ProtectedRoute>
+            }
+          />
       </Routes>
     </BrowserRouter>
   );

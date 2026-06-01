@@ -1,7 +1,6 @@
 import { useState } from "react";
-
+import styles from "./create.module.css";
 export default function CreateAnimal() {
-  
   const [form, setForm] = useState({
     name: "",
     scientificName: "",
@@ -11,6 +10,7 @@ export default function CreateAnimal() {
     size: "",
     weight: "",
     habitat: "",
+    bestViewingTime: "",
     depthRange: "",
     diet: "",
     isSchooling: false,
@@ -18,70 +18,110 @@ export default function CreateAnimal() {
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
+    const { name, value, type } = e.target;
 
     setForm((prev) => ({
       ...prev,
-      [name]: value,
+      [name]: type === "number" ? Number(value) : value,
     }));
   };
 
   const handleCreate = async (e: React.FormEvent) => {
     e.preventDefault();
-
+    console.log("FORM SUBMIT");
     const formData = new FormData();
 
-    Object.entries(form).forEach(([key, value]) => {
-      if (value !== null) {
-        formData.append(key, value as any);
-      }
-    });
+    // Alles explizit setzen
+    formData.append("name", form.name);
+    formData.append("scientificName", form.scientificName);
+    formData.append("description", form.description);
+    formData.append("category", form.category);
 
-    await fetch("http://localhost:5000/api/v1/species/createAnimal", {
-      method: "POST",
-      body: formData,
-    });
+    formData.append("dangerLevel", String(form.dangerLevel));
+
+    formData.append("size", form.size);
+    formData.append("weight", form.weight);
+    formData.append("habitat", form.habitat);
+    if (form.bestViewingTime) {
+      formData.append("bestViewingTime", form.bestViewingTime);
+    }
+
+    formData.append("depthRange", form.depthRange);
+    formData.append("diet", form.diet);
+
+    formData.append("isSchooling", String(form.isSchooling));
+
+    if (form.image) {
+      formData.append("image", form.image);
+    }
+    for (const pair of formData.entries()) {
+      console.log(pair[0], pair[1]);
+    }
+    try {
+      const response = await fetch(
+        "http://localhost:5000/api/v1/species/createAnimal",
+        {
+          method: "POST",
+          body: formData,
+        },
+      );
+
+      console.log("STATUS:", response.status);
+
+      const data = await response.json();
+
+      console.log("RESPONSE:", data);
+    } catch (error) {
+      console.error("FETCH ERROR:", error);
+    }
   };
   return (
-    <>
-      <form onSubmit={handleCreate}>
-        <h2>Create Animal</h2>
+    <div className={styles.container}>
+      <form className={styles.form} onSubmit={handleCreate}>
+        <h2 className={styles.title}>Create Animal</h2>
+
         <input
+          className={styles.input}
           type="text"
           name="name"
-          id=""
           placeholder="Name"
           onChange={handleChange}
         />
+
         <input
+          className={styles.input}
           type="text"
           name="scientificName"
-          id=""
           placeholder="Scientific Name"
           onChange={handleChange}
         />
+
         <input
+          className={styles.input}
           type="text"
           name="description"
-          id=""
-          placeholder="description"
+          placeholder="Description"
           onChange={handleChange}
         />
+
         <input
+          className={styles.input}
           type="text"
           name="category"
-          id=""
-          placeholder="category"
+          placeholder="Category"
           onChange={handleChange}
         />
+
         <input
+          className={styles.input}
           type="number"
           name="dangerLevel"
-          id=""
-          placeholder="danger Level"
+          placeholder="Danger Level"
           onChange={handleChange}
         />
+
         <input
+          className={styles.fileInput}
           type="file"
           name="image"
           accept="image/*"
@@ -94,80 +134,96 @@ export default function CreateAnimal() {
             }
           }}
         />
+
         <input
+          className={styles.input}
           type="text"
           name="size"
-          id=""
-          placeholder="size"
+          placeholder="Size"
           onChange={handleChange}
         />
+
         <input
+          className={styles.input}
           type="text"
           name="weight"
-          id=""
-          placeholder="weight"
+          placeholder="Weight"
           onChange={handleChange}
         />
+
         <input
+          className={styles.input}
           type="text"
           name="habitat"
-          id=""
-          placeholder="habitat"
+          placeholder="Habitat"
           onChange={handleChange}
         />
+
         <input
+          className={styles.input}
           type="month"
           name="bestViewingTime"
-          id=""
-          placeholder="best viewing month"
+          placeholder="Best Viewing Month"
           onChange={handleChange}
         />
+
         <input
+          className={styles.input}
           name="depthRange"
           placeholder="Depth Range"
           onChange={handleChange}
         />
+
         <input
+          className={styles.input}
           type="text"
           name="diet"
           placeholder="Diet"
           onChange={handleChange}
         />
-        <div>
-          <p>Is Schooling?</p>
 
-          <label>
-            Yes
-            <input
-              type="radio"
-              name="isSchooling"
-              checked={form.isSchooling === true}
-              onChange={() =>
-                setForm((prev) => ({
-                  ...prev,
-                  isSchooling: true,
-                }))
-              }
-            />
-          </label>
+        <div className={styles.radioWrapper}>
+          <p className={styles.radioTitle}>Is Schooling?</p>
 
-          <label>
-            No
-            <input
-              type="radio"
-              name="isSchooling"
-              checked={form.isSchooling === false}
-              onChange={() =>
-                setForm((prev) => ({
-                  ...prev,
-                  isSchooling: false,
-                }))
-              }
-            />
-          </label>
+          <div className={styles.radioGroup}>
+            <label className={styles.radioLabel}>
+              Yes
+              <input
+                className={styles.radioInput}
+                type="radio"
+                name="isSchooling"
+                checked={form.isSchooling === true}
+                onChange={() =>
+                  setForm((prev) => ({
+                    ...prev,
+                    isSchooling: true,
+                  }))
+                }
+              />
+            </label>
+
+            <label className={styles.radioLabel}>
+              No
+              <input
+                className={styles.radioInput}
+                type="radio"
+                name="isSchooling"
+                checked={form.isSchooling === false}
+                onChange={() =>
+                  setForm((prev) => ({
+                    ...prev,
+                    isSchooling: false,
+                  }))
+                }
+              />
+            </label>
+          </div>
         </div>
-        <button type="submit">Create Animal</button>
+
+        <button className={styles.button} type="submit">
+          Create Animal
+        </button>
       </form>
-    </>
+    </div>
   );
 }
