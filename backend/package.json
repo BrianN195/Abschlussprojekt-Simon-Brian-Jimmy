@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-  "build": "npm --prefix ../frontend run build && tsc",
+  "build": "npm --prefix ../frontend install && npm --prefix ../frontend run build && tsc",
   "dev": "tsx src/server.ts",
   "start": "npm run build && node dist/server.js",
   "test": "echo \"Error: no test specified\" && exit 1",
