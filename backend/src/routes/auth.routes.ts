@@ -10,6 +10,8 @@ import apiLimiter from "../middlewares/apiLimiter";
 import EmailVerificationToken from "../db/models/EmailVerificationTokenModel";
 import transporter from "../mail/mailer";
 import crypto from "crypto";
+import authMiddleware from "../middlewares/authMiddleware";
+import { roleMiddleware } from "../middlewares/roleMiddleware";
 const router = Router();
 
 const JWT_SECRET = process.env.JWT_SECRET || "your-secret-key";
@@ -460,6 +462,34 @@ router.get("/verify-email/:token", async (req: Request, res: Response) => {
     return res.status(500).json({
       message: "Serverfehler bei E-Mail-Verifizierung",
     });
+  }
+});
+router.post("/make-admin",authMiddleware, roleMiddleware(["admin"]), async (req: Request, res: Response) => {
+  try {
+    const { email } = req.body;
+
+    const user = await UserModel.findOne({
+      where: { email },
+    });
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    user.role = "admin";
+    await user.save();
+
+    return res.json({
+      message: "User promoted to admin",
+      user: {
+        id: user.id,
+        email: user.email,
+        role: user.role,
+      },
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: "Server error" });
   }
 });
 export default router;
