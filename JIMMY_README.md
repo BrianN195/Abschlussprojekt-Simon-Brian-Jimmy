@@ -329,3 +329,41 @@ Auftrag morgen das Design für die about Seite. ( ?? Vogelperspektive Malediven 
 
 Kurzbeschreibung: Heute lag der Fokus auf Feinschliff im Favorites-Bereich (sichtbares Placeholder-Bild, Bildausrichtung, Entfernen von Blur, bessere Textplatzierung, größere Titel-Schrift) sowie einer kleinen Anpassung am Register-Button. Alle Änderungen sind oben per Link verlinkt, damit du direkt in die betroffenen Dateien springen kannst.
 
+
+
+## Vorbereitung für die Präsentation am Dienstag (02.06.2026):
+
+zu vorbereiten ist e-mail adresse ist geöffnet.
+
+### Simon
+- Powerpointpräsentationen/ Canvaspräsentation 3 sheeds:
+
+    - Vorstellung Projektmitglieder
+    - über unsere Seite
+
+- Webseite im Browser präsentieren:
+
+### Jimmy
+    - Präsentieren als Gast Account
+        - Mehrsprachigkeit der Seite erwähnen und kurz zeigen.
+        - sagen und zeigen, dass man keine Favoriten hinterlegen kann.
+
+    - Registrierung live machen.
+        - Login-maske zeigen
+        - Erwähnen das es ein Wetter-liveticker ist.
+        - Erklärung und zeigen wie das mit dem Vorteil eines Accounts und eingelogt ist ( !!! nur die Favoriten mit delete  etc !!!)
+    
+### Brian
+    - Animals Seite zeigen uund erklären (klick auf Bild, create, connect und Ergebnis zeigen)
+    - Searchbar Ergebnisse zeigen.
+
+### Simon
+    - Profilseite zeigen und erkläeren (Profilbild, Daten ändern, Default Avatar)
+
+    - Abschlußslides
+        - Tech-stack
+        - zukünftige features max. 3 
+        -Verabschiedung
+
+
+
