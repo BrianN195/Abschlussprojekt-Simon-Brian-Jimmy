@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import type { LocationDetail } from "../../types/Locations";
 import { Link, useParams } from "react-router-dom";
 import styles from "./Location.module.css";
+import { API_BASE_URL } from "../../services/apiConfig";
 
 export default function Location() {
   const { i18n, t } = useTranslation();
@@ -12,7 +13,7 @@ export default function Location() {
   useEffect(() => {
     if (!id) return;
 
-    fetch(`http://localhost:5000/api/v1/resorts/${id}/animal`, {
+    fetch(`${API_BASE_URL}/resorts/${id}/animal`, {
       headers: {
         "Accept-Language": i18n.language,
       },

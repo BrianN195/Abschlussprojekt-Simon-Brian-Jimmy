@@ -1,5 +1,6 @@
 import { useState } from "react";
 import styles from "./create.module.css";
+import { API_BASE_URL } from "../../services/apiConfig";
 export default function CreateAnimal() {
   const [form, setForm] = useState({
     name: "",
@@ -59,7 +60,7 @@ export default function CreateAnimal() {
     }
     try {
       const response = await fetch(
-        "http://localhost:5000/api/v1/species/createAnimal",
+        `${API_BASE_URL}/species/createAnimal`,
         {
           method: "POST",
           body: formData,

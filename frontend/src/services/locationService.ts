@@ -1,8 +1,6 @@
 import type { Location } from "../types/Locations";
+import { API_BASE_URL } from "./apiConfig";
 
-const API_BASE_URL =
-  import.meta.env.VITE_API_URL?.replace(/\/$/, "") ||
-  "http://localhost:5000/api/v1";
 const API_URL = `${API_BASE_URL}/resorts`;
 
 type ApiError = {

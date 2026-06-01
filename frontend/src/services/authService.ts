@@ -1,8 +1,7 @@
 // frontend/src/services/authService.ts
+import { API_BASE_URL } from "./apiConfig";
 
-const API_URL =
-  import.meta.env.VITE_API_URL?.replace(/\/$/, "") ||
-  "http://localhost:5000/api/v1/auth";
+const API_URL = `${API_BASE_URL}/auth`;
 
 export type AuthUser = {
   id: string | number;

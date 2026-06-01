@@ -1,12 +1,13 @@
 import { useState } from "react";
 import styles from "./createAdmin.module.css"
+import { API_BASE_URL } from "../../services/apiConfig";
 export default function MakeAdmin() {
   const [email, setEmail] = useState("");
 
   const handleMakeAdmin = async () => {
     const token = localStorage.getItem("authToken");
 
-    const res = await fetch("http://localhost:5000/api/v1/auth/make-admin", {
+    const res = await fetch(`${API_BASE_URL}/auth/make-admin`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
