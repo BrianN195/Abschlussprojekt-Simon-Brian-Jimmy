@@ -11,9 +11,7 @@ import {
 
 import styles from "./Animalcopy.module.css";
 
-const API_BASE_URL =
-  import.meta.env.VITE_API_URL?.replace(/\/$/, "") ||
-  "http://localhost:5000/api/v1";
+const API_BASE_URL = "/api/v1";
 
 export default function Animal() {
   const { i18n, t } = useTranslation();

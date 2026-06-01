@@ -4,9 +4,7 @@ import type { LocationDetail } from "../../types/Locations";
 import { Link, useParams } from "react-router-dom";
 import styles from "./Location.module.css";
 
-const API_BASE_URL =
-  import.meta.env.VITE_API_URL?.replace(/\/$/, "") ||
-  "http://localhost:5000/api/v1";
+const API_BASE_URL = "/api/v1";
 
 export default function Location() {
   const { i18n, t } = useTranslation();

@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
-const API_BASE_URL =
-  import.meta.env.VITE_API_URL?.replace(/\/$/, "") ||
-  "http://localhost:5000/api/v1";
+const API_BASE_URL = "/api/v1";
 
 export default function VerifyEmail() {
   const { token } = useParams();
