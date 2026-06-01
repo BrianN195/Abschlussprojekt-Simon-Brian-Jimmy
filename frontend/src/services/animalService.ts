@@ -1,7 +1,8 @@
 import type { Animal } from "../types/Animal";
-const API_URL =
+const API_BASE_URL =
   import.meta.env.VITE_API_URL?.replace(/\/$/, "") ||
-  "http://localhost:5000/api/v1/species";
+  "http://localhost:5000/api/v1";
+const API_URL = `${API_BASE_URL}/species`;
 
 type ApiError = {
   error?: string;
