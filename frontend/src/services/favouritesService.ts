@@ -1,7 +1,7 @@
 import type { FavoriteAnimal } from "../types/FavoriteAnimal";
 import { authService } from "./authService";
-import { API_BASE_URL } from "./apiConfig";
 
+const API_BASE_URL = "/api/v1";
 const API_URL = `${API_BASE_URL}/favorites`;
 
 type ApiError = {

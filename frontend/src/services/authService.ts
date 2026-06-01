@@ -1,7 +1,6 @@
 // frontend/src/services/authService.ts
-import { API_BASE_URL } from "./apiConfig";
 
-const API_URL = `${API_BASE_URL}/auth`;
+const API_URL = "/api/v1/auth";
 
 export type AuthUser = {
   id: string | number;

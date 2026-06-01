@@ -93,6 +93,21 @@
   margin: 0;
   display: block;
 }
+
+.favoriteHint {
+  margin-top: 0.75rem;
+  padding: 0.75rem 1rem;
+  border-radius: 16px;
+  background: rgba(10, 34, 48, 0.78);
+  color: #f2fbff;
+  border: 1px solid rgba(126, 231, 255, 0.55);
+  box-shadow:
+    0 0 14px rgba(0, 255, 255, 0.18),
+    0 0 28px rgba(0, 180, 255, 0.12);
+  text-align: center;
+  line-height: 1.35;
+}
+
 .statContainer {
   display: flex;
   flex-direction: column;

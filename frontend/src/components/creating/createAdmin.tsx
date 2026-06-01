@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styles from "./createAdmin.module.css"
-import { API_BASE_URL } from "../../services/apiConfig";
+
+const API_BASE_URL = "/api/v1";
 export default function MakeAdmin() {
   const [email, setEmail] = useState("");
 

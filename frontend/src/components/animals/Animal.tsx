@@ -3,6 +3,7 @@ import { useEffect, useState, type ChangeEvent } from "react";
 import { Link, useParams } from "react-router-dom";
 import type { AnimalDetail } from "../../types/Animal";
 import type { Location } from "../../types/Locations";
+import { authService } from "../../services/authService";
 import {
   isFavouriteAnimal,
   removeFavoriteAnimal,
@@ -11,6 +12,8 @@ import {
 
 import styles from "./Animalcopy.module.css";
 import { API_BASE_URL } from "../../services/apiConfig";
+
+const API_BASE_URL = "/api/v1";
 
 export default function Animal() {
   const { i18n, t } = useTranslation();
@@ -81,6 +84,14 @@ export default function Animal() {
     event: ChangeEvent<HTMLInputElement>,
   ) => {
     if (!animal) return;
+
+    if (!authService.isAuthenticated()) {
+      event.preventDefault();
+      event.stopPropagation();
+      setIsFavourite(false);
+      window.dispatchEvent(new Event("favorite-login-required"));
+      return;
+    }
 
     const checked = event.target.checked;
     setIsFavourite(checked);

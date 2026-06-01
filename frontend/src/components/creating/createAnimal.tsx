@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styles from "./create.module.css";
-import { API_BASE_URL } from "../../services/apiConfig";
+
+const API_BASE_URL = "/api/v1";
 export default function CreateAnimal() {
   const [form, setForm] = useState({
     name: "",

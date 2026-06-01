@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { API_BASE_URL } from "../../services/apiConfig";
 
+const API_BASE_URL = "/api/v1";
+
 export default function VerifyEmail() {
   const { token } = useParams();
 

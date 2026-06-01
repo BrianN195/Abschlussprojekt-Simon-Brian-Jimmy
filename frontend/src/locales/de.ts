@@ -124,6 +124,7 @@ const de = {
     emptyTitle: "Noch keine Favoriten",
     emptySubtitle: "Wähle Tiere über die Favoriten-Checkbox aus",
     selectAnimal: "{{name}} auswählen",
+    loginRequired: "Um Favoriten auszuwählen, musst du registriert und eingeloggt sein",
     scrollLeft: "Favoriten nach links scrollen",
     scrollRight: "Favoriten nach rechts scrollen",
   },

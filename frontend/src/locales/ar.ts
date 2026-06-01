@@ -124,6 +124,7 @@ const ar = {
     emptyTitle: "لا توجد مفضلة بعد",
     emptySubtitle: "حدد الحيوانات باستخدام مربع المفضلة",
     selectAnimal: "تحديد {{name}}",
+    loginRequired: "لاختيار المفضلة يجب أن تكون مسجلاً ومُسجَّل الدخول",
     scrollLeft: "تمرير المفضلة إلى اليسار",
     scrollRight: "تمرير المفضلة إلى اليمين",
   },

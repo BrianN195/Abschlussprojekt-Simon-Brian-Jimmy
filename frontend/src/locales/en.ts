@@ -123,6 +123,7 @@ const en = {
     emptyTitle: "No favorites yet",
     emptySubtitle: "Select animals with the favorite checkbox",
     selectAnimal: "Select {{name}}",
+    loginRequired: "To choose favorites, you must be registered and logged in",
     scrollLeft: "Scroll favorites left",
     scrollRight: "Scroll favorites right",
   },

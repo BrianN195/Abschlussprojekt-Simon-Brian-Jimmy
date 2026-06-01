@@ -5,6 +5,8 @@ import { Link, useParams } from "react-router-dom";
 import styles from "./Location.module.css";
 import { API_BASE_URL } from "../../services/apiConfig";
 
+const API_BASE_URL = "/api/v1";
+
 export default function Location() {
   const { i18n, t } = useTranslation();
   const { id } = useParams();

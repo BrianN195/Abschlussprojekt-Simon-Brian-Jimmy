@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import type { User } from "../types/User";
 import { API_BASE_URL } from "../services/apiConfig";
 
+const API_BASE_URL = "/api/v1";
 
 function useUser() {
   const [user, setUser] = useState<User | null>(null);

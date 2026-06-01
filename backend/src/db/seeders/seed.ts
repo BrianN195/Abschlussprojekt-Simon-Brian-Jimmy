@@ -917,9 +917,14 @@ async function seed() {
   console.log("🌱 Seed erfolgreich ausgeführt (idempotent)");
 }
 
-seed()
-  .then(() => process.exit(0))
-  .catch((err) => {
-    console.error("❌ Seed Fehler:", err);
-    process.exit(1);
-  });
+export { seed };
+
+// Auto-run when called directly (npm run seed)
+if (require.main === module) {
+  seed()
+    .then(() => process.exit(0))
+    .catch((err) => {
+      console.error("❌ Seed Fehler:", err);
+      process.exit(1);
+    });
+}

@@ -329,3 +329,117 @@ Auftrag morgen das Design für die about Seite. ( ?? Vogelperspektive Malediven 
 
 Kurzbeschreibung: Heute lag der Fokus auf Feinschliff im Favorites-Bereich (sichtbares Placeholder-Bild, Bildausrichtung, Entfernen von Blur, bessere Textplatzierung, größere Titel-Schrift) sowie einer kleinen Anpassung am Register-Button. Alle Änderungen sind oben per Link verlinkt, damit du direkt in die betroffenen Dateien springen kannst.
 
+
+
+## Vorbereitung für die Präsentation am Dienstag (02.06.2026):
+
+zu vorbereiten ist e-mail adresse ist geöffnet.
+
+### Simon
+- Powerpointpräsentationen/ Canvaspräsentation 3 sheeds:
+
+    - Vorstellung Projektmitglieder
+    - über unsere Seite
+
+- Webseite im Browser präsentieren:
+
+### Jimmy
+    - Präsentieren als Gast Account
+        - Mehrsprachigkeit der Seite erwähnen und kurz zeigen.
+        - sagen und zeigen, dass man keine Favoriten hinterlegen kann.
+
+    - Registrierung live machen.
+        - Login-maske zeigen
+        - Erwähnen das es ein Wetter-liveticker ist.
+        - Erklärung und zeigen wie das mit dem Vorteil eines Accounts und eingelogt ist ( !!! nur die Favoriten mit delete  etc !!!)
+    
+### Brian
+    - Animals Seite zeigen uund erklären (klick auf Bild, create, connect und Ergebnis zeigen)
+    - Searchbar Ergebnisse zeigen.
+
+### Simon
+    - Profilseite zeigen und erkläeren (Profilbild, Daten ändern, Default Avatar)
+
+    - Abschlußslides
+        - Tech-stack
+        - zukünftige features max. 3 
+        -Verabschiedung
+
+    ## Letzte Änderungen (01.06.2026)
+
+    - **Kurz:** Gäste können Favoriten nicht speichern. Beim Versuch zeigt die Seite einen zentralen, zentrierten Hinweis-Banner im Header an (einzeilig, mit `!!` davor/danach). Die Umsetzung ist responsive und nutzt eine eigene CSS-Klasse.
+
+    - **Betroffene Dateien (klickbar):**
+        - [frontend/src/components/layout/MainNavigation.tsx](./frontend/src/components/layout/MainNavigation.tsx)
+        - [frontend/src/styles/MainNavigation.css](./frontend/src/styles/MainNavigation.css)
+        - [frontend/src/components/animals/Animal.tsx](./frontend/src/components/animals/Animal.tsx)
+        - [frontend/src/components/animals/ListOfAnimals.tsx](./frontend/src/components/animals/ListOfAnimals.tsx)
+        - [frontend/src/services/favouritesService.ts](./frontend/src/services/favouritesService.ts)
+        - [frontend/src/locales/de.ts](./frontend/src/locales/de.ts)
+        - [frontend/src/locales/en.ts](./frontend/src/locales/en.ts)
+        - [frontend/src/locales/fr.ts](./frontend/src/locales/fr.ts)
+        - [frontend/src/locales/es.ts](./frontend/src/locales/es.ts)
+        - [frontend/src/locales/ar.ts](./frontend/src/locales/ar.ts)
+        - [frontend/src/locales/zh.ts](./frontend/src/locales/zh.ts)
+
+    - **Erläuterung:**
+        - Wenn ein nicht authentifizierter Benutzer versucht, ein Tier als Favorit zu markieren, wird die Aktion abgefangen und stattdessen ein `favorite-login-required` CustomEvent ausgelöst.
+        - Die `MainNavigation`-Komponente lauscht auf dieses Event und zeigt einen vollbreiten Banner (`.nav-favorite-banner`) mit der Nachricht an. Die eigentliche Nachricht trägt die Klasse `.nav-favorite-message`.
+        - Die Nachricht wird einzeilig angezeigt und ist mit `!!` eingerahmt (`!! Nachricht !!`). Auf sehr kleinen Bildschirmen darf sie umbrechen (responsive rule).
+
+    - **Code‑Beispiele (Stellen beginnen mit dem Kommentar "Hinweis für Gäste")**
+
+        Animal (relevanter Auszug):
+
+        ```tsx
+        // Hinweis für Gäste: Verhindere Favorit-Aktion und sende das Hinweis-Event
+        if (!authService.isAuthenticated()) {
+            window.dispatchEvent(new Event('favorite-login-required'));
+            return;
+        }
+        // Hinweis für Gäste: ansonsten Favorite-API aufrufen
+        await favouritesService.saveFavoriteAnimal(animalId);
+        ```
+
+        ListOfAnimals (relevanter Auszug):
+
+        ```tsx
+        // Hinweis für Gäste: Blockiere Favorit in der Liste und sende Event
+        if (!authService.isAuthenticated()) {
+            window.dispatchEvent(new Event('favorite-login-required'));
+            return;
+        }
+        // Hinweis für Gäste: Authentifizierte Nutzer führen normalen Speichervorgang aus
+        await favouritesService.saveFavoriteAnimal(animalId);
+        ```
+
+        MainNavigation (relevanter Auszug):
+
+        ```tsx
+        // Hinweis für Gäste: Listener zeigt Banner für kurze Zeit an
+        useEffect(() => {
+            const handleFavoriteLoginRequired = () => {
+                setFavoriteHintVisible(true);
+                window.setTimeout(() => setFavoriteHintVisible(false), 4000);
+            };
+            window.addEventListener('favorite-login-required', handleFavoriteLoginRequired);
+            return () => window.removeEventListener('favorite-login-required', handleFavoriteLoginRequired);
+        }, []);
+        ```
+
+        CSS (Wichtige Klassen):
+
+        ```css
+        /* Hinweis für Gäste: Banner-Wrapper, zentriert unter dem Header */
+        .nav-favorite-banner { width:100%; display:flex; justify-content:center; padding:0 16px 12px; }
+
+        /* Hinweis für Gäste: Der Textcontainer - einzeilig, mit !! umrahmt */
+        .nav-favorite-message { white-space:nowrap; width:fit-content; max-width:calc(100vw - 32px); }
+        ```
+
+    - **Warum so:** Zentraler Banner vermeidet Duplikate in einzelnen Komponenten und liefert konsistente User-Feedback für Gäste. Die Event-basierte Lösung hält die Komponenten locker gekoppelt.
+
+    Wenn du möchtest, committe ich die README-Änderung mit einer Commit-Nachricht wie `docs: add 01.06.2026 favorite-guest banner notes`.
+
+
+
