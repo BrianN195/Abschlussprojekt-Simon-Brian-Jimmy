@@ -11,8 +11,10 @@ import resortsRoutes from './routes/resorts.routes';
 import searchRoutes from './routes/search.routes'
 import { sequelize } from './db/config/database';
 import "./db/models/index"
+import AnimalModel from './db/models/AnimalModel';
 import weatherRoutes from './routes/weather.routes';
 import localeMiddleware from './middlewares/localeMiddleware';
+import { seed } from './db/seeders/seed';
 
 const projectRoot = path.resolve(__dirname, '..', '..');
 const frontendDistPath = path.join(projectRoot, 'frontend', 'dist');
@@ -111,8 +113,22 @@ app.use((req: Request, res: Response) => {
 });
 
 sequelize.sync({ alter: true })
-  .then(() => {
+  .then(async () => {
     console.log('Database synced');
+
+    // Auto-seed if database is empty
+    try {
+      const animalCount = await AnimalModel.count();
+      if (animalCount === 0) {
+        console.log('🌱 Database is empty, running seed...');
+        await seed();
+        console.log('✅ Seed completed');
+      } else {
+        console.log(`✅ Database already has ${animalCount} animals, skipping seed`);
+      }
+    } catch (err) {
+      console.error('⚠️ Error during auto-seed:', err);
+    }
 
     app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
