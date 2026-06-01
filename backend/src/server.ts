@@ -65,7 +65,7 @@ app.use('/api/v1/search', searchRoutes);
 app.use('/api/v1/connect', connectRoutes)
 
 // SPA Fallback: serve index.html for client-side routing
-app.get('*', (req: Request, res: Response) => {
+app.use((req: Request, res: Response, next: NextFunction) => {
   const indexPath = path.join(frontendDistPath, 'index.html');
   res.sendFile(indexPath, (err) => {
     if (err) {
