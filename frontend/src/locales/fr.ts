@@ -124,6 +124,7 @@ const fr = {
     emptyTitle: "Pas encore de favoris",
     emptySubtitle: "Sélectionnez des animaux avec la case favoris",
     selectAnimal: "Sélectionner {{name}}",
+    loginRequired: "Pour choisir des favoris, vous devez être inscrit et connecté",
     scrollLeft: "Faire défiler les favoris vers la gauche",
     scrollRight: "Faire défiler les favoris vers la droite",
   },

@@ -125,6 +125,7 @@ const es = {
     emptyTitle: "Aún no hay favoritos",
     emptySubtitle: "Selecciona animales con la casilla de favoritos",
     selectAnimal: "Seleccionar {{name}}",
+    loginRequired: "Para elegir favoritos, debes estar registrado e iniciar sesión",
     scrollLeft: "Desplazar favoritos a la izquierda",
     scrollRight: "Desplazar favoritos a la derecha",
   },

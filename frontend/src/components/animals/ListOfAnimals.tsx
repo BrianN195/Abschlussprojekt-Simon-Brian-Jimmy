@@ -4,6 +4,7 @@ import { speciesService } from "../../services/animalService";
 import type { Animal } from "../../types/Animal";
 import { Link } from "react-router-dom";
 import style from "./AnimalList.module.css";
+import { authService } from "../../services/authService";
 import {
   removeFavoriteAnimal,
   saveFavoriteAnimal,
@@ -40,6 +41,13 @@ export default function AnimalList() {
     event: ChangeEvent<HTMLInputElement>,
     animal: Animal,
   ) => {
+    if (!authService.isAuthenticated()) {
+      event.preventDefault();
+      event.stopPropagation();
+      window.dispatchEvent(new Event("favorite-login-required"));
+      return;
+    }
+
     const checked = event.target.checked;
 
     try {

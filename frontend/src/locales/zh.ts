@@ -116,6 +116,7 @@ const zh = {
     emptyTitle: "暂无收藏",
     emptySubtitle: "使用收藏复选框选择动物",
     selectAnimal: "选择 {{name}}",
+    loginRequired: "要选择收藏，你必须已注册并登录",
     scrollLeft: "向左滚动收藏",
     scrollRight: "向右滚动收藏",
   },
