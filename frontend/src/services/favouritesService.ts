@@ -1,9 +1,8 @@
 import type { FavoriteAnimal } from "../types/FavoriteAnimal";
 import { authService } from "./authService";
 
-const API_URL =
-    import.meta.env.VITE_API_URL?.replace(/\/$/, "") ||
-    "http://localhost:5000/api/v1/favorites";
+const API_BASE_URL = "/api/v1";
+const API_URL = `${API_BASE_URL}/favorites`;
 
 type ApiError = {
     error?: string;

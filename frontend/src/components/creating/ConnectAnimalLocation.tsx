@@ -1,5 +1,7 @@
 import { useState } from "react";
 import styles from "./connectAnimalLocation.module.css"
+
+const API_BASE_URL = "/api/v1";
 export default function ConnectAnimalLocation() {
   const [animalName, setAnimalName] = useState("");
   const [locationName, setLocationName] = useState("");
@@ -9,7 +11,7 @@ export default function ConnectAnimalLocation() {
 
   const searchLocation = async () => {
     const res = await fetch(
-      `http://localhost:5000/api/v1/connect/search-location/${locationName}`,
+      `${API_BASE_URL}/connect/search-location/${locationName}`,
     );
 
     const data = await res.json();
@@ -19,7 +21,7 @@ export default function ConnectAnimalLocation() {
 
   const searchAnimal = async () => {
     const res = await fetch(
-      `http://localhost:5000/api/v1/connect/search-animal/${animalName}`,
+      `${API_BASE_URL}/connect/search-animal/${animalName}`,
     );
 
     const data = await res.json();
@@ -30,7 +32,7 @@ export default function ConnectAnimalLocation() {
   const handleConnect = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    await fetch("http://localhost:5000/api/v1/connect/connect", {
+    await fetch(`${API_BASE_URL}/connect/connect`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

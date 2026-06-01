@@ -2,6 +2,7 @@ import express, { Express, Request, Response, NextFunction } from 'express';
 import cors, { CorsOptions } from 'cors';
 import dotenv from 'dotenv';
 import path from 'path';
+import fs from 'fs';
 import authRoutes from './routes/auth.routes';
 import favoritesRoutes from './routes/favorites.routes';
 import connectRoutes from './routes/connect.routes'
@@ -10,8 +11,13 @@ import resortsRoutes from './routes/resorts.routes';
 import searchRoutes from './routes/search.routes'
 import { sequelize } from './db/config/database';
 import "./db/models/index"
+import AnimalModel from './db/models/AnimalModel';
 import weatherRoutes from './routes/weather.routes';
 import localeMiddleware from './middlewares/localeMiddleware';
+import { seed } from './db/seeders/seed';
+
+const projectRoot = path.resolve(__dirname, '..', '..');
+const frontendDistPath = path.join(projectRoot, 'frontend', 'dist');
 
 dotenv.config();
 
@@ -46,7 +52,6 @@ app.use('/uploads', express.static(path.resolve(process.cwd(), 'public/uploads')
 app.use("/images", express.static("public/images"));
 
 // Serve Frontend (static files)
-const frontendDistPath = path.resolve(process.cwd(), '../frontend/dist');
 app.use(express.static(frontendDistPath));
 
 app.use('/api/v1/weather', weatherRoutes);
@@ -66,10 +71,27 @@ app.use('/api/v1/connect', connectRoutes)
 
 // SPA Fallback: serve index.html for client-side routing
 app.use((req: Request, res: Response, next: NextFunction) => {
+  if (req.method !== 'GET' && req.method !== 'HEAD') {
+    next();
+    return;
+  }
+
+  if (req.path.startsWith('/api')) {
+    next();
+    return;
+  }
+
   const indexPath = path.join(frontendDistPath, 'index.html');
+  if (!fs.existsSync(indexPath)) {
+    console.error(`❌ Index.html not found at: ${indexPath}`);
+    res.status(404).json({ error: 'Frontend not found' });
+    return;
+  }
+
   res.sendFile(indexPath, (err) => {
     if (err) {
-      res.status(404).json({ error: 'Frontend not found' });
+      console.error(`❌ Error serving index.html: ${err.message}`);
+      res.status(500).json({ error: 'Error serving frontend' });
     }
   });
 });
@@ -88,8 +110,22 @@ app.use((req: Request, res: Response) => {
 });
 
 sequelize.sync({ alter: true })
-  .then(() => {
+  .then(async () => {
     console.log('Database synced');
+
+    // Auto-seed if database is empty
+    try {
+      const animalCount = await AnimalModel.count();
+      if (animalCount === 0) {
+        console.log('🌱 Database is empty, running seed...');
+        await seed();
+        console.log('✅ Seed completed');
+      } else {
+        console.log(`✅ Database already has ${animalCount} animals, skipping seed`);
+      }
+    } catch (err) {
+      console.error('⚠️ Error during auto-seed:', err);
+    }
 
     app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);

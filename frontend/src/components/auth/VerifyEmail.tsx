@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
+const API_BASE_URL = "/api/v1";
+
 export default function VerifyEmail() {
   const { token } = useParams();
 
@@ -11,7 +13,7 @@ export default function VerifyEmail() {
     const verifyEmail = async () => {
       try {
         const response = await fetch(
-          `http://localhost:5000/api/v1/auth/verify-email/${token}`
+          `${API_BASE_URL}/auth/verify-email/${token}`
         );
 
         const data = await response.json();

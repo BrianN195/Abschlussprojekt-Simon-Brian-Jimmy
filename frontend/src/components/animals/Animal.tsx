@@ -12,6 +12,8 @@ import {
 
 import styles from "./Animalcopy.module.css";
 
+const API_BASE_URL = "/api/v1";
+
 export default function Animal() {
   const { i18n, t } = useTranslation();
   const { id } = useParams();
@@ -26,7 +28,7 @@ export default function Animal() {
 
     const loadAnimal = async () => {
       try {
-        const res = await fetch(`http://localhost:5000/api/v1/species/${id}`, {
+        const res = await fetch(`${API_BASE_URL}/species/${id}`, {
           headers: { "Accept-Language": i18n.language },
           signal,
         });
@@ -41,7 +43,7 @@ export default function Animal() {
     const loadLocations = async () => {
       try {
         const res = await fetch(
-          `http://localhost:5000/api/v1/species/${id}/locations`,
+          `${API_BASE_URL}/species/${id}/locations`,
           {
             headers: { "Accept-Language": i18n.language },
             signal,

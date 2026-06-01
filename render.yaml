@@ -3,7 +3,7 @@ services:
     name: wildlife-app
     runtime: node
     startCommand: npm --prefix backend run start
-    buildCommand: npm --prefix backend run build
+    buildCommand: npm --prefix frontend install && npm --prefix frontend run build && npm --prefix backend run build
     envVars:
       - key: NODE_ENV
         value: production
