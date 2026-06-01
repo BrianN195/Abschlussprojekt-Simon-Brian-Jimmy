@@ -20,6 +20,7 @@ import ProtectedRoute from "./components/creating/ProtectedRoute";
 import useUser from "./hooks/useUser";
 import ConnectAnimalLocation from "./components/creating/ConnectAnimalLocation";
 import { useTranslation } from "react-i18next";
+import VerifyEmail from "./components/auth/VerifyEmail";
 
 function App() {
   const { t } = useTranslation();
@@ -44,6 +45,7 @@ function App() {
           <Route path="/animal/:id" element={<Animal />} />
           <Route path="/location/:id" element={<Location />} />
           <Route path="/animals" element={<AnimalList />} />
+          <Route path="/verify-email/:token" element={<VerifyEmail />} />
           <Route
             path="/create-animal"
             element={
@@ -68,16 +70,16 @@ function App() {
           />
         </Route>
         <Route
-            path="/connect"
-            element={
-              <ProtectedRoute
-                allowedRoles={["admin", "mod"]}
-                userRole={user?.role}
-              >
-                <ConnectAnimalLocation />
-              </ProtectedRoute>
-            }
-          />
+          path="/connect"
+          element={
+            <ProtectedRoute
+              allowedRoles={["admin", "mod"]}
+              userRole={user?.role}
+            >
+              <ConnectAnimalLocation />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
     </BrowserRouter>
   );

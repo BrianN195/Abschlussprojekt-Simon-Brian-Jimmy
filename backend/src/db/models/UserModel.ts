@@ -12,6 +12,7 @@ class UserModel extends Model {
   declare birthDate: string | null;
   declare role: "user" | "admin" | "moderator";
   declare isVerified: boolean;
+  declare emailToken: string | null
 }
 // hier in die {} das damit ts weiß was wie exestiert
 //
@@ -66,6 +67,9 @@ UserModel.init(
       type: DataTypes.BOOLEAN,
       defaultValue: false,
     },
+    emailToken: {
+      type: DataTypes.STRING
+    }
   },
 
   {

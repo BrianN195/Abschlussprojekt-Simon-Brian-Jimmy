@@ -1,14 +1,14 @@
-import { Router, Request, Response } from 'express';
-import fs from 'fs';
-import path from 'path';
-import multer from 'multer';
-import jwt from 'jsonwebtoken';
-import sharp from 'sharp';
-import bcrypt from 'bcrypt';
-import UserModel from '../db/models/UserModel';
-import apiLimiter from '../middlewares/apiLimiter';
-import EmailVerificationToken from '../db/models/EmailVerificationTokenModel';
-import transporter from '../mail/mailer';
+import { Router, Request, Response } from "express";
+import fs from "fs";
+import path from "path";
+import multer from "multer";
+import jwt from "jsonwebtoken";
+import sharp from "sharp";
+import bcrypt from "bcrypt";
+import UserModel from "../db/models/UserModel";
+import apiLimiter from "../middlewares/apiLimiter";
+import EmailVerificationToken from "../db/models/EmailVerificationTokenModel";
+import transporter from "../mail/mailer";
 import crypto from "crypto";
 const router = Router();
 
@@ -41,11 +41,7 @@ const upload = multer({
     fileSize: 5 * 1024 * 1024,
   },
   fileFilter: (_req, file, cb) => {
-    const allowedTypes = [
-      "image/jpeg",
-      "image/png",
-      "image/webp",
-    ];
+    const allowedTypes = ["image/jpeg", "image/png", "image/webp"];
 
     if (!allowedTypes.includes(file.mimetype)) {
       return cb(new Error("Only images allowed"));
@@ -55,7 +51,7 @@ const upload = multer({
   },
 });
 
- function serializeUser(req: Request, user: UserModel) {
+function serializeUser(req: Request, user: UserModel) {
   return {
     id: user.id,
     email: user.email,
@@ -66,12 +62,12 @@ const upload = multer({
     bio: user.bio,
     gender: user.gender,
     birthDate: user.birthDate,
-    role: user.role
+    role: user.role,
   };
 }
 
 // POST /api/v1/auth/register
-router.post('/register', apiLimiter, async (req: Request, res: Response) => {
+router.post("/register", apiLimiter, async (req: Request, res: Response) => {
   try {
     const { email, password, username, gender, birthDate } = req.body;
 
@@ -134,8 +130,8 @@ router.post('/register', apiLimiter, async (req: Request, res: Response) => {
 });
 
 // POST /api/v1/auth/login
-router.post('/login', apiLimiter, async (req: Request, res: Response) => {
-  console.log("Im login backend")
+router.post("/login", apiLimiter, async (req: Request, res: Response) => {
+  console.log("Im login backend");
   try {
     const { username, password } = req.body;
 
@@ -175,36 +171,13 @@ router.post('/login', apiLimiter, async (req: Request, res: Response) => {
 });
 
 // GET /api/v1/auth/me (Protected)
-router.get('/me', async (req: Request, res: Response) => {
+router.get("/me", async (req: Request, res: Response) => {
   console.log("ME ROUTE HIT 1");
   try {
     console.log("ME ROUTE HIT 2");
-    const token = req.headers.authorization?.split(' ')[1];
+    const token = req.headers.authorization?.split(" ")[1];
     if (!token) {
-      return res.status(401).json({ error: 'No token provided' });
-    }
-
-    const decoded = jwt.verify(token, JWT_SECRET) as any;
-    const user = await UserModel.findByPk(decoded.id)
-
-    if (!user) {
-      return res.status(404).json({ error: 'User not found' });
-    }
-
-    res.json({
-      ...serializeUser(req, user),
-    });
-  } catch (error) {
-    res.status(401).json({ error: 'Invalid token' });
-  }
-});
-
-// PUT /api/v1/auth/me (Protected)
-router.put('/me', upload.single('avatar'),apiLimiter,  async (req: Request, res: Response) => {
-  try {
-    const token = req.headers.authorization?.split(' ')[1];
-    if (!token) {
-      return res.status(401).json({ error: 'No token provided' });
+      return res.status(401).json({ error: "No token provided" });
     }
 
     const decoded = jwt.verify(token, JWT_SECRET) as any;
@@ -214,71 +187,119 @@ router.put('/me', upload.single('avatar'),apiLimiter,  async (req: Request, res:
       return res.status(404).json({ error: "User not found" });
     }
 
-    const { username, bio, gender, birthDate, profileImage } = req.body;
-    const normalizedBirthDate =
-      birthDate === undefined || birthDate === null
-        ? undefined
-        : String(birthDate).trim() === ''
-          ? null
-          : String(birthDate).trim();
-
-    if (username !== undefined) {
-      user.username = username;
-    }
-    if (bio !== undefined) {
-      user.bio = bio;
-    }
-    if (gender !== undefined) {
-      user.gender = gender;
-    }
-    if (normalizedBirthDate !== undefined) {
-      user.birthDate = normalizedBirthDate;
-    }
-    if (req.file) {
-      // process uploaded file (resize + convert to webp)
-      const uploadedPath = path.join(profileUploadsDir, req.file.filename);
-      const optimizedFilename = `${Date.now()}-${path.parse(req.file.filename).name}.webp`;
-      const optimizedPath = path.join(profileUploadsDir, optimizedFilename);
-
-      try {
-        await sharp(uploadedPath)
-          .resize(512, 512, { fit: 'cover' })
-          .webp({ quality: 80 })
-          .toFile(optimizedPath);
-
-        // remove original uploaded file
-        try { fs.unlinkSync(uploadedPath); } catch (e) { /* ignore */ }
-
-        // delete previous avatar file if local
-        if (user.profileImage && typeof user.profileImage === 'string' && user.profileImage.startsWith('/uploads/profiles/')) {
-          const oldPath = path.join(process.cwd(), 'public', user.profileImage);
-          try { if (fs.existsSync(oldPath)) fs.unlinkSync(oldPath); } catch (e) { /* ignore */ }
-        }
-
-        user.profileImage = `/uploads/profiles/${optimizedFilename}`;
-      } catch (e) {
-        console.error('Sharp processing failed:', e);
-        // if sharp fails, fallback to the raw uploaded file URL
-        user.profileImage = `/uploads/profiles/${req.file.filename}`;
-      }
-    } else if (profileImage !== undefined) {
-      user.profileImage = profileImage;
-    }
-
-    await user.save();
-
-    res.json(serializeUser(req, user));
+    res.json({
+      ...serializeUser(req, user),
+    });
   } catch (error) {
-    console.error('Profile update failed:', error);
-
-    if (error instanceof jwt.JsonWebTokenError || error instanceof jwt.TokenExpiredError) {
-      return res.status(401).json({ error: 'Invalid token' });
-    }
-
-    const message = error instanceof Error ? error.message : 'Failed to update profile';
-    return res.status(400).json({ error: message });
+    res.status(401).json({ error: "Invalid token" });
   }
 });
+
+// PUT /api/v1/auth/me (Protected)
+router.put(
+  "/me",
+  upload.single("avatar"),
+  apiLimiter,
+  async (req: Request, res: Response) => {
+    try {
+      const token = req.headers.authorization?.split(" ")[1];
+      if (!token) {
+        return res.status(401).json({ error: "No token provided" });
+      }
+
+      const decoded = jwt.verify(token, JWT_SECRET) as any;
+      const user = await UserModel.findByPk(decoded.id);
+
+      if (!user) {
+        return res.status(404).json({ error: "User not found" });
+      }
+
+      const { username, bio, gender, birthDate, profileImage } = req.body;
+      const normalizedBirthDate =
+        birthDate === undefined || birthDate === null
+          ? undefined
+          : String(birthDate).trim() === ""
+            ? null
+            : String(birthDate).trim();
+
+      if (username !== undefined) {
+        user.username = username;
+      }
+      if (bio !== undefined) {
+        user.bio = bio;
+      }
+      if (gender !== undefined) {
+        user.gender = gender;
+      }
+      if (normalizedBirthDate !== undefined) {
+        user.birthDate = normalizedBirthDate;
+      }
+      if (req.file) {
+        // process uploaded file (resize + convert to webp)
+        const uploadedPath = path.join(profileUploadsDir, req.file.filename);
+        const optimizedFilename = `${Date.now()}-${path.parse(req.file.filename).name}.webp`;
+        const optimizedPath = path.join(profileUploadsDir, optimizedFilename);
+
+        try {
+          await sharp(uploadedPath)
+            .resize(512, 512, { fit: "cover" })
+            .webp({ quality: 80 })
+            .toFile(optimizedPath);
+
+          // remove original uploaded file
+          try {
+            fs.unlinkSync(uploadedPath);
+          } catch (e) {
+            /* ignore */
+          }
+
+          // delete previous avatar file if local
+          if (
+            user.profileImage &&
+            typeof user.profileImage === "string" &&
+            user.profileImage.startsWith("/uploads/profiles/")
+          ) {
+            const oldPath = path.join(
+              process.cwd(),
+              "public",
+              user.profileImage,
+            );
+            try {
+              if (fs.existsSync(oldPath)) fs.unlinkSync(oldPath);
+            } catch (e) {
+              /* ignore */
+            }
+          }
+
+          user.profileImage = `/uploads/profiles/${optimizedFilename}`;
+        } catch (e) {
+          console.error("Sharp processing failed:", e);
+          // if sharp fails, fallback to the raw uploaded file URL
+          user.profileImage = `/uploads/profiles/${req.file.filename}`;
+        }
+      } else if (profileImage !== undefined) {
+        user.profileImage = profileImage;
+      }
+
+      await user.save();
+
+      res.json(serializeUser(req, user));
+    } catch (error) {
+      console.error("Profile update failed:", error);
+
+      if (
+        error instanceof jwt.JsonWebTokenError ||
+        error instanceof jwt.TokenExpiredError
+      ) {
+        return res.status(401).json({ error: "Invalid token" });
+      }
+
+      const message =
+        error instanceof Error ? error.message : "Failed to update profile";
+      return res.status(400).json({ error: message });
+    }
+  },
+);
 
 // PUT /api/v1/auth/me (Protected)
 router.put(
@@ -401,4 +422,44 @@ router.get("/verify-email/:token", async (req, res) => {
   }
 });
 
+router.get("/verify-email/:token", async (req: Request, res: Response) => {
+  const { token } = req.params;
+
+  if (!token) {
+    return res.status(400).json({
+      message: "Token fehlt",
+    });
+  }
+
+  try {
+    // User mit Token finden
+    const user = await UserModel.findOne({
+      where: {
+        emailToken: token,
+      },
+    });
+
+    if (!user) {
+      return res.status(400).json({
+        message: "Ungültiger oder abgelaufener Token",
+      });
+    }
+
+    // User aktivieren + Token löschen
+    user.isVerified = true;
+    user.emailToken = null;
+
+    await user.save();
+
+    return res.status(200).json({
+      message: "E-Mail erfolgreich bestätigt",
+    });
+  } catch (error) {
+    console.error("VERIFY EMAIL ERROR:", error);
+
+    return res.status(500).json({
+      message: "Serverfehler bei E-Mail-Verifizierung",
+    });
+  }
+});
 export default router;
