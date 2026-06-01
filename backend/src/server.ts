@@ -2,6 +2,7 @@ import express, { Express, Request, Response, NextFunction } from 'express';
 import cors, { CorsOptions } from 'cors';
 import dotenv from 'dotenv';
 import path from 'path';
+import fs from 'fs';
 import authRoutes from './routes/auth.routes';
 import favoritesRoutes from './routes/favorites.routes';
 import connectRoutes from './routes/connect.routes'
@@ -15,6 +16,12 @@ import localeMiddleware from './middlewares/localeMiddleware';
 
 const projectRoot = path.resolve(__dirname, '..', '..');
 const frontendDistPath = path.join(projectRoot, 'frontend', 'dist');
+
+console.log('🔍 Frontend dist path:', frontendDistPath);
+console.log('🔍 Frontend dist exists:', fs.existsSync(frontendDistPath));
+if (fs.existsSync(frontendDistPath)) {
+  console.log('🔍 Index.html exists:', fs.existsSync(path.join(frontendDistPath, 'index.html')));
+}
 
 dotenv.config();
 
@@ -69,9 +76,23 @@ app.use('/api/v1/connect', connectRoutes)
 // SPA Fallback: serve index.html for client-side routing
 app.use((req: Request, res: Response, next: NextFunction) => {
   const indexPath = path.join(frontendDistPath, 'index.html');
+  
+  if (!fs.existsSync(indexPath)) {
+    console.error(`❌ Index.html not found at: ${indexPath}`);
+    return res.status(404).json({ 
+      error: 'Frontend not found',
+      debug: {
+        frontendDistPath,
+        indexPath,
+        exists: fs.existsSync(frontendDistPath)
+      }
+    });
+  }
+  
   res.sendFile(indexPath, (err) => {
     if (err) {
-      res.status(404).json({ error: 'Frontend not found' });
+      console.error(`❌ Error serving index.html: ${err.message}`);
+      res.status(500).json({ error: 'Error serving frontend', debug: err.message });
     }
   });
 });
