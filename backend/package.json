@@ -8,7 +8,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "seed": "ts-node src/db/seeders/seed.ts",
     "make-admin": "ts-node src/scripts/makeAdmin.ts",
-    "fix-image": "ts-node src/scripts/fixLocationImage.ts"
+    "fix-image": "ts-node src/scripts/fixLocationImage.ts",
+    "start": "node src/server.ts"
   },
   "keywords": [],
   "author": "",
