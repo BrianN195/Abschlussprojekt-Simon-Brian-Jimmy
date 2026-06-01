@@ -1,6 +1,10 @@
 import { useState } from "react";
 import styles from "./create.module.css"
 
+const API_BASE_URL =
+  import.meta.env.VITE_API_URL?.replace(/\/$/, "") ||
+  "http://localhost:5000/api/v1";
+
 export default function CreateLocation() {
   const [form, setForm] = useState({
     name: "",
@@ -38,7 +42,7 @@ export default function CreateLocation() {
       }
     });
 
-    await fetch("http://localhost:5000/api/v1/species/createLocation", {
+    await fetch(`${API_BASE_URL}/species/createLocation`, {
       method: "POST",
       body: formData,
     });

@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import type { User } from "../types/User";
 
+const API_BASE_URL =
+  import.meta.env.VITE_API_URL?.replace(/\/$/, "") ||
+  "http://localhost:5000/api/v1";
 
 function useUser() {
   const [user, setUser] = useState<User | null>(null);
@@ -15,7 +18,7 @@ function useUser() {
       return;
     }
 
-    fetch("http://localhost:5000/api/v1/auth/me", {
+    fetch(`${API_BASE_URL}/auth/me`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
