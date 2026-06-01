@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-  "build": "npm --prefix ../frontend install && npm --prefix ../frontend run build && tsc",
+  "build": "tsc",
   "dev": "tsx src/server.ts",
-  "start": "npm run build && node dist/server.js",
+  "start": "node dist/server.js",
   "test": "echo \"Error: no test specified\" && exit 1",
   "seed": "ts-node src/db/seeders/seed.ts",
   "make-admin": "ts-node src/scripts/makeAdmin.ts",

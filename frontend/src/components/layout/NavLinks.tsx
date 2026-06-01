@@ -22,10 +22,10 @@ function NavLinks({ onLinkClick, mobile = false }: NavLinksProps) {
       </Link>
       {user?.role === "admin" && (
     <>
-      <Link to="/create-animal">Create Animal</Link>
-      <Link to="/create-location">Create Location</Link>
-      <Link to="/connect">Connecting</Link>
-      <Link to="/makeAdmin">Make Admin</Link>
+      <Link to="/create-animal" className={linkClassName}>Create Animal</Link>
+      <Link to="/create-location" className={linkClassName}>Create Location</Link>
+      <Link to="/connect" className={linkClassName}>Connecting</Link>
+      <Link to="/makeAdmin" className={linkClassName}>Make Admin</Link>
     </>
   )}
     </>
