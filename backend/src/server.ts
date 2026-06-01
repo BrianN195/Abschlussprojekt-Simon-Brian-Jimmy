@@ -13,6 +13,9 @@ import "./db/models/index"
 import weatherRoutes from './routes/weather.routes';
 import localeMiddleware from './middlewares/localeMiddleware';
 
+const projectRoot = path.resolve(__dirname, '..', '..');
+const frontendDistPath = path.join(projectRoot, 'frontend', 'dist');
+
 dotenv.config();
 
 const app: Express = express();
@@ -46,7 +49,6 @@ app.use('/uploads', express.static(path.resolve(process.cwd(), 'public/uploads')
 app.use("/images", express.static("public/images"));
 
 // Serve Frontend (static files)
-const frontendDistPath = path.resolve(process.cwd(), '../frontend/dist');
 app.use(express.static(frontendDistPath));
 
 app.use('/api/v1/weather', weatherRoutes);
