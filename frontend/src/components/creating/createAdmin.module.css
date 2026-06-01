@@ -1,0 +1,56 @@
+.adminContainer {
+  max-width: 420px;
+  margin: 60px auto;
+  padding: 24px;
+  background: #0f172a;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  color: white;
+}
+
+.adminTitle {
+  font-size: 22px;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.adminInput {
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid #334155;
+  background: #1e293b;
+  color: white;
+  outline: none;
+  transition: 0.2s ease;
+}
+
+.adminInput:focus {
+  border-color: #38bdf8;
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
+}
+
+.adminButton {
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: none;
+  background: #38bdf8;
+  color: #0f172a;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.adminButton:hover {
+  background: #0ea5e9;
+  transform: translateY(-1px);
+}
+
+.adminButton:active {
+  transform: scale(0.98);
+}

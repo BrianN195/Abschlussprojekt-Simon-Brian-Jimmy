@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import styles from "./createAdmin.module.css"
 export default function MakeAdmin() {
   const [email, setEmail] = useState("");
 
@@ -20,19 +20,20 @@ export default function MakeAdmin() {
   };
 
   return (
-    <div>
-      <h2>Make Admin</h2>
+    <div className={styles.adminContainer}>
+  <h2 className={styles.adminTitle}>Make Admin</h2>
 
-      <input
-        type="email"
-        placeholder="User email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
+  <input
+    className={styles.adminInput}
+    type="email"
+    placeholder="User email"
+    value={email}
+    onChange={(e) => setEmail(e.target.value)}
+  />
 
-      <button onClick={handleMakeAdmin}>
-        Promote to Admin
-      </button>
-    </div>
+  <button className={styles.adminButton} onClick={handleMakeAdmin}>
+    Promote to Admin
+  </button>
+</div>
   );
 }

@@ -21,6 +21,7 @@ import useUser from "./hooks/useUser";
 import ConnectAnimalLocation from "./components/creating/ConnectAnimalLocation";
 import { useTranslation } from "react-i18next";
 import VerifyEmail from "./components/auth/VerifyEmail";
+import MakeAdmin from "./components/creating/createAdmin";
 
 function App() {
   const { t } = useTranslation();
@@ -77,6 +78,17 @@ function App() {
               userRole={user?.role}
             >
               <ConnectAnimalLocation />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/makeAdmin"
+          element={
+            <ProtectedRoute
+              allowedRoles={["admin"]}
+              userRole={user?.role}
+            >
+              <MakeAdmin/>
             </ProtectedRoute>
           }
         />

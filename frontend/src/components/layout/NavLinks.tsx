@@ -25,6 +25,7 @@ function NavLinks({ onLinkClick, mobile = false }: NavLinksProps) {
       <Link to="/create-animal">Create Animal</Link>
       <Link to="/create-location">Create Location</Link>
       <Link to="/connect">Connecting</Link>
+      <Link to="/makeAdmin">Make Admin</Link>
     </>
   )}
     </>
