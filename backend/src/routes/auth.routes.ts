@@ -99,25 +99,25 @@ router.post("/register", apiLimiter, async (req: Request, res: Response) => {
     //=====Folgend für email verifikation======
     //=========================================
 
-    const token = crypto.randomBytes(32).toString("hex");
+  //   const token = crypto.randomBytes(32).toString("hex");
 
-    await EmailVerificationToken.create({
-      token,
-      UserId: newUser.id,
-      expiresAt: new Date(Date.now() + 1000 * 60 * 60), // 1h
-    });
+  //   await EmailVerificationToken.create({
+  //     token,
+  //     UserId: newUser.id,
+  //     expiresAt: new Date(Date.now() + 1000 * 60 * 60), // 1h
+  //   });
 
-    const verificationLink = `${process.env.FRONTEND_URL}/verify-email/${token}`;
+  //   const verificationLink = `${process.env.FRONTEND_URL}/verify-email/${token}`;
 
-    await transporter.sendMail({
-      from: process.env.EMAIL_USER,
-      to: newUser.email,
-      subject: "Email bestätigen",
-      html: `
-    <h1>Bitte bestätige deine Email</h1>
-    <a href="${verificationLink}">Jetzt bestätigen</a>
-  `,
-    });
+  //   await transporter.sendMail({
+  //     from: process.env.EMAIL_USER,
+  //     to: newUser.email,
+  //     subject: "Email bestätigen",
+  //     html: `
+  //   <h1>Bitte bestätige deine Email</h1>
+  //   <a href="${verificationLink}">Jetzt bestätigen</a>
+  // `,
+  //   });
 
     //=========================================
     //=========================================
@@ -390,80 +390,81 @@ router.put(
     }
   },
 );
+//==========================================================
+// router.get("/verify-email/:token", async (req, res) => {
+//   try {
+//     const { token } = req.params;
 
-router.get("/verify-email/:token", async (req, res) => {
-  try {
-    const { token } = req.params;
+//     const record = await EmailVerificationToken.findOne({
+//       where: { token },
+//     });
 
-    const record = await EmailVerificationToken.findOne({
-      where: { token },
-    });
+//     if (!record) {
+//       return res.status(400).json({ error: "Invalid token" });
+//     }
 
-    if (!record) {
-      return res.status(400).json({ error: "Invalid token" });
-    }
+//     if (record.expiresAt < new Date()) {
+//       return res.status(400).json({ error: "Token expired" });
+//     }
 
-    if (record.expiresAt < new Date()) {
-      return res.status(400).json({ error: "Token expired" });
-    }
+//     const user = await UserModel.findByPk(record.UserId);
 
-    const user = await UserModel.findByPk(record.UserId);
+//     if (!user) {
+//       return res.status(404).json({ error: "User not found" });
+//     }
 
-    if (!user) {
-      return res.status(404).json({ error: "User not found" });
-    }
+//     user.isVerified = true;
+//     await user.save();
 
-    user.isVerified = true;
-    await user.save();
+//     await record.destroy();
 
-    await record.destroy();
+//     res.json({ message: "Email verified successfully" });
+//   } catch (err) {
+//     res.status(500).json({ error: "Verification failed" });
+//   }
+// });
 
-    res.json({ message: "Email verified successfully" });
-  } catch (err) {
-    res.status(500).json({ error: "Verification failed" });
-  }
-});
+// router.get("/verify-email/:token", async (req: Request, res: Response) => {
+//   const { token } = req.params;
 
-router.get("/verify-email/:token", async (req: Request, res: Response) => {
-  const { token } = req.params;
+//   if (!token) {
+//     return res.status(400).json({
+//       message: "Token fehlt",
+//     });
+//   }
 
-  if (!token) {
-    return res.status(400).json({
-      message: "Token fehlt",
-    });
-  }
+//   try {
+//     // User mit Token finden
+//     const user = await UserModel.findOne({
+//       where: {
+//         emailToken: token,
+//       },
+//     });
 
-  try {
-    // User mit Token finden
-    const user = await UserModel.findOne({
-      where: {
-        emailToken: token,
-      },
-    });
+//     if (!user) {
+//       return res.status(400).json({
+//         message: "Ungültiger oder abgelaufener Token",
+//       });
+//     }
 
-    if (!user) {
-      return res.status(400).json({
-        message: "Ungültiger oder abgelaufener Token",
-      });
-    }
+//     // User aktivieren + Token löschen
+//     user.isVerified = true;
+//     user.emailToken = null;
 
-    // User aktivieren + Token löschen
-    user.isVerified = true;
-    user.emailToken = null;
+//     await user.save();
 
-    await user.save();
+//     return res.status(200).json({
+//       message: "E-Mail erfolgreich bestätigt",
+//     });
+//   } catch (error) {
+//     console.error("VERIFY EMAIL ERROR:", error);
 
-    return res.status(200).json({
-      message: "E-Mail erfolgreich bestätigt",
-    });
-  } catch (error) {
-    console.error("VERIFY EMAIL ERROR:", error);
-
-    return res.status(500).json({
-      message: "Serverfehler bei E-Mail-Verifizierung",
-    });
-  }
-});
+//     return res.status(500).json({
+//       message: "Serverfehler bei E-Mail-Verifizierung",
+//     });
+//   }
+// });
+//====================
 router.post("/make-admin",authMiddleware, roleMiddleware(["admin"]), async (req: Request, res: Response) => {
   try {
     const { email } = req.body;
