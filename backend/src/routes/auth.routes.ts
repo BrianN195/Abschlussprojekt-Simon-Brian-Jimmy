@@ -153,11 +153,11 @@ router.post("/login", apiLimiter, async (req: Request, res: Response) => {
       return res.status(401).json({ error: "Invalid credentials" });
     }
 
-    if (!user.isVerified) {
-      return res.status(403).json({
-        error: "Please verify your email first",
-      });
-    }
+    // if (!user.isVerified) {
+    //   return res.status(403).json({
+    //     error: "Please verify your email first",
+    //   });
+    // }
 
     const token = jwt.sign({ id: user.id, email: user.email }, JWT_SECRET, {
       expiresIn: "7d",
