@@ -365,11 +365,11 @@ zu vorbereiten ist e-mail adresse ist geöffnet.
         - zukünftige features max. 3 
         -Verabschiedung
 
-    ## Letzte Änderungen (01.06.2026)
+## Letzte Änderungen (01.06.2026)
 
     - **Kurz:** Gäste können Favoriten nicht speichern. Beim Versuch zeigt die Seite einen zentralen, zentrierten Hinweis-Banner im Header an (einzeilig, mit `!!` davor/danach). Die Umsetzung ist responsive und nutzt eine eigene CSS-Klasse.
 
-    - **Betroffene Dateien (klickbar):**
+**Betroffene Dateien (klickbar):**
         - [frontend/src/components/layout/MainNavigation.tsx](./frontend/src/components/layout/MainNavigation.tsx)
         - [frontend/src/styles/MainNavigation.css](./frontend/src/styles/MainNavigation.css)
         - [frontend/src/components/animals/Animal.tsx](./frontend/src/components/animals/Animal.tsx)
@@ -382,14 +382,62 @@ zu vorbereiten ist e-mail adresse ist geöffnet.
         - [frontend/src/locales/ar.ts](./frontend/src/locales/ar.ts)
         - [frontend/src/locales/zh.ts](./frontend/src/locales/zh.ts)
 
-    - **Erläuterung:**
+**Erläuterung:**
         - Wenn ein nicht authentifizierter Benutzer versucht, ein Tier als Favorit zu markieren, wird die Aktion abgefangen und stattdessen ein `favorite-login-required` CustomEvent ausgelöst.
         - Die `MainNavigation`-Komponente lauscht auf dieses Event und zeigt einen vollbreiten Banner (`.nav-favorite-banner`) mit der Nachricht an. Die eigentliche Nachricht trägt die Klasse `.nav-favorite-message`.
         - Die Nachricht wird einzeilig angezeigt und ist mit `!!` eingerahmt (`!! Nachricht !!`). Auf sehr kleinen Bildschirmen darf sie umbrechen (responsive rule).
 
-    - **Code‑Beispiele (Stellen beginnen mit dem Kommentar "Hinweis für Gäste")**
+**Code‑Beispiele (Stellen beginnen mit dem Kommentar "Hinweis für Gäste")**
 
         Animal (relevanter Auszug):
+           ```tsx
+        // Hinweis für Gäste: Verhindere Favorit-Aktion und sende das Hinweis-Event
+        if (!authService.isAuthenticated()) {
+            window.dispatchEvent(new Event('favorite-login-required'));
+            return;
+        }
+        // Hinweis für Gäste: ansonsten Favorite-API aufrufen
+
+---
+
+## Letzte Änderungen (01.06.2026) — Deployment & Browser-Kompatibilität
+
+- **Kurz:** Wir haben die Produktion und Browser-Kompatibilität gehärtet, damit das Frontend auf Render und in allen gängigen Browsern (inkl. Opera) zuverlässig ausgeliefert wird. Dazu gehören: Browserslist, optionaler Legacy-Build, ein kleiner Polyfills-Loader, CSS-Fallbacks sowie ein robuster Server-Pfad für statische Dateien.
+
+- **Betroffene Dateien (klickbar):**
+    - [frontend/package.json](frontend/package.json)
+    - [frontend/vite.config.ts](frontend/vite.config.ts)
+    - [frontend/public/polyfills/polyfills-legacy.js](frontend/public/polyfills/polyfills-legacy.js)
+    - [frontend/src/index.css](frontend/src/index.css)
+    - [frontend/src/styles/MainNavigation.css](frontend/src/styles/MainNavigation.css)
+    - [backend/src/server.ts](backend/src/server.ts)
+
+- **Detaillierte Erläuterungen:**
+    - `frontend/package.json` — Browserslist: `">0.2%", "not dead", "not op_mini all", "defaults"`.
+        Das sorgt dafür, dass Build-Tools und Polyfill-Strategien aktuelle Opera- und andere Browser-Versionen einschließen.
+
+    - `frontend/vite.config.ts` — Optionaler Legacy-Plugin-Wrapper:
+        - Implementierung lädt `@vitejs/plugin-legacy`, falls installiert, und erzeugt Legacy-Bundles.
+        - Kommentar-Hinweis oben in der Datei beschreibt Zweck und Aktivierung.
+
+    - `frontend/public/polyfills/polyfills-legacy.js` — Runtime-Loader:
+        - Lädt schlanke CDN-Shims für `fetch`, `AbortController` und `CustomEvent`, wenn diese nicht vorhanden sind.
+        - Datei enthält am Anfang einen erklärenden Kommentar ("Hinweis: Polyfills-Loader...")
+
+    - `frontend/src/index.css` — Layout-Fallbacks:
+        - `100svh` bleibt primär, zusätzlich `min-height: 100vh` als Fallback für Browser ohne `svh`.
+        - Kommentar in der CSS-Datei erklärt den Fallback.
+
+    - `frontend/src/styles/MainNavigation.css` — Visuelle Fallbacks:
+        - `backdrop-filter` ergänzt durch `-webkit-backdrop-filter` für WebKit/Safari-Varianten.
+
+    - `backend/src/server.ts` — Robustheit beim Finden des gebauten Frontends:
+        - Sucht mehrere `frontend/dist`-Standorte (verschiedene Arbeitsverzeichnisse auf Hosts wie Render).
+        - Enthält einen erklärenden Kommentar über die Pfadsuche und die SPA-Fallback-Route.
+
+- **Hinweis-Kommentare im Code:**
+    - Alle oben aufgelisteten Dateien enthalten jetzt kurze Kommentarzeilen, die deutlich machen: "Hinweis: darunter steht der Code für Browser-Compatibility / polyfills / frontend serving" — so findest du die relevanten Stellen schnell.
+    - Beispiel (aus `Animal.tsx`):
 
         ```tsx
         // Hinweis für Gäste: Verhindere Favorit-Aktion und sende das Hinweis-Event
@@ -398,6 +446,35 @@ zu vorbereiten ist e-mail adresse ist geöffnet.
             return;
         }
         // Hinweis für Gäste: ansonsten Favorite-API aufrufen
+        ```
+
+- **Warum das wichtig ist:**
+    - Opera ist Chromium-basiert; durch die `defaults`/Browserslist-Abdeckung und optionale Legacy-Bundles sind aktuelle Opera- und Opera-Mobile-Versionen gedeckt.
+    - Ältere WebViews (z. B. in manchen Android-Apps) profitieren vom Polyfill-Loader.
+    - `backend/src/server.ts` stellt sicher, dass Render oder andere Hosts das `index.html` finden, auch wenn das Arbeitsverzeichnis anders ist.
+
+- **Tests, die du ausführen kannst:**
+    1. Lokaler Root-Build:
+
+         ```bash
+         npm run build
+         ```
+
+    2. Frontend-Preview (lokal testen in Opera):
+
+         ```bash
+         cd frontend
+         npm run preview
+         # öffne die Vorschau-URL in Opera Desktop / Opera Mobile oder BrowserStack
+         ```
+
+    3. Funktionstest: Als Gast Favorit markieren → sollte die Header-Nachricht auslösen.
+
+- **Rollback / Sicherheit:**
+    - Wir haben vorher ein Backup-Branch/Tag erstellt; falls etwas schiefgeht, kannst du auf die Referenz zurücksetzen (siehe Git-Log).
+
+---
+Ende der dokumentierten Änderungen (01.06.2026).
         await favouritesService.saveFavoriteAnimal(animalId);
         ```
 
@@ -420,7 +497,7 @@ zu vorbereiten ist e-mail adresse ist geöffnet.
         useEffect(() => {
             const handleFavoriteLoginRequired = () => {
                 setFavoriteHintVisible(true);
-                window.setTimeout(() => setFavoriteHintVisible(false), 4000);
+                window.setTimeout(() => setFavoriteHintVisible(false), 5000);
             };
             window.addEventListener('favorite-login-required', handleFavoriteLoginRequired);
             return () => window.removeEventListener('favorite-login-required', handleFavoriteLoginRequired);

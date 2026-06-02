@@ -61,11 +61,14 @@ body,
   background: var(--bg);
 }
 
+/* Hinweis: Der folgende Block enthält das `svh`-Layout und einen `vh`-Fallback
+   für Browser, die noch kein `svh` unterstützen. */
 #root {
   width: 100%;
   margin: 0;
   text-align: center;
   min-height: 100svh;
+  min-height: 100vh; /* fallback for browsers without svh */
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
