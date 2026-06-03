@@ -16,8 +16,19 @@ import weatherRoutes from './routes/weather.routes';
 import localeMiddleware from './middlewares/localeMiddleware';
 import { seed } from './db/seeders/seed';
 
+// Hinweis: Robustes Finden und Servieren des gebauten Frontend-Ordners.
+// Dieser Block sucht mehrere mögliche Pfade, weil Hosts wie Render
+// ein anderes Arbeitsverzeichnis verwenden können. Die SPA-Fallback-Route
+// weiter unten serviert `index.html` aus dem ermittelten `frontendDistPath`.
 const projectRoot = path.resolve(__dirname, '..', '..');
-const frontendDistPath = path.join(projectRoot, 'frontend', 'dist');
+const frontendDistCandidates = [
+  path.join(projectRoot, 'frontend', 'dist'),
+  path.resolve(process.cwd(), 'frontend', 'dist'),
+  path.resolve(process.cwd(), '..', 'frontend', 'dist'),
+  path.resolve(__dirname, '..', 'frontend', 'dist'),
+  path.resolve(__dirname, '..', '..', 'frontend', 'dist'),
+];
+const frontendDistPath = frontendDistCandidates.find((candidate) => fs.existsSync(candidate)) ?? frontendDistCandidates[0]!;
 
 dotenv.config();
 
@@ -83,8 +94,11 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 
   const indexPath = path.join(frontendDistPath, 'index.html');
   if (!fs.existsSync(indexPath)) {
-    console.error(`❌ Index.html not found at: ${indexPath}`);
-    res.status(404).json({ error: 'Frontend not found' });
+    console.error('❌ Frontend not found. Checked paths:', frontendDistCandidates);
+    res.status(404).json({
+      error: 'Frontend not found',
+      checkedPaths: frontendDistCandidates,
+    });
     return;
   }
 

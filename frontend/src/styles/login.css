@@ -2,7 +2,7 @@
   min-height: 100vh;
   width: 100%;
 
-  background-image: url("./images/desktop/login-diver-desktop.png");
+  background-image: url("/images/desktop/login-diver-desktop.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -416,7 +416,7 @@
 
 @media (max-width: 1024px) {
   .login-page {
-    background-image: url("./images/tablet/login-diver-tablet.png");
+    background-image: url("/images/tablet/login-diver-tablet.png");
     padding: 1.5rem;
   }
 
@@ -439,7 +439,7 @@
 
 @media (min-width: 768px) and (max-width: 1366px) and (orientation: landscape) {
   .login-page {
-    background-image: url("./images/tablet/login-diver-tablet.png");
+    background-image: url("/images/tablet/login-diver-tablet.png");
   }
 
   .login-form {
@@ -456,7 +456,7 @@
 
 @media (max-width: 600px) {
   .login-page {
-    background-image: url("./images/handy/login-diver-mobile.png");
+    background-image: url("/images/handy/login-diver-mobile.png");
     padding: 1rem;
   }
 
@@ -491,7 +491,7 @@
 
 @media (max-height: 500px) and (orientation: landscape) {
   .login-page {
-    background-image: url("./images/handy/login-diver-mobile.png");
+    background-image: url("/images/handy/login-diver-mobile.png");
     padding: 0.75rem;
 
     justify-content: flex-start;

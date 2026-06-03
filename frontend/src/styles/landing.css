@@ -2,7 +2,7 @@
   min-height: 100vh;
   width: 100%;
 
-  background-image: url("./images/desktop/landing-ocean-desktop.png");
+  background-image: url("/images/desktop/landing-ocean-desktop.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -160,7 +160,7 @@
 
 @media (max-width: 1024px) {
   .landing-page {
-    background-image: url("./images/tablet/landing-ocean-tablet.png");
+    background-image: url("/images/tablet/landing-ocean-tablet.png");
     padding: 1.5rem;
   }
 
@@ -181,7 +181,7 @@
 
 @media (min-width: 768px) and (max-width: 1366px) and (orientation: landscape) {
   .landing-page {
-    background-image: url("./images/tablet/landing-ocean-tablet.png");
+    background-image: url("/images/tablet/landing-ocean-tablet.png");
   }
 
   .landing-content {
@@ -205,7 +205,7 @@
 
 @media (max-width: 600px) {
   .landing-page {
-    background-image: url("./images/handy/landing-ocean-mobile.png");
+    background-image: url("/images/handy/landing-ocean-mobile.png");
     padding: 1rem;
   }
 
@@ -260,7 +260,7 @@
 
 @media (max-height: 500px) and (orientation: landscape) {
   .landing-page {
-    background-image: url("./images/handy/landing-ocean-mobile.png");
+    background-image: url("/images/handy/landing-ocean-mobile.png");
     padding: 0.75rem;
   }
 
